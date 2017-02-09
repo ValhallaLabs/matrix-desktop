@@ -7,7 +7,7 @@ jar {
     manifest {
         attributes 'Implementation-Title': 'Matrix Desktop',
                    'Implementation-Version': version,
-                   'Main-Class': 'ua.softgroup.matrix.desktop.Main'
+                   'Main-Class': 'ua.softgroup.matrix.desktop.start.Main'
     }
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }

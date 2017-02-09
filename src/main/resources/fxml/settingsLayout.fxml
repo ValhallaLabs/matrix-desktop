@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.SettingController">
+    <children>
+        <TabPane layoutX="105.0" layoutY="44.0" prefHeight="400.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab text="Global Settings">
+                    <content>
+                        <GridPane>
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Label text="%connection_address" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                    <children>
+                                        <TextField fx:id="addressField" promptText="address">
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                        </TextField>
+                                        <Label text=":">
+                                            <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                            </HBox.margin>
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="portField" promptText="port" />
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                                    <children>
+                                        <Button fx:id="applyButton" disable="true" mnemonicParsing="false" onAction="#applySettings" text="%apply" />
+                                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cencelSetting" text="%set_def" />
+                                        <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeSettingsWindow" text="%close">
+                                            <HBox.margin>
+                                                <Insets right="20.0" />
+                                            </HBox.margin>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="3.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <children>
+                                        <ChoiceBox fx:id="languageChoiceCheckBox" prefWidth="150.0" />
+                                    </children>
+                                    <GridPane.margin>
+                                        <Insets />
+                                    </GridPane.margin>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </VBox>
+                                <Separator prefWidth="200.0" GridPane.valignment="BOTTOM" />
+                                <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
+                                <Label text="%language" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </GridPane>
+                    </content>
+                </Tab>
+                <Tab text="View Settings" />
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

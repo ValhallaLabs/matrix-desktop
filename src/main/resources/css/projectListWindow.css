@@ -1,0 +1,34 @@
+.table-view .column-header {
+    -fx-font-size: 16px;
+    -fx-background-color: #3063a4;
+    -fx-border-color: white;
+    -fx-base: rgb(0, 0, 0);
+}
+.green-button {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-family: "System";
+    -fx-graphic: url("/images/stop-matrix2.png");
+    -fx-font-size: 14px;
+    -fx-background-color: #47d465;
+}
+.red-button {
+    -fx-text-fill: white;
+    -fx-font-family: "System";
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-graphic: url("/images/stop-small.png");
+    -fx-background-color: #d74747;
+}
+.add-button {
+    -fx-graphic: url("/images/attach.png");
+    -fx-background-color: #c6c6c6;
+    -fx-font-size: 11px;
+    -fx-text-fill: black;
+}
+.send-reports-button{
+    -fx-graphic: url("/images/done-send.png");
+    -fx-background-color: #3064a2;
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+}

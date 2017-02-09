@@ -1,0 +1,16 @@
+#settings{
+    -fx-graphic: url("/images/settings-icon.png");
+}
+
+#excel>.label{
+    -fx-graphic: url("/images/excel-icon.png");
+}
+#reload>.label {
+    -fx-graphic: url("/images/reload.png");
+}
+#started{
+    -fx-text-fill: blue;
+}
+#stopped{
+    -fx-text-fill: red;
+}
