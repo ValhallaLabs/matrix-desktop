@@ -22,6 +22,13 @@ public class ProjectModel implements Serializable {
 
     private String rateCurrency;
 
+    public ProjectModel(long id, String title, String description, String authorName) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.authorName = authorName;
+    }
+
     public long getId() {
         return id;
     }

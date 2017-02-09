@@ -17,13 +17,13 @@
             <items>
                 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="876.0">
                     <children>
-                        <TableView fx:id="projectsTable" layoutX="-7.0" prefHeight="750.0" prefWidth="876.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="tvProjectsTable" layoutX="-7.0" prefHeight="750.0" prefWidth="876.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columns>
-                               <TableColumn fx:id="idProject" prefWidth="75.0" text="Project" />
-                                <TableColumn fx:id="authorName" maxWidth="4000.0" prefWidth="75.0" text="Author" />
-                                <TableColumn fx:id="title" minWidth="1.0" prefWidth="1.0" text="Name" />
-                                <TableColumn fx:id="description" prefWidth="92.0" text="Description" />
-                                <TableColumn fx:id="status" maxWidth="4000.0" prefWidth="75.0" text="Status" />
+                               <TableColumn fx:id="tcIdProject" prefWidth="75.0" text="Id Project" />
+                                <TableColumn fx:id="tcAuthorName" maxWidth="4000.0" prefWidth="75.0" text="Author" />
+                                <TableColumn fx:id="tcTitle" minWidth="1.0" prefWidth="1.0" text="Name" />
+                                <TableColumn fx:id="tcDescription" prefWidth="92.0" text="Description" />
+                                <TableColumn fx:id="tcStatus" maxWidth="4000.0" prefWidth="75.0" text="Status" />
                             </columns>
                             <columnResizePolicy>
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -67,7 +67,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label prefHeight="72.0" prefWidth="282.0" text="Разработка сайта' на Вордперссе с установкой плагина  Event calendar и кастомизация  Avanda премиум темы ооороргрорололорор авыа " wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
+                        <Label fx:id="labelDiscribeProject" prefHeight="72.0" prefWidth="282.0" text="Разработка сайта' на Вордперссе с установкой плагина  Event calendar и кастомизация  Avanda премиум темы ооороргрорололорор авыа " wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets left="15.0" />
                            </GridPane.margin>
@@ -98,7 +98,7 @@
                                     <Insets bottom="15.0" left="15.0" top="26.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label fx:id="dayInWord" text="Воскресенье " textFill="#3063a4">
+                              <Label fx:id="labelDayInWord" text="Воскресенье " textFill="#3063a4">
                                  <HBox.margin>
                                     <Insets bottom="15.0" left="4.0" right="2.0" top="25.0" />
                                  </HBox.margin>
@@ -114,9 +114,9 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="dayInNumber" text="11.07.2017" textFill="#3063a4">
+                              <Label fx:id="labelDayInNumber" text="11.07.2017" textFill="#3063a4">
                                  <HBox.margin>
-                                    <Insets bottom="15.0" right="15.0" top="25.0" />
+                                    <Insets bottom="15.0" left="3.0" right="15.0" top="25.0" />
                                  </HBox.margin>
                                  <font>
                                     <Font name="System Bold" size="15.0" />
@@ -134,7 +134,7 @@
                                     <Image url="@../images/comp-foto.gif" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="nameSales" text="Stas Prymak" textFill="#3063a4">
+                              <Label fx:id="labelNameSales" text="Stas Prymak" textFill="#3063a4">
                                  <HBox.margin>
                                     <Insets left="4.0" top="17.0" />
                                  </HBox.margin>
@@ -150,7 +150,7 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="nameProject" text="iTotal Wordpress website" textFill="#3063a4">
+                              <Label fx:id="labelNameProject" text="iTotal Wordpress website" textFill="#3063a4">
                                  <HBox.margin>
                                     <Insets top="17.0" />
                                  </HBox.margin>
@@ -173,7 +173,7 @@
                                     <Image url="@../images/srart-icon.png" />
                                  </image>
                               </ImageView>
-                              <Label text="08:56">
+                              <Label fx:id="labelStartWorkToday" text="08:56">
                                  <padding>
                                     <Insets top="4.0" />
                                  </padding>
@@ -196,7 +196,7 @@
                                     <Image url="@../images/time-work.png" />
                                  </image>
                               </ImageView>
-                              <Label text="5h36m">
+                              <Label fx:id="labelTodayTotalTime" text="5h36m">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
@@ -236,7 +236,7 @@
                                           <Insets left="6.0" />
                                        </FlowPane.margin>
                                     </ImageView>
-                                    <Label prefWidth="120.0" text="136h 22m" textAlignment="CENTER">
+                                    <Label fx:id="labelTotalTime" prefWidth="120.0" text="136h 22m" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="16.0" />
                                        </font>
@@ -266,7 +266,7 @@
                                           <Insets left="6.0" />
                                        </FlowPane.margin>
                                     </ImageView>
-                                    <Label prefWidth="120.0" text="26.12.2016" textAlignment="CENTER">
+                                    <Label fx:id="labelDateStartProject" prefWidth="120.0" text="26.12.2016" textAlignment="CENTER">
                                        <padding>
                                           <Insets left="6.0" />
                                        </padding>
@@ -293,7 +293,7 @@
                                           <Insets left="6.0" />
                                        </FlowPane.margin>
                                     </ImageView>
-                                    <Label prefWidth="120.0" text="26.01.2017" textAlignment="CENTER">
+                                    <Label fx:id="labelDeadLineProject" prefWidth="120.0" text="26.01.2017" textAlignment="CENTER">
                                        <padding>
                                           <Insets left="6.0" />
                                        </padding>
@@ -324,33 +324,33 @@
                   </SplitPane>
                   <HBox prefHeight="67.0" prefWidth="200.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="435.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" styleClass="green-button" text="Старт">
+                        <Button fx:id="btnStart" mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" styleClass="green-button" text="Старт">
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                            </HBox.margin>
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font></Button>
-                        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" styleClass="red-button" text="Стоп">
+                        <Button fx:id="btnStop" mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" styleClass="red-button" text="Стоп">
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                            </HBox.margin></Button>
                      </children>
                   </HBox>
-                  <TextArea fx:id="textArea" layoutX="-6.0" layoutY="510.0" prefHeight="185.0" prefWidth="316.0" promptText="Написать отчет.." AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="500.0" />
+                  <TextArea fx:id="taWriteReport" layoutX="-6.0" layoutY="510.0" prefHeight="185.0" prefWidth="316.0" promptText="Написать отчет.." AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="500.0" />
                   <HBox layoutX="-8.0" layoutY="648.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="687.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="130.0" styleClass="add-button" text="Прикрепить файл">
+                        <Button fx:id="btnAttachFile" mnemonicParsing="false" prefHeight="28.0" prefWidth="130.0" styleClass="add-button" text="Прикрепить файл">
                            <HBox.margin>
                               <Insets bottom="10.0" left="4.0" right="3.0" top="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="130.0" styleClass="send-reports-button" text="Отправить отчет">
+                        <Button fx:id="btnSendReport" mnemonicParsing="false" prefHeight="28.0" prefWidth="130.0" styleClass="send-reports-button" text="Отправить отчет">
                            <HBox.margin>
                               <Insets bottom="10.0" left="5.0" right="8.0" top="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Label text="0" textFill="#3063a4">
+                        <Label fx:id="labelSymbolsNeedReport" text="0" textFill="#3063a4">
                            <HBox.margin>
                               <Insets bottom="23.0" top="14.0" />
                            </HBox.margin>

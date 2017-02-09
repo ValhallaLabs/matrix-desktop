@@ -5,19 +5,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
-import java.time.LocalDateTime;
+
 
 public class Main extends Application {
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     private Stage loginStage;
-//    private ClassLoader classLoader;
-//    private FXMLLoader loader;
+    private ClassLoader classLoader;
+    private FXMLLoader loader;
     private BorderPane mainLayout;
     private AnchorPane projectsLayout;
 
@@ -27,20 +23,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        this.loginStage=primaryStage;
+        this.loginStage = primaryStage;
         this.loginStage.setTitle("SuperVisor");
         setLoginPane();
         setProjectPane();
     }
 
     private void setLoginPane() {
-
         try {
-         ClassLoader  classLoader=getClass().getClassLoader();
-         FXMLLoader    loader =new FXMLLoader();
+            classLoader = getClass().getClassLoader();
+            loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource("fxml/mainLayout.fxml"));
-            mainLayout=loader.load();
-            Scene scene=new Scene(mainLayout);
+            mainLayout = loader.load();
+            Scene scene = new Scene(mainLayout);
             loginStage.setScene(scene);
             loginStage.show();
             loginStage.setMinWidth(1200);
@@ -51,12 +46,11 @@ public class Main extends Application {
     }
 
     private void setProjectPane() {
-
         try {
-           ClassLoader classLoader=getClass().getClassLoader();
-            FXMLLoader loader=new FXMLLoader();
+            classLoader = getClass().getClassLoader();
+            loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource("fxml/projectsLayout.fxml"));
-            projectsLayout=loader.load();
+            projectsLayout = loader.load();
             mainLayout.setCenter(projectsLayout);
         } catch (IOException e) {
             e.printStackTrace();

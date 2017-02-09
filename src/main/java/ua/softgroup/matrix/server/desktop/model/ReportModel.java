@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class ReportModel extends TokenModel {
     private static final long serialVersionUID = 1L;
 
+
     private long id;
 
     private String title;
