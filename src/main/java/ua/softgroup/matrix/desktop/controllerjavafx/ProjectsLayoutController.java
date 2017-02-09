@@ -15,7 +15,7 @@ import java.util.Locale;
 /**
  * Created by AndriiBei on 09.02.2017.
  */
-public class ProjectsController {
+public class ProjectsLayoutController {
 
     private ObservableList<PieChart.Data> pieChartList;
     static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
