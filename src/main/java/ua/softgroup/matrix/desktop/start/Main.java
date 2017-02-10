@@ -6,11 +6,15 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 
 public class Main extends Application {
-
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     private Stage loginStage;
     private ClassLoader classLoader;
     private FXMLLoader loader;
@@ -18,6 +22,7 @@ public class Main extends Application {
     private AnchorPane projectsLayout;
 
     public static void main(String[] args) {
+        logger.debug("Current time: {}", LocalDateTime.now());
         launch(args);
     }
 
