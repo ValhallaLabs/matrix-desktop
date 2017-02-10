@@ -6,34 +6,34 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="320.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.LoginController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="320.0" styleClass="base-font" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.LoginController">
 
     <children>
-      <VBox prefHeight="300.0" prefWidth="320.0">
+      <VBox prefHeight="290.0" prefWidth="320.0">
          <children>
-                <Label text="SuperVisor" textFill="#777777">
+                <Label text="SuperVisor" textFill="#3063a4">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" left="68.0" top="20.0" />
+                  <Insets bottom="10.0" left="68.0" top="10.0" />
                </VBox.margin>
             </Label>
-                <TextField fx:id="loginTextField" alignment="CENTER" prefHeight="45.0" prefWidth="270.0" promptText="username">
+                <TextField fx:id="loginTextField" alignment="CENTER" focusTraversable="false" prefHeight="45.0" prefWidth="270.0" promptText="username" styleClass="text-area">
                <VBox.margin>
                   <Insets bottom="5.0" top="8.0" />
                </VBox.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font></TextField>
-                <PasswordField fx:id="passwordTextField" alignment="CENTER" prefHeight="45.0" prefWidth="270.0" promptText="password">
+                <PasswordField fx:id="passwordTextField" alignment="CENTER" focusTraversable="false" prefHeight="45.0" prefWidth="270.0" promptText="password" styleClass="text-area">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font></PasswordField>
-            <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="290.0" text="login">
+            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#startMainWindow" prefHeight="45.0" prefWidth="270.0" styleClass="btn" text="login">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
