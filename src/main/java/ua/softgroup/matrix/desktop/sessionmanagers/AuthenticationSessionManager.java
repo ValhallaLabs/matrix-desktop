@@ -4,6 +4,7 @@ import io.reactivex.*;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
 import org.reactivestreams.Subscriber;
@@ -30,27 +31,40 @@ import java.util.Set;
  */
 public class AuthenticationSessionManager {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
-    private LoginLayoutController loginLayoutController;
     private Emitter<UserPassword> userPasswordEmitter;
     private ObjectOutputStream objectOutputStream;
     private DataInputStream dataInputStream;
-    Disposable subscription;
+    private Disposable disposableSubscription;
 
-    private Emitter createNewObservable() {
-        Observable<Set<ProjectModel>> observable = Observable.using(this::createSocketConnection, this::createObservable, this::closeSocketConnection);
-        subscription = observable.subscribe(
-                this::setProjectsModelsToCurrentSessionInfo,
-                throwable -> throwable.printStackTrace());
-        return userPasswordEmitter;
+    /**
+     * Received user data for authentication, creates UserPassword DTO, end emit it into observable.
+     * @param userNameString string that contains user name
+     * @param userPasswordString string that contains user password
+     */
+    public void sendUserAuthData(String userNameString, String userPasswordString) {
+        UserPassword userPassword = new UserPassword();
+        userPassword.setUsername(userNameString);
+        userPassword.setPassword(userPasswordString);
+        userPasswordEmitter.onNext(userPassword);
     }
 
-    private void setProjectsModelsToCurrentSessionInfo(Set<ProjectModel> projectModels){
-        CurrentSessionInfo.setUserActiveProjects(projectModels);
-        subscription.dispose();
+    /**
+     * AuthenticationSessionManager constructor. Creates Disposable subscription.
+     */
+    public AuthenticationSessionManager() {
+        Observable observable =
+                Observable.using(this::openSocketConnection, this::createObservable, this::closeSocketConnection);
+        disposableSubscription = observable
+                .observeOn(Schedulers.io())
+                .subscribe(this::setProjectsModelsToCurrentSessionInfo, this::handleExceptions);
     }
 
-    //Resource factory
-    private Socket createSocketConnection() throws IOException {
+    /**
+     * The factory function to create a resource object that depends on the Observable.
+     * Creates a new socket connection with server.
+     * @return a new socket connection
+     */
+    private Socket openSocketConnection() throws IOException {
         Socket socket = SocketProvider.openNewConnection();
         objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
         dataInputStream = new DataInputStream(socket.getInputStream());
@@ -58,7 +72,11 @@ public class AuthenticationSessionManager {
         return socket;
     }
 
-    //Dispose Action
+    /**
+     * The function that will dispose of the resource, that depends to the Observable.
+     * Sends command to server about closing connection and closes socket connection.
+     * @param socket The socket which is dependent to an observable
+     */
     private void closeSocketConnection(Socket socket) throws IOException {
         logger.debug("Socket connection closed");
         objectOutputStream.writeObject(ServerCommands.CLOSE);
@@ -66,7 +84,12 @@ public class AuthenticationSessionManager {
         socket.close();
     }
 
-    //ObservableFactory
+    /**
+     * The factory function to create an Observable, that executes process of authentication
+     * and gets all projects of user.
+     * @param socket The socket which is dependent to an observable
+     * @return Observable
+     */
     private Observable createObservable(Socket socket) {
         return Observable.create((ObservableOnSubscribe<UserPassword>) e -> userPasswordEmitter = e)
                 .map(this::authenticateUser)
@@ -75,6 +98,11 @@ public class AuthenticationSessionManager {
                 .map(tokenModel -> getAllProjects(tokenModel, socket));
     }
 
+    /**
+     * Sends to server command about authentication and DTO with authentication user info.
+     * @param userPassword DTO with username and password
+     * @return String object that contains response about result of authentication
+     */
     private String authenticateUser(UserPassword userPassword) throws IOException, ClassNotFoundException {
         objectOutputStream.writeObject(ServerCommands.AUTHENTICATE);
         objectOutputStream.writeObject(userPassword);
@@ -82,6 +110,12 @@ public class AuthenticationSessionManager {
         return dataInputStream.readUTF();
     }
 
+    /**
+     * Filter that handles result of authentication, and continues chain in case of positive result,
+     * or notify user about incorrect authentication user info.
+     * @param response String object that contains response about result of authentication
+     * @return boolean result of authentication
+     */
     private Boolean handleServerAuthResponse(String response) {
         logger.debug("Auth response {}", response);
         Boolean tokenValidationResult = !Constants.INVALID_USERNAME.name().equals(response) &&
@@ -92,12 +126,23 @@ public class AuthenticationSessionManager {
         return tokenValidationResult;
     }
 
+    /**
+     * Creates TokenModel from received token in a string
+     * @param token String object that contains token
+     * @return tokenModel TokenModel with current token
+     */
     private TokenModel composeTokenModel(String token) {
         TokenModel tokenModel = new TokenModel();
         tokenModel.setToken(token);
         return tokenModel;
     }
 
+    /**
+     * Sends to server command about getting all user active projects and DTO with session token.
+     * @param tokenModel DTO with token
+     * @param socket socket for opening object input stream
+     * @return object that has to contain set of project models
+     */
     private Object getAllProjects(TokenModel tokenModel, Socket socket) throws IOException, ClassNotFoundException {
         objectOutputStream.writeObject(ServerCommands.GET_ALL_PROJECT);
         objectOutputStream.writeObject(tokenModel);
@@ -105,20 +150,35 @@ public class AuthenticationSessionManager {
         return new ObjectInputStream(socket.getInputStream()).readObject();
     }
 
-    //TEMPORARY
+    /**
+     * Tries to set received object response into set of project models, and then set it to CurrentSessionInfo.
+     * Dispose authentication session.
+     * @param objectResponse object that has to contain set of project models
+     */
+    private void setProjectsModelsToCurrentSessionInfo(Object objectResponse){
+        //TODO: provide multithreading control when record to CurrentSessionInfo
+        Set<ProjectModel> projectModels = null;
+        try {
+            projectModels = (Set<ProjectModel>) objectResponse;
+        } catch (Exception e) {
+            logger.debug("Server doesn't return any projects");
+        }
+        CurrentSessionInfo.setUserActiveProjects(projectModels);
+        disposableSubscription.dispose();
+    }
+
+    /**
+     * Handles exception which may be thrown while session is executing.
+     * @param throwable
+     */
+    private void handleExceptions(Throwable throwable) {
+        //TODO: Think of what to do if exception is thrown
+        disposableSubscription.dispose();
+    }
+
+    //TODO: Temporary method, delete before merging
     public static void main(String[] args) {
         AuthenticationSessionManager authenticationSessionManager = new AuthenticationSessionManager();
-        Emitter emitter = authenticationSessionManager.createNewObservable();
-        logger.debug("Current time: {}", "1");
-        UserPassword userPassword = new UserPassword();
-        userPassword.setUsername("supasdas");
-        userPassword.setPassword("asdf");
-        emitter.onNext(userPassword);
-
-        logger.debug("Current time: {}", "2");
-        UserPassword userPassword1 = new UserPassword();
-        userPassword1.setUsername("sup");
-        userPassword1.setPassword("asdf");
-        emitter.onNext(userPassword1);
+        authenticationSessionManager.sendUserAuthData("sup", "asdf");
     }
 }

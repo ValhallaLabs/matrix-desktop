@@ -5,6 +5,6 @@ package ua.softgroup.matrix.desktop.sessionmanagers;
  */
 public abstract class SessionManager {
 
-    abstract void execute();
+//    abstract void execute( t);
 
 }
