@@ -65,7 +65,7 @@ public class MainLayoutController {
     }
 
     public void startReportLayoutWindow(ActionEvent actionEvent) {
-        ((Node)menuBar).getScene().getWindow().hide();
+//        ((Node)menuBar).getScene().getWindow().hide();
         new ReportLayoutController().startReportLayoutController();
     }
 }

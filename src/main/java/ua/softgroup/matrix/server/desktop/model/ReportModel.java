@@ -23,6 +23,13 @@ public class ReportModel extends TokenModel {
     public ReportModel() {
     }
 
+    public ReportModel(LocalDate date, long id, boolean checked, String description) {
+        this.date = date;
+        this.id = id;
+        this.checked = checked;
+        this.description = description;
+    }
+
     public ReportModel(long id, String token, String title, String description, long projectId) {
         super.setToken(token);
         this.id = id;

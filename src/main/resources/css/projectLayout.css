@@ -32,3 +32,7 @@
     -fx-font-size: 12px;
     -fx-text-fill: white;
 }
+.table-row-cell:selected .table-cell {
+    -fx-background-color: #3063a4;
+    -fx-text-fill: white;
+}

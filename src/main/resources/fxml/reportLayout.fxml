@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
@@ -7,42 +8,48 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" stylesheets="@../css/reportLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" stylesheets="@../css/reportLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.ReportLayoutController">
    <children>
-      <VBox layoutX="-6.0" prefHeight="150.0" prefWidth="100.0" styleClass="vbox" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="100.0" prefWidth="100.0" styleClass="right-anchor" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0">
          <children>
-            <Label text="LiIST OF REPORT">
+            <Label text="LIST OF REPORT" textFill="#3063a4">
                <font>
-                  <Font size="48.0" />
+                  <Font name="System Bold" size="40.0" />
                </font>
+               <VBox.margin>
+                  <Insets right="20.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
             </Label>
-            <Label text="Project Name" textFill="#c9c4c4">
+            <Label text="Project Name">
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font name="System Bold" size="22.0" />
                </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
             </Label>
          </children>
-         <padding>
-            <Insets bottom="20.0" left="30.0" right="30.0" top="30.0" />
-         </padding>
       </VBox>
-      <SplitPane dividerPositions="0.7" prefHeight="750.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
+      <SplitPane dividerPositions="0.7" prefHeight="750.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="140.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane>
                <children>
-                  <GridPane layoutY="8.0" prefHeight="120.0" prefWidth="836.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="8.0">
+                  <GridPane layoutX="14.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="-14.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="220.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="0.0" prefWidth="285.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="155.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="0.0" prefWidth="125.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="217.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="291.0" minWidth="10.0" prefWidth="282.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="157.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.0" minWidth="10.0" prefWidth="141.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <padding>
-                        <Insets bottom="30.0" left="30.0" right="30.0" top="15.0" />
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane-grei">
@@ -50,109 +57,182 @@
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                            </GridPane.margin>
                            <children>
-                              <Label prefHeight="32.0" prefWidth="220.0" text="NAME">
+                              <Label prefHeight="26.0" prefWidth="200.0" text="NAME :" textFill="WHITE">
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
                                  <font>
-                                    <Font name="System Bold" size="18.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
-                           </children></Pane>
+                           </children>
+                        </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane-grei" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                            </GridPane.margin>
                            <children>
-                              <Label prefHeight="32.0" prefWidth="220.0" text="RESPONSIBLE">
+                              <Label prefHeight="26.0" prefWidth="200.0" text="RESPONSIBLE :" textFill="WHITE">
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
                                  <font>
-                                    <Font name="System Bold" size="18.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
-                           </children></Pane>
+                           </children>
+                        </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane-whitegrei" GridPane.columnIndex="1">
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="250.0" text="Victor Pigol">
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
                            <GridPane.margin>
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                            </GridPane.margin>
-                           <children>
-                              <Label prefHeight="32.0" prefWidth="250.0" text="Name Work package">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                           </children></Pane>
+                        </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane-whitegrei" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="250.0" text="Stas Boizov">
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
                            <GridPane.margin>
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                            </GridPane.margin>
-                           <children>
-                              <Label prefHeight="32.0" prefWidth="250.0" text="Mrazish" />
-                           </children></Pane>
+                        </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane-grei" GridPane.columnIndex="2">
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="130.0" text="DATE START :" textFill="WHITE">
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
                            <GridPane.margin>
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                            </GridPane.margin>
-                           <children>
-                              <Label prefHeight="32.0" prefWidth="150.0" text="DATE START">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                           </children></Pane>
+                        </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane-grei" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="140.0" text="DATE DEADLINE :" textFill="WHITE">
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
                            <GridPane.margin>
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                            </GridPane.margin>
-                           <children>
-                              <Label prefHeight="32.0" prefWidth="150.0" text="DATE DEADLINE">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                           </children></Pane>
+                        </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane-whitegrei" GridPane.columnIndex="3">
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="125.0" text="2011/05">
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
                            <GridPane.margin>
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                            </GridPane.margin>
-                           <children>
-                              <Label prefHeight="32.0" prefWidth="120.0" text="2011/05">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                           </children></Pane>
+                        </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane-whitegrei" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="125.0" text="01.01.2018">
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold Italic" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
                            <GridPane.margin>
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                            </GridPane.margin>
-                           <children>
-                              <Label prefHeight="32.0" prefWidth="120.0" text="01.01.2018">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                           </children></Pane>
+                        </Pane>
                      </children>
                   </GridPane>
-                  <TableView layoutX="30.0" layoutY="115.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="115.0">
+                  <TableView fx:id="tableViewReport" layoutX="15.0" layoutY="115.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="105.0">
                     <columns>
-                      <TableColumn prefWidth="106.0" text="Date" />
-                      <TableColumn prefWidth="115.0" text=" Time" />
-                        <TableColumn prefWidth="151.0" text="Verified" />
-                        <TableColumn prefWidth="403.0" text="Report" />
+                      <TableColumn fx:id="reportTableColumnDate" prefWidth="115.0" text="Date" />
+                      <TableColumn fx:id="reportTableColumnTime" prefWidth="115.0" text=" Time" />
+                        <TableColumn fx:id="reportTableColumnVerified" prefWidth="151.0" text="Verified" />
+                        <TableColumn fx:id="reportTableColumnReport" prefWidth="385.0" text="Report" />
                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="pane-grei">
+          <AnchorPane>
+               <opaqueInsets>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
+               </opaqueInsets>
                <children>
-                  <TextArea layoutY="6.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="190.0" />
-                  <Label layoutX="123.0" layoutY="156.0" text="REPORT:">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Label>
+                  <VBox prefHeight="200.0" prefWidth="200.0" styleClass="right-anchor" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="25.0" prefWidth="283.0" text="REPORT RESULT:" textFill="#3063a4">
+                           <VBox.margin>
+                              <Insets left="10.0" top="100.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="300.0" promptText="Read your report if need exchange or write new" styleClass="rightancor" wrapText="true">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextArea>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <padding>
+                              <Insets left="10.0" right="10.0" top="40.0" />
+                           </padding>
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" styleClass="change-report-button" text="Сhange Report" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#btnCancelReportWindow" prefHeight="40.0" prefWidth="300.0" styleClass="cancel-report-button" text="Cancel" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
                </children>
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
             </AnchorPane>
         </items>
       </SplitPane>
