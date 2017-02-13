@@ -32,6 +32,7 @@ public class AuthenticationSessionManager {
 
     /**
      * Received user data for authentication, creates UserPassword DTO, end emit it into observable.
+     * countDownLatch.await() blocks current thread, until userPasswordEmitter will be initialized.
      * @param userNameString string that contains user name
      * @param userPasswordString string that contains user password
      */
@@ -94,6 +95,7 @@ public class AuthenticationSessionManager {
 
     /**
      * Function to create an custom Observable emitter.
+     * countDownLatch.countDown() removes block of the main thread, and lets user to use userPasswordEmitter.
      * @param e observable emitter for user password models
      */
     private void createObservableEmitter(ObservableEmitter<UserPassword> e) {
