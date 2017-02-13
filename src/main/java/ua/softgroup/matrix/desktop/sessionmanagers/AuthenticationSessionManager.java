@@ -2,35 +2,25 @@ package ua.softgroup.matrix.desktop.sessionmanagers;
 
 import io.reactivex.*;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.PublishSubject;
-import io.reactivex.subjects.Subject;
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
-import ua.softgroup.matrix.desktop.start.Main;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
 import ua.softgroup.matrix.server.desktop.api.Constants;
 import ua.softgroup.matrix.server.desktop.api.ServerCommands;
 import ua.softgroup.matrix.server.desktop.model.ProjectModel;
 import ua.softgroup.matrix.server.desktop.model.TokenModel;
 import ua.softgroup.matrix.server.desktop.model.UserPassword;
-
 import java.io.*;
 import java.net.Socket;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
- * Created by Vadim on 10.02.2017.
+ * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public class AuthenticationSessionManager {
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationSessionManager.class);
     private Emitter<UserPassword> userPasswordEmitter;
     private ObjectOutputStream objectOutputStream;
     private DataInputStream dataInputStream;
@@ -41,21 +31,18 @@ public class AuthenticationSessionManager {
      * @param userNameString string that contains user name
      * @param userPasswordString string that contains user password
      */
-    public void sendUserAuthData(String userNameString, String userPasswordString) {
-        UserPassword userPassword = new UserPassword();
-        userPassword.setUsername(userNameString);
-        userPassword.setPassword(userPasswordString);
+    public void sendUserAuthData(String userNameString, String userPasswordString) throws InterruptedException {
+        UserPassword userPassword = new UserPassword(userNameString, userPasswordString);
+        synchronized (this){
+            if(userPasswordEmitter == null) {
+                this.wait();
+            }
+        }
         userPasswordEmitter.onNext(userPassword);
     }
 
-    /**
-     * AuthenticationSessionManager constructor. Creates Disposable subscription.
-     */
     public AuthenticationSessionManager() {
-        Observable observable =
-                Observable.using(this::openSocketConnection, this::createObservable, this::closeSocketConnection);
-        disposableSubscription = observable
-                .observeOn(Schedulers.io())
+        disposableSubscription = Observable.using(this::openSocketConnection, this::createObservable, this::closeSocketConnection)
                 .subscribe(this::setProjectsModelsToCurrentSessionInfo, this::handleExceptions);
     }
 
@@ -91,12 +78,24 @@ public class AuthenticationSessionManager {
      * @return Observable
      */
     private Observable createObservable(Socket socket) {
-        return Observable.create((ObservableOnSubscribe<UserPassword>) e -> userPasswordEmitter = e)
+        return Observable.create(this::createObservableEmitter)
                 .map(this::authenticateUser)
                 .filter(this::handleServerAuthResponse)
                 .map(this::composeTokenModel)
-                .map(tokenModel -> getAllProjects(tokenModel, socket));
+                .map(tokenModel -> getAllProjects(tokenModel, socket))
+                .subscribeOn(Schedulers.io());
     }
+
+    /**
+     * Function to create an custom Observable emitter.
+     * @param e observable emitter for user password models
+     */
+    private void createObservableEmitter(ObservableEmitter<UserPassword> e) {
+        synchronized (this) {
+            userPasswordEmitter = e;
+            this.notify();
+        }
+     }
 
     /**
      * Sends to server command about authentication and DTO with authentication user info.
@@ -122,6 +121,9 @@ public class AuthenticationSessionManager {
                 !Constants.INVALID_PASSWORD.name().equals(response);
         if(!tokenValidationResult) {
             //TODO: Notify user about wrong login data
+            synchronized (this){
+                this.notify();
+            }
         }
         return tokenValidationResult;
     }
@@ -156,10 +158,11 @@ public class AuthenticationSessionManager {
      * @param objectResponse object that has to contain set of project models
      */
     private void setProjectsModelsToCurrentSessionInfo(Object objectResponse){
-        //TODO: provide multithreading control when record to CurrentSessionInfo
+        //TODO: provide multithreading on CurrentSessionInfo
         Set<ProjectModel> projectModels = null;
         try {
             projectModels = (Set<ProjectModel>) objectResponse;
+            logger.debug("Project models {}", projectModels.toString());
         } catch (Exception e) {
             logger.debug("Server doesn't return any projects");
         }
@@ -169,16 +172,22 @@ public class AuthenticationSessionManager {
 
     /**
      * Handles exception which may be thrown while session is executing.
-     * @param throwable
+     * @param throwable object that has to cast to throwable
      */
-    private void handleExceptions(Throwable throwable) {
+    private void handleExceptions(Object throwable) {
         //TODO: Think of what to do if exception is thrown
+        ((Throwable) throwable).printStackTrace();
         disposableSubscription.dispose();
     }
 
     //TODO: Temporary method, delete before merging
     public static void main(String[] args) {
         AuthenticationSessionManager authenticationSessionManager = new AuthenticationSessionManager();
-        authenticationSessionManager.sendUserAuthData("sup", "asdf");
+        try {
+            authenticationSessionManager.sendUserAuthData("sup", "asdf");
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
