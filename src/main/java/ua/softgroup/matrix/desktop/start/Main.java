@@ -6,15 +6,18 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 
 public class Main extends Application {
-
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     private Stage loginStage;
 
     public static void main(String[] args) {
+        logger.debug("Current time: {}", LocalDateTime.now());
         launch(args);
     }
 

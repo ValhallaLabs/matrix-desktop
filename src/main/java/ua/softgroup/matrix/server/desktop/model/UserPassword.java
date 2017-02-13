@@ -9,6 +9,13 @@ public class UserPassword implements Serializable {
 
     private String password;
 
+    public UserPassword() {}
+
+    public UserPassword(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }
