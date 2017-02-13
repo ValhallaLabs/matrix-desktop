@@ -7,6 +7,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
 import ua.softgroup.matrix.server.desktop.api.Constants;
@@ -24,6 +25,7 @@ import java.util.concurrent.CountDownLatch;
  */
 public class AuthenticationSessionManager {
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationSessionManager.class);
+    private LoginLayoutController loginLayoutController;
     private Emitter<UserPassword> userPasswordEmitter;
     private ObjectOutputStream objectOutputStream;
     private DataInputStream dataInputStream;
@@ -47,7 +49,8 @@ public class AuthenticationSessionManager {
         }
     }
 
-    public AuthenticationSessionManager() {
+    public AuthenticationSessionManager(LoginLayoutController loginLayoutController) {
+        this.loginLayoutController = loginLayoutController;
         countDownLatch = new CountDownLatch(1);
         disposableSubscription = Observable.using(this::openSocketConnection, this::createObservable, this::closeSocketConnection)
                 .subscribe(this::setProjectsModelsToCurrentSessionInfo, this::handleExceptions);
@@ -116,8 +119,8 @@ public class AuthenticationSessionManager {
     }
 
     /**
-     * Filter that handles result of authentication, and continues chain in case of positive result,
-     * or notify user about incorrect authentication user info.
+     * Filter that handles result of authentication, and continues chain in case of positive result and notify UI
+     * to open main window, or notify user about incorrect authentication user info.
      * @param response String object that contains response about result of authentication
      * @return boolean result of authentication
      */
@@ -125,11 +128,10 @@ public class AuthenticationSessionManager {
         logger.debug("Auth response {}", response);
         Boolean tokenValidationResult = !Constants.INVALID_USERNAME.name().equals(response) &&
                 !Constants.INVALID_PASSWORD.name().equals(response);
-        if(!tokenValidationResult) {
+        if(tokenValidationResult) {
+            //TODO: Notify login controller to start main window
+        } else {
             //TODO: Notify user about wrong login data
-            synchronized (this){
-                this.notify();
-            }
         }
         return tokenValidationResult;
     }
@@ -188,7 +190,7 @@ public class AuthenticationSessionManager {
 
     //TODO: Temporary method, delete before merging
     public static void main(String[] args) {
-        AuthenticationSessionManager authenticationSessionManager = new AuthenticationSessionManager();
-        authenticationSessionManager.sendUserAuthData("sup", "asdf");
+//        AuthenticationSessionManager authenticationSessionManager = new AuthenticationSessionManager();
+//        authenticationSessionManager.sendUserAuthData("sup", "asdf");
     }
 }

@@ -17,6 +17,11 @@ import java.io.IOException;
 /**
  * Created by AndriiBei on 09.02.2017.
  */
+/** TODO For Andrii Bei:
+ * 1) Create method that will load user projects in table form CurrentSessionManager(need to use synchronization,
+ * will think about it together later, just make some sketches).
+ */
+
 public class MainLayoutController {
     @FXML
     public Menu menuReport;
