@@ -11,9 +11,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="740.0" prefWidth="1200.0" stylesheets="@../css/projectListWindow.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.ProjectsController">
+<AnchorPane prefHeight="750.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController">
     <children>
-        <SplitPane dividerPositions="0.73" focusTraversable="true" layoutX="183.0" layoutY="76.0" prefHeight="740.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.73" focusTraversable="true" layoutX="183.0" layoutY="76.0" prefHeight="750.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="876.0">
                     <children>
@@ -163,7 +163,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </HBox>
-                        <HBox prefHeight="24.0" prefWidth="158.0" GridPane.rowIndex="6">
+                        <HBox prefHeight="24.0" prefWidth="158.0" GridPane.rowIndex="6" >
                            <children>
                               <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>

@@ -1,0 +1,30 @@
+.pane-grei{
+    -fx-background-color: #d9d9d9;
+}
+.pane-whitegrei{
+    -fx-background-color: #f3f3f3;
+}
+.leftancor{
+    -fx-background-color: white;
+}
+.topVbox{
+    -fx-background-color: white;
+}
+.rightancor{
+    -fx-background-color: white;
+}
+.text-area{
+    -fx-background-color: #d9d9d9, #d9d9d9;
+}
+
+.text-area .content {
+    -fx-background-color: #d9d9d9;
+}
+
+.text-area:focused .content {
+    -fx-background-color: #d9d9d9;
+}
+.split-pane
+{
+    -fx-padding: 0;
+}

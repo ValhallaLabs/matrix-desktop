@@ -5,9 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.MainLayoutController">
     <top>
-        <MenuBar prefHeight="22.0" BorderPane.alignment="CENTER">
+        <MenuBar fx:id="menuBar" prefHeight="22.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
@@ -17,7 +17,7 @@
                 <MenuItem mnemonicParsing="false" text="According" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Report">
+            <Menu fx:id="menuReport" mnemonicParsing="false" onAction="#startReportLayoutWindow" text="Report">
               <items>
                 <MenuItem mnemonicParsing="false" text="Report" />
               </items>
