@@ -11,9 +11,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="740.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController">
+
+<AnchorPane prefHeight="750.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController">
     <children>
-        <SplitPane dividerPositions="0.73" focusTraversable="true" layoutX="183.0" layoutY="76.0" prefHeight="740.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.73" focusTraversable="true" layoutX="183.0" layoutY="76.0" prefHeight="750.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="876.0">
                     <children>
@@ -337,7 +338,7 @@
                            </HBox.margin></Button>
                      </children>
                   </HBox>
-                  <TextArea fx:id="taWriteReport" layoutX="-6.0" layoutY="510.0" prefHeight="185.0" prefWidth="316.0" promptText="Написать отчет.." AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="500.0" />
+                  <TextArea fx:id="taWriteReport" layoutX="-6.0" layoutY="510.0" prefHeight="185.0" prefWidth="316.0" promptText="Написать отчет.." wrapText="true" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="500.0" />
                   <HBox layoutX="-8.0" layoutY="648.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="687.0">
                      <children>
                         <Button fx:id="btnAttachFile" mnemonicParsing="false" prefHeight="28.0" prefWidth="130.0" styleClass="add-button" text="Прикрепить файл">
