@@ -17,6 +17,7 @@ import ua.softgroup.matrix.server.desktop.model.UserPassword;
 import java.io.*;
 import java.net.Socket;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
@@ -27,23 +28,27 @@ public class AuthenticationSessionManager {
     private ObjectOutputStream objectOutputStream;
     private DataInputStream dataInputStream;
     private Disposable disposableSubscription;
+    private CountDownLatch countDownLatch;
 
     /**
      * Received user data for authentication, creates UserPassword DTO, end emit it into observable.
+     * countDownLatch.await() blocks current thread, until userPasswordEmitter will be initialized.
      * @param userNameString string that contains user name
      * @param userPasswordString string that contains user password
      */
-    public void sendUserAuthData(String userNameString, String userPasswordString) throws InterruptedException {
+    public void sendUserAuthData(String userNameString, String userPasswordString) {
         UserPassword userPassword = new UserPassword(userNameString, userPasswordString);
-        synchronized (this){
-            if(userPasswordEmitter == null) {
-                this.wait();
-            }
+        try {
+            countDownLatch.await();
+            userPasswordEmitter.onNext(userPassword);
+        } catch (InterruptedException e) {
+            logger.debug("sendUserAuthData. Something went wrong {}", e.toString());
+            //TODO: Some kind of global crash. Restart app.
         }
-        userPasswordEmitter.onNext(userPassword);
     }
 
     public AuthenticationSessionManager() {
+        countDownLatch = new CountDownLatch(1);
         disposableSubscription = Observable.using(this::openSocketConnection, this::createObservable, this::closeSocketConnection)
                 .subscribe(this::setProjectsModelsToCurrentSessionInfo, this::handleExceptions);
     }
@@ -90,13 +95,12 @@ public class AuthenticationSessionManager {
 
     /**
      * Function to create an custom Observable emitter.
+     * countDownLatch.countDown() removes block of the main thread, and lets user to use userPasswordEmitter.
      * @param e observable emitter for user password models
      */
     private void createObservableEmitter(ObservableEmitter<UserPassword> e) {
-        synchronized (this) {
-            userPasswordEmitter = e;
-            this.notify();
-        }
+        userPasswordEmitter = e;
+        countDownLatch.countDown();
      }
 
     /**
@@ -185,11 +189,6 @@ public class AuthenticationSessionManager {
     //TODO: Temporary method, delete before merging
     public static void main(String[] args) {
         AuthenticationSessionManager authenticationSessionManager = new AuthenticationSessionManager();
-        try {
-            authenticationSessionManager.sendUserAuthData("sup", "asdf");
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        authenticationSessionManager.sendUserAuthData("sup", "asdf");
     }
 }
