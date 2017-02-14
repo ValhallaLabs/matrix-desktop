@@ -48,7 +48,8 @@ public class LoginLayoutController {
     }
 
     public void startMainWindow(ActionEvent actionEvent) {
-        sendAuthDataToNotificationManager();
+//        sendAuthDataToNotificationManager();
+        closeLoginLayoutAndStartMainLayout();
     }
 
     private void sendAuthDataToNotificationManager() {

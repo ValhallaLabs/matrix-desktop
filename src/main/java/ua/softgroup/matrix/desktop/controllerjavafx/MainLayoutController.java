@@ -3,7 +3,6 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -35,7 +34,7 @@ public class MainLayoutController {
 
     public void startMainControllerLayout() {
         primaryStage = new Stage();
-        Image icon = new Image(getClass().getResourceAsStream("/images/logo.png"));
+        Image icon = new Image(getClass().getResourceAsStream("/images/testLogoIcon.png"));
         primaryStage.getIcons().add(icon);
         startMainLayout();
         startProjectLayout();

@@ -11,7 +11,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="750.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController">
     <children>
         <SplitPane dividerPositions="0.73" focusTraversable="true" layoutX="183.0" layoutY="76.0" prefHeight="750.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -93,7 +92,7 @@
                            <children>
                               <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/calendar.png" />
+                                    <Image url="@../images/calendarIcon.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets bottom="15.0" left="15.0" top="26.0" />
@@ -132,7 +131,7 @@
                                     <Insets top="22.0" />
                                  </HBox.margin>
                                  <image>
-                                    <Image url="@../images/comp-foto.gif" />
+                                    <Image url="@../images/computerIcon.gif" />
                                  </image>
                               </ImageView>
                               <Label fx:id="labelNameSales" text="Stas Prymak" textFill="#3063a4">
@@ -171,7 +170,7 @@
                                     <Insets left="15.0" top="8.0" />
                                  </HBox.margin>
                                  <image>
-                                    <Image url="@../images/srart-icon.png" />
+                                    <Image url="@../images/startTimeIcon.png" />
                                  </image>
                               </ImageView>
                               <Label fx:id="labelStartWorkToday" text="08:56">
@@ -194,7 +193,7 @@
                                     <Insets top="7.0" />
                                  </HBox.margin>
                                  <image>
-                                    <Image url="@../images/time-work.png" />
+                                    <Image url="@../images/timeWorkIcon.png" />
                                  </image>
                               </ImageView>
                               <Label fx:id="labelTodayTotalTime" text="5h36m">
@@ -231,7 +230,7 @@
                                     </Label>
                                     <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/time-work.png" />
+                                          <Image url="@../images/timeWorkIcon.png" />
                                        </image>
                                        <FlowPane.margin>
                                           <Insets left="6.0" />
@@ -261,7 +260,7 @@
                                     </Label>
                                     <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/Events%20-%20Calendar2.png" />
+                                          <Image url="@../images/calendarIcon.png" />
                                        </image>
                                        <FlowPane.margin>
                                           <Insets left="6.0" />
@@ -288,7 +287,7 @@
                                     </Label>
                                     <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/Events%20-%20Calendar2.png" />
+                                          <Image url="@../images/calendarIcon.png" />
                                        </image>
                                        <FlowPane.margin>
                                           <Insets left="6.0" />
