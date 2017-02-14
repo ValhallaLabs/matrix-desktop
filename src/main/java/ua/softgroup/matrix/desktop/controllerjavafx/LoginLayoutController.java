@@ -20,6 +20,8 @@ import java.io.IOException;
  */
 
 public class LoginLayoutController {
+    private Stage stage;
+    private AuthenticationSessionManager authenticationSessionManager;
     @FXML
     public TextField loginTextField;
     @FXML
@@ -29,22 +31,14 @@ public class LoginLayoutController {
     @FXML
     public Label labelErrorMessage;
 
-    private AuthenticationSessionManager authenticationSessionManager;
+    @FXML
+    public void initialize(){
+        authenticationSessionManager = new AuthenticationSessionManager(this);
+    }
 
-    public void startLoginLayout(Stage loginStage) {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(classLoader.getResource("fxml/loginLayout.fxml"));
-            Pane loginLayout = loader.load();
-            Scene scene = new Scene(loginLayout);
-            loginStage.setScene(scene);
-            loginStage.initStyle(StageStyle.UTILITY);
-            loginStage.setResizable(false);
-            loginStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void setUpStage(Stage stage) {
+        this.stage = stage;
+        stage.setOnCloseRequest(event -> authenticationSessionManager.closeSession());
     }
 
     public void startMainWindow(ActionEvent actionEvent) {
@@ -52,9 +46,8 @@ public class LoginLayoutController {
     }
 
     private void sendAuthDataToNotificationManager() {
-        String login = loginTextField.getText().toString();
-        String password = passwordTextField.getText().toString();
-        authenticationSessionManager = new AuthenticationSessionManager(LoginLayoutController.this);
+        String login = loginTextField.getText();
+        String password = passwordTextField.getText();
         authenticationSessionManager.sendUserAuthData(login, password);
     }
 
@@ -63,12 +56,11 @@ public class LoginLayoutController {
     }
 
     public void closeLoginLayoutAndStartMainLayout() {
-        closeLoginlayout();
+        stage.close();
         new MainLayoutController().startMainControllerLayout();
     }
 
-    private void closeLoginlayout() {
-        Stage stage = (Stage) btnLogin.getScene().getWindow();
-        stage.close();
+    public AuthenticationSessionManager getAuthenticationSessionManager() {
+        return authenticationSessionManager;
     }
 }
