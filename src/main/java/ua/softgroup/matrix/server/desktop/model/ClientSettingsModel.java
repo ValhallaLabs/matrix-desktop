@@ -54,4 +54,14 @@ public class ClientSettingsModel implements Serializable {
     public void setDownTime(int downTime) {
         this.downTime = downTime;
     }
+
+    @Override
+    public String toString() {
+        return "ClientSettingsModel{" +
+                "version=" + version +
+                ", screenshotUpdateFrequently=" + screenshotUpdateFrequently +
+                ", keyboardUpdateFrequently=" + keyboardUpdateFrequently +
+                ", downTime=" + downTime +
+                '}';
+    }
 }

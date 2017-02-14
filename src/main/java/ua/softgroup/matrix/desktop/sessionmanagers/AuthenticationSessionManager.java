@@ -12,6 +12,7 @@ import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
 import ua.softgroup.matrix.server.desktop.api.Constants;
 import ua.softgroup.matrix.server.desktop.api.ServerCommands;
+import ua.softgroup.matrix.server.desktop.model.ClientSettingsModel;
 import ua.softgroup.matrix.server.desktop.model.ProjectModel;
 import ua.softgroup.matrix.server.desktop.model.TokenModel;
 import ua.softgroup.matrix.server.desktop.model.UserPassword;
@@ -32,6 +33,13 @@ public class AuthenticationSessionManager {
     private Disposable disposableSubscription;
     private CountDownLatch countDownLatch;
 
+    public AuthenticationSessionManager(/*LoginLayoutController loginLayoutController*/) {
+        this.loginLayoutController = loginLayoutController;
+        countDownLatch = new CountDownLatch(1);
+        disposableSubscription = Observable.using(this::openSocketConnection, this::createObservable, this::closeSocketConnection)
+                .subscribe(this::disposeManager, this::handleExceptions);
+    }
+
     /**
      * Received user data for authentication, creates UserPassword DTO, end emit it into observable.
      * countDownLatch.await() blocks current thread, until userPasswordEmitter will be initialized.
@@ -41,7 +49,9 @@ public class AuthenticationSessionManager {
     public void sendUserAuthData(String userNameString, String userPasswordString) {
         UserPassword userPassword = new UserPassword(userNameString, userPasswordString);
         try {
-            countDownLatch.await();
+            if (userPasswordEmitter ==  null) {
+                countDownLatch.await();
+            }
             userPasswordEmitter.onNext(userPassword);
         } catch (InterruptedException e) {
             logger.debug("sendUserAuthData. Something went wrong {}", e.toString());
@@ -49,11 +59,13 @@ public class AuthenticationSessionManager {
         }
     }
 
-    public AuthenticationSessionManager(LoginLayoutController loginLayoutController) {
-        this.loginLayoutController = loginLayoutController;
-        countDownLatch = new CountDownLatch(1);
-        disposableSubscription = Observable.using(this::openSocketConnection, this::createObservable, this::closeSocketConnection)
-                .subscribe(this::setProjectsModelsToCurrentSessionInfo, this::handleExceptions);
+    /**
+     * Closes current authentication session
+     */
+    public void closeSession(){
+        if(!disposableSubscription.isDisposed()) {
+            disposableSubscription.dispose();
+        }
     }
 
     /**
@@ -92,7 +104,9 @@ public class AuthenticationSessionManager {
                 .map(this::authenticateUser)
                 .filter(this::handleServerAuthResponse)
                 .map(this::composeTokenModel)
-                .map(tokenModel -> getAllProjects(tokenModel, socket))
+                .map(tokenModel -> getAllProjectsAndClientSettings(tokenModel,socket))
+                .doOnNext(this::setProjectsModelsToCurrentSessionInfo)
+                .map(this::setClientSettingToCurrentSessionInfo)
                 .subscribeOn(Schedulers.io());
     }
 
@@ -111,7 +125,7 @@ public class AuthenticationSessionManager {
      * @param userPassword DTO with username and password
      * @return String object that contains response about result of authentication
      */
-    private String authenticateUser(UserPassword userPassword) throws IOException, ClassNotFoundException {
+    private String authenticateUser(UserPassword userPassword) throws IOException {
         objectOutputStream.writeObject(ServerCommands.AUTHENTICATE);
         objectOutputStream.writeObject(userPassword);
         objectOutputStream.flush();
@@ -128,10 +142,8 @@ public class AuthenticationSessionManager {
         logger.debug("Auth response {}", response);
         Boolean tokenValidationResult = !Constants.INVALID_USERNAME.name().equals(response) &&
                 !Constants.INVALID_PASSWORD.name().equals(response);
-        if(tokenValidationResult) {
-            //TODO: Notify login controller to start main window
-        } else {
-            //TODO: Notify user about wrong login data
+        if(!tokenValidationResult) {
+            //TODO: Notify login controller to start main window AT MAIN THREAD
         }
         return tokenValidationResult;
     }
@@ -153,28 +165,54 @@ public class AuthenticationSessionManager {
      * @param socket socket for opening object input stream
      * @return object that has to contain set of project models
      */
-    private Object getAllProjects(TokenModel tokenModel, Socket socket) throws IOException, ClassNotFoundException {
+    private InputStream getAllProjectsAndClientSettings(TokenModel tokenModel, Socket socket) throws IOException {
         objectOutputStream.writeObject(ServerCommands.GET_ALL_PROJECT);
         objectOutputStream.writeObject(tokenModel);
+        objectOutputStream.writeObject(ServerCommands.UPDATE_SETTING);
         objectOutputStream.flush();
-        return new ObjectInputStream(socket.getInputStream()).readObject();
+        return socket.getInputStream();
     }
 
     /**
-     * Tries to set received object response into set of project models, and then set it to CurrentSessionInfo.
-     * Dispose authentication session.
-     * @param objectResponse object that has to contain set of project models
+     * Tries to receive set of project models, and then set it to CurrentSessionInfo.
+     * @param inputStream for open ObjectInputStream
+     * @return inputStream for a further action
      */
-    private void setProjectsModelsToCurrentSessionInfo(Object objectResponse){
-        //TODO: provide multithreading on CurrentSessionInfo
+    private InputStream setProjectsModelsToCurrentSessionInfo(InputStream inputStream) throws IOException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+
         Set<ProjectModel> projectModels = null;
         try {
-            projectModels = (Set<ProjectModel>) objectResponse;
-            logger.debug("Project models {}", projectModels.toString());
-        } catch (Exception e) {
-            logger.debug("Server doesn't return any projects");
+            projectModels = (Set<ProjectModel>) objectInputStream.readObject();
+            logger.debug("Project models received successfully: {}", projectModels);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            logger.debug("Project models received unsuccessfully");
         }
         CurrentSessionInfo.setUserActiveProjects(projectModels);
+        return inputStream;
+    }
+
+    /**
+     * Tries to receive client settings model, and then set it to CurrentSessionInfo.
+     * @param inputStream for open ObjectInputStream
+     * @return settingsResult result of getting client settings
+     */
+    private Boolean setClientSettingToCurrentSessionInfo(InputStream inputStream) throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+        ClientSettingsModel clientSettingsModel = (ClientSettingsModel) objectInputStream.readObject();
+        logger.debug("Client settings model: {}", clientSettingsModel.toString());
+        CurrentSessionInfo.setClientSettingsModel(clientSettingsModel);
+        return true;
+    }
+
+    /**
+     * Tells {@Link LoginLayoutController} to open main window and dispose current session.
+     * @param sessionStatus useless param at the moment
+     */
+    private void disposeManager(Object sessionStatus){
+        logger.debug("Authentication completed");
+        //TODO: Start to open Main window if true
         disposableSubscription.dispose();
     }
 
@@ -190,7 +228,7 @@ public class AuthenticationSessionManager {
 
     //TODO: Temporary method, delete before merging
     public static void main(String[] args) {
-//        AuthenticationSessionManager authenticationSessionManager = new AuthenticationSessionManager();
-//        authenticationSessionManager.sendUserAuthData("sup", "asdf");
+        AuthenticationSessionManager authenticationSessionManager = new AuthenticationSessionManager();
+        authenticationSessionManager.sendUserAuthData("sup", "asdf");
     }
 }
