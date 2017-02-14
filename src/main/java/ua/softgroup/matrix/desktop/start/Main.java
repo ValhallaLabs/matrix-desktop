@@ -30,11 +30,5 @@ public class Main extends Application {
         this.loginStage = primaryStage;
         this.loginStage.setTitle("SuperVisor");
         loginLayoutController.startLoginLayout(loginStage);
-        loginStage.close();
-    }
-
-    @Override
-    public void stop() throws Exception {
-        super.stop();
     }
 }
