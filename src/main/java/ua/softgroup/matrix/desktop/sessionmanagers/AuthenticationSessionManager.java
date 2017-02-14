@@ -33,7 +33,7 @@ public class AuthenticationSessionManager {
     private Disposable disposableSubscription;
     private CountDownLatch countDownLatch;
 
-    public AuthenticationSessionManager(/*LoginLayoutController loginLayoutController*/) {
+    public AuthenticationSessionManager(LoginLayoutController loginLayoutController) {
         this.loginLayoutController = loginLayoutController;
         countDownLatch = new CountDownLatch(1);
         disposableSubscription = Observable.using(this::openSocketConnection, this::createObservable, this::closeSocketConnection)
@@ -228,7 +228,7 @@ public class AuthenticationSessionManager {
 
     //TODO: Temporary method, delete before merging
     public static void main(String[] args) {
-        AuthenticationSessionManager authenticationSessionManager = new AuthenticationSessionManager();
-        authenticationSessionManager.sendUserAuthData("sup", "asdf");
+//        AuthenticationSessionManager authenticationSessionManager = new AuthenticationSessionManager();
+//        authenticationSessionManager.sendUserAuthData("sup", "asdf");
     }
 }
