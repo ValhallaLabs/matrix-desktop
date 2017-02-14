@@ -37,7 +37,7 @@ public class AuthenticationSessionManager {
         this.loginLayoutController = loginLayoutController;
         countDownLatch = new CountDownLatch(1);
         disposableSubscription = Observable.using(this::openSocketConnection, this::createObservable, this::closeSocketConnection)
-                .subscribe(this::disposeManager, this::handleExceptions);
+                .subscribe(this::startMainLayoutAndDisposeManager, this::handleExceptions);
     }
 
     /**
@@ -143,7 +143,7 @@ public class AuthenticationSessionManager {
         Boolean tokenValidationResult = !Constants.INVALID_USERNAME.name().equals(response) &&
                 !Constants.INVALID_PASSWORD.name().equals(response);
         if(!tokenValidationResult) {
-            //TODO: Notify login controller to start main window AT MAIN THREAD
+            loginLayoutController.errorLoginPassword();
         }
         return tokenValidationResult;
     }
@@ -210,9 +210,9 @@ public class AuthenticationSessionManager {
      * Tells {@Link LoginLayoutController} to open main window and dispose current session.
      * @param sessionStatus useless param at the moment
      */
-    private void disposeManager(Object sessionStatus){
+    private void startMainLayoutAndDisposeManager(Object sessionStatus){
         logger.debug("Authentication completed");
-        //TODO: Start to open Main window if true
+        loginLayoutController.closeLoginLayoutAndStartMainLayout();
         disposableSubscription.dispose();
     }
 

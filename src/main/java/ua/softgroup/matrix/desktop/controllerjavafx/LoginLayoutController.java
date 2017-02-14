@@ -27,7 +27,8 @@ public class LoginLayoutController {
     @FXML
     public Button btnLogin;
     @FXML
-    Label labelErrorMessage;
+    public Label labelErrorMessage;
+
     private AuthenticationSessionManager authenticationSessionManager;
 
     public void startLoginLayout(Stage loginStage) {
