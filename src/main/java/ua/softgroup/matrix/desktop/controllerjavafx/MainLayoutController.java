@@ -15,13 +15,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Created by AndriiBei on 09.02.2017.
+ * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-/** TODO For Andrii Bei:
+
+/**
+ * TODO For Andrii Bei:
  * 1) Create method that will load user projects in table form CurrentSessionManager(need to use synchronization,
  * will think about it together later, just make some sketches).
  */
-
 public class MainLayoutController {
     @FXML
     public Menu menuReport;
@@ -33,7 +34,7 @@ public class MainLayoutController {
     private Stage primaryStage;
 
     public void startMainControllerLayout() {
-        primaryStage=new Stage();
+        primaryStage = new Stage();
         Image icon = new Image(getClass().getResourceAsStream("/images/logo.png"));
         primaryStage.getIcons().add(icon);
         startMainLayout();
@@ -62,7 +63,7 @@ public class MainLayoutController {
             classLoader = getClass().getClassLoader();
             loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource("fxml/projectsLayout.fxml"));
-          AnchorPane projectsLayout = loader.load();
+            AnchorPane projectsLayout = loader.load();
             mainLayout.setCenter(projectsLayout);
         } catch (IOException e) {
             e.printStackTrace();

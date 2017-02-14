@@ -1,7 +1,7 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
 /**
- * Created by AndriiBei on 09.02.2017.
+ * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class SettingLayoutController {
 }

@@ -21,22 +21,22 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 /**
- * Created by AndriiBei on 10.02.2017.
+ * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class ReportLayoutController {
 
     @FXML
     public TableView<ReportModel> tableViewReport;
     @FXML
-    public TableColumn<ReportModel,Integer> reportTableColumnDate;
+    public TableColumn<ReportModel, Integer> reportTableColumnDate;
     @FXML
-    public TableColumn<ReportModel,Long> reportTableColumnTime;
+    public TableColumn<ReportModel, Long> reportTableColumnTime;
     @FXML
-    public TableColumn<ReportModel,Boolean> reportTableColumnVerified;
+    public TableColumn<ReportModel, Boolean> reportTableColumnVerified;
     @FXML
-    public TableColumn<ReportModel,String> reportTableColumnReport;
+    public TableColumn<ReportModel, String> reportTableColumnReport;
 
-   ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
+    ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
     private Stage primaryStage;
 
     @FXML
@@ -45,7 +45,7 @@ public class ReportLayoutController {
     }
 
     public void startReportLayoutController() {
-        primaryStage=new Stage();
+        primaryStage = new Stage();
         startReportLayout();
         initReport();
     }
@@ -55,32 +55,32 @@ public class ReportLayoutController {
         reportTableColumnTime.setCellValueFactory(new PropertyValueFactory<>("id"));
         reportTableColumnVerified.setCellValueFactory(new PropertyValueFactory<>("checked"));
         reportTableColumnReport.setCellValueFactory(new PropertyValueFactory<>("description"));
-        reportData.add(new ReportModel(LocalDate.now(),1,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),3,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),2,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(),4,true,"ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 1, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 3, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 2, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
+        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
         tableViewReport.setItems(reportData);
     }
 
     private void startReportLayout() {
         try {
-            ClassLoader  classLoader = getClass().getClassLoader();
+            ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource("fxml/reportLayout.fxml"));
             AnchorPane anchorPane = loader.load();
