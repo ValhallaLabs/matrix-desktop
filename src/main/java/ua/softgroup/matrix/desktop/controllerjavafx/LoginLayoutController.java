@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationSessionManager;
+import ua.softgroup.matrix.desktop.start.Main;
 
 import java.io.IOException;
 
@@ -19,7 +20,7 @@ import java.io.IOException;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 
-public class LoginLayoutController {
+public class LoginLayoutController extends Main {
     @FXML
     public TextField loginTextField;
     @FXML
@@ -48,8 +49,7 @@ public class LoginLayoutController {
     }
 
     public void startMainWindow(ActionEvent actionEvent) {
-//        sendAuthDataToNotificationManager();
-        closeLoginLayoutAndStartMainLayout();
+       sendAuthDataToNotificationManager();
     }
 
     private void sendAuthDataToNotificationManager() {
