@@ -30,7 +30,6 @@ public class Main extends Application {
     }
 
     public void startLoginLayout(Stage loginStage) {
-        System.out.println("pizdec");
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();

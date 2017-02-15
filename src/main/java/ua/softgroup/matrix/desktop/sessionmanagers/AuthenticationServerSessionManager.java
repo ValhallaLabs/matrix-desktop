@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
-import ua.softgroup.matrix.desktop.utils.SocketProvider;
 import ua.softgroup.matrix.server.desktop.api.Constants;
 import ua.softgroup.matrix.server.desktop.api.ServerCommands;
 import ua.softgroup.matrix.server.desktop.model.ClientSettingsModel;
@@ -24,73 +23,18 @@ import java.util.concurrent.CountDownLatch;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public class AuthenticationSessionManager {
-    private static final Logger logger = LoggerFactory.getLogger(AuthenticationSessionManager.class);
+public class AuthenticationServerSessionManager extends ServerSessionManager {
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationServerSessionManager.class);
     private LoginLayoutController loginLayoutController;
     private Emitter<UserPassword> userPasswordEmitter;
-    private ObjectOutputStream objectOutputStream;
-    private DataInputStream dataInputStream;
     private Disposable disposableSubscription;
     private CountDownLatch countDownLatch;
 
-    public AuthenticationSessionManager(LoginLayoutController loginLayoutController) {
+    public AuthenticationServerSessionManager(LoginLayoutController loginLayoutController) {
         this.loginLayoutController = loginLayoutController;
         countDownLatch = new CountDownLatch(1);
-        disposableSubscription = Observable.using(this::openSocketConnection, this::createObservable, this::closeSocketConnection)
+        disposableSubscription = Observable.using(this::openSocketConnection, this::createBindedObservable, this::closeSocketConnection)
                 .subscribe(this::startMainLayoutAndDisposeManager, this::handleExceptions);
-    }
-
-    /**
-     * Received user data for authentication, creates UserPassword DTO, end emit it into observable.
-     * countDownLatch.await() blocks current thread, until userPasswordEmitter will be initialized.
-     * @param userNameString string that contains user name
-     * @param userPasswordString string that contains user password
-     */
-    public void sendUserAuthData(String userNameString, String userPasswordString) {
-        UserPassword userPassword = new UserPassword(userNameString, userPasswordString);
-        try {
-            if (userPasswordEmitter ==  null) {
-                countDownLatch.await();
-            }
-            userPasswordEmitter.onNext(userPassword);
-        } catch (InterruptedException e) {
-            logger.debug("sendUserAuthData. Something went wrong {}", e.toString());
-            //TODO: Some kind of global crash. Restart app.
-        }
-    }
-
-    /**
-     * Closes current authentication session
-     */
-    public void closeSession(){
-        if(!disposableSubscription.isDisposed()) {
-            disposableSubscription.dispose();
-        }
-    }
-
-    /**
-     * The factory function to create a resource object that depends on the Observable.
-     * Creates a new socket connection with server.
-     * @return a new socket connection
-     */
-    private Socket openSocketConnection() throws IOException {
-        Socket socket = SocketProvider.openNewConnection();
-        objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-        dataInputStream = new DataInputStream(socket.getInputStream());
-        logger.debug("Open socket connection");
-        return socket;
-    }
-
-    /**
-     * The function that will dispose of the resource, that depends to the Observable.
-     * Sends command to server about closing connection and closes socket connection.
-     * @param socket The socket which is dependent to an observable
-     */
-    private void closeSocketConnection(Socket socket) throws IOException {
-        logger.debug("Socket connection closed");
-        objectOutputStream.writeObject(ServerCommands.CLOSE);
-        objectOutputStream.flush();
-        socket.close();
     }
 
     /**
@@ -99,9 +43,10 @@ public class AuthenticationSessionManager {
      * @param socket The socket which is dependent to an observable
      * @return Observable
      */
-    private Observable createObservable(Socket socket) {
+    @Override
+    protected Observable<Boolean> createBindedObservable(Socket socket) {
         return Observable.create(this::createObservableEmitter)
-                .map(this::authenticateUser)
+                .map(userPassword -> authenticateUser(userPassword, socket))
                 .filter(this::handleServerAuthResponse)
                 .map(this::composeTokenModel)
                 .map(tokenModel -> getAllProjectsAndClientSettings(tokenModel,socket))
@@ -125,11 +70,11 @@ public class AuthenticationSessionManager {
      * @param userPassword DTO with username and password
      * @return String object that contains response about result of authentication
      */
-    private String authenticateUser(UserPassword userPassword) throws IOException {
+    private String authenticateUser(UserPassword userPassword, Socket socket) throws IOException {
         objectOutputStream.writeObject(ServerCommands.AUTHENTICATE);
         objectOutputStream.writeObject(userPassword);
         objectOutputStream.flush();
-        return dataInputStream.readUTF();
+        return new DataInputStream(socket.getInputStream()).readUTF();
     }
 
     /**
@@ -226,9 +171,32 @@ public class AuthenticationSessionManager {
         disposableSubscription.dispose();
     }
 
-    //TODO: Temporary method, delete before merging
-    public static void main(String[] args) {
-//        AuthenticationSessionManager authenticationSessionManager = new AuthenticationSessionManager();
-//        authenticationSessionManager.sendUserAuthData("sup", "asdf");
+    /**
+     * Received user data for authentication, creates UserPassword DTO, end emit it into observable.
+     * countDownLatch.await() blocks current thread, until userPasswordEmitter will be initialized.
+     * @param userNameString string that contains user name
+     * @param userPasswordString string that contains user password
+     */
+    public void sendUserAuthData(String userNameString, String userPasswordString) {
+        UserPassword userPassword = new UserPassword(userNameString, userPasswordString);
+        try {
+            if (userPasswordEmitter ==  null) {
+                countDownLatch.await();
+            }
+            userPasswordEmitter.onNext(userPassword);
+        } catch (InterruptedException e) {
+            logger.debug("sendUserAuthData. Something went wrong {}", e.toString());
+            //TODO: Some kind of global crash. Restart app.
+        }
+    }
+
+    /**
+     * Closes current authentication session
+     */
+    @Override
+    public void closeSession(){
+        if(!disposableSubscription.isDisposed()) {
+            disposableSubscription.dispose();
+        }
     }
 }
