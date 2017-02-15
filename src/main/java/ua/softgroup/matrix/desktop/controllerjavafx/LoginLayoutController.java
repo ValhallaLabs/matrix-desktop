@@ -1,26 +1,23 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationSessionManager;
-import ua.softgroup.matrix.desktop.start.Main;
 
-import java.io.IOException;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 
 public class LoginLayoutController {
+    private static String EMPTY_FIElD = "Error: Please Fill All Field";
+    private static String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
     private Stage stage;
     private AuthenticationSessionManager authenticationSessionManager;
     @FXML
@@ -33,8 +30,10 @@ public class LoginLayoutController {
     public Label labelErrorMessage;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         authenticationSessionManager = new AuthenticationSessionManager(this);
+        addTextLimiter(loginTextField, 20);
+        addTextLimiter(passwordTextField, 20);
     }
 
     public void setUpStage(Stage stage) {
@@ -43,7 +42,11 @@ public class LoginLayoutController {
     }
 
     public void startMainWindow(ActionEvent actionEvent) {
-       sendAuthDataToNotificationManager();
+        if (!textFieldNotEmpty(loginTextField) || !textFieldNotEmpty(passwordTextField)) {
+            labelErrorMessage.setText(EMPTY_FIElD);
+            return;
+        }
+        sendAuthDataToNotificationManager();
     }
 
     private void sendAuthDataToNotificationManager() {
@@ -53,7 +56,7 @@ public class LoginLayoutController {
     }
 
     public void errorLoginPassword() {
-        labelErrorMessage.setVisible(true);
+        labelErrorMessage.setText(INVALID_LOGIN_PASSWORD);
     }
 
     public void closeLoginLayoutAndStartMainLayout() {
@@ -64,4 +67,21 @@ public class LoginLayoutController {
     public AuthenticationSessionManager getAuthenticationSessionManager() {
         return authenticationSessionManager;
     }
+
+    public static void addTextLimiter(final TextField tf, final int maxLength) {
+        tf.textProperty().addListener((ov, oldValue, newValue) -> {
+            if (tf.getText().length() > maxLength) {
+                String s = tf.getText().substring(0, maxLength);
+                tf.setText(s);
+            }
+        });
+    }
+
+    public static boolean textFieldNotEmpty(TextField tf) {
+        if (tf.getText() != null && !tf.getText().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
 }

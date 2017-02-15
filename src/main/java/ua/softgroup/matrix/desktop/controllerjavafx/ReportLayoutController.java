@@ -7,16 +7,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import ua.softgroup.matrix.server.desktop.model.ProjectModel;
 import ua.softgroup.matrix.server.desktop.model.ReportModel;
-
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -35,6 +32,10 @@ public class ReportLayoutController {
     public TableColumn<ReportModel, Boolean> reportTableColumnVerified;
     @FXML
     public TableColumn<ReportModel, String> reportTableColumnReport;
+    @FXML
+    public Button btnChangeReport;
+    @FXML
+    public Button btnCancelReport;
 
     ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
     private Stage primaryStage;
@@ -95,7 +96,11 @@ public class ReportLayoutController {
         }
     }
 
-    public void btnCancelReportWindow(ActionEvent actionEvent) {
+    public void CancelReportWindow(ActionEvent actionEvent) {
+        ((Node) actionEvent.getSource()).getScene().getWindow().hide();
+    }
+
+    public void ChangeReportWindow(ActionEvent actionEvent) {
         ((Node) actionEvent.getSource()).getScene().getWindow().hide();
     }
 }

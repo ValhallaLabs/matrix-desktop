@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="320.0" styleClass="base-font" stylesheets="@../css/loginLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="320.0" styleClass="base-font" stylesheets="@../css/loginLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController">
 
     <children>
       <VBox prefHeight="300.0" prefWidth="320.0">
@@ -33,7 +33,7 @@
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></PasswordField>
-            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#startMainWindow" prefHeight="45.0" prefWidth="270.0" styleClass="btn" text="login">
+            <Button fx:id="btnLogin" defaultButton="true" mnemonicParsing="false" onAction="#startMainWindow" prefHeight="45.0" prefWidth="270.0" styleClass="btn" text="login">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
@@ -41,12 +41,12 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <Label fx:id="labelErrorMessage" alignment="CENTER" prefHeight="19.0" prefWidth="282.0" text="Error: Wrong Login or Password" textFill="#d74747" visible="false">
+            <Label fx:id="labelErrorMessage" alignment="CENTER" prefHeight="19.0" prefWidth="282.0" textFill="#d74747">
                <VBox.margin>
                   <Insets left="4.0" />
                </VBox.margin>
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
             <CheckBox mnemonicParsing="false" text="Remember me">
