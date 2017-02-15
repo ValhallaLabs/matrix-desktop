@@ -128,7 +128,7 @@
                            <children>
                               <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
-                                    <Insets top="22.0" />
+                                    <Insets left="15.0" top="22.0" />
                                  </HBox.margin>
                                  <image>
                                     <Image url="@../images/computerIcon.gif" />
@@ -136,23 +136,23 @@
                               </ImageView>
                               <Label fx:id="labelNameSales" maxWidth="-Infinity" prefWidth="90.0" text="Stas Prymak" textFill="#3063a4">
                                  <HBox.margin>
-                                    <Insets left="4.0" top="18.0" />
+                                    <Insets left="4.0" top="17.0" />
                                  </HBox.margin>
                                  <font>
-                                    <Font name="System Bold" size="15.0" />
+                                    <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
                               <Label fx:id="labelNameProject" text="iTotal Wordpress website" textFill="#3063a4">
                                  <HBox.margin>
-                                    <Insets left="2.0" top="18.0" />
+                                    <Insets left="2.0" right="15.0" top="18.0" />
                                  </HBox.margin>
                                  <font>
-                                    <Font name="System Bold" size="15.0" />
+                                    <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
                            </children>
                            <GridPane.margin>
-                              <Insets left="15.0" right="5.0" />
+                              <Insets />
                            </GridPane.margin>
                         </HBox>
                         <HBox prefHeight="24.0" prefWidth="158.0" GridPane.rowIndex="6">
