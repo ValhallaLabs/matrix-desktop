@@ -1,26 +1,28 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.server.desktop.model.ProjectModel;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Set;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class ProjectsLayoutController {
-
-    private ObservableList<PieChart.Data> pieChartList;
-    static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
-
 
     @FXML
     public TableView<ProjectModel> tvProjectsTable;
@@ -45,6 +47,8 @@ public class ProjectsLayoutController {
     @FXML
     public Label labelNameProject;
     @FXML
+    public Label labelDiscribeProject;
+    @FXML
     public Label labelStartWorkToday;
     @FXML
     public Label labelTodayTotalTime;
@@ -66,39 +70,68 @@ public class ProjectsLayoutController {
     public Button btnSendReport;
     @FXML
     public Label labelSymbolsNeedReport;
+    private Set<ProjectModel> projectModelSet;
+    private ObservableList<PieChart.Data> pieChartList;
+    static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
+    private static DateTimeFormatter dateFormatNumber=DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private static DateTimeFormatter dateFormatText=DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
 
     @FXML
     private void initialize() {
+        initPieChart();
         initTable();
-        initColumn();
         getTodayDayAndSetInView();
     }
 
+    private void setDataInInfo(ProjectModel projectModel) {
+        labelNameSales.setText(projectModel.getAuthorName());
+        labelNameProject.setText(" : " + projectModel.getTitle());
+        labelDiscribeProject.setText(projectModel.getDescription());
+        labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
+       labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
+    }
+
     private void getTodayDayAndSetInView() {
-        Date date = new Date();
-        SimpleDateFormat dateFormatText = new SimpleDateFormat("EEEEE", Locale.ENGLISH);
-        String dayOfWeekText = dateFormatText.format(date);
-        SimpleDateFormat dateFormatNumber = new SimpleDateFormat("d.MM.yyyy");
-        String dayOfWeekNumber = dateFormatNumber.format(date);
+        LocalDate date =LocalDate.now();
+        String dayOfWeekText =date.format(dateFormatText);
+        String dayOfWeekNumber = date.format(dateFormatNumber);
         labelDayInWord.setText(dayOfWeekText);
         labelDayInNumber.setText(dayOfWeekNumber);
     }
 
-    private void initColumn() {
+    private void initTable() {
         tcIdProject.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcAuthorName.setCellValueFactory(new PropertyValueFactory<>("authorName"));
         tcTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         tcDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        projectsData.add(new ProjectModel(1, "1sdsd", "1sdsd", "1sdsdsds"));
-        projectsData.add(new ProjectModel(2, "2sdsd", "2sdsd", "2sdsdsds"));
-        projectsData.add(new ProjectModel(3, "3sdsd", "3sdsd", "3sdsdsds"));
-        projectsData.add(new ProjectModel(4, "4sdsd", "4sdsd", "4sdsdsds"));
-        tvProjectsTable.setItems(projectsData);
+        setProjectInTable();
     }
 
-    private void initTable() {
+    private void setProjectInTable() {
+        projectModelSet = CurrentSessionInfo.getUserActiveProjects();
+        projectModelSet.forEach(projectsData::add);
+//        for (ProjectModel projectModel : projectModelSet) {
+//            projectsData.add(projectModel);
+//        }
+        tvProjectsTable.setItems(projectsData);
+        setprojectInfo();
+    }
+    private void setprojectInfo() {
+        for (ProjectModel projectmodel : projectsData) {
+            labelNameSales.setText(projectmodel.getAuthorName());
+            labelNameProject.setText(" : " + projectmodel.getTitle());
+            labelDiscribeProject.setText(projectmodel.getDescription());
+        }
+    }
+
+    private void initPieChart() {
         pieChartList = FXCollections.observableArrayList(new PieChart.Data("Простой", 7),
                 new PieChart.Data("Чистое", 93));
         missPieCharts.setData(pieChartList);
+    }
+
+    public void chosenProject(Event event) {
+        ProjectModel selectProject=(ProjectModel)tvProjectsTable.getSelectionModel().getSelectedItem();
+        setDataInInfo(selectProject);
     }
 }

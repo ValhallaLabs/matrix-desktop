@@ -18,12 +18,11 @@ import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationServerSessionMa
  */
 
 public class LoginLayoutController {
+
     private static String EMPTY_FIElD = "Error: Please Fill All Field";
     private static String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
     private Stage stage;
-
     private AuthenticationServerSessionManager authenticationSessionManager;
-
     @FXML
     public TextField loginTextField;
     @FXML
@@ -34,12 +33,10 @@ public class LoginLayoutController {
     public Label labelErrorMessage;
 
     @FXML
-
     public void initialize(){
         authenticationSessionManager = new AuthenticationServerSessionManager(this);
         addTextLimiter(loginTextField, 20);
         addTextLimiter(passwordTextField, 20);
-
     }
 
     public void setUpStage(Stage stage) {
