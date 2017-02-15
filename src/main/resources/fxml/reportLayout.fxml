@@ -10,7 +10,7 @@
 
 <AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" stylesheets="@../css/reportLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.ReportLayoutController">
    <children>
-      <VBox prefHeight="100.0" prefWidth="100.0" styleClass="right-anchor" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0">
+      <VBox focusTraversable="true" prefHeight="100.0" prefWidth="100.0" styleClass="right-anchor" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0">
          <children>
             <Label text="LIST OF REPORT" textFill="#3063a4">
                <font>
@@ -184,12 +184,12 @@
                   </TableView>
                </children>
             </AnchorPane>
-          <AnchorPane>
+          <AnchorPane focusTraversable="true">
                <opaqueInsets>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
                </opaqueInsets>
                <children>
-                  <VBox prefHeight="200.0" prefWidth="200.0" styleClass="right-anchor" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
+                  <VBox focusTraversable="true" prefHeight="200.0" prefWidth="200.0" styleClass="right-anchor" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="25.0" prefWidth="283.0" text="REPORT RESULT:" textFill="#3063a4">
                            <VBox.margin>
@@ -207,12 +207,12 @@
                               <Font size="14.0" />
                            </font>
                         </TextArea>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
+                        <VBox focusTraversable="true" prefHeight="200.0" prefWidth="100.0">
                            <padding>
                               <Insets left="10.0" right="10.0" top="40.0" />
                            </padding>
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" styleClass="change-report-button" text="Сhange Report" textFill="WHITE">
+                              <Button fx:id="btnChangeReport" defaultButton="true" mnemonicParsing="false" onAction="#ChangeReportWindow" prefHeight="40.0" prefWidth="300.0" styleClass="change-report-button" text="Сhange Report" textFill="WHITE">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </VBox.margin>
@@ -220,7 +220,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#btnCancelReportWindow" prefHeight="40.0" prefWidth="300.0" styleClass="cancel-report-button" text="Cancel" textFill="WHITE">
+                              <Button fx:id="btnCancelReport" cancelButton="true" mnemonicParsing="false" onAction="#CancelReportWindow" prefHeight="40.0" prefWidth="300.0" styleClass="cancel-report-button" text="Cancel" textFill="WHITE">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" top="10.0" />
                                  </VBox.margin>
