@@ -2,19 +2,12 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationSessionManager;
-import ua.softgroup.matrix.desktop.start.Main;
-
-import java.io.IOException;
+import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationServerSessionManager;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
@@ -22,7 +15,7 @@ import java.io.IOException;
 
 public class LoginLayoutController {
     private Stage stage;
-    private AuthenticationSessionManager authenticationSessionManager;
+    private AuthenticationServerSessionManager authenticationSessionManager;
     @FXML
     public TextField loginTextField;
     @FXML
@@ -34,7 +27,7 @@ public class LoginLayoutController {
 
     @FXML
     public void initialize(){
-        authenticationSessionManager = new AuthenticationSessionManager(this);
+        authenticationSessionManager = new AuthenticationServerSessionManager(this);
     }
 
     public void setUpStage(Stage stage) {
@@ -61,7 +54,7 @@ public class LoginLayoutController {
         new MainLayoutController().startMainControllerLayout();
     }
 
-    public AuthenticationSessionManager getAuthenticationSessionManager() {
+    public AuthenticationServerSessionManager getAuthenticationSessionManager() {
         return authenticationSessionManager;
     }
 }
