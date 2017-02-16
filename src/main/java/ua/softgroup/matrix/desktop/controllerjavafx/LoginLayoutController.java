@@ -3,14 +3,19 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationServerSessionManager;
 
+import java.io.IOException;
 
 
 /**
@@ -33,7 +38,7 @@ public class LoginLayoutController {
     public Label labelErrorMessage;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         authenticationSessionManager = new AuthenticationServerSessionManager(this);
         addTextLimiter(loginTextField, 20);
         addTextLimiter(passwordTextField, 20);
@@ -64,7 +69,29 @@ public class LoginLayoutController {
 
     public void closeLoginLayoutAndStartMainLayout() {
         stage.close();
-        new MainLayoutController().startMainControllerLayout();
+        startMainControllerLayout();
+    }
+
+    private void startMainControllerLayout() {
+        try {
+            Stage primaryStage = new Stage();
+            Image icon = new Image(getClass().getResourceAsStream("/images/testLogoIcon.png"));
+            primaryStage.getIcons().add(icon);
+            ClassLoader classLoader = getClass().getClassLoader();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(classLoader.getResource("fxml/mainLayout.fxml"));
+            BorderPane mainLayout = loader.load();
+            Scene scene = new Scene(mainLayout);
+            primaryStage.setScene(scene);
+            primaryStage.setMinWidth(1200);
+            primaryStage.setMinHeight(800);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+            MainLayoutController mainController=loader.getController();
+            mainController.startProjectsLayoutController(mainLayout);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public AuthenticationServerSessionManager getAuthenticationSessionManager() {

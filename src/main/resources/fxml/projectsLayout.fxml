@@ -67,7 +67,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="labelDiscribeProject" alignment="TOP_LEFT" prefHeight="72.0" prefWidth="282.0" text="Разработка сайта' на Вордперссе с установкой плагина  Event calendar и кастомизация  Avanda премиум темы ооороргрорололорор авыа " wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
+                        <Label fx:id="labelDiscribeProject" alignment="TOP_LEFT" prefHeight="72.0" prefWidth="282.0" wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets left="15.0" />
                            </GridPane.margin>
@@ -134,7 +134,7 @@
                                     <Image url="@../images/computerIcon.gif" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="labelNameSales" maxWidth="-Infinity" prefWidth="90.0" text="Stas Prymak" textFill="#3063a4">
+                              <Label fx:id="labelNameSales" maxWidth="-Infinity" prefWidth="90.0" textFill="#3063a4">
                                  <HBox.margin>
                                     <Insets left="4.0" top="17.0" />
                                  </HBox.margin>
@@ -142,7 +142,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelNameProject" text="iTotal Wordpress website" textFill="#3063a4">
+                              <Label fx:id="labelNameProject" textFill="#3063a4">
                                  <HBox.margin>
                                     <Insets left="2.0" right="15.0" top="18.0" />
                                  </HBox.margin>

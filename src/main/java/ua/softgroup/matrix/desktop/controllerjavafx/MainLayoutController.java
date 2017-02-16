@@ -6,11 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 /**
@@ -28,40 +29,31 @@ public class MainLayoutController {
     public Menu menuReport;
     @FXML
     public MenuBar menuBar;
-    private ClassLoader classLoader;
-    private FXMLLoader loader;
-    private BorderPane mainLayout;
 
-
-    public void startMainControllerLayout() {
-        startMainLayout();
-        startProjectLayout();
-    }
-
-    private void startMainLayout() {
+    public void startReportLayoutWindow(ActionEvent actionEvent) {
         try {
-            Stage primaryStage = new Stage();
-            Image icon = new Image(getClass().getResourceAsStream("/images/testLogoIcon.png"));
-            primaryStage.getIcons().add(icon);
-            classLoader = getClass().getClassLoader();
-            loader = new FXMLLoader();
-            loader.setLocation(classLoader.getResource("fxml/mainLayout.fxml"));
-            mainLayout = loader.load();
-            Scene scene = new Scene(mainLayout);
+            Stage  primaryStage = new Stage();
+            ClassLoader classLoader = getClass().getClassLoader();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(classLoader.getResource("fxml/reportLayout.fxml"));
+            AnchorPane anchorPane = loader.load();
+            Scene scene = new Scene(anchorPane);
             primaryStage.setScene(scene);
-            primaryStage.show();
             primaryStage.setMinWidth(1200);
-            primaryStage.setMinHeight(800);
+            primaryStage.setMinHeight(750);
+            primaryStage.initModality(Modality.WINDOW_MODAL);
+            primaryStage.initOwner(menuBar.getScene().getWindow());
             primaryStage.setResizable(false);
+            primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void startProjectLayout() {
+    public void startProjectsLayoutController(BorderPane mainLayout) {
         try {
-            classLoader = getClass().getClassLoader();
-            loader = new FXMLLoader();
+            ClassLoader  classLoader = getClass().getClassLoader();
+            FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource("fxml/projectsLayout.fxml"));
             AnchorPane projectsLayout = loader.load();
             mainLayout.setCenter(projectsLayout);
@@ -70,8 +62,5 @@ public class MainLayoutController {
         }
     }
 
-    public void startReportLayoutWindow(ActionEvent actionEvent) {
-//        ((Node)menuBar).getScene().getWindow().hide();
-        new ReportLayoutController().startReportLayoutController();
-    }
+
 }

@@ -78,14 +78,6 @@ public class ProjectsLayoutController {
         getTodayDayAndSetInView();
     }
 
-    private void setDataInInfo(ProjectModel projectModel) {
-        labelNameSales.setText(projectModel.getAuthorName());
-        labelNameProject.setText(" : " + projectModel.getTitle());
-        labelDiscribeProject.setText(projectModel.getDescription());
-        labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
-       labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
-    }
-
     private void getTodayDayAndSetInView() {
         LocalDate date =LocalDate.now();
         String dayOfWeekText =date.format(dateFormatText);
@@ -104,19 +96,21 @@ public class ProjectsLayoutController {
 
     private void setProjectInTable() {
         Set<ProjectModel> projectModelSet = CurrentSessionInfo.getUserActiveProjects();
-        projectModelSet.forEach(projectsData::add);
+        if(projectModelSet!=null&&!projectModelSet.isEmpty()){
+            projectModelSet.forEach(projectsData::add);
 //        for (ProjectModel projectModel : projectModelSet) {
 //            projectsData.add(projectModel);
 //        }
-        tvProjectsTable.setItems(projectsData);
-        setOtherProjectInfo();
-    }
-    private void setOtherProjectInfo() {
-        for (ProjectModel projectmodel : projectsData) {
-            labelNameSales.setText(projectmodel.getAuthorName());
-            labelNameProject.setText(":" + projectmodel.getTitle());
-            labelDiscribeProject.setText(projectmodel.getDescription());
+            tvProjectsTable.setItems(projectsData);
+            setOtherProjectInfoInView(projectsData.get(0));
         }
+    }
+    private void setOtherProjectInfoInView(ProjectModel projectModel) {
+            labelNameSales.setText(projectModel.getAuthorName());
+            labelNameProject.setText(":" + projectModel.getTitle());
+            labelDiscribeProject.setText(projectModel.getDescription());
+            labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
+            labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
     }
 
     private void initPieChart() {
@@ -127,6 +121,6 @@ public class ProjectsLayoutController {
 
     public void chosenProject(Event event) {
         ProjectModel selectProject=(ProjectModel)tvProjectsTable.getSelectionModel().getSelectedItem();
-        setDataInInfo(selectProject);
+        setOtherProjectInfoInView(selectProject);
     }
 }
