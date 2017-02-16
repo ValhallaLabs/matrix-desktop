@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import ua.softgroup.matrix.server.desktop.model.ReportModel;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -36,9 +37,7 @@ public class ReportLayoutController {
     public Button btnChangeReport;
     @FXML
     public Button btnCancelReport;
-
-    ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
-    private Stage primaryStage;
+    private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
@@ -46,9 +45,7 @@ public class ReportLayoutController {
     }
 
     public void startReportLayoutController() {
-        primaryStage = new Stage();
         startReportLayout();
-        initReport();
     }
 
     private void initReport() {
@@ -81,6 +78,7 @@ public class ReportLayoutController {
 
     private void startReportLayout() {
         try {
+            Stage  primaryStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource("fxml/reportLayout.fxml"));

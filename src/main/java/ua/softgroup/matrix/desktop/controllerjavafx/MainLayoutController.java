@@ -23,6 +23,7 @@ import java.io.IOException;
  * will think about it together later, just make some sketches).
  */
 public class MainLayoutController {
+
     @FXML
     public Menu menuReport;
     @FXML
@@ -30,18 +31,18 @@ public class MainLayoutController {
     private ClassLoader classLoader;
     private FXMLLoader loader;
     private BorderPane mainLayout;
-    private Stage primaryStage;
+
 
     public void startMainControllerLayout() {
-        primaryStage = new Stage();
-        Image icon = new Image(getClass().getResourceAsStream("/images/testLogoIcon.png"));
-        primaryStage.getIcons().add(icon);
         startMainLayout();
         startProjectLayout();
     }
 
     private void startMainLayout() {
         try {
+            Stage primaryStage = new Stage();
+            Image icon = new Image(getClass().getResourceAsStream("/images/testLogoIcon.png"));
+            primaryStage.getIcons().add(icon);
             classLoader = getClass().getClassLoader();
             loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource("fxml/mainLayout.fxml"));

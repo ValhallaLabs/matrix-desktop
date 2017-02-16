@@ -1,0 +1,834 @@
+10:20:05.239 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:20:05.168
+10:20:05.872 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:20:09.265 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+10:20:09.903 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+10:20:11.397 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:21:45.045 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:21:44.983
+10:21:45.626 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:21:51.386 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:22:01.910 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:22:01.825
+10:22:02.879 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:22:10.880 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:22:23.144 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:22:23.079
+10:22:23.646 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:22:27.791 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:22:38.209 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:22:38.124
+10:22:38.738 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:22:51.720 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:23:01.754 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:23:01.678
+10:23:02.320 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:23:08.256 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:35:50.290 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:35:50.202
+10:35:51.280 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:35:55.685 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:36:21.022 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:36:20.957
+10:36:21.535 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:36:28.235 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:36:34.144 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:36:34.061
+10:36:34.695 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:36:37.488 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:37:30.658 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:37:30.594
+10:37:31.171 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:37:33.513 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:43:27.479 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:43:27.395
+10:43:28.040 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:43:35.429 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:43:59.666 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:43:59.599
+10:44:00.175 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:44:02.799 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+10:44:04.236 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:44:08.819 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:44:08.741
+10:44:09.352 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:44:12.796 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:46:16.218 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:46:16.142
+10:46:16.939 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:53:51.509 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:53:51.427
+10:53:52.555 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:54:05.902 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:54:05.944 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+10:54:05.975 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+10:54:06.056 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+10:54:07.510 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:54:13.137 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:54:13.071
+10:54:13.635 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:54:21.923 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response 8Q0jMq4y_5QZu6Hyp_LYSCluDx6TYMIw
+10:54:22.035 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Project models received successfully: []
+10:54:22.040 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+10:54:22.040 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Authentication completed
+10:54:22.606 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:54:30.504 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:54:30.400
+10:54:31.355 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:54:34.726 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+10:54:43.639 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response DwdAxyPtlmTmGBppZxa5Q0GCC1LbYUM4
+10:54:43.744 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Project models received successfully: []
+10:54:43.747 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+10:54:43.747 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Authentication completed
+10:54:44.655 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+10:58:01.385 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T10:58:01.314
+10:58:01.885 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+10:58:14.808 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+10:59:24.618 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:01:39.569 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response 8iXSd104LDHC6lwGL8QuM9sDhQi3WByC
+11:01:39.703 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Project models received successfully: []
+11:01:39.705 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+11:01:39.705 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Authentication completed
+11:01:40.241 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:02:47.130 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:02:47.060
+11:02:47.707 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:02:53.348 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response xCGk6Eita8m-5o3-8xOaBsvjpRoVtdtl
+11:02:53.477 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Project models received successfully: []
+11:02:53.479 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+11:02:53.479 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Authentication completed
+11:02:54.075 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:04:14.043 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:04:13.928
+11:04:16.642 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:04:25.759 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:04:30.005 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response 5R3B1eKp5uXaCgDSsPTU57Blm9XpxzBn
+11:04:30.140 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Project models received successfully: []
+11:04:30.145 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+11:04:30.145 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Authentication completed
+11:04:30.722 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:05:25.637 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:05:25.477
+11:05:26.329 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:05:32.407 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response vmRvy3R40DCzkCURoO0g-wlDkc98__Yc
+11:05:32.534 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Project models received successfully: []
+11:05:32.537 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+11:05:32.537 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Authentication completed
+11:05:33.228 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:06:06.916 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:06:06.837
+11:06:07.468 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:06:19.169 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response eIwRlVLryt0zho7LX7kkSmfb2p9SfCdn
+11:06:19.293 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Project models received successfully: []
+11:06:19.295 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+11:06:19.296 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Authentication completed
+11:06:20.164 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:07:02.838 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:07:02.712
+11:07:03.830 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:07:09.222 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response WhwSyPngF1jI3QXF5CW9sWfRCPbkNlMr
+11:07:09.322 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Project models received successfully: []
+11:07:09.324 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+11:07:09.324 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Authentication completed
+11:07:09.958 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:11:14.268 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:11:14.183
+11:11:15.089 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:11:20.783 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response bDVBtI1l56ZPorlddOowWnsvFXOtGNAu
+11:11:20.907 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Project models received successfully: []
+11:11:20.909 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+11:11:20.909 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Authentication completed
+11:11:21.506 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:19:28.401 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:19:28.338
+11:19:28.987 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:19:38.979 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response UrW5udt-Z-h8roPutSaUM0xwCgIIC71c
+11:19:39.096 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Project models received successfully: []
+11:19:39.099 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+11:19:39.099 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Authentication completed
+11:19:39.700 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:22:39.100 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:22:39.035
+11:22:39.607 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:22:43.454 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:23:03.056 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response 3-Y3ZTC2yu7flX8XxR_FPIZ369GJE0Sj
+11:23:03.168 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Project models received successfully: []
+11:23:03.170 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+11:23:03.170 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Authentication completed
+11:23:03.914 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:32:10.625 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:32:10.507
+11:32:11.246 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:34:26.163 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:34:31.956 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:34:31.895
+11:34:32.538 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:38:48.742 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:38:53.334 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:38:58.605 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:03.868 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:12.154 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:13.984 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:14.935 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:25.444 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:25.808 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:25.971 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:26.111 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:26.268 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:26.408 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:26.539 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:26.955 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:27.087 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:27.195 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:27.327 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:27.464 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:27.575 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:27.697 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:27.842 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:30.168 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:30.312 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:30.449 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:30.599 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:30.739 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:30.891 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:31.015 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:31.160 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:31.288 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:31.407 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:31.522 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:31.675 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:33.145 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:33.290 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:48.664 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:39:57.319 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response _Tj8HogsnfcmwEXMtTJZRWVn6NpkDrvD
+11:39:57.430 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Project models received successfully: []
+11:39:57.432 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+11:39:57.432 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Authentication completed
+11:39:58.047 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:53:51.133 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:53:51.063
+11:53:51.647 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:53:53.676 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:54:01.138 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:55:01.459 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:55:01.388
+11:55:01.998 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:55:04.760 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:55:47.624 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:55:47.551
+11:55:48.226 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:55:57.147 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:56:01.353 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:56:08.694 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:56:12.887 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:56:12.821
+11:56:13.382 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:56:42.728 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:56:51.634 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:57:02.613 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:58:08.198 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:58:08.134
+11:58:08.685 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+11:58:10.805 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:58:16.185 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+11:58:17.418 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+11:58:22.312 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T11:58:22.246
+11:58:22.780 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+12:02:23.314 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+12:02:30.012 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+12:06:36.500 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T12:06:36.436
+12:06:37.008 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+12:08:01.351 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+12:08:02.441 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+12:08:05.599 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T12:08:05.532
+12:08:06.140 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+12:08:09.523 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+12:08:55.560 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T12:08:55.486
+12:08:56.066 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+12:08:58.099 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+12:08:59.715 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+12:09:02.142 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T12:09:02.077
+12:09:02.627 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+12:09:04.910 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+12:09:20.805 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+12:09:47.370 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+12:09:50.234 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T12:09:50.171
+12:09:50.733 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+12:09:53.006 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+12:10:06.982 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response K610nxREezZVEAxHw6r2GinzRMQhFabR
+12:10:07.116 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Project models received successfully: []
+12:10:07.118 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+12:10:07.119 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Authentication completed
+12:10:07.611 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+12:10:29.276 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T12:10:29.212
+12:10:29.773 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+12:18:45.816 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+12:18:48.693 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T12:18:48.626
+12:18:49.192 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+12:18:54.437 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+12:19:28.104 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T12:19:28.034
+12:19:28.703 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+12:19:29.361 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+12:19:30.766 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+12:19:32.964 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T12:19:32.894
+12:19:33.608 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+12:19:39.429 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+12:19:47.458 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T12:19:47.394
+12:19:48.034 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+12:20:13.708 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+12:28:33.163 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T12:28:33.098
+12:28:33.677 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+12:35:20.965 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+12:39:15.436 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T12:39:15.369
+12:39:15.965 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Open socket connection
+12:39:21.008 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+12:39:28.041 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Auth response INVALID_USERNAME
+12:42:13.183 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationSessionManager - Socket connection closed
+12:42:51.916 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T12:42:51.850
+12:42:52.423 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+12:42:54.813 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+12:45:10.696 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T12:45:10.632
+12:45:11.189 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+12:45:16.254 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response INVALID_USERNAME
+12:46:28.614 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+13:07:29.097 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T13:07:29.027
+13:07:29.614 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+13:07:33.415 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response INVALID_USERNAME
+13:07:42.783 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 7rZkZ94n_Waq8Or9tFgUJw3-YS-MxXZj
+13:07:42.897 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: []
+13:07:42.899 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+13:07:42.899 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+13:07:43.372 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+13:24:22.458 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T13:24:22.381
+13:24:23.030 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+13:24:30.761 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response G6IAe2GWqFYG2cMiyGUrtMSO5m_vux0M
+13:24:30.960 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='TestGreatAGAIN', description='Dont Wasted your time', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+13:24:30.962 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+13:24:30.962 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+13:24:31.521 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+13:29:35.538 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T13:29:35.453
+13:29:36.039 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+13:29:41.706 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 2pd3GV_E2lz8qzk94SqB4n1N8VfeePwF
+13:29:41.831 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='TestGreatAGAIN', description='Dont Wasted your time', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+13:29:41.833 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+13:29:41.833 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+13:29:42.356 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+13:30:33.152 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T13:30:33.085
+13:30:33.650 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+13:30:38.624 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response cnNB7fo4S7S79N5A_2elcI7BIsij4JiN
+13:30:38.815 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='TestGreatAGAIN2', description='TestGreatAGAIN2', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='TestGreatAGAIN', description='Dont Wasted your time', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+13:30:38.817 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+13:30:38.817 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+13:30:39.425 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+13:31:18.223 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T13:31:18.157
+13:31:18.703 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+13:31:23.764 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response IdxE0lfWgpgEO3NHmcquZmbCKGBJbjXx
+13:31:23.922 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='TestGreatAGAIN', description='Dont Wasted your time', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='TestGreatAGAIN2', description='TestGreatAGAIN2', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+13:31:23.925 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+13:31:23.925 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+13:31:24.490 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:18:53.103 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T14:18:53.042
+14:18:53.570 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:18:59.699 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 1QR1B4lRyYONc9mTYHKtB36XOGAotw4Z
+14:18:59.859 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='TestGreatAGAIN2', description='TestGreatAGAIN2', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='TestGreatAGAIN', description='Dont Wasted your time', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+14:18:59.861 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:18:59.862 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:19:00.415 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:20:11.124 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T14:20:11.010
+14:20:11.768 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:20:16.556 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response KPZSiaunOkCGQVGRAhmCv2RQGWwPmk56
+14:20:16.681 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='TestGreatAGAIN2', description='TestGreatAGAIN2', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='TestGreatAGAIN', description='Dont Wasted your time', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+14:20:16.684 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:20:16.684 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:20:17.239 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:24:05.608 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T14:24:05.526
+14:24:06.176 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:24:15.225 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response CkMKcGgq1m0yDdzOx4zqLu3WHoaH2EG5
+14:24:15.385 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='TestGreatAGAIN2', description='TestGreatAGAIN2', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+14:24:15.387 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:24:15.387 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:24:16.006 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:26:49.505 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T14:26:49.442
+14:26:50.009 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:26:56.462 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response HueE4i5od5n_Ypaltql8gWvnae4f8G_B
+14:26:56.609 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='TestGreatAGAIN2', description='TestGreatAGAIN2', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+14:26:56.611 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:26:56.612 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:26:57.150 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:27:29.805 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T14:27:29.708
+14:27:30.389 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:27:35.884 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response Bj0_nXHg1FbZjnohQVXytIWIDjIDq4rR
+14:27:36.012 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='TestGreatAGAIN2', description='TestGreatAGAIN2', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+14:27:36.014 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:27:36.014 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:27:36.629 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:28:23.263 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T14:28:23.199
+14:28:23.767 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:28:28.202 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response oAZxVL5XB_-1HVHma-2PYUEKiMIXMNgy
+14:28:28.340 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='TestGreatAGAIN2', description='TestGreatAGAIN2', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+14:28:28.342 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:28:28.342 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:28:28.977 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:29:18.526 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T14:29:18.410
+14:29:19.373 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:29:24.149 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response rrNg2U1V4tDmKEjNxzYzUskLP-lp9uYj
+14:29:24.287 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='TestGreatAGAIN2', description='TestGreatAGAIN2', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+14:29:24.289 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:29:24.289 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:29:24.873 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:29:50.851 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T14:29:50.730
+14:29:51.882 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:29:55.801 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response UPs0Joew-dnAbwQ6QgV2znxPHZ-GrRRv
+14:29:55.943 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='TestGreatAGAIN2', description='TestGreatAGAIN2', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+14:29:55.944 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:29:55.944 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:29:56.481 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:31:14.343 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T14:31:14.281
+14:31:14.827 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:31:19.654 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response iiS8lWN0BFBcHZ5L8GHhjs-O01IMF3lW
+14:31:19.797 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта&#39; на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+14:31:19.799 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:31:19.799 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:31:20.320 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:33:54.233 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T14:33:54.154
+14:33:54.879 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:34:00.143 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response Qij9Vk3TVlXX_Gz6hKDFdxLITSF-Ln-a
+14:34:00.298 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта&#39; на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+14:34:00.300 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:34:00.300 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:34:00.922 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:39:06.279 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T14:39:06.213
+14:39:06.894 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:39:12.330 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response wp-BZBVRh23JdcaA1-j3NtpaYIxClCEW
+14:39:12.531 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+14:39:12.535 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:39:12.535 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:39:13.142 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:46:09.803 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T14:46:09.718
+14:46:10.603 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:46:15.771 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response jZV_I7Wou1nM6NouUjdvZ_Zzyv5bsGCZ
+14:46:15.923 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+14:46:15.925 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:46:15.925 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:46:16.439 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:59:00.054 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T14:58:59.991
+14:59:00.568 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:59:04.478 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 4UCmUohAwtLZfi2xY0YrVeClvnmk79ZU
+14:59:04.636 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+14:59:04.639 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:59:04.639 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:59:05.296 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:59:20.946 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T14:59:20.880
+14:59:21.587 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:59:26.186 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response mh9tx4pqSxeODr-wt1hOr50svJePiMCX
+14:59:26.312 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+14:59:26.315 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:59:26.315 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:59:27.235 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:00:13.543 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:00:13.469
+15:00:14.058 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:00:18.025 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response OuXwy-22iQ_qqgbaZhekDvoR-xtb8IFn
+15:00:18.169 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+15:00:18.171 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:00:18.171 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:00:18.736 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:01:55.855 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:01:55.769
+15:01:56.419 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:02:00.853 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response Dni1IP8gHA1XB7mtiY66njE7AKHfCSdN
+15:02:00.981 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+15:02:00.983 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:02:00.984 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:02:01.589 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:33:56.387 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:33:56.300
+15:33:56.939 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:34:01.327 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 7U9jMLkq11jjTMOM-m6fpzA_ZNOR_qZ8
+15:34:01.457 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=null, endDate=null, rate=2, rateCurrency=USD}]
+15:34:01.459 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:34:01.459 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:34:02.030 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:34:47.571 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:34:47.461
+15:34:48.197 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:34:52.704 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 179Rleld1y_wm6pAkrh1fVvFzGaiHNd3
+15:34:52.870 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:34:52.872 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:34:52.872 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:34:53.396 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:41:39.986 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:41:39.918
+15:41:40.622 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:41:45.185 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response -x-RFy6HCSO1d9p7uaqwUzME4RssYPlP
+15:41:45.347 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:41:45.352 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:41:45.352 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:41:45.926 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:42:47.034 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:42:46.926
+15:42:47.851 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:42:52.804 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 7H8riDRube2wEOD0mDXaeWSsxbcb9NO0
+15:42:52.977 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+15:42:52.980 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:42:52.980 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:42:53.799 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:43:30.925 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:43:30.861
+15:43:31.392 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:43:35.886 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 0_b18T30HQmeqTStQY5c2QhnYBN3rmLm
+15:43:36.021 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+15:43:36.023 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:43:36.023 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:43:36.594 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:43:48.522 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:43:48.449
+15:43:49.093 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:43:53.218 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response csZD71qMjeBqJzLEQA-vjr8UPTi1QC92
+15:43:53.355 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+15:43:53.357 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:43:53.357 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:43:53.999 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:44:14.122 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:44:14.053
+15:44:14.702 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:44:18.802 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response T6C5pVlUPpHGkkNTXljreMLJXdMtUh-y
+15:44:18.934 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:44:18.936 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:44:18.936 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:44:19.488 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:44:36.934 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:44:36.851
+15:44:37.456 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:44:42.037 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response cV16rVBNKEJyE5FPykEG94vlsGwAuzYe
+15:44:42.184 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:44:42.187 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:44:42.187 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:44:42.853 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:45:52.684 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:45:52.623
+15:45:53.182 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:45:56.808 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response lzxIVRUMkURPuCUUdIP4eQVP9xgpAwzj
+15:45:56.958 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+15:45:56.961 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:45:56.961 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:45:57.499 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:46:17.825 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:46:17.753
+15:46:18.305 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:46:22.324 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response kksAnEIDsH_OHtAdpQfRuOUT-lYG0JHL
+15:46:22.461 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+15:46:22.464 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:46:22.464 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:46:23.012 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:48:48.382 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:48:48.307
+15:48:49.022 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:48:55.251 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response SkzLJpRV7jqvT2BGGDowSqpoIuOyxe_E
+15:48:55.389 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+15:48:55.391 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:48:55.391 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:48:55.996 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:50:35.537 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:50:35.473
+15:50:36.051 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:50:41.279 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response INVALID_PASSWORD
+15:50:45.032 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response C5NErViTg6eJwtqLCPheFL6EIVEOue9p
+15:50:45.171 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:50:45.173 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:50:45.173 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:50:45.725 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:51:58.853 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:51:58.791
+15:51:59.353 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:52:03.062 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response mw06Mn2Efj_FXcAw9V7DOclw0IzlEhhf
+15:52:03.206 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:52:03.209 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:52:03.209 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:52:03.890 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:55:10.391 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:55:10.325
+15:55:10.871 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:55:14.724 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response jkdxNSlMVptX8f8jazEmW0yW-VVKJpY0
+15:55:14.883 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:55:14.885 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:55:14.885 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:55:15.417 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:56:04.123 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:56:04.061
+15:56:04.601 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:56:09.089 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response xiHTtqoxP-JLpns1SJwxLxO_KMQw_6Yc
+15:56:09.213 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+15:56:09.216 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:56:09.216 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:56:09.747 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:56:27.238 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:56:27.153
+15:56:27.859 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:56:32.088 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response FklSV5eFGAMFazbK06Ti6ekHNQFstmi4
+15:56:32.258 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:56:32.261 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:56:32.261 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:56:32.921 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:57:08.304 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:57:08.230
+15:57:08.865 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:57:12.746 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response nX7CNuqJ3SD5C1zU0w4wIRDG8d9Izaua
+15:57:12.921 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+15:57:12.924 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:57:12.924 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:57:13.620 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:58:48.970 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:58:48.893
+15:58:49.448 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:58:54.218 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response Jbdr-zA6z-hKmQNoW_u-qPqz0I0MftQA
+15:58:54.375 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:58:54.377 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:58:54.377 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:58:54.909 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:59:35.661 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T15:59:35.590
+15:59:36.340 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:59:40.500 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response -HuFt8TybzrlFmzi0S3HNWfyKnFeS6HK
+15:59:40.640 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+15:59:40.643 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:59:40.643 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:59:41.399 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:01:36.418 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:01:36.348
+16:01:36.945 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:01:41.404 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 63CCjKIOfPLV_Rrp-UZfCDwqlE7Ze7ZP
+16:01:41.550 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+16:01:41.553 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:01:41.553 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:01:42.206 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:02:50.495 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:02:50.429
+16:02:50.959 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:02:56.011 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response INVALID_PASSWORD
+16:03:00.577 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response B06dE4xiGM4aO1tnqMIIeoozH0KMCYJD
+16:03:00.710 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+16:03:00.713 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:03:00.713 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:03:01.498 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:03:30.650 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:03:30.585
+16:03:31.209 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:03:37.962 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response m490hDEo9KfTpJvB5kXLvEo0v07XPb8y
+16:03:38.112 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+16:03:38.114 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:03:38.115 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:03:38.694 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:04:21.757 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:04:21.693
+16:04:22.269 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:04:26.317 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response mmAy4Gv8dX3HnHfjFJmJ6jNTsp2g2wCr
+16:04:26.472 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+16:04:26.474 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:04:26.474 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:04:27.025 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:04:41.965 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:04:41.900
+16:04:42.453 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:04:46.751 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response ynqEMErK_wUVdo0aGQNLSkMAY9EN9-Dx
+16:04:46.889 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+16:04:46.891 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:04:46.891 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:04:47.460 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:06:29.165 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:06:29.081
+16:06:29.804 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:06:34.007 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 9lZ6fz2TzoUFcOVKKoMrzxlYxnqP42p2
+16:06:34.162 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+16:06:34.164 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:06:34.164 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:06:34.754 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:07:22.696 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:07:22.619
+16:07:23.310 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:07:27.517 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 5VVsm-7__taT30fs7VjVVT5g-NPkj04Z
+16:07:27.667 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+16:07:27.669 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:07:27.669 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:07:28.317 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:08:25.134 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:08:25.070
+16:08:25.636 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:08:29.625 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response xdzgrKWRD8kdsQzy9rQB_zOE-Xu76NTt
+16:08:29.750 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+16:08:29.752 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:08:29.753 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:08:30.296 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:09:50.493 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:09:50.430
+16:09:50.956 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:09:54.974 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response VGVsgu4uyuxCfrd906yOdOKIlCs5cO7C
+16:09:55.109 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+16:09:55.111 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:09:55.112 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:09:55.659 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:10:29.461 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:10:29.454
+16:10:29.974 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:10:31.569 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:10:31.506
+16:10:32.124 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:10:40.650 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:10:41.239 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response K8_aGOLEl8cbO5QNJ_AnrTCJk3uGUVEY
+16:10:41.366 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+16:10:41.368 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:10:41.369 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:10:41.952 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:15:16.383 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:15:16.320
+16:15:16.859 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:15:22.166 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response cjN9EK3XNBW4FpMhh7ZC1q6wzWZJAuwT
+16:15:22.314 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+16:15:22.316 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:15:22.317 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:15:22.899 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:21:01.130 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:21:01.063
+16:21:01.674 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:21:06.462 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response PCsOZFlN4RQQlruBReaisiPi7f1a7cHz
+16:21:06.594 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+16:21:06.597 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:21:06.598 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:21:07.346 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:21:40.170 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:21:40.101
+16:21:40.725 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:21:46.152 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response Ye8pcTml-KCkp4ad-Rin6sWduaIw94o8
+16:21:46.291 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+16:21:46.294 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:21:46.294 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:21:46.944 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:22:00.221 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:22:00.140
+16:22:00.746 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:22:04.810 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response _9-9b6Czs71nkEznTRNWT40UvJwTyaVK
+16:22:04.942 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+16:22:04.944 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:22:04.944 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:22:05.474 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:22:46.224 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:22:46.157
+16:22:46.715 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:22:51.335 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response jNkkEJXUPvrD7MwSv4blUV4uvsxJj38n
+16:22:51.462 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+16:22:51.464 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:22:51.465 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:22:52.025 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:24:57.805 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:24:57.731
+16:24:58.288 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:25:05.040 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 0AgT_QsI-24sdhpcnbrg5JzmELwyrJRr
+16:25:05.172 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+16:25:05.174 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:25:05.175 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:25:05.728 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:45:15.805 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:45:15.732
+16:45:16.290 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:45:21.846 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response -_BZOv_MnAw_idHdV4wM_ydP0czCDIJa
+16:45:21.967 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+16:45:21.969 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:45:21.970 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:45:22.523 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:51:04.094 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:51:04.021
+16:51:04.693 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:51:09.528 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response xMsslOj-i9LAgDwTpo27uEAAZ__8dN12
+16:51:09.645 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+16:51:09.648 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:51:09.648 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:51:10.194 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:51:49.619 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:51:49.605
+16:51:50.218 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:51:51.432 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:51:51.371
+16:51:51.931 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:51:59.917 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:52:00.518 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response c-VyKzPYrA-_WUgAN4mKYO3hl7Yf6wQf
+16:52:00.642 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+16:52:00.645 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:52:00.645 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:52:01.343 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:52:59.656 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:52:59.591
+16:53:00.149 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:53:08.886 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response F4F6LFNLEfcbj2W1l578qLmEw0HCTco0
+16:53:09.026 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+16:53:09.029 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:53:09.029 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:53:09.599 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:53:30.710 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:53:30.536
+16:53:31.557 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:53:36.653 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 5-1XbVgsKfE5zFQRkVHSFq-k4XgZl1GI
+16:53:36.818 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+16:53:36.820 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:53:36.821 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:53:37.655 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:54:04.814 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:54:04.728
+16:54:05.452 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:54:10.993 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response BQocVhlVqqma7jngWfK4ecZu00D4QhXc
+16:54:11.161 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+16:54:11.163 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:54:11.164 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:54:11.737 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:59:39.635 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T16:59:39.572
+16:59:40.158 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:59:45.062 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response IL9NcAxYcgGmsoKCqMkFcviFUCPbi3PK
+16:59:45.202 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+16:59:45.204 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:59:45.204 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:59:45.801 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:00:02.631 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T17:00:02.572
+17:00:03.098 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:00:07.454 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response HJZScZIOV9y7LhxVhsSizUpvF4LHVXIJ
+17:00:07.587 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+17:00:07.590 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:00:07.590 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:00:08.161 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:03:59.742 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T17:03:59.667
+17:04:00.320 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:04:04.754 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response EwVe2knXKx_s_LNPTKn0mVSmVK3P5YLm
+17:04:04.873 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+17:04:04.876 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:04:04.876 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:04:05.545 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:10:09.688 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T17:10:09.599
+17:10:10.278 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:10:15.087 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 4tBKLb7yAAZiWob9SO5Qcx9v1PEc1k5_
+17:10:15.240 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+17:10:15.243 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:10:15.243 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:10:15.888 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:22:44.579 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T17:22:44.520
+17:22:45.041 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:22:51.469 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 3a_TKEefb40OyUWTHl8MuU664a3ntSE5
+17:22:51.616 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+17:22:51.619 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:22:51.619 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:22:52.172 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:27:18.574 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T17:27:18.513
+17:27:19.047 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:27:23.497 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 2s99yHp1fFSXtA-Zm2Kin2iZsfP5TL7J
+17:27:23.635 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+17:27:23.637 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:27:23.637 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:27:24.191 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:28:22.320 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T17:28:22.209
+17:28:22.906 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:28:27.037 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response _dq9HkERxUJPfaS6mCnPrkjivXy_ZiHy
+17:28:27.150 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+17:28:27.153 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:28:27.153 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:28:27.724 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:29:19.365 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T17:29:19.278
+17:29:19.987 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:29:23.861 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response NWreD6f5ULImK0LkOmaNFLy0bo2KTS4J
+17:29:23.990 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+17:29:23.992 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:29:23.992 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:29:24.550 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:30:51.353 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T17:30:51.283
+17:30:51.845 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:30:55.874 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response p_lgaT4QjvWJTY4F_vBOTmeVbOe35b0i
+17:30:56.005 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+17:30:56.008 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:30:56.008 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:30:56.601 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+18:15:45.094 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T18:15:45.030
+18:15:45.582 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+18:15:50.722 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response xjhCg76Q24R1GfQ7_YdOXGGTUgoGEhdV
+18:15:50.845 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+18:15:50.847 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+18:15:50.847 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+18:15:51.443 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+18:16:25.493 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T18:16:25.416
+18:16:26.037 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+18:16:31.379 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response GyLIkzhp_ZTYCGvdlFetjF_ZLJ0YchX3
+18:16:31.507 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+18:16:31.509 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+18:16:31.509 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+18:16:32.089 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+18:17:05.506 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T18:17:05.447
+18:17:05.970 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+18:17:10.527 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response QfkZ3kBrd_jGDUJXb2ZuVSqiQqD8h68q
+18:17:10.662 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+18:17:10.664 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+18:17:10.665 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+18:17:11.337 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+18:19:39.302 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T18:19:39.239
+18:19:39.763 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+18:19:44.322 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response bloeQNEz3iy3gINUNfG1xB59OR5FZSPn
+18:19:44.456 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+18:19:44.458 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+18:19:44.459 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+18:19:45.010 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+18:20:09.017 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T18:20:08.951
+18:20:09.493 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+18:20:13.566 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response D_a8WMkqnMO3UChmQZVYv5l-bMYtngkc
+18:20:13.679 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+18:20:13.682 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+18:20:13.682 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+18:20:14.234 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+18:20:54.838 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T18:20:54.772
+18:20:55.378 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+18:21:00.252 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response Cb-bBQOfp4fpOhD7CEBwYhuwkYFD4h_s
+18:21:00.369 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+18:21:00.371 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+18:21:00.372 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+18:21:00.955 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+18:21:21.764 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T18:21:21.651
+18:21:22.891 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+18:21:30.578 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response uJuur1VuEuJrFig16P4nn0pm_oxP2GNT
+18:21:30.717 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+18:21:30.719 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+18:21:30.719 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+18:21:31.297 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+18:22:09.671 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T18:22:09.588
+18:22:10.257 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+18:22:14.610 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response zMMuc7ndAVBOXXri3-powhBDw_JozwPj
+18:22:14.759 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+18:22:14.762 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+18:22:14.762 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+18:22:15.459 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+18:23:22.106 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T18:23:22.046
+18:23:22.571 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+18:23:25.592 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response INVALID_USERNAME
+18:23:26.945 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+18:23:56.642 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-15T18:23:56.584
+18:23:57.094 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+18:24:01.915 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response p1Ng7Dt3UXaJ7g7WniENXUj7xXtl_kj1
+18:24:02.045 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=5, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=6, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+18:24:02.047 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+18:24:02.047 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+18:24:02.626 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed

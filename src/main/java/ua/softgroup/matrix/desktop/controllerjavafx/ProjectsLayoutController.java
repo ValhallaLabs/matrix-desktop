@@ -1,9 +1,7 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -13,7 +11,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.server.desktop.model.ProjectModel;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -70,8 +67,6 @@ public class ProjectsLayoutController {
     public Button btnSendReport;
     @FXML
     public Label labelSymbolsNeedReport;
-    private Set<ProjectModel> projectModelSet;
-    private ObservableList<PieChart.Data> pieChartList;
     static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
     private static DateTimeFormatter dateFormatNumber=DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText=DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
@@ -108,24 +103,24 @@ public class ProjectsLayoutController {
     }
 
     private void setProjectInTable() {
-        projectModelSet = CurrentSessionInfo.getUserActiveProjects();
+        Set<ProjectModel> projectModelSet = CurrentSessionInfo.getUserActiveProjects();
         projectModelSet.forEach(projectsData::add);
 //        for (ProjectModel projectModel : projectModelSet) {
 //            projectsData.add(projectModel);
 //        }
         tvProjectsTable.setItems(projectsData);
-        setprojectInfo();
+        setOtherProjectInfo();
     }
-    private void setprojectInfo() {
+    private void setOtherProjectInfo() {
         for (ProjectModel projectmodel : projectsData) {
             labelNameSales.setText(projectmodel.getAuthorName());
-            labelNameProject.setText(" : " + projectmodel.getTitle());
+            labelNameProject.setText(":" + projectmodel.getTitle());
             labelDiscribeProject.setText(projectmodel.getDescription());
         }
     }
 
     private void initPieChart() {
-        pieChartList = FXCollections.observableArrayList(new PieChart.Data("Простой", 7),
+        ObservableList<PieChart.Data>  pieChartList = FXCollections.observableArrayList(new PieChart.Data("Простой", 7),
                 new PieChart.Data("Чистое", 93));
         missPieCharts.setData(pieChartList);
     }
