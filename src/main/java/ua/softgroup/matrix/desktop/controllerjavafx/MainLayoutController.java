@@ -8,6 +8,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -63,4 +64,23 @@ public class MainLayoutController {
     }
 
 
+    public void startSettingLayoutWindow(ActionEvent actionEvent) {
+        try {
+            Stage  settingStage = new Stage();
+            ClassLoader classLoader = getClass().getClassLoader();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(classLoader.getResource("fxml/settingsLayout.fxml"));
+            Pane pane = loader.load();
+            Scene scene = new Scene(pane);
+            settingStage.setScene(scene);
+            settingStage.setMinWidth(500);
+            settingStage.setMinHeight(250);
+            settingStage.initModality(Modality.WINDOW_MODAL);
+            settingStage.initOwner(menuBar.getScene().getWindow());
+            settingStage.setResizable(false);
+            settingStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
