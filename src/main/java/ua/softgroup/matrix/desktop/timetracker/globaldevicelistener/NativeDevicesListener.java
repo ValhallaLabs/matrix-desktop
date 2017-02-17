@@ -22,11 +22,12 @@ import java.util.logging.Level;
  */
 public class NativeDevicesListener implements GlobalDeviceListener {
     private static final Logger logger = LoggerFactory.getLogger(NativeDevicesListener.class);
-    private static final String START_COUNT_POINT = "Start count", STOP_COUNT_POINT = "Stop count";
+    private static final String START_COUNT_UNTIL_DT_POINT = "Start count until downtime",
+            STOP_COUNT_UNTIL_DT_POINT = "Stop count until downtime";
     private TimeTracker timeTracker;
-    private Disposable eventObjectsDisposable;
-    private FlowableEmitter<EventObject> startCountFlowableEmitter, stopCountFlowableEmitter;
-    private Boolean isCounting = false;
+    private Disposable downtimeControlDisposable;
+    private FlowableEmitter<EventObject> startCountUntilDtEmitter, stopCountUntilDtEmitter;
+    private Boolean isCountingUntilDt = false;
     private Boolean isDowntime = false;
 
     private NativeDevicesListener(TimeTracker timeTracker) {
@@ -60,12 +61,13 @@ public class NativeDevicesListener implements GlobalDeviceListener {
      */
     @Override
     public boolean turnOn() {
-        createDowntimeControlFlowable();
+        downtimeControlDisposable = createDowntimeControlFlowable();
         try {
             GlobalScreen.registerNativeHook();
             logger.debug("Global devices listener turn on");
             return true;
         } catch (NativeHookException e) {
+            downtimeControlDisposable.dispose();
             logger.debug("Global devices listener crashed: {}", e);
             return false;
         }
@@ -74,9 +76,10 @@ public class NativeDevicesListener implements GlobalDeviceListener {
     /**
      * Creates and subscribe flowable that received items emitted by startCountFlowable and stopCountFlowable.
      * The flowable controls start and stop of counting downtime, and time until starts count it.
+     * @return downtimeControlDisposable
      */
-    private void createDowntimeControlFlowable() {
-        eventObjectsDisposable = Flowable.merge(createStartCountFlowable(), createStopCountFlowable())
+    private Disposable createDowntimeControlFlowable() {
+        return Flowable.merge(createStartCountUntilDtFlowable(), createStopCountUntilDtFlowable())
                 .doOnNext(s -> logger.debug("Count until down time: {}", s))
                 .doOnNext(this::stopDowntime)
                 //TODO: uncomment when you bind Listener to main part
@@ -91,10 +94,10 @@ public class NativeDevicesListener implements GlobalDeviceListener {
      * A start count point emits after 1000 milliseconds after last event.
      * @return startCountFlowable
      */
-    private Flowable<String> createStartCountFlowable() {
-        return Flowable.create(this::createStartCountFlowableEmitter, BackpressureStrategy.LATEST)
+    private Flowable<String> createStartCountUntilDtFlowable() {
+        return Flowable.create(this::createStartCountUntilDtFlowableEmitter, BackpressureStrategy.LATEST)
                 .debounce(1000, TimeUnit.MILLISECONDS)
-                .map(this::startCount)
+                .map(this::startCountUntilDt)
                 .subscribeOn(Schedulers.io());
     }
 
@@ -103,30 +106,30 @@ public class NativeDevicesListener implements GlobalDeviceListener {
      * Emits one event at the begin for start count time until downtime.
      * @param e emitter of StartCountFlowable
      */
-    private void createStartCountFlowableEmitter(FlowableEmitter<EventObject> e) {
-        startCountFlowableEmitter = e;
-        startCountFlowableEmitter.onNext(new EventObject(this));
+    private void createStartCountUntilDtFlowableEmitter(FlowableEmitter<EventObject> e) {
+        startCountUntilDtEmitter = e;
+        startCountUntilDtEmitter.onNext(new EventObject(this));
     }
 
     /**
-     * Sets isCounting status true.
+     * Sets isCountingUntilDt status true.
      * @param eventObject event of devices
-     * @return START_COUNT_POINT point of starting count time until downtime
+     * @return START_COUNT_UNTIL_DT_POINT point of starting count time until downtime
      */
-    private String startCount(EventObject eventObject) {
-        isCounting = true;
-        return START_COUNT_POINT;
+    private String startCountUntilDt(EventObject eventObject) {
+        isCountingUntilDt = true;
+        return START_COUNT_UNTIL_DT_POINT;
     }
 
     /**
      * Creates flowable that emits points of stopping count time until count downtime.
-     * A stop count point emits only if isCounting status is true.
+     * A stop count point emits only if isCountingUntilDt status is true.
      * @return stopCountFlowable
      */
-    private Flowable<String> createStopCountFlowable() {
-        return Flowable.create(this::createStopCountFlowableEmitter, BackpressureStrategy.DROP)
-                .filter(eventObject -> isCounting)
-                .map(this::stopCount)
+    private Flowable<String> createStopCountUntilDtFlowable() {
+        return Flowable.create(this::createStopCountUntilDtFlowableEmitter, BackpressureStrategy.DROP)
+                .filter(eventObject -> isCountingUntilDt)
+                .map(this::stopCountUntilDt)
                 .subscribeOn(Schedulers.io());
     }
 
@@ -134,24 +137,24 @@ public class NativeDevicesListener implements GlobalDeviceListener {
      * Set flowable emitter into own emitter for sending events to flowable.
      * @param e emitter of StopCountFlowable
      */
-    private void createStopCountFlowableEmitter(FlowableEmitter<EventObject> e) {
-        stopCountFlowableEmitter = e;
+    private void createStopCountUntilDtFlowableEmitter(FlowableEmitter<EventObject> e) {
+        stopCountUntilDtEmitter = e;
     }
 
     /**
-     * Sets isCounting status false.
+     * Sets isCountingUntilDt status false.
      * @param eventObject event of devices
-     * @return STOP_COUNT_POINT point of starting count time until downtime
+     * @return STOP_COUNT_UNTIL_DT_POINT point of starting count time until downtime
      */
-    private String stopCount(EventObject eventObject) {
-        isCounting = false;
-        return STOP_COUNT_POINT;
+    private String stopCountUntilDt(EventObject eventObject) {
+        isCountingUntilDt = false;
+        return STOP_COUNT_UNTIL_DT_POINT;
     }
 
     /**
      * Stops downtime counting if isDowntime true
      * @param stopPoint point of stop counting downtime
-     * @return STOP_COUNT_POINT point of starting count time until downtime
+     * @return STOP_COUNT_UNTIL_DT_POINT point of starting count time until downtime
      */
     private String stopDowntime(String stopPoint) {
         if (isDowntime) {
@@ -162,29 +165,39 @@ public class NativeDevicesListener implements GlobalDeviceListener {
         return stopPoint;
     }
 
-
+    /**
+     * Starts downtime counting if method receive START_COUNT_UNTIL_DT_POINT
+     * @param point can be point of start or stop counting downtime
+     */
     private void startDowntime(String point){
-        if (START_COUNT_POINT.equals(point)) {
+        if (START_COUNT_UNTIL_DT_POINT.equals(point)) {
             //TODO: send to timetracker command START_DOWNTIME
             logger.debug("Down time is started!");
             isDowntime = true;
         }
     }
 
+    /**
+     * Receive events from keyboard and mouse and sending its to emitters.
+     * @param eventObject event which was emitted by keyboard or mouse
+     */
     private void receiveEvent(EventObject eventObject) {
-        startCountFlowableEmitter.onNext(eventObject);
-        stopCountFlowableEmitter.onNext(eventObject);
+        startCountUntilDtEmitter.onNext(eventObject);
+        stopCountUntilDtEmitter.onNext(eventObject);
     }
 
+    /**
+     * Tries to turn off GlobalListener.
+     * @return turnOffResult result of turning off GlobalListener
+     */
     public boolean turnOff() {
         try {
-            eventObjectsDisposable.dispose();
+            downtimeControlDisposable.dispose();
             GlobalScreen.unregisterNativeHook();
             logger.debug("Global devices listener turn off");
             return true;
         } catch (NativeHookException e) {
             logger.debug("Global devices listener crashed: {}", e);
-            e.printStackTrace();
             return false;
         }
     }
