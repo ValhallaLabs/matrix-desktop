@@ -101,6 +101,7 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
     private TokenModel composeTokenModel(String token) {
         TokenModel tokenModel = new TokenModel();
         tokenModel.setToken(token);
+        CurrentSessionInfo.setTokenModel(tokenModel);
         return tokenModel;
     }
 
@@ -125,14 +126,12 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
      */
     private InputStream setProjectsModelsToCurrentSessionInfo(InputStream inputStream) throws IOException {
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-
         Set<ProjectModel> projectModels = null;
         try {
             projectModels = (Set<ProjectModel>) objectInputStream.readObject();
             logger.debug("Project models received successfully: {}", projectModels);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            logger.debug("Project models received unsuccessfully");
+            logger.debug("Project models received unsuccessfully", e);
         }
         CurrentSessionInfo.setUserActiveProjects(projectModels);
         return inputStream;
