@@ -12,6 +12,7 @@ import java.net.Socket;
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public abstract class ServerSessionManager {
+    //TODO logger's class
     protected static final Logger logger = LoggerFactory.getLogger(AuthenticationServerSessionManager.class);
     protected ObjectOutputStream objectOutputStream;
 
@@ -50,5 +51,6 @@ public abstract class ServerSessionManager {
      * @param socket The socket which is dependent to an observable
      * @return Observable
      */
+    // TODO bad practice
     protected abstract Observable<?> createBindedObservable(Socket socket);
 }

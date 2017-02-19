@@ -20,10 +20,14 @@ import java.net.Socket;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
+import static ua.softgroup.matrix.server.desktop.api.Constants.INVALID_PASSWORD;
+import static ua.softgroup.matrix.server.desktop.api.Constants.INVALID_USERNAME;
+
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public class AuthenticationServerSessionManager extends ServerSessionManager {
+    //TODO hiding superclass' field
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationServerSessionManager.class);
     private LoginLayoutController loginLayoutController;
     private Emitter<UserPassword> userPasswordEmitter;
@@ -85,6 +89,7 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
      */
     private Boolean handleServerAuthResponse(String response) {
         logger.debug("Auth response {}", response);
+        //TODO wat?
         Boolean tokenValidationResult = !Constants.INVALID_USERNAME.name().equals(response) &&
                 !Constants.INVALID_PASSWORD.name().equals(response);
         if(!tokenValidationResult) {
@@ -99,6 +104,7 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
      * @return tokenModel TokenModel with current token
      */
     private TokenModel composeTokenModel(String token) {
+        // TODO use constructor, Luce!
         TokenModel tokenModel = new TokenModel();
         tokenModel.setToken(token);
         return tokenModel;
@@ -124,14 +130,15 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
      * @return inputStream for a further action
      */
     private InputStream setProjectsModelsToCurrentSessionInfo(InputStream inputStream) throws IOException {
+        // TODO try with resources
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
 
         Set<ProjectModel> projectModels = null;
         try {
             projectModels = (Set<ProjectModel>) objectInputStream.readObject();
             logger.debug("Project models received successfully: {}", projectModels);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException e) { // TODO catch or not catch
+            e.printStackTrace(); // TODO log exceptions
             logger.debug("Project models received unsuccessfully");
         }
         CurrentSessionInfo.setUserActiveProjects(projectModels);
@@ -143,15 +150,18 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
      * @param inputStream for open ObjectInputStream
      * @return settingsResult result of getting client settings
      */
+    // TODO Boolean object? always true?
     private Boolean setClientSettingToCurrentSessionInfo(InputStream inputStream) throws IOException, ClassNotFoundException {
+        // TODO try with resources
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
         ClientSettingsModel clientSettingsModel = (ClientSettingsModel) objectInputStream.readObject();
-        logger.debug("Client settings model: {}", clientSettingsModel.toString());
+        logger.debug("Client settings model: {}", clientSettingsModel.toString()); // TODO to String is redundant
         CurrentSessionInfo.setClientSettingsModel(clientSettingsModel);
         return true;
     }
 
     /**
+     * // TODO link
      * Tells {@Link LoginLayoutController} to open main window and dispose current session.
      * @param sessionStatus useless param at the moment
      */
@@ -185,6 +195,7 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
             }
             userPasswordEmitter.onNext(userPassword);
         } catch (InterruptedException e) {
+            // TODO log exceptions properly
             logger.debug("sendUserAuthData. Something went wrong {}", e.toString());
             //TODO: Some kind of global crash. Restart app.
         }

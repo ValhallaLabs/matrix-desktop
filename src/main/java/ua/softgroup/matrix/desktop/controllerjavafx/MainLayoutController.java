@@ -11,8 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 
 /**
@@ -36,10 +35,12 @@ public class MainLayoutController {
             Stage  primaryStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
+            // TODO use constants
             loader.setLocation(classLoader.getResource("fxml/reportLayout.fxml"));
             AnchorPane anchorPane = loader.load();
             Scene scene = new Scene(anchorPane);
             primaryStage.setScene(scene);
+            // TODO use constants
             primaryStage.setMinWidth(1200);
             primaryStage.setMinHeight(750);
             primaryStage.initModality(Modality.WINDOW_MODAL);
@@ -47,6 +48,7 @@ public class MainLayoutController {
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {
+            //TODO logging!
             e.printStackTrace();
         }
     }

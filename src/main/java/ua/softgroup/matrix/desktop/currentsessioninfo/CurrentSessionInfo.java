@@ -9,6 +9,7 @@ import java.util.Set;
 /**
  * Created by Vadim on 10.02.2017.
  */
+// TODO package structure
 public class CurrentSessionInfo {
     private static TokenModel tokenModel;
     private static Set<ProjectModel> userActiveProjects;

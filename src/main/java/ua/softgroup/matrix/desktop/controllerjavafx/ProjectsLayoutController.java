@@ -68,6 +68,7 @@ public class ProjectsLayoutController {
     @FXML
     public Label labelSymbolsNeedReport;
     static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
+    // TODO format code
     private static DateTimeFormatter dateFormatNumber=DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText=DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
 
@@ -87,6 +88,7 @@ public class ProjectsLayoutController {
     }
 
     private void initTable() {
+        //TODO use constants
         tcIdProject.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcAuthorName.setCellValueFactory(new PropertyValueFactory<>("authorName"));
         tcTitle.setCellValueFactory(new PropertyValueFactory<>("title"));

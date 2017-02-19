@@ -75,6 +75,7 @@ public class LoginLayoutController {
     private void startMainControllerLayout() {
         try {
             Stage primaryStage = new Stage();
+            // TODO use constants
             Image icon = new Image(getClass().getResourceAsStream("/images/testLogoIcon.png"));
             primaryStage.getIcons().add(icon);
             ClassLoader classLoader = getClass().getClassLoader();
@@ -83,6 +84,7 @@ public class LoginLayoutController {
             BorderPane mainLayout = loader.load();
             Scene scene = new Scene(mainLayout);
             primaryStage.setScene(scene);
+            // TODO use constants
             primaryStage.setMinWidth(1200);
             primaryStage.setMinHeight(800);
             primaryStage.setResizable(false);
@@ -90,6 +92,7 @@ public class LoginLayoutController {
             MainLayoutController mainController=loader.getController();
             mainController.startProjectsLayoutController(mainLayout);
         } catch (IOException e) {
+            // TODO logging!
             e.printStackTrace();
         }
     }

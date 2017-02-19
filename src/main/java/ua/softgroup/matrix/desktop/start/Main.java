@@ -22,6 +22,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //TODO що це за діч 1
         Stage loginStage = primaryStage;
         loginStage.setTitle("SuperVisor");
         startLoginLayout(loginStage);
