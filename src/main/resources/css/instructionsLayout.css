@@ -1,0 +1,20 @@
+.split-pane {
+    -fx-border-color: transparent;
+    -fx-box-border: rgba(255, 255, 255, 0);
+    -fx-background-color: transparent;
+}
+.split-pane > .split-pane-divider {
+    -fx-background-color: transparent
+}
+.grei-background{
+    -fx-background-color: #ebebeb;
+}
+
+.list-view .list-cell:even {
+    -fx-background-color: #ebebeb;
+    -fx-text-fill: black;
+}
+.list-view .list-cell:odd {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: black;
+}

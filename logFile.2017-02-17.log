@@ -1,0 +1,259 @@
+09:56:38.186 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T09:56:38.119
+10:54:01.248 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+11:29:51.785 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+11:31:17.045 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T11:31:16.980
+11:31:17.498 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+11:31:22.085 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response INVALID_USERNAME
+11:31:30.196 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 8lVsjS4a8nQlblorABp73nJlm2rifUua
+11:31:30.536 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+11:31:30.538 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+11:31:30.539 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+11:31:31.090 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+11:54:02.923 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+11:54:37.287 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:17:13.772 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:17:39.842 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:18:18.963 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:18:28.596 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:18:28.599 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:18:28.605 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:20:49.665 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:20:59.504 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T14:20:59.443
+14:21:00.079 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:21:07.032 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:21:20.536 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:21:41.664 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T14:21:41.602
+14:21:42.149 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:21:54.691 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:22:20.762 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T14:22:20.698
+14:22:21.246 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:22:26.934 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:24:04.171 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:24:19.689 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T14:24:19.621
+14:24:20.217 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:24:26.581 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:24:30.515 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:24:48.338 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T14:24:48.260
+14:24:48.985 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:24:56.127 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response y9df1Z5XbEjR7NPOigrogfcq4Ea62Z9B
+14:24:56.342 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+14:24:56.344 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:24:56.344 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:24:56.977 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:25:07.444 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:30:15.323 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:30:28.495 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T14:30:28.428
+14:30:29.003 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:30:33.155 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response Sf3kGbfuF4Go2nu68ue8nOMpnTtx7gCR
+14:30:33.297 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+14:30:33.300 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:30:33.300 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:30:34.226 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:30:42.594 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:32:31.551 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T14:32:31.477
+14:32:32.036 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:32:36.446 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response KYyI4at4DjprhiEwmPE1JWpKvlg2sMFN
+14:32:36.611 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+14:32:36.614 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:32:36.614 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:32:37.239 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:32:43.146 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:33:06.347 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:34:37.529 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:34:38.389 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response irsco77dBRess-usaeg7tmEIL7BJC3gR
+14:34:38.614 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+14:34:38.621 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:34:38.621 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:34:38.627 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:35:04.760 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:35:05.521 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response -O-2x0RlKWW_hTWIhhoktQCGA9eD7Bi1
+14:35:05.715 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+14:35:05.719 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:35:05.720 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:35:05.725 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:35:38.758 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:35:39.530 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response WxbqCvI104_Rp6NInegzLqT9iBj6mNLE
+14:35:39.716 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+14:35:39.719 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:35:39.720 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:37:57.670 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:37:58.533 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 3VsHiPJGhjOrfdTHLgDuyJBM74H0KxlX
+14:37:58.728 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+14:37:58.731 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:37:58.731 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:37:58.734 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:38:48.193 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:38:48.964 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response BRhmyRFQpIxTPdvGp2eVMwdKSzwIjRds
+14:38:49.142 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+14:38:49.145 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:38:49.145 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:38:49.146 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:38:49.152 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:40:26.469 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:40:27.271 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response eS9yGPKrVc61o4i5X3qMSESdgk5ZoBNa
+14:40:27.438 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+14:40:27.440 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:40:27.440 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:40:27.440 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:40:32.443 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:41:03.775 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:41:04.544 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 5y2XNXWmCREb6Q2GjZ9mPq3_8RN08uI-
+14:41:04.697 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+14:41:04.700 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:41:04.700 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:41:04.700 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:41:09.702 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:42:30.465 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:46:16.625 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T14:46:16.560
+14:46:17.106 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:46:40.175 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:51:46.025 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:51:54.245 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:52:34.413 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:54:23.361 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:55:37.011 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:55:37.843 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response S9IwzoYNXKZDpM2BNVyYGlbePN-yfAm0
+14:55:38.077 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+14:55:38.083 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:55:38.083 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:55:38.084 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:55:43.085 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:56:19.558 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+14:56:20.405 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 4fzeLd_ovTDSX_eVCOy7HvDvB2g2GzWn
+14:56:20.673 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+14:56:20.676 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+14:56:20.677 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+14:56:20.677 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+14:56:25.680 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:05:21.670 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:05:22.484 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 5YizGvhvwb4wJgGxiUl6K8S5xdHTwMVs
+15:05:22.651 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:05:22.654 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:05:22.655 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:05:22.655 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:05:27.658 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:05:43.002 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:05:51.148 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:05:51.893 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response l_odl6k44Idd7VtSPKZTbcEflpP_QRv4
+15:05:52.087 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+15:05:52.090 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:05:52.090 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:05:52.091 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:05:57.092 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:06:41.639 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:06:42.441 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response uMumGk9qMo0Ej1MXdcaqyAyw4T8mAT3p
+15:06:42.667 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+15:06:42.670 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:06:42.670 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:06:42.670 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:06:47.671 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:07:41.007 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:07:41.864 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response YfroDvN-IkDefrxq-dB9CSR_vapPYlGX
+15:07:42.050 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:07:42.053 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:07:42.053 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:07:42.053 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:07:44.056 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:09:04.930 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:09:05.701 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response YBA8_UnOWNbmLh16S9Qljp8gdNh2U-Vn
+15:09:05.881 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:09:05.884 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:09:05.885 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:09:05.885 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:09:07.887 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:09:37.236 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:09:38.082 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response S-BPWJnlnuhwQbLuGy10vOaT1Nea9MH_
+15:09:38.253 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:09:38.256 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:09:38.256 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:09:38.256 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:09:40.259 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:11:15.517 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:11:16.267 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response BC5RHA1QdFljwiC2o4O_u5mGhsMCtsDr
+15:11:16.440 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+15:11:16.443 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:11:16.443 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:11:16.443 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:11:18.445 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:21:57.400 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:21:58.188 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response r8DJXWG455FXNzA5aezLWXjvfrLQzYQt
+15:21:58.382 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:21:58.384 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:21:58.385 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:21:58.385 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:22:00.387 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:24:13.451 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+15:24:14.189 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response -npP13eHdYAMWQj_68lD-InzZWs1mYBD
+15:24:14.367 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+15:24:14.369 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+15:24:14.370 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+15:24:14.370 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+15:24:16.372 [main] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:05:28.344 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T16:05:28.282
+16:05:28.869 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:05:54.447 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T16:05:54.384
+16:05:54.939 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:05:58.437 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response INVALID_USERNAME
+16:06:06.478 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response YSi-PQsTP8whjlCFBpNg2tT7XhcrVgjy
+16:06:06.693 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+16:06:06.695 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+16:06:06.695 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+16:06:07.209 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:06:56.462 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T16:06:56.388
+16:06:57.023 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:35:53.809 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+16:35:55.741 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T16:35:55.668
+16:35:56.442 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+16:35:58.257 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:22:00.792 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T17:22:00.730
+17:22:01.514 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:22:04.322 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:22:09.355 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T17:22:09.274
+17:22:09.918 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:22:13.470 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response uhEsQuZ2mVWSx_q9ZYiYAs3aJR5V8f-f
+17:22:13.637 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+17:22:13.640 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:22:13.641 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:22:14.305 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:24:52.893 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T17:24:52.823
+17:24:53.383 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:24:57.607 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response 7EKRa3-RXE9IdsJLQ-hCNUjHuVXjwOZM
+17:24:57.770 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+17:24:57.775 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:24:57.776 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:24:58.507 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:25:49.580 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T17:25:49.509
+17:25:50.248 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:25:54.508 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response VHhzD297bC29ywkh1zkeT8tJ3sz98kGo
+17:25:54.655 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+17:25:54.657 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:25:54.657 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:25:55.171 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:26:10.346 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T17:26:10.284
+17:26:10.822 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:26:14.538 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response UqG_8WUteOJvV-LL_RTay0mEhOEh4Qsv
+17:26:14.694 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+17:26:14.697 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:26:14.697 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:26:15.266 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:31:05.615 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T17:31:05.546
+17:31:06.125 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:31:09.996 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response Y9jAElSOOZRa-ajwIY1qOVbe5qj-9_Jm
+17:31:10.168 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+17:31:10.170 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:31:10.170 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:31:10.783 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:35:06.748 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T17:35:06.660
+17:35:07.621 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:35:11.864 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response qV7Rt4oTGjsFHWGRF4xuh4VUFbqyjhRg
+17:35:12.085 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}, ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}]
+17:35:12.089 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:35:12.090 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:35:12.845 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
+17:38:26.094 [main] DEBUG u.s.matrix.desktop.start.Main - Current time: 2017-02-17T17:38:26.025
+17:38:26.588 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Open socket connection
+17:38:40.867 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Auth response BVoONg_77Qp-tUx6NgBxpTY4ezMLT4SN
+17:38:41.029 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Project models received successfully: [ProjectModel{id=3, title='iTotal Wordpress website', description='Разработка сайта &nbsp;на Вордперссе с установкой плагина &nbsp;Event calendar и кастомизация &nbsp;Avanda премиум темы ооороргрорололорор авыа&nbsp;', authorName='supervisor first name supervisor last name', startDate=2017-02-10, endDate=2017-03-08, rate=2, rateCurrency=USD}, ProjectModel{id=2, title='Supervisor', description='Dont Wasted your time fkljghjgsd hngdfjghhndfjklg dnfivunjkivhnu kjghdfjybgu gflhydtgfioyurti thdtgfyuibygu ghfdgfi', authorName='supervisor first name supervisor last name', startDate=2017-02-16, endDate=2017-02-24, rate=2, rateCurrency=USD}]
+17:38:41.032 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Client settings model: ClientSettingsModel{version=1, screenshotUpdateFrequently=10, keyboardUpdateFrequently=5, downTime=5}
+17:38:41.032 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Authentication completed
+17:38:41.604 [JavaFX Application Thread] DEBUG u.s.m.d.s.AuthenticationServerSessionManager - Socket connection closed
