@@ -87,17 +87,12 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
      */
     private boolean handleServerAuthResponse(String response) {
         logger.debug("Auth response {}", response);
-        //TODO wat?
-        boolean failureAuth;
         if (Constants.INVALID_USERNAME.name().equals(response) || Constants.INVALID_PASSWORD.name().equals(response)) {
-            failureAuth = true;
-        }
-        Boolean tokenValidationResult = !Constants.INVALID_USERNAME.name().equals(response) &&
-                !Constants.INVALID_PASSWORD.name().equals(response);
-        if(!tokenValidationResult) {
             loginLayoutController.errorLoginPassword();
+            return false;
+        } else {
+            return true;
         }
-        return tokenValidationResult;
     }
 
     /**
@@ -132,7 +127,8 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
      */
     private InputStream setProjectsModelsToCurrentSessionInfo(InputStream inputStream) throws IOException {
         Set<ProjectModel> projectModels = null;
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(inputStream)) {
+        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+        try {
             projectModels = (Set<ProjectModel>) objectInputStream.readObject();
             logger.debug("Project models received successfully: {}", projectModels);
         } catch (ClassNotFoundException e) {
@@ -173,6 +169,7 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
             disposableSubscription.dispose();
         } else {
             logger.debug("Authentication wasn't complete successfully");
+            disposableSubscription.dispose();
             // TODO: tell user to try to restart client or login again.
         }
     }
