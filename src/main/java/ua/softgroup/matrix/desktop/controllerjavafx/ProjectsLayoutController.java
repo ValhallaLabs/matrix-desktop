@@ -111,8 +111,11 @@ public class ProjectsLayoutController {
             labelNameSales.setText(projectModel.getAuthorName());
             labelNameProject.setText(":" + projectModel.getTitle());
             labelDiscribeProject.setText(projectModel.getDescription());
+           if ((projectModel.getStartDate()!=null && projectModel.getEndDate()!=null)){
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
             labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
+        }
+
     }
 
     private void initPieChart() {
