@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
+import ua.softgroup.matrix.desktop.utils.SocketProvider;
 import ua.softgroup.matrix.server.desktop.api.Constants;
 import ua.softgroup.matrix.server.desktop.api.ServerCommands;
 import ua.softgroup.matrix.server.desktop.model.ClientSettingsModel;
@@ -26,17 +27,32 @@ import static ua.softgroup.matrix.server.desktop.api.Constants.INVALID_USERNAME;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public class AuthenticationServerSessionManager extends ServerSessionManager {
+public class AuthenticationServerSessionManager {
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationServerSessionManager.class);
     private LoginLayoutController loginLayoutController;
     private Emitter<UserPassword> userPasswordEmitter;
     private Disposable disposableSubscription;
     private CountDownLatch countDownLatch;
+    private ObjectOutputStream objectOutputStream;
 
     public AuthenticationServerSessionManager(LoginLayoutController loginLayoutController) {
         this.loginLayoutController = loginLayoutController;
         countDownLatch = new CountDownLatch(1);
         disposableSubscription = Observable.using(this::openSocketConnection, this::createBindedObservable, this::closeSocketConnection)
+                .subscribeOn(Schedulers.io())
                 .subscribe(this::startMainLayoutAndDisposeManager, this::handleExceptions);
+    }
+
+    /**
+     * The factory function to create a resource object that depends on the Observable.
+     * Creates a new socket connection with server.
+     * @return a new socket connection
+     */
+    protected Socket openSocketConnection() throws IOException {
+        Socket socket = SocketProvider.openNewConnection();
+        objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+        logger.debug("Open socket connection");
+        return socket;
     }
 
     /**
@@ -45,17 +61,29 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
      * @param socket The socket which is dependent to an observable
      * @return Observable
      */
-    @Override
     protected Observable<Boolean> createBindedObservable(Socket socket) {
         return Observable.create(this::createObservableEmitter)
+                .subscribeOn(Schedulers.io())
                 .map(userPassword -> authenticateUser(userPassword, socket))
                 .filter(this::handleServerAuthResponse)
                 .map(this::composeTokenModel)
                 .map(tokenModel -> getAllProjectsAndClientSettings(tokenModel,socket))
                 .doOnNext(this::setProjectsModelsToCurrentSessionInfo)
-                .map(this::setClientSettingToCurrentSessionInfo)
-                .subscribeOn(Schedulers.io());
+                .map(this::setClientSettingToCurrentSessionInfo);
     }
+
+    /**
+     * The function that will dispose of the resource, that depends to the Observable.
+     * Sends command to server about closing connection and closes socket connection.
+     * @param socket The socket which is dependent to an observable
+     */
+    protected void closeSocketConnection(Socket socket) throws IOException {
+        logger.debug("Socket connection closed");
+        objectOutputStream.writeObject(ServerCommands.CLOSE);
+        objectOutputStream.flush();
+        socket.close();
+    }
+
 
     /**
      * Function to create an custom Observable emitter.
@@ -205,7 +233,6 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
     /**
      * Closes current authentication session
      */
-    @Override
     public void closeSession(){
         if(!disposableSubscription.isDisposed()) {
             disposableSubscription.dispose();
