@@ -2,7 +2,7 @@ package ua.softgroup.matrix.server.desktop.model;
 
 import java.io.Serializable;
 
-public class TimeModel extends TokenModel implements Serializable {
+public class TimeModel implements Serializable {
     private static final long serialVersionUID = 1L;
     private long projectId;
     private long minute;

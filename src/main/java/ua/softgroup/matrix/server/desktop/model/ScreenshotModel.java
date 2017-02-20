@@ -1,6 +1,6 @@
 package ua.softgroup.matrix.server.desktop.model;
 
-public class ScreenshotModel extends TokenModel{
+public class ScreenshotModel {
     private static final long serialVersionUID = 1L;
     private byte[] file;
     private long projectID;

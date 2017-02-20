@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * @author Oleksandr Tyshkovets <sg.olexander@gmail.com>
  */
-public class ActiveWindowsModel extends TokenModel implements Serializable {
+public class ActiveWindowsModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long projectId;

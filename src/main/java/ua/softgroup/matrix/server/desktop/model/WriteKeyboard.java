@@ -2,7 +2,7 @@ package ua.softgroup.matrix.server.desktop.model;
 
 import java.io.Serializable;
 
-public class WriteKeyboard extends TokenModel implements Serializable {
+public class WriteKeyboard implements Serializable {
     private static final long serialVersionUID = 1L;
     private String words;
     private long projectID;

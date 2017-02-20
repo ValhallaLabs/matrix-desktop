@@ -2,9 +2,10 @@ package ua.softgroup.matrix.server.desktop.model;
 
 import java.time.LocalDate;
 
-public class ReportModel extends TokenModel {
+public class ReportModel {
     private static final long serialVersionUID = 1L;
 
+    private TokenModel tokenModel;
 
     private long id;
 
@@ -30,8 +31,8 @@ public class ReportModel extends TokenModel {
         this.description = description;
     }
 
-    public ReportModel(long id, String token, String title, String description, long projectId) {
-        super.setToken(token);
+    public ReportModel(long id, TokenModel tokenModel, String title, String description, long projectId) {
+        this.tokenModel = tokenModel;
         this.id = id;
         this.title = title;
         this.description = description;
