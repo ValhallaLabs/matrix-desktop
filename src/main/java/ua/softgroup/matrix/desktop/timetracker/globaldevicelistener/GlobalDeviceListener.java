@@ -14,5 +14,5 @@ public interface GlobalDeviceListener {
      * Turns off global device listener
      * @return boolean result is listener was turned off
      */
-    boolean turnOff();;
+    boolean turnOff();
 }

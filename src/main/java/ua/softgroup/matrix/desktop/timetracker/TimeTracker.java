@@ -3,6 +3,8 @@ package ua.softgroup.matrix.desktop.timetracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.MainLayoutController;
+import ua.softgroup.matrix.desktop.timetracker.globaldevicelistener.GlobalDeviceListener;
+import ua.softgroup.matrix.desktop.timetracker.globaldevicelistener.NativeDevicesListener;
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
@@ -11,9 +13,8 @@ public class TimeTracker {
     private static TimeTracker timeTracker;
     protected static final Logger logger = LoggerFactory.getLogger(TimeTracker.class);
     private MainLayoutController mainLayoutController;
-    private long projectId;
     private boolean isTracking = false;
-
+    private GlobalDeviceListener globalDeviceListener;
 
     public static TimeTracker getInstance(MainLayoutController mainLayoutController) {
         if(timeTracker == null){
@@ -24,6 +25,7 @@ public class TimeTracker {
 
     private TimeTracker(MainLayoutController mainLayoutController) {
         this.mainLayoutController = mainLayoutController;
+        globalDeviceListener = new NativeDevicesListener(this);
     }
 
     /**
@@ -43,7 +45,7 @@ public class TimeTracker {
         if (isTracking) {
             return false;
         } else {
-
+            globalDeviceListener.turnOn();
             return true;
         }
     }
@@ -59,6 +61,7 @@ public class TimeTracker {
          */
         //If tracker is working, you can stop it. Else, you can't, fucker.
         if (isTracking) {
+            globalDeviceListener.turnOff();
             return true;
         } else {
             return false;
@@ -66,11 +69,9 @@ public class TimeTracker {
     }
 
     void startDownTime() {
-
     }
 
     void stopDownTime() {
-
     }
 
     //TODO: use interval for emitting control points

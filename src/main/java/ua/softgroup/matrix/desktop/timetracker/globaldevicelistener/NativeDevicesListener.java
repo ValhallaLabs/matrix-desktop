@@ -30,7 +30,7 @@ public class NativeDevicesListener implements GlobalDeviceListener {
     private Boolean isCountingUntilDt = false;
     private Boolean isDowntime = false;
 
-    private NativeDevicesListener(TimeTracker timeTracker) {
+    public NativeDevicesListener(TimeTracker timeTracker) {
         this.timeTracker = timeTracker;
         offGlobalScreenLogger();
         addListenersToGlobalListener();

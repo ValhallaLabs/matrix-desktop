@@ -12,8 +12,7 @@ import java.net.Socket;
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public abstract class ServerSessionManager {
-    //TODO logger's class
-    protected static final Logger logger = LoggerFactory.getLogger(AuthenticationServerSessionManager.class);
+    protected static final Logger logger = LoggerFactory.getLogger(ServerSessionManager.class);
     protected ObjectOutputStream objectOutputStream;
 
     /**

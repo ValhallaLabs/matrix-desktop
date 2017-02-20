@@ -27,8 +27,6 @@ import static ua.softgroup.matrix.server.desktop.api.Constants.INVALID_USERNAME;
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public class AuthenticationServerSessionManager extends ServerSessionManager {
-    //TODO hiding superclass' field
-    private static final Logger logger = LoggerFactory.getLogger(AuthenticationServerSessionManager.class);
     private LoginLayoutController loginLayoutController;
     private Emitter<UserPassword> userPasswordEmitter;
     private Disposable disposableSubscription;
@@ -87,9 +85,13 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
      * @param response String object that contains response about result of authentication
      * @return boolean result of authentication
      */
-    private Boolean handleServerAuthResponse(String response) {
+    private boolean handleServerAuthResponse(String response) {
         logger.debug("Auth response {}", response);
         //TODO wat?
+        boolean failureAuth;
+        if (Constants.INVALID_USERNAME.name().equals(response) || Constants.INVALID_PASSWORD.name().equals(response)) {
+            failureAuth = true;
+        }
         Boolean tokenValidationResult = !Constants.INVALID_USERNAME.name().equals(response) &&
                 !Constants.INVALID_PASSWORD.name().equals(response);
         if(!tokenValidationResult) {
@@ -104,9 +106,7 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
      * @return tokenModel TokenModel with current token
      */
     private TokenModel composeTokenModel(String token) {
-        // TODO use constructor, Luce!
-        TokenModel tokenModel = new TokenModel();
-        tokenModel.setToken(token);
+        TokenModel tokenModel = new TokenModel(token);
         CurrentSessionInfo.setTokenModel(tokenModel);
         return tokenModel;
     }
@@ -131,14 +131,11 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
      * @return inputStream for a further action
      */
     private InputStream setProjectsModelsToCurrentSessionInfo(InputStream inputStream) throws IOException {
-        // TODO try with resources
-        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
         Set<ProjectModel> projectModels = null;
-        try {
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(inputStream)) {
             projectModels = (Set<ProjectModel>) objectInputStream.readObject();
             logger.debug("Project models received successfully: {}", projectModels);
-
-        } catch (ClassNotFoundException e) { // TODO catch or not catch
+        } catch (ClassNotFoundException e) {
             logger.debug("Project models received unsuccessfully", e);
         }
         CurrentSessionInfo.setUserActiveProjects(projectModels);
@@ -150,25 +147,34 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
      * @param inputStream for open ObjectInputStream
      * @return settingsResult result of getting client settings
      */
-    // TODO Boolean object? always true?
-    private Boolean setClientSettingToCurrentSessionInfo(InputStream inputStream) throws IOException, ClassNotFoundException {
+    private Boolean setClientSettingToCurrentSessionInfo(InputStream inputStream) throws IOException {
         // TODO try with resources
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-        ClientSettingsModel clientSettingsModel = (ClientSettingsModel) objectInputStream.readObject();
-        logger.debug("Client settings model: {}", clientSettingsModel.toString()); // TODO to String is redundant
-        CurrentSessionInfo.setClientSettingsModel(clientSettingsModel);
-        return true;
+        ClientSettingsModel clientSettingsModel = null;
+        try {
+            clientSettingsModel = (ClientSettingsModel) objectInputStream.readObject();
+            CurrentSessionInfo.setClientSettingsModel(clientSettingsModel);
+            logger.debug("Client settings model: {}", clientSettingsModel);
+            return true;
+        } catch (ClassNotFoundException e) {
+            logger.debug("Client settings model wasn't received: {}", e);
+            return false;
+        }
     }
 
     /**
-     * // TODO link
-     * Tells {@Link LoginLayoutController} to open main window and dispose current session.
-     * @param sessionStatus useless param at the moment
+     * Tells {@link LoginLayoutController} to open main window and dispose current session.
+     * @param authSessionStatus useless param at the moment
      */
-    private void startMainLayoutAndDisposeManager(Object sessionStatus){
-        logger.debug("Authentication completed");
-        loginLayoutController.closeLoginLayoutAndStartMainLayout();
-        disposableSubscription.dispose();
+    private void startMainLayoutAndDisposeManager(Boolean authSessionStatus){
+        if(authSessionStatus) {
+            logger.debug("Authentication completed");
+            loginLayoutController.closeLoginLayoutAndStartMainLayout();
+            disposableSubscription.dispose();
+        } else {
+            logger.debug("Authentication wasn't complete successfully");
+            // TODO: tell user to try to restart client or login again.
+        }
     }
 
     /**
@@ -195,8 +201,7 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
             }
             userPasswordEmitter.onNext(userPassword);
         } catch (InterruptedException e) {
-            // TODO log exceptions properly
-            logger.debug("sendUserAuthData. Something went wrong {}", e.toString());
+            logger.debug("Something went wrong with sending user auth data to server: {}", e);
             //TODO: Some kind of global crash. Restart app.
         }
     }
