@@ -178,10 +178,9 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
      * Handles exception which may be thrown while session is executing.
      * @param throwable object that has to cast to throwable
      */
-    private void handleExceptions(Object throwable) {
-        //TODO: Think of what to do if exception is thrown
-        ((Throwable) throwable).printStackTrace();
-        disposableSubscription.dispose();
+    private void handleExceptions(Throwable throwable) {
+        //TODO: Tell UI to show message, that client is unable to start, restart it
+        logger.debug("Unable to start client: ", throwable);
     }
 
     /**
@@ -198,8 +197,8 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
             }
             userPasswordEmitter.onNext(userPassword);
         } catch (InterruptedException e) {
-            logger.debug("Something went wrong with sending user auth data to server: {}", e);
-            //TODO: Some kind of global crash. Restart app.
+            logger.debug("Something went wrong with sending user auth data to server: ", e);
+            //TODO: Tell UI to show message, that client is unable to start, restart it
         }
     }
 
