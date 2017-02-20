@@ -25,7 +25,7 @@ public class TimeTracker {
 
     private TimeTracker(MainLayoutController mainLayoutController) {
         this.mainLayoutController = mainLayoutController;
-        globalDeviceListener = new NativeDevicesListener(this);
+//        globalDeviceListener = new NativeDevicesListener(this);
     }
 
     /**
