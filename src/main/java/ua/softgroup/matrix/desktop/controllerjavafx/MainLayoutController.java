@@ -83,4 +83,24 @@ public class MainLayoutController {
             e.printStackTrace();
         }
     }
+
+    public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
+        try {
+            Stage  settingStage = new Stage();
+            ClassLoader classLoader = getClass().getClassLoader();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(classLoader.getResource("fxml/instructionsLayout.fxml"));
+            Pane pane = loader.load();
+            Scene scene = new Scene(pane);
+            settingStage.setScene(scene);
+            settingStage.setMinWidth(900);
+            settingStage.setMinHeight(600);
+            settingStage.initModality(Modality.WINDOW_MODAL);
+            settingStage.initOwner(menuBar.getScene().getWindow());
+            settingStage.setResizable(false);
+            settingStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
