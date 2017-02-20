@@ -24,8 +24,12 @@ import java.io.IOException;
 
 public class LoginLayoutController {
 
-    private static String EMPTY_FIElD = "Error: Please Fill All Field";
-    private static String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
+    private static final String EMPTY_FIElD = "Error: Please Fill All Field";
+    private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
+    private static final String LOGO="/images/testLogoIcon.png";
+    private static final String MAIN_LAYOUT="fxml/mainLayout.fxml";
+    private static final int MAIN_LAYOUT_MIN_WIDTH=1200;
+    private static final int MAIN_LAYOUT_MIN_HEIGHT=800;
     private Stage stage;
     private AuthenticationServerSessionManager authenticationSessionManager;
     @FXML
@@ -75,18 +79,16 @@ public class LoginLayoutController {
     private void startMainControllerLayout() {
         try {
             Stage primaryStage = new Stage();
-            // TODO use constants
-            Image icon = new Image(getClass().getResourceAsStream("/images/testLogoIcon.png"));
+            Image icon = new Image(getClass().getResourceAsStream(LOGO));
             primaryStage.getIcons().add(icon);
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(classLoader.getResource("fxml/mainLayout.fxml"));
+            loader.setLocation(classLoader.getResource(MAIN_LAYOUT));
             BorderPane mainLayout = loader.load();
             Scene scene = new Scene(mainLayout);
             primaryStage.setScene(scene);
-            // TODO use constants
-            primaryStage.setMinWidth(1200);
-            primaryStage.setMinHeight(800);
+            primaryStage.setMinWidth(MAIN_LAYOUT_MIN_WIDTH);
+            primaryStage.setMinHeight(MAIN_LAYOUT_MIN_HEIGHT);
             primaryStage.setResizable(false);
             primaryStage.show();
             MainLayoutController mainController=loader.getController();
@@ -116,5 +118,6 @@ public class LoginLayoutController {
         }
         return false;
     }
+
 
 }

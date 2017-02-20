@@ -22,10 +22,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //TODO що це за діч 1
-        Stage loginStage = primaryStage;
-        loginStage.setTitle("SuperVisor");
-        startLoginLayout(loginStage);
+        startLoginLayout(primaryStage);
     }
 
     public void startLoginLayout(Stage loginStage) {
@@ -38,6 +35,7 @@ public class Main extends Application {
             loginLayoutController.setUpStage(loginStage);
             Scene scene = new Scene(loginLayout);
             loginStage.setScene(scene);
+            loginStage.setTitle("SuperVisor");
             loginStage.setResizable(false);
             loginStage.show();
         } catch (IOException e) {
