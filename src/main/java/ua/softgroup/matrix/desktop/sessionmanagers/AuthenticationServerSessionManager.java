@@ -107,6 +107,7 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
         // TODO use constructor, Luce!
         TokenModel tokenModel = new TokenModel();
         tokenModel.setToken(token);
+        CurrentSessionInfo.setTokenModel(tokenModel);
         return tokenModel;
     }
 
@@ -132,14 +133,13 @@ public class AuthenticationServerSessionManager extends ServerSessionManager {
     private InputStream setProjectsModelsToCurrentSessionInfo(InputStream inputStream) throws IOException {
         // TODO try with resources
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-
         Set<ProjectModel> projectModels = null;
         try {
             projectModels = (Set<ProjectModel>) objectInputStream.readObject();
             logger.debug("Project models received successfully: {}", projectModels);
+
         } catch (ClassNotFoundException e) { // TODO catch or not catch
-            e.printStackTrace(); // TODO log exceptions
-            logger.debug("Project models received unsuccessfully");
+            logger.debug("Project models received unsuccessfully", e);
         }
         CurrentSessionInfo.setUserActiveProjects(projectModels);
         return inputStream;
