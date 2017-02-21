@@ -9,8 +9,10 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
+import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 import ua.softgroup.matrix.server.desktop.model.ProjectModel;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -73,7 +75,7 @@ public class ProjectsLayoutController {
     private static DateTimeFormatter dateFormatText=DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
 
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException {
         initPieChart();
         initTable();
         getTodayDayAndSetInView();
@@ -115,7 +117,6 @@ public class ProjectsLayoutController {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
             labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
         }
-
     }
 
     private void initPieChart() {
@@ -124,8 +125,9 @@ public class ProjectsLayoutController {
         missPieCharts.setData(pieChartList);
     }
 
-    public void chosenProject(Event event) {
+    public void chosenProject(Event event) throws IOException {
         ProjectModel selectProject=(ProjectModel)tvProjectsTable.getSelectionModel().getSelectedItem();
         setOtherProjectInfoInView(selectProject);
+       CurrentSessionInfo.setProjectId(selectProject.getId());
     }
 }

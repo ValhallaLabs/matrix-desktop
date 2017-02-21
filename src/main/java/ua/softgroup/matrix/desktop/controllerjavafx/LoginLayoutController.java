@@ -12,9 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
 import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationServerSessionManager;
-
 import java.io.IOException;
 
 
@@ -58,7 +56,7 @@ public class LoginLayoutController {
             labelErrorMessage.setText(EMPTY_FIElD);
             return;
         }
-        sendAuthDataToNotificationManager();
+       sendAuthDataToNotificationManager();
     }
 
     private void sendAuthDataToNotificationManager() {

@@ -2,6 +2,7 @@ package ua.softgroup.matrix.desktop.currentsessioninfo;
 
 import ua.softgroup.matrix.server.desktop.model.ClientSettingsModel;
 import ua.softgroup.matrix.server.desktop.model.ProjectModel;
+import ua.softgroup.matrix.server.desktop.model.ReportModel;
 import ua.softgroup.matrix.server.desktop.model.TokenModel;
 
 import java.util.Set;
@@ -14,6 +15,8 @@ public class CurrentSessionInfo {
     private static TokenModel tokenModel;
     private static Set<ProjectModel> userActiveProjects;
     private static ClientSettingsModel clientSettingsModel;
+    private static long projectId;
+
 
     public static TokenModel getTokenModel() {
         return tokenModel;
@@ -38,4 +41,11 @@ public class CurrentSessionInfo {
     public static void setClientSettingsModel(ClientSettingsModel clientSettingsModel) {
         CurrentSessionInfo.clientSettingsModel = clientSettingsModel;
     }
+    public static void setProjectId(long id){
+        projectId=id;
+    }
+    public static long getProjectId(){
+        return projectId;
+    }
+
 }
