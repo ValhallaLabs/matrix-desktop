@@ -12,7 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationServerSessionManager;
+import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
+
 import java.io.IOException;
 
 
@@ -22,6 +26,7 @@ import java.io.IOException;
 
 public class LoginLayoutController {
 
+    private static final Logger logger = LoggerFactory.getLogger(LoginLayoutController.class);
     private static final String EMPTY_FIElD = "Error: Please Fill All Field";
     private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
     private static final String LOGO="/images/testLogoIcon.png";
@@ -92,7 +97,7 @@ public class LoginLayoutController {
             MainLayoutController mainController=loader.getController();
             mainController.startProjectsLayoutController(mainLayout);
         } catch (IOException e) {
-            // TODO logging!
+            logger.debug("Error when start Main Layout");
             e.printStackTrace();
         }
     }

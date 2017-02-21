@@ -53,7 +53,7 @@ public class ReportLayoutController {
     @FXML
     private void initialize() throws IOException {
         projectId = CurrentSessionInfo.getProjectId();
-        reportServerSessionManager = new ReportServerSessionManager(this);
+        reportServerSessionManager = new ReportServerSessionManager();
         System.out.println(projectId);
         if (projectId != 0) {
             report = reportServerSessionManager.sendProjectData(projectId);

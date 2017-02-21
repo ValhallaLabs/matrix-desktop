@@ -17,16 +17,8 @@
                   <Font name="System Bold" size="40.0" />
                </font>
                <VBox.margin>
-                  <Insets right="20.0" />
+                  <Insets right="20.0" top="20.0" />
                </VBox.margin>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </Label>
-            <Label fx:id="labelProjectName" text="Project Name">
-               <font>
-                  <Font name="System Bold" size="22.0" />
-               </font>
                <padding>
                   <Insets left="10.0" />
                </padding>

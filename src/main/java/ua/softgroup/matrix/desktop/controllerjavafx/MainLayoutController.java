@@ -11,6 +11,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 
 import java.io.IOException;
@@ -35,6 +37,7 @@ public class MainLayoutController {
     private static final String INSTRUCTIONS_LAYOUT="fxml/instructionsLayout.fxml";
     private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH=900;
     private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT=600;
+    private static final Logger logger = LoggerFactory.getLogger(MainLayoutController.class);
     @FXML
     public Menu menuReport;
     @FXML
@@ -56,7 +59,7 @@ public class MainLayoutController {
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {
-            //TODO logging!
+            logger.debug("Error when start Report Window");
             e.printStackTrace();
         }
     }
@@ -70,6 +73,7 @@ public class MainLayoutController {
             mainLayout.setCenter(projectsLayout);
         } catch (IOException e) {
             e.printStackTrace();
+            logger.debug("Error when start Projects Window");
         }
     }
 
@@ -91,6 +95,7 @@ public class MainLayoutController {
             settingStage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            logger.debug("Error when start Setting Window");
         }
     }
 
@@ -111,6 +116,7 @@ public class MainLayoutController {
             InstructionsStage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            logger.debug("Error when start Instructions Window");
         }
     }
 }

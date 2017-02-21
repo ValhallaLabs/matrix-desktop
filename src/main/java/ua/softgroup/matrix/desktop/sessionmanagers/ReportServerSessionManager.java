@@ -4,7 +4,6 @@ package ua.softgroup.matrix.desktop.sessionmanagers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.controllerjavafx.ReportLayoutController;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
 import ua.softgroup.matrix.server.desktop.api.ServerCommands;
@@ -18,17 +17,12 @@ import java.util.Set;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class ReportServerSessionManager {
-    private static ReportLayoutController reportLayoutController;
+
     private static final Logger logger = LoggerFactory.getLogger(ReportServerSessionManager.class);
-    private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
     private DataOutputStream dataOutputStems;
-    private Set<ReportModel> reportModelsa;
+    private Set<ReportModel> projectReport;
     private Socket socket;
-
-    public ReportServerSessionManager(ReportLayoutController reportLayoutController) throws IOException {
-        this.reportLayoutController = reportLayoutController;
-    }
 
     public Set<ReportModel> sendProjectData(long id) throws IOException {
         socket = openSocketConnection();
@@ -36,7 +30,7 @@ public class ReportServerSessionManager {
         getProjectReportById(id);
         setReportModelToCurrentSessionInfo();
         closeSocketConnection(socket);
-        return reportModelsa;
+        return projectReport;
     }
 
     private void initOutputStreams() throws IOException {
@@ -45,7 +39,7 @@ public class ReportServerSessionManager {
         dataOutputStems = new DataOutputStream(output);
     }
 
-    private InputStream getProjectReportById(long id) throws IOException {
+    private void getProjectReportById(long id) throws IOException {
         objectOutputStream.writeObject(ServerCommands.GET_REPORTS_BY_PROJECT_ID);
         objectOutputStream.flush();
         TokenModel tokenModel = CurrentSessionInfo.getTokenModel();
@@ -54,16 +48,16 @@ public class ReportServerSessionManager {
         dataOutputStems.writeLong(id);
         dataOutputStems.flush();
         logger.debug("Get Report by project Id");
-        return socket.getInputStream();
     }
 
     private void setReportModelToCurrentSessionInfo() throws IOException {
-        objectInputStream = new ObjectInputStream(socket.getInputStream());
+        ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
         try {
-            reportModelsa = (Set<ReportModel>) objectInputStream.readObject();
-            System.out.println(reportModelsa);
+            projectReport = (Set<ReportModel>) objectInputStream.readObject();
+            System.out.println(projectReport);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            logger.debug("Unable get report From Input Stream");
         }
         logger.debug("Set Report Model to Current Session");
     }
