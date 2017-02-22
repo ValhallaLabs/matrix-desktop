@@ -73,6 +73,8 @@ public class ProjectsLayoutController {
     // TODO format code
     private static DateTimeFormatter dateFormatNumber=DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText=DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
+    private ReportServerSessionManager reportServerSessionManager;
+
 
     @FXML
     private void initialize() throws IOException {
@@ -110,6 +112,7 @@ public class ProjectsLayoutController {
         }
     }
     private void setOtherProjectInfoInView(ProjectModel projectModel) {
+        CurrentSessionInfo.setProjectId(projectModel.getId());
             labelNameSales.setText(projectModel.getAuthorName());
             labelNameProject.setText(":" + projectModel.getTitle());
             labelDiscribeProject.setText(projectModel.getDescription());
@@ -117,6 +120,7 @@ public class ProjectsLayoutController {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
             labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
         }
+
     }
 
     private void initPieChart() {
@@ -126,8 +130,7 @@ public class ProjectsLayoutController {
     }
 
     public void chosenProject(Event event) throws IOException {
-        ProjectModel selectProject=(ProjectModel)tvProjectsTable.getSelectionModel().getSelectedItem();
+        ProjectModel selectProject=tvProjectsTable.getSelectionModel().getSelectedItem();
         setOtherProjectInfoInView(selectProject);
-       CurrentSessionInfo.setProjectId(selectProject.getId());
     }
 }

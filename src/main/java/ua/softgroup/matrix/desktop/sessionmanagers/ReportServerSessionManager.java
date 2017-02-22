@@ -54,12 +54,12 @@ public class ReportServerSessionManager {
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
         try {
             projectReport = (Set<ReportModel>) objectInputStream.readObject();
-            System.out.println(projectReport);
+            logger.debug("Set Report Model to Current Session successfully"+projectReport);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             logger.debug("Unable get report From Input Stream");
         }
-        logger.debug("Set Report Model to Current Session");
+
     }
 
     private Socket openSocketConnection() throws IOException {

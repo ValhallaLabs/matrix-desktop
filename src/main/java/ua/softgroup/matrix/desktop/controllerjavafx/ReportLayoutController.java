@@ -3,6 +3,7 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -55,7 +56,7 @@ public class ReportLayoutController {
         projectId = CurrentSessionInfo.getProjectId();
         reportServerSessionManager = new ReportServerSessionManager();
         System.out.println(projectId);
-        if (projectId != 0) {
+        if (projectId != null) {
             report = reportServerSessionManager.sendProjectData(projectId);
         }
         initReport();
@@ -100,5 +101,10 @@ public class ReportLayoutController {
 
     public void ChangeReportWindow(ActionEvent actionEvent) {
         ((Node) actionEvent.getSource()).getScene().getWindow().hide();
+    }
+
+    public void chooseReport(Event event) {
+       ReportModel selectReport=tableViewReport.getSelectionModel().getSelectedItem();
+        taEditReport.setText(selectReport.getDescription());
     }
 }
