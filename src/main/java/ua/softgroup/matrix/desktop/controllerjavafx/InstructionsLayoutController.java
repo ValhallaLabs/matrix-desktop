@@ -5,15 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 import ua.softgroup.matrix.server.desktop.model.InstructionsModel;
-import ua.softgroup.matrix.server.desktop.model.ProjectModel;
-import ua.softgroup.matrix.server.desktop.model.ScreenshotModel;
-
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 

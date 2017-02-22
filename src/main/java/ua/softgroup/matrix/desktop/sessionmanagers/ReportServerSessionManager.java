@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
 import ua.softgroup.matrix.server.desktop.api.ServerCommands;
+import ua.softgroup.matrix.server.desktop.model.ProjectModel;
 import ua.softgroup.matrix.server.desktop.model.ReportModel;
 import ua.softgroup.matrix.server.desktop.model.TokenModel;
 import java.io.*;
@@ -24,6 +25,15 @@ public class ReportServerSessionManager {
     private Set<ReportModel> projectReport;
     private Socket socket;
 
+    public void saveReportToServer(ReportModel reportModel) throws IOException {
+        socket=openSocketConnection();
+        initOutputStreams();
+        saveReport(reportModel);
+        closeSocketConnection(socket);
+    }
+
+
+
     public Set<ReportModel> sendProjectData(long id) throws IOException {
         socket = openSocketConnection();
         initOutputStreams();
@@ -31,6 +41,11 @@ public class ReportServerSessionManager {
         setReportModelToCurrentSessionInfo();
         closeSocketConnection(socket);
         return projectReport;
+    }
+    private void saveReport(ReportModel reportmodel) throws IOException {
+        objectOutputStream.writeObject(ServerCommands.SAVE_REPORT);
+        objectOutputStream.writeObject(reportmodel);
+        objectOutputStream.flush();
     }
 
     private void initOutputStreams() throws IOException {
@@ -68,7 +83,7 @@ public class ReportServerSessionManager {
         return socket;
     }
 
-    protected void closeSocketConnection(Socket socket) throws IOException {
+    private void closeSocketConnection(Socket socket) throws IOException {
         objectOutputStream.writeObject(ServerCommands.CLOSE);
         objectOutputStream.flush();
         socket.close();

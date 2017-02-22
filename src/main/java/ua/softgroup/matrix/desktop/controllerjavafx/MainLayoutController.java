@@ -13,7 +13,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
+
 
 import java.io.IOException;
 
@@ -27,16 +27,16 @@ import java.io.IOException;
  * will think about it together later, just make some sketches).
  */
 public class MainLayoutController {
-    private static final String REPORT_LAYOUT="fxml/reportLayout.fxml";
-    private static final int REPORT_LAYOUT_MIN_WIDTH=1200;
-    private static final int REPORT_LAYOUT_MIN_HEIGHT=750;
-    private static final String PROJECT_LAYOUT="fxml/projectsLayout.fxml";
-    private static final String SETTING_LAYOUT="fxml/settingsLayout.fxml";
-    private static final int SETTING_LAYOUT_MIN_WIDTH=500;
-    private static final int SETTING_LAYOUT_MIN_HEIGHT=250;
+    private static final String REPORT_LAYOUT = "fxml/reportLayout.fxml";
+    private static final int REPORT_LAYOUT_MIN_WIDTH = 1200;
+    private static final int REPORT_LAYOUT_MIN_HEIGHT = 750;
+    private static final String PROJECT_LAYOUT = "fxml/projectsLayout.fxml";
+    private static final String SETTING_LAYOUT ="fxml/settingsLayout.fxml";
+    private static final int SETTING_LAYOUT_MIN_WIDTH = 500;
+    private static final int SETTING_LAYOUT_MIN_HEIGHT = 250;
     private static final String INSTRUCTIONS_LAYOUT="fxml/instructionsLayout.fxml";
-    private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH=900;
-    private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT=600;
+    private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 900;
+    private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 600;
     private static final Logger logger = LoggerFactory.getLogger(MainLayoutController.class);
     @FXML
     public Menu menuReport;

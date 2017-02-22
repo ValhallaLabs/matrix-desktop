@@ -41,9 +41,11 @@ public class CurrentSessionInfo {
     public static void setClientSettingsModel(ClientSettingsModel clientSettingsModel) {
         CurrentSessionInfo.clientSettingsModel = clientSettingsModel;
     }
+
     public static void setProjectId(long id){
-        projectId=id;
+        CurrentSessionInfo.projectId = id;
     }
+
     public static long getProjectId(){
         return projectId;
     }

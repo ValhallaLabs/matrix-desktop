@@ -3,6 +3,7 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
@@ -11,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 import ua.softgroup.matrix.server.desktop.model.ProjectModel;
+import ua.softgroup.matrix.server.desktop.model.ReportModel;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -70,24 +72,25 @@ public class ProjectsLayoutController {
     @FXML
     public Label labelSymbolsNeedReport;
     static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
-    // TODO format code
-    private static DateTimeFormatter dateFormatNumber=DateTimeFormatter.ofPattern("dd.MM.yyyy");
-    private static DateTimeFormatter dateFormatText=DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
-    private static final String ID_COLUMN="id";
-    private static final String AUTHOR_NAME_COLUMN="authorName";
-    private static final String TITLE_COLUMN="title";
-    private static final String DESCRIPTION_COLUMN="description";
+    private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
+    private static final String ID_COLUMN = "id";
+    private static final String AUTHOR_NAME_COLUMN = "authorName";
+    private static final String TITLE_COLUMN = "title";
+    private static final String DESCRIPTION_COLUMN = "description";
+    private ReportServerSessionManager reportServerSessionManager;
 
     @FXML
     private void initialize() throws IOException {
+        reportServerSessionManager = new ReportServerSessionManager();
         initPieChart();
         initTable();
         getTodayDayAndSetInView();
     }
 
     private void getTodayDayAndSetInView() {
-        LocalDate date =LocalDate.now();
-        String dayOfWeekText =date.format(dateFormatText);
+        LocalDate date = LocalDate.now();
+        String dayOfWeekText = date.format(dateFormatText);
         String dayOfWeekNumber = date.format(dateFormatNumber);
         labelDayInWord.setText(dayOfWeekText);
         labelDayInNumber.setText(dayOfWeekNumber);
@@ -122,7 +125,6 @@ public class ProjectsLayoutController {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
             labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
         }
-
     }
 
     private void initPieChart() {
@@ -132,7 +134,13 @@ public class ProjectsLayoutController {
     }
 
     public void chosenProject(Event event) throws IOException {
-        ProjectModel selectProject=tvProjectsTable.getSelectionModel().getSelectedItem();
+        ProjectModel selectProject = tvProjectsTable.getSelectionModel().getSelectedItem();
         setOtherProjectInfoInView(selectProject);
+    }
+
+    public void saveReportToServer(ActionEvent actionEvent) throws IOException {
+        ReportModel reportModel=new ReportModel(CurrentSessionInfo.getTokenModel().getToken(),taWriteReport.getText(),CurrentSessionInfo.getProjectId(),LocalDate.now());
+        reportModel.setTitle("kaban gay");
+        reportServerSessionManager.saveReportToServer(reportModel);
     }
 }

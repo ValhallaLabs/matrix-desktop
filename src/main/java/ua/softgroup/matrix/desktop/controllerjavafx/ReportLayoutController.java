@@ -45,10 +45,10 @@ public class ReportLayoutController {
     public Label labelDeadlineDate;
     @FXML
     public TextArea taEditReport;
-    private static final String DATE_COLUMN="date";
-    private static final String ID_COLUMN="id";
-    private static final String CHECKED_COLUMN="checked";
-    private static final String DESCRIPTION_COLUMN="description";
+    private static final String DATE_COLUMN = "date";
+    private static final String ID_COLUMN = "id";
+    private static final String CHECKED_COLUMN = "checked";
+    private static final String DESCRIPTION_COLUMN = "description";
     private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
     private ReportServerSessionManager reportServerSessionManager;
     private Long projectId;

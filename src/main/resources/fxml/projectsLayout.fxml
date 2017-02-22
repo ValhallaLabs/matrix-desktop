@@ -337,7 +337,7 @@
                               <Insets bottom="10.0" left="4.0" right="3.0" top="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnSendReport" mnemonicParsing="false" prefHeight="28.0" prefWidth="130.0" styleClass="send-reports-button" text="Отправить отчет">
+                        <Button fx:id="btnSendReport" mnemonicParsing="false" onAction="#saveReportToServer" prefHeight="28.0" prefWidth="130.0" styleClass="send-reports-button" text="Отправить отчет">
                            <HBox.margin>
                               <Insets bottom="10.0" left="5.0" right="8.0" top="10.0" />
                            </HBox.margin>
