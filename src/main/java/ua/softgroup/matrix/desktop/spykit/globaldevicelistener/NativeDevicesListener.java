@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
 
+import java.awt.*;
 import java.util.EventObject;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -27,13 +28,16 @@ public class NativeDevicesListener implements GlobalDeviceListener {
     private TimeTracker timeTracker;
     private Disposable downtimeControlDisposable;
     private FlowableEmitter<EventObject> startCountUntilDtEmitter, stopCountUntilDtEmitter;
-    private Boolean isCountingUntilDt = false;
-    private Boolean isDowntime = false;
+    private Boolean isCountingUntilDt = false, isDowntime = false;
     private StringBuilder keyboardLogs;
+    private double mouseFootage = 0;
+    private Point prevMousePosition;
 
-    public NativeDevicesListener(TimeTracker timeTracker) {
+    public NativeDevicesListener(/*TimeTracker timeTracker*/) {
         this.timeTracker = timeTracker;
         keyboardLogs = new StringBuilder("");
+        prevMousePosition = MouseInfo.getPointerInfo().getLocation();
+        System.out.println(prevMousePosition.toString());
         offGlobalScreenLogger();
         addListenersToGlobalListener();
     }
@@ -216,6 +220,9 @@ public class NativeDevicesListener implements GlobalDeviceListener {
         }
 
         public void nativeMouseMoved(NativeMouseEvent e) {
+            mouseFootage += (Math.sqrt(Math.pow(e.getX() - prevMousePosition.getX(), 2) +
+                    Math.pow(e.getY() - prevMousePosition.getY(), 2)))/3779.5275;
+            prevMousePosition.setLocation(e.getX(), e.getY());
             receiveEvent(e);
         }
 
@@ -235,5 +242,11 @@ public class NativeDevicesListener implements GlobalDeviceListener {
         public void nativeKeyReleased(NativeKeyEvent e) {}
 
         public void nativeKeyTyped(NativeKeyEvent e) {}
+    }
+
+
+    public static void main(String[] args) {
+        NativeDevicesListener nativeDevicesListener = new NativeDevicesListener();
+        nativeDevicesListener.turnOn();
     }
 }
