@@ -51,20 +51,22 @@ public class ReportLayoutController {
     private static final String DESCRIPTION_COLUMN = "description";
     private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
     private ReportServerSessionManager reportServerSessionManager;
-    private Long projectId;
+    private Long currentProjectId;
     private Set<ReportModel> report;
     private String reportText;
+    private long currentReportId;
+
 
     @FXML
     private void initialize() throws IOException {
-        projectId = CurrentSessionInfo.getProjectId();
+        currentProjectId = CurrentSessionInfo.getProjectId();
         reportServerSessionManager = new ReportServerSessionManager();
-        System.out.println(projectId);
-        if (projectId != null) {
-            report = reportServerSessionManager.sendProjectData(projectId);
+        System.out.println(currentProjectId);
+        if (currentProjectId != null) {
+            report = reportServerSessionManager.sendProjectData(currentProjectId);
         }
         initReport();
-        setOtherProjectInfoInView(projectId);
+        setOtherProjectInfoInView(currentProjectId);
     }
 
     private void setOtherProjectInfoInView(Long id) {
@@ -88,27 +90,39 @@ public class ReportLayoutController {
         reportTableColumnTime.setCellValueFactory(new PropertyValueFactory<>(ID_COLUMN));
         reportTableColumnVerified.setCellValueFactory(new PropertyValueFactory<>(CHECKED_COLUMN));
         reportTableColumnReport.setCellValueFactory(new PropertyValueFactory<>(DESCRIPTION_COLUMN));
-
         if (report != null && !report.isEmpty()) {
             for (ReportModel model :
                     report) {
                 reportData.add(model);
                 reportText=model.getDescription();
+
             }
             tableViewReport.setItems(reportData);
         }
+    }
+
+    private void checkVerifyReportAndSetButtonCondition(ReportModel reportModel) {
+        if (reportModel.isChecked()){
+            btnChangeReport.setDisable(true);
+        }else btnChangeReport.setDisable(false);
     }
 
     public void CancelReportWindow(ActionEvent actionEvent) {
         ((Node) actionEvent.getSource()).getScene().getWindow().hide();
     }
 
-    public void ChangeReportWindow(ActionEvent actionEvent) {
+    public void ChangeReportWindow(ActionEvent actionEvent) throws IOException {
+        ReportModel reportModel=new ReportModel(CurrentSessionInfo.getTokenModel().getToken(), currentReportId,taEditReport.getText(),currentProjectId);
+        System.out.println(reportModel.toString());
+        reportModel.setTitle("dddsdsdsadasdsdsaad");
+         reportServerSessionManager.changeReportOnServer(reportModel);
         ((Node) actionEvent.getSource()).getScene().getWindow().hide();
     }
 
     public void chooseReport(Event event) {
        ReportModel selectReport=tableViewReport.getSelectionModel().getSelectedItem();
+        checkVerifyReportAndSetButtonCondition(selectReport);
+       currentReportId =selectReport.getId();
         taEditReport.setText(selectReport.getDescription());
     }
 }

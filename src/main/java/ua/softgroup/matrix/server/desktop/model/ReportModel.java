@@ -31,6 +31,13 @@ public class ReportModel extends TokenModel implements Serializable {
         this.date = date;
     }
 
+    public ReportModel(String token, long id, String description, long projectId) {
+        super(token);
+        this.id = id;
+        this.description = description;
+        this.projectId = projectId;
+    }
+
     public String getDescription() {
         return description;
     }

@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
+import ua.softgroup.matrix.server.desktop.api.Constants;
 import ua.softgroup.matrix.server.desktop.api.ServerCommands;
-import ua.softgroup.matrix.server.desktop.model.ProjectModel;
 import ua.softgroup.matrix.server.desktop.model.ReportModel;
 import ua.softgroup.matrix.server.desktop.model.TokenModel;
 import java.io.*;
@@ -24,15 +24,21 @@ public class ReportServerSessionManager {
     private DataOutputStream dataOutputStems;
     private Set<ReportModel> projectReport;
     private Socket socket;
+    private String responseServer;
 
     public void saveReportToServer(ReportModel reportModel) throws IOException {
-        socket=openSocketConnection();
+        socket = openSocketConnection();
+        initOutputStreams();
+        saveReport(reportModel);
+        serverReportResponse(responseServer);
+        closeSocketConnection(socket);
+    }
+    public void changeReportOnServer(ReportModel reportModel) throws IOException {
+        socket = openSocketConnection();
         initOutputStreams();
         saveReport(reportModel);
         closeSocketConnection(socket);
     }
-
-
 
     public Set<ReportModel> sendProjectData(long id) throws IOException {
         socket = openSocketConnection();
@@ -42,10 +48,19 @@ public class ReportServerSessionManager {
         closeSocketConnection(socket);
         return projectReport;
     }
+
+    private void serverReportResponse(String response) {
+        logger.debug("Report Response");
+        if (Constants.REPORT_EXISTS.name().equals(response)) {
+            System.out.println("Report Already create");
+        }
+    }
+
     private void saveReport(ReportModel reportmodel) throws IOException {
         objectOutputStream.writeObject(ServerCommands.SAVE_REPORT);
         objectOutputStream.writeObject(reportmodel);
         objectOutputStream.flush();
+        responseServer = new DataInputStream(socket.getInputStream()).readUTF();
     }
 
     private void initOutputStreams() throws IOException {
@@ -69,7 +84,7 @@ public class ReportServerSessionManager {
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
         try {
             projectReport = (Set<ReportModel>) objectInputStream.readObject();
-            logger.debug("Set Report Model to Current Session successfully"+projectReport);
+            logger.debug("Set Report Model to Current Session successfully" + projectReport);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             logger.debug("Unable get report From Input Stream");
