@@ -73,8 +73,10 @@ public class ProjectsLayoutController {
     // TODO format code
     private static DateTimeFormatter dateFormatNumber=DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText=DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
-    private ReportServerSessionManager reportServerSessionManager;
-
+    private static final String ID_COLUMN="id";
+    private static final String AUTHOR_NAME_COLUMN="authorName";
+    private static final String TITLE_COLUMN="title";
+    private static final String DESCRIPTION_COLUMN="description";
 
     @FXML
     private void initialize() throws IOException {
@@ -93,10 +95,10 @@ public class ProjectsLayoutController {
 
     private void initTable() {
         //TODO use constants
-        tcIdProject.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tcAuthorName.setCellValueFactory(new PropertyValueFactory<>("authorName"));
-        tcTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
-        tcDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        tcIdProject.setCellValueFactory(new PropertyValueFactory<>(ID_COLUMN));
+        tcAuthorName.setCellValueFactory(new PropertyValueFactory<>(AUTHOR_NAME_COLUMN));
+        tcTitle.setCellValueFactory(new PropertyValueFactory<>(TITLE_COLUMN));
+        tcDescription.setCellValueFactory(new PropertyValueFactory<>(DESCRIPTION_COLUMN));
         setProjectInTable();
     }
 

@@ -45,6 +45,10 @@ public class ReportLayoutController {
     public Label labelDeadlineDate;
     @FXML
     public TextArea taEditReport;
+    private static final String DATE_COLUMN="date";
+    private static final String ID_COLUMN="id";
+    private static final String CHECKED_COLUMN="checked";
+    private static final String DESCRIPTION_COLUMN="description";
     private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
     private ReportServerSessionManager reportServerSessionManager;
     private Long projectId;
@@ -80,10 +84,10 @@ public class ReportLayoutController {
     }
 
     private void initReport() {
-        reportTableColumnDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        reportTableColumnTime.setCellValueFactory(new PropertyValueFactory<>("id"));
-        reportTableColumnVerified.setCellValueFactory(new PropertyValueFactory<>("checked"));
-        reportTableColumnReport.setCellValueFactory(new PropertyValueFactory<>("description"));
+        reportTableColumnDate.setCellValueFactory(new PropertyValueFactory<>(DATE_COLUMN));
+        reportTableColumnTime.setCellValueFactory(new PropertyValueFactory<>(ID_COLUMN));
+        reportTableColumnVerified.setCellValueFactory(new PropertyValueFactory<>(CHECKED_COLUMN));
+        reportTableColumnReport.setCellValueFactory(new PropertyValueFactory<>(DESCRIPTION_COLUMN));
 
         if (report != null && !report.isEmpty()) {
             for (ReportModel model :
