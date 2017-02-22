@@ -7,7 +7,7 @@ jar {
     manifest {
         attributes 'Implementation-Title': 'Matrix Desktop',
                    'Implementation-Version': version,
-                   'Main-Class': 'ua.softgroup.matrix.desktop.spykit.WindowsTitleHoooker'
+                   'Main-Class': 'ua.softgroup.matrix.desktop.spykit.titleslistener.MacOsActiveWindowTitleListener'
     }
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
