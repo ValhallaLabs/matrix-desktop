@@ -1,9 +1,11 @@
 package ua.softgroup.matrix.server.desktop.model;
 
+import java.io.Serializable;
+
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-public class InstructionsModel {
+public class InstructionsModel implements Serializable {
     private String name;
     private String content;
 

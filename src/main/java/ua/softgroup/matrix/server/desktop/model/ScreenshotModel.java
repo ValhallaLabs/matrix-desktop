@@ -1,9 +1,16 @@
 package ua.softgroup.matrix.server.desktop.model;
 
-public class ScreenshotModel {
+import java.io.Serializable;
+
+public class ScreenshotModel implements Serializable{
     private static final long serialVersionUID = 1L;
     private byte[] file;
     private long projectID;
+
+    public ScreenshotModel(byte[] file, long projectID) {
+        this.file = file;
+        this.projectID = projectID;
+    }
 
     public long getProjectID() {
         return projectID;

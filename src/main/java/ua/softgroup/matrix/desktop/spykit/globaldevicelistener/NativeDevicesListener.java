@@ -31,7 +31,7 @@ public class NativeDevicesListener implements GlobalDeviceListener {
     private Boolean isDowntime = false;
     private StringBuilder keyboardLogs;
 
-    public NativeDevicesListener(/*TimeTracker timeTracker*/) {
+    public NativeDevicesListener(TimeTracker timeTracker) {
         this.timeTracker = timeTracker;
         keyboardLogs = new StringBuilder("");
         offGlobalScreenLogger();

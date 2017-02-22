@@ -1,8 +1,9 @@
 package ua.softgroup.matrix.server.desktop.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ReportModel {
+public class ReportModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private TokenModel tokenModel;
