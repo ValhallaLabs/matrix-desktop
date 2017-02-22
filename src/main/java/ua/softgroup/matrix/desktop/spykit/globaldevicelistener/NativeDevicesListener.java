@@ -36,6 +36,11 @@ public class NativeDevicesListener implements GlobalDeviceListener {
     private Point prevMousePosition;
     private long projectId;
 
+    //TODO: add checks for a client setting of frequency of sending to server and provide sending of logs, add to constructor projectID
+
+
+
+
     public NativeDevicesListener(TimeTracker timeTracker) {
         this.timeTracker = timeTracker;
         keyboardLogs = new StringBuilder("");

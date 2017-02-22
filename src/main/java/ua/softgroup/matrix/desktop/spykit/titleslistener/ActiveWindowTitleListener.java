@@ -21,6 +21,9 @@ public abstract class ActiveWindowTitleListener {
     private String prevTitle = "";
     private Disposable titleReaderDisposable;
 
+    //TODO: add checks for a client setting of frequency of sending to server and provide sending, create constructor for projectID
+
+
     public boolean turnOn() {
         countDownLatch = new CountDownLatch(1);
         try {
