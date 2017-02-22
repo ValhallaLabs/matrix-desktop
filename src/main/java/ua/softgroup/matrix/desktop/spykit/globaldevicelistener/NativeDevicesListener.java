@@ -11,7 +11,9 @@ import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
+import ua.softgroup.matrix.server.desktop.model.WriteKeyboard;
 
 import java.awt.*;
 import java.util.EventObject;
@@ -32,8 +34,9 @@ public class NativeDevicesListener implements GlobalDeviceListener {
     private StringBuilder keyboardLogs;
     private double mouseFootage = 0;
     private Point prevMousePosition;
+    private long projectId;
 
-    public NativeDevicesListener(/*TimeTracker timeTracker*/) {
+    public NativeDevicesListener(TimeTracker timeTracker) {
         this.timeTracker = timeTracker;
         keyboardLogs = new StringBuilder("");
         prevMousePosition = MouseInfo.getPointerInfo().getLocation();
@@ -66,7 +69,8 @@ public class NativeDevicesListener implements GlobalDeviceListener {
      * @return turnOnResult result of turning on GlobalListener
      */
     @Override
-    public boolean turnOn() {
+    public boolean turnOn(long projectId) {
+        this.projectId = projectId;
         downtimeControlDisposable = createDowntimeControlFlowable();
         try {
             GlobalScreen.registerNativeHook();
@@ -88,8 +92,7 @@ public class NativeDevicesListener implements GlobalDeviceListener {
         return Flowable.merge(createStartCountUntilDtFlowable(), createStopCountUntilDtFlowable())
                 .doOnNext(s -> logger.debug("Count until down time: {}", s))
                 .doOnNext(this::stopDowntime)
-                //TODO: uncomment when you bind Listener to main part
-//                .debounce(CurrentSessionInfo.getClientSettingsModel().getDownTime(), TimeUnit.MINUTES)
+                .debounce(CurrentSessionInfo.getClientSettingsModel().getDownTime(), TimeUnit.MINUTES)
                 .debounce(5000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::startDowntime);
@@ -208,20 +211,36 @@ public class NativeDevicesListener implements GlobalDeviceListener {
         }
     }
 
-    public String getKeyboardLogging() {
-        String keyboardLogsToSend = keyboardLogs.toString();
+    /**
+     * Returns {@link WriteKeyboard} model with logs of keyboard and footage of mouse.
+     * Clears keyboardLogs string builder and mouseFootage count.
+     * @return writeKeyboard model with keyboard logs
+     */
+    @Override
+    public WriteKeyboard getKeyboardLogging() {
+        //TODO: Add to WriteKeyboard field of mouse footage and set here.
+        WriteKeyboard writeKeyboard = new WriteKeyboard(keyboardLogs.toString(), projectId);
         keyboardLogs = new StringBuilder("");
-        return keyboardLogsToSend;
-    }
+        return writeKeyboard;
+    };
 
     private class GlobalMouseListener implements NativeMouseInputListener {
+        private final static double PIXELS_PER_METER = 3779.5275;
+        /**
+         * Send event of mouse buttons into emitters.
+         * @param e native key event
+         */
         public void nativeMousePressed(NativeMouseEvent e) {
             receiveEvent(e);
         }
 
+        /**
+         * Send event of mouse moves into emitters and calculate mouse footage in meters.
+         * @param e native key event
+         */
         public void nativeMouseMoved(NativeMouseEvent e) {
             mouseFootage += (Math.sqrt(Math.pow(e.getX() - prevMousePosition.getX(), 2) +
-                    Math.pow(e.getY() - prevMousePosition.getY(), 2)))/3779.5275;
+                    Math.pow(e.getY() - prevMousePosition.getY(), 2)))/PIXELS_PER_METER;
             prevMousePosition.setLocation(e.getX(), e.getY());
             receiveEvent(e);
         }
@@ -234,6 +253,10 @@ public class NativeDevicesListener implements GlobalDeviceListener {
     }
 
     private class GlobalKeyListener implements NativeKeyListener {
+        /**
+         * Send event of keyboard into emitters of listeners and logging keyboard.
+         * @param e native key event
+         */
         public void nativeKeyPressed(NativeKeyEvent e) {
             receiveEvent(e);
             keyboardLogs.append(NativeKeyEvent.getKeyText(e.getKeyCode()));
@@ -242,11 +265,5 @@ public class NativeDevicesListener implements GlobalDeviceListener {
         public void nativeKeyReleased(NativeKeyEvent e) {}
 
         public void nativeKeyTyped(NativeKeyEvent e) {}
-    }
-
-
-    public static void main(String[] args) {
-        NativeDevicesListener nativeDevicesListener = new NativeDevicesListener();
-        nativeDevicesListener.turnOn();
     }
 }
