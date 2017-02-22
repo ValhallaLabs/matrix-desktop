@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.timetracker.globaldevicelistener;
+package ua.softgroup.matrix.desktop.spykit.globaldevicelistener;
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>

@@ -1,15 +1,10 @@
-package ua.softgroup.matrix.desktop.timetracker.titleslistener;
+package ua.softgroup.matrix.desktop.spykit.titleslistener;
 
-import com.sun.jna.Native;
-import com.sun.jna.platform.win32.User32;
-import com.sun.jna.platform.win32.WinDef;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationServerSessionManager;
 import ua.softgroup.matrix.server.desktop.model.ActiveWindowsModel;
 
 import java.util.concurrent.CountDownLatch;

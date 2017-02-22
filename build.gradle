@@ -7,7 +7,7 @@ jar {
     manifest {
         attributes 'Implementation-Title': 'Matrix Desktop',
                    'Implementation-Version': version,
-                   'Main-Class': 'ua.softgroup.matrix.desktop.timetracker.WindowsTitleHoooker'
+                   'Main-Class': 'ua.softgroup.matrix.desktop.spykit.WindowsTitleHoooker'
     }
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }

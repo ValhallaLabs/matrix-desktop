@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.timetracker.titleslistener;
+package ua.softgroup.matrix.desktop.spykit.titleslistener;
 
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.User32;
@@ -7,7 +7,7 @@ import com.sun.jna.platform.win32.WinDef;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public class WindowsActiveWindowTitleListener extends ActiveWindowTitleListener {
+class WindowsActiveWindowTitleListener extends ActiveWindowTitleListener {
     private static final int MAX_TITLE_LENGTH = 1024;
 
     @Override

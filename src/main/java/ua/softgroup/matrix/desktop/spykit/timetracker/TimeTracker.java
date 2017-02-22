@@ -1,10 +1,9 @@
-package ua.softgroup.matrix.desktop.timetracker;
+package ua.softgroup.matrix.desktop.spykit.timetracker;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.MainLayoutController;
-import ua.softgroup.matrix.desktop.timetracker.globaldevicelistener.GlobalDeviceListener;
-import ua.softgroup.matrix.desktop.timetracker.globaldevicelistener.NativeDevicesListener;
+import ua.softgroup.matrix.desktop.spykit.globaldevicelistener.GlobalDeviceListener;
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>

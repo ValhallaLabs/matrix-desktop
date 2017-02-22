@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.timetracker.globaldevicelistener;
+package ua.softgroup.matrix.desktop.spykit.globaldevicelistener;
 
 import io.reactivex.*;
 import io.reactivex.disposables.Disposable;
@@ -11,7 +11,7 @@ import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.timetracker.TimeTracker;
+import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
 
 import java.util.EventObject;
 import java.util.concurrent.TimeUnit;
@@ -160,7 +160,7 @@ public class NativeDevicesListener implements GlobalDeviceListener {
      */
     private String stopDowntime(String stopPoint) {
         if (isDowntime) {
-            //TODO: send to timetracker command END_DOWNTIME
+            //TODO: send to spykit command END_DOWNTIME
             logger.debug("Down time is stopped!");
             isDowntime = false;
         }
@@ -173,7 +173,7 @@ public class NativeDevicesListener implements GlobalDeviceListener {
      */
     private void startDowntime(String point){
         if (START_COUNT_UNTIL_DT_POINT.equals(point)) {
-            //TODO: send to timetracker command START_DOWNTIME
+            //TODO: send to spykit command START_DOWNTIME
             logger.debug("Down time is started!");
             isDowntime = true;
         }

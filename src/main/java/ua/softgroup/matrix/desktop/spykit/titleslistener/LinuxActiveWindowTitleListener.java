@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.timetracker.titleslistener;
+package ua.softgroup.matrix.desktop.spykit.titleslistener;
 
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
@@ -11,7 +11,7 @@ import com.sun.jna.ptr.PointerByReference;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public class LinuxActiveWindowTitleListener extends ActiveWindowTitleListener {
+class LinuxActiveWindowTitleListener extends ActiveWindowTitleListener {
     private final X11 x11;
     private final XLib xlib;
     private Display display;
