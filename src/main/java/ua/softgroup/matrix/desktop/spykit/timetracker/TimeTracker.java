@@ -44,7 +44,7 @@ public class TimeTracker {
         if (isTracking) {
             return false;
         } else {
-            globalDeviceListener.turnOn();
+//            globalDeviceListener.turnOn(this);
             return true;
         }
     }
