@@ -13,7 +13,6 @@ import org.jnativehook.mouse.NativeMouseWheelEvent;
 import org.jnativehook.mouse.NativeMouseWheelListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.spykit.listeners.SpyKitListener;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
 import ua.softgroup.matrix.server.desktop.model.WriteKeyboard;
@@ -33,7 +32,7 @@ public class NativeDevicesListener implements SpyKitListener {
     private TimeTracker timeTracker;
     private Disposable downtimeControlDisposable;
     private FlowableEmitter<EventObject> startCountUntilDtEmitter, stopCountUntilDtEmitter;
-    private Boolean isCountingUntilDt = false, isDowntime = false, isWorking = false;
+    private Boolean isCountingUntilDt = false, isDowntime = false, isUsed = false;
     private StringBuilder keyboardLogs;
     private double mouseFootage;
     private Point prevMousePosition;
@@ -78,21 +77,14 @@ public class NativeDevicesListener implements SpyKitListener {
      * @return turnOnResult result of turning on GlobalListener
      */
     @Override
-    public boolean turnOn() {
-        if (!isWorking) {
-            downtimeControlDisposable = createDowntimeControlFlowable();
-            try {
-                GlobalScreen.registerNativeHook();
-                logger.debug("Native devices listener is turned on");
-                return true;
-            } catch (NativeHookException e) {
-                downtimeControlDisposable.dispose();
-                logger.debug("Native devices listener crashed: {}", e);
-                return false;
-            }
+    public void turnOn() throws NativeHookException {
+        if (!isUsed) {
+            createDowntimeControlFlowable();
+            GlobalScreen.registerNativeHook();
+            isUsed = true;
+            logger.debug("Native devices listener is turned on");
         } else {
-            logger.debug("Native devices listener is turned on already");
-            return false;
+            logger.debug("Native devices listener was turned on already");
         }
     }
 
@@ -101,11 +93,11 @@ public class NativeDevicesListener implements SpyKitListener {
      * The flowable controls start and stop of counting downtime, and time until starts count it.
      * @return downtimeControlDisposable
      */
-    private Disposable createDowntimeControlFlowable() {
-        return Flowable.merge(createStartCountUntilDtFlowable(), createStopCountUntilDtFlowable())
+    private void createDowntimeControlFlowable() {
+        downtimeControlDisposable = Flowable.merge(createStartCountUntilDtFlowable(), createStopCountUntilDtFlowable())
                 .doOnNext(s -> logger.debug("Count until down time: {}", s))
                 .doOnNext(this::stopDowntime)
-                .debounce(CurrentSessionInfo.getClientSettingsModel().getDownTime(), TimeUnit.MINUTES)
+                .debounce(5, TimeUnit.SECONDS)
                 .debounce(5000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::startDowntime);
@@ -212,21 +204,15 @@ public class NativeDevicesListener implements SpyKitListener {
      * Tries to turn off GlobalListener.
      * @return turnOffResult result of turning off GlobalListener
      */
-    public boolean turnOff() {
-        if (isWorking) {
-            try {
-                downtimeControlDisposable.dispose();
-                removeListenersFromGlobalListener();
-                GlobalScreen.unregisterNativeHook();
-                logger.debug("Native devices listener is turned off");
-                return true;
-            } catch (NativeHookException e) {
-                logger.debug("Native devices listener crashed: {}", e);
-                return false;
-            }
+    @Override
+    public void turnOff() throws NativeHookException {
+        if (isUsed) {
+            downtimeControlDisposable.dispose();
+            removeListenersFromGlobalListener();
+            GlobalScreen.unregisterNativeHook();
+            logger.debug("Native devices listener is turned off");
         } else {
-            logger.debug("Native devices listener is turned off already");
-            return false;
+            logger.debug("Native devices listener was turned off already");
         }
     }
 

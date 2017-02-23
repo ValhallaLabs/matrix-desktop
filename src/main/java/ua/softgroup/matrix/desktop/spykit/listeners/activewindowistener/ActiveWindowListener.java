@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class ActiveWindowListener implements SpyKitListener {
     private static final Logger logger = LoggerFactory.getLogger(ActiveWindowListener.class);
-    private boolean isWorking = false;
+    private boolean isUsed = false;
     private long time;
     private String currentTitle = "";
     private ActiveWindowsModel activeWindowsModel;
@@ -32,21 +32,14 @@ public abstract class ActiveWindowListener implements SpyKitListener {
      * @return result of turning of ActiveWindowListener
      */
     @Override
-    public boolean turnOn() {
-        if (!isWorking){
-            countDownLatch = new CountDownLatch(1);
-            try {
-                startTitleReader();
-                countDownLatch.await();
-                logger.debug("ActiveWindowListener is turned on successfully");
-                return true;
-            } catch (InterruptedException e) {
-                logger.debug("ActiveWindowListener is turned on unsuccessfully:", e);
-                return false;
-            }
+    public void turnOn() throws InterruptedException {
+        if (!isUsed){
+            startTitleReader();
+            logger.debug("ActiveWindowListener is turned on successfully");
+            isUsed = true;
+            (countDownLatch = new CountDownLatch(1)).await();
         } else {
-            logger.debug("ActiveWindowListener is turned on already");
-            return false;
+            logger.debug("ActiveWindowListener was turned on already");
         }
     }
 
@@ -106,23 +99,22 @@ public abstract class ActiveWindowListener implements SpyKitListener {
         } else {
             activeWindowsModel.getWindowTimeMap().put(currentTitle, time);
         }
+        logger.debug("map:{}", activeWindowsModel.getWindowTimeMap().toString());
     }
 
     /**
      * Turns off ActiveWindowListener.
      */
     @Override
-    public boolean turnOff() {
-        if (isWorking) {
+    public void turnOff() {
+        if (isUsed) {
             countDownLatch.countDown();
             if (titleReaderDisposable != null && !titleReaderDisposable.isDisposed()) {
                 titleReaderDisposable.dispose();
             }
             logger.debug("ActiveWindow listener is turned off");
-            return true;
         } else {
-            logger.debug("ActiveWindow listener is turned off already");
-            return false;
+            logger.debug("ActiveWindow listener was turned off already");
         }
     }
 

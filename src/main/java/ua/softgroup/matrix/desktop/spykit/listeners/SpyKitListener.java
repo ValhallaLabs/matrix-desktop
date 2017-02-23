@@ -1,5 +1,6 @@
 package ua.softgroup.matrix.desktop.spykit.listeners;
 
+import org.jnativehook.NativeHookException;
 import ua.softgroup.matrix.server.desktop.model.WriteKeyboard;
 
 /**
@@ -10,11 +11,11 @@ public interface SpyKitListener {
      * Turns on global device listener
      * @return boolean result is listener was turned on
      */
-    boolean turnOn();
+    void turnOn() throws InterruptedException, NativeHookException;
 
     /**
      * Turns off global device listener
      * @return boolean result is listener was turned off
      */
-    boolean turnOff();
+    void turnOff() throws NativeHookException;
 }
