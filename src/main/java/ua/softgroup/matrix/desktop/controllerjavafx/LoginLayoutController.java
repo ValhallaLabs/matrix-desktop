@@ -12,8 +12,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationServerSessionManager;
+
 
 import java.io.IOException;
 
@@ -24,12 +26,13 @@ import java.io.IOException;
 
 public class LoginLayoutController {
 
+    private static final Logger logger = LoggerFactory.getLogger(LoginLayoutController.class);
     private static final String EMPTY_FIElD = "Error: Please Fill All Field";
     private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
-    private static final String LOGO="/images/testLogoIcon.png";
-    private static final String MAIN_LAYOUT="fxml/mainLayout.fxml";
-    private static final int MAIN_LAYOUT_MIN_WIDTH=1200;
-    private static final int MAIN_LAYOUT_MIN_HEIGHT=800;
+    private static final String LOGO = "/images/testLogoIcon.png";
+    private static final String MAIN_LAYOUT = "fxml/mainLayout.fxml";
+    private static final int MAIN_LAYOUT_MIN_WIDTH = 1200;
+    private static final int MAIN_LAYOUT_MIN_HEIGHT = 800;
     private Stage stage;
     private AuthenticationServerSessionManager authenticationSessionManager;
     @FXML
@@ -91,10 +94,10 @@ public class LoginLayoutController {
             primaryStage.setMinHeight(MAIN_LAYOUT_MIN_HEIGHT);
             primaryStage.setResizable(false);
             primaryStage.show();
-            MainLayoutController mainController=loader.getController();
+            MainLayoutController mainController = loader.getController();
             mainController.startProjectsLayoutController(mainLayout);
         } catch (IOException e) {
-            // TODO logging!
+            logger.debug("Error when start Main Layout");
             e.printStackTrace();
         }
     }
@@ -118,6 +121,5 @@ public class LoginLayoutController {
         }
         return false;
     }
-
 
 }

@@ -17,16 +17,8 @@
                   <Font name="System Bold" size="40.0" />
                </font>
                <VBox.margin>
-                  <Insets right="20.0" />
+                  <Insets right="20.0" top="20.0" />
                </VBox.margin>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </Label>
-            <Label text="Project Name">
-               <font>
-                  <Font name="System Bold" size="22.0" />
-               </font>
                <padding>
                   <Insets left="10.0" />
                </padding>
@@ -84,7 +76,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane-whitegrei" GridPane.columnIndex="1">
                            <children>
-                              <Label prefHeight="26.0" prefWidth="250.0" text="Victor Pigol">
+                              <Label fx:id="labelProjectName" prefHeight="26.0" prefWidth="250.0" text="Victor Pigol">
                                  <padding>
                                     <Insets left="5.0" />
                                  </padding>
@@ -99,7 +91,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane-whitegrei" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
-                              <Label prefHeight="26.0" prefWidth="250.0" text="Stas Boizov">
+                              <Label fx:id="labelResponsible" prefHeight="26.0" prefWidth="250.0" text="Stas Boizov">
                                  <padding>
                                     <Insets left="5.0" />
                                  </padding>
@@ -144,7 +136,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane-whitegrei" GridPane.columnIndex="3">
                            <children>
-                              <Label prefHeight="26.0" prefWidth="125.0" text="2011/05">
+                              <Label fx:id="labelStartDate" prefHeight="26.0" prefWidth="125.0" text="2011/05">
                                  <padding>
                                     <Insets left="5.0" />
                                  </padding>
@@ -159,7 +151,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane-whitegrei" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <children>
-                              <Label prefHeight="26.0" prefWidth="125.0" text="01.01.2018">
+                              <Label fx:id="labelDeadlineDate" prefHeight="26.0" prefWidth="125.0" text="01.01.2018">
                                  <padding>
                                     <Insets left="5.0" />
                                  </padding>
@@ -174,7 +166,7 @@
                         </Pane>
                      </children>
                   </GridPane>
-                  <TableView fx:id="tableViewReport" layoutX="15.0" layoutY="115.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="105.0">
+                  <TableView fx:id="tableViewReport" layoutX="15.0" layoutY="115.0" onMouseClicked="#chooseReport" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="105.0">
                     <columns>
                       <TableColumn fx:id="reportTableColumnDate" prefWidth="115.0" text="Date" />
                       <TableColumn fx:id="reportTableColumnTime" prefWidth="115.0" text=" Time" />
@@ -199,7 +191,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
-                        <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="300.0" promptText="Read your report if need exchange or write new" styleClass="rightancor" wrapText="true">
+                        <TextArea fx:id="taEditReport" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="300.0" promptText="Read your report if need exchange or write new" styleClass="rightancor" wrapText="true">
                            <VBox.margin>
                               <Insets left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>

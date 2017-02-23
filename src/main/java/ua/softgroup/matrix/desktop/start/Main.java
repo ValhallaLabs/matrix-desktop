@@ -39,7 +39,7 @@ public class Main extends Application {
             loginStage.setResizable(false);
             loginStage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.debug("Error when start Main Window");
         }
     }
 
