@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.spykit.listeners.titleslistener;
+package ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener;
 
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
@@ -16,7 +16,8 @@ class LinuxActiveWindowListener extends ActiveWindowListener {
     private final XLib xlib;
     private Display display;
 
-    public LinuxActiveWindowListener() {
+    LinuxActiveWindowListener(long projectId) {
+        super(projectId);
         x11 = X11.INSTANCE;
         xlib = XLib.INSTANCE;
         display = x11.XOpenDisplay(null);

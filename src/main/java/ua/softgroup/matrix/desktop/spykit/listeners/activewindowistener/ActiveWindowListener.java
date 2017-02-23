@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.spykit.listeners.titleslistener;
+package ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public abstract class ActiveWindowListener implements SpyKitListener {
-    protected static final Logger logger = LoggerFactory.getLogger(ActiveWindowListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(ActiveWindowListener.class);
     private boolean isWorking = false;
     private long time;
     private String currentTitle = "";
@@ -23,7 +23,7 @@ public abstract class ActiveWindowListener implements SpyKitListener {
     private Disposable titleReaderDisposable;
     private CountDownLatch countDownLatch;
 
-    public ActiveWindowListener(long projectId) {
+    ActiveWindowListener(long projectId) {
         activeWindowsModel = new ActiveWindowsModel(projectId);
     }
 
@@ -65,6 +65,12 @@ public abstract class ActiveWindowListener implements SpyKitListener {
     }
 
     /**
+     * Abstract method, which every OS overrides to get title of active window.
+     * @return newTitle
+     */
+    protected abstract String getProcessTitle();
+
+    /**
      * Compares new title to current title
      * @return result of comparison.
      */
@@ -101,12 +107,6 @@ public abstract class ActiveWindowListener implements SpyKitListener {
             activeWindowsModel.getWindowTimeMap().put(currentTitle, time);
         }
     }
-
-    /**
-     * Abstract method, which every OS overrides to get title of active window.
-     * @return newTitle
-     */
-    protected abstract String getProcessTitle();
 
     /**
      * Turns off ActiveWindowListener.

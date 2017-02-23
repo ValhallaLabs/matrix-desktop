@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.spykit.listeners.titleslistener;
+package ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener;
 
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.User32;
@@ -9,6 +9,10 @@ import com.sun.jna.platform.win32.WinDef;
  */
 class WindowsActiveWindowListener extends ActiveWindowListener {
     private static final int MAX_TITLE_LENGTH = 1024;
+
+    WindowsActiveWindowListener(long projectId) {
+        super(projectId);
+    }
 
     @Override
     protected String getProcessTitle() {

@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.spykit.listeners.titleslistener;
+package ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener;
 
 import com.sun.istack.internal.Nullable;
 import com.sun.jna.Platform;
@@ -8,26 +8,26 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public class WindowListenerFactory {
-    private static final Logger logger = LoggerFactory.getLogger(WindowListenerFactory.class);
+public class ActiveWindowListenerFactory {
+    private static final Logger logger = LoggerFactory.getLogger(ActiveWindowListenerFactory.class);
 
     /**
      * Returns window listener for detected platform or null if platform is unknown.
      * @return window listener
      */
     @Nullable
-    public static ActiveWindowListener getListener() {
+    public static ActiveWindowListener getListener(long projectId) {
         if (Platform.isWindows()) {
             logger.debug("Platform is Windows");
-            return new WindowsActiveWindowListener();
+            return new WindowsActiveWindowListener(projectId);
         }
         if (Platform.isLinux()) {
             logger.debug("Platform is Linux");
-            return new LinuxActiveWindowListener();
+            return new LinuxActiveWindowListener(projectId);
         }
         if (Platform.isMac()) {
             logger.debug("Platform is Mac");
-            return new MacOsActiveWindowListener();
+            return new MacOsActiveWindowListener(projectId);
         }
         return null;
     }
