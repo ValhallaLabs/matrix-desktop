@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.spykit.titleslistener;
+package ua.softgroup.matrix.desktop.spykit.listeners.titleslistener;
 
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
@@ -11,12 +11,12 @@ import com.sun.jna.ptr.PointerByReference;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-class LinuxActiveWindowTitleListener extends ActiveWindowTitleListener {
+class LinuxActiveWindowListener extends ActiveWindowListener {
     private final X11 x11;
     private final XLib xlib;
     private Display display;
 
-    public LinuxActiveWindowTitleListener() {
+    public LinuxActiveWindowListener() {
         x11 = X11.INSTANCE;
         xlib = XLib.INSTANCE;
         display = x11.XOpenDisplay(null);

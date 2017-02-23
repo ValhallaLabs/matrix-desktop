@@ -13,7 +13,8 @@ public class ActiveWindowsModel implements Serializable {
     private Long projectId;
     private Map<String, Long> windowTimeMap = new LinkedHashMap<>();
 
-    public ActiveWindowsModel() {
+    public ActiveWindowsModel(Long projectId) {
+        this.projectId = projectId;
     }
 
     public ActiveWindowsModel(Long projectId, Map<String, Long> windowTimeMap) {

@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.spykit.titleslistener;
+package ua.softgroup.matrix.desktop.spykit.listeners.titleslistener;
 
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.User32;
@@ -7,7 +7,7 @@ import com.sun.jna.platform.win32.WinDef;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-class WindowsActiveWindowTitleListener extends ActiveWindowTitleListener {
+class WindowsActiveWindowListener extends ActiveWindowListener {
     private static final int MAX_TITLE_LENGTH = 1024;
 
     @Override
@@ -16,10 +16,5 @@ class WindowsActiveWindowTitleListener extends ActiveWindowTitleListener {
         WinDef.HWND hwnd = User32.INSTANCE.GetForegroundWindow();
         User32.INSTANCE.GetWindowText(hwnd, buffer, MAX_TITLE_LENGTH);
         return Native.toString(buffer);
-    }
-
-    public static void main(String[] args) {
-        WindowsActiveWindowTitleListener windowsActiveWindowTitleListener = new WindowsActiveWindowTitleListener();
-        windowsActiveWindowTitleListener.turnOn();
     }
 }

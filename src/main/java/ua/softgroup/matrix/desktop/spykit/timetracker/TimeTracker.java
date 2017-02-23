@@ -3,7 +3,7 @@ package ua.softgroup.matrix.desktop.spykit.timetracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.MainLayoutController;
-import ua.softgroup.matrix.desktop.spykit.globaldevicelistener.GlobalDeviceListener;
+import ua.softgroup.matrix.desktop.spykit.listeners.SpyKitListener;
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
@@ -13,7 +13,7 @@ public class TimeTracker {
     protected static final Logger logger = LoggerFactory.getLogger(TimeTracker.class);
     private MainLayoutController mainLayoutController;
     private boolean isTracking = false;
-    private GlobalDeviceListener globalDeviceListener;
+    private SpyKitListener spykitListener;
 
     public static TimeTracker getInstance(MainLayoutController mainLayoutController) {
         if(timeTracker == null){
@@ -24,7 +24,7 @@ public class TimeTracker {
 
     private TimeTracker(MainLayoutController mainLayoutController) {
         this.mainLayoutController = mainLayoutController;
-//        globalDeviceListener = new NativeDevicesListener(this);
+//        spykitListener = new NativeDevicesListener(this);
     }
 
     /**
@@ -35,16 +35,16 @@ public class TimeTracker {
      */
     public boolean startTracking(long projectId) {
         /**TODO: temporary implementation of startTracking method
-         * 1) Turn on GlobalDeviceListener
+         * 1) Turn on SpyKitListener
          * 2) If it starts successfully, then send command to server to Start work
          * 3) If server received it successfully, then everything is okay.
-         *    If not, turn off GlobalDeviceListener, and shut down fucking matrix.
+         *    If not, turn off SpyKitListener, and shut down fucking matrix.
          */
         //If tracker isn't working, you can start it. Else, you can't, fucker.
         if (isTracking) {
             return false;
         } else {
-//            globalDeviceListener.turnOn(this);
+//            spykitListener.turnOn(this);
             return true;
         }
     }
@@ -56,11 +56,11 @@ public class TimeTracker {
     public boolean stopTracking() {
         /**TODO: temporary implementation of stopTracking method
          * 1) Sends to server command to Stop work
-         * 2) Turn off GlobalDeviceListener
+         * 2) Turn off SpyKitListener
          */
         //If tracker is working, you can stop it. Else, you can't, fucker.
         if (isTracking) {
-            globalDeviceListener.turnOff();
+            spykitListener.turnOff();
             return true;
         } else {
             return false;
