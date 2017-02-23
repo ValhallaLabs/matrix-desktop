@@ -87,6 +87,14 @@ public class ProjectsLayoutController {
         initPieChart();
         initTable();
         getTodayDayAndSetInView();
+        setFocusOnTableView();
+
+    }
+
+    private void setFocusOnTableView() {
+        tvProjectsTable.requestFocus();
+        tvProjectsTable.getSelectionModel().select(CurrentSessionInfo.getUserActiveProjects().size()-1);
+        tvProjectsTable.getFocusModel().focus(CurrentSessionInfo.getUserActiveProjects().size()-1);
     }
 
     private void getTodayDayAndSetInView() {
