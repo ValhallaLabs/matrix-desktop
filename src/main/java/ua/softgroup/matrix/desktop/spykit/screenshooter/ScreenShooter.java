@@ -7,6 +7,7 @@ import ua.softgroup.matrix.server.desktop.model.ScreenshotModel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 
 /**
@@ -28,7 +29,8 @@ public class ScreenShooter {
     private ScreenshotModel makeScreenshot() {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(new Robot().createScreenCapture(getVirtualBound()), "png", baos);
+            File file = new File("scr.png");
+            ImageIO.write(getScreenCapture(), "png", baos);
             baos.flush();
             byte[] imageInByte = baos.toByteArray();
             baos.close();
@@ -41,19 +43,24 @@ public class ScreenShooter {
     }
 
     /**
-     * Gets bounds of all screens for screenshot
+     * Gets bounds of active monitor for screenshot
      * @return rectangle area for screenshot
      */
-    private Rectangle getVirtualBound() {
-        Rectangle virtualBounds = new Rectangle();
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice[] gs = ge.getScreenDevices();
-        for (GraphicsDevice gd : gs) {
-            GraphicsConfiguration[] gc = gd.getConfigurations();
-            for (GraphicsConfiguration aGc : gc) {
-                virtualBounds = virtualBounds.union(aGc.getBounds());
-            }
-        }
-        return virtualBounds;
+    private BufferedImage getScreenCapture() throws AWTException {
+        return new Robot().createScreenCapture(MouseInfo.getPointerInfo().getDevice()
+                .getDefaultConfiguration().getBounds());
     }
+
+    //TODO: implement or remove this code
+//    Snippet code for converting image into grey and black&white
+
+//    master = ImageIO.read(new File("C:/Users/shane/Dropbox/pictures/439px-Join!_It's_your_duty!.jpg"));
+//    grayScale = ImageIO.read(new File("C:/Users/shane/Dropbox/pictures/439px-Join!_It's_your_duty!.jpg"));
+//    ColorConvertOp op = new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null);
+//    op.filter(grayScale, grayScale);
+//
+//    blackWhite = new BufferedImage(master.getWidth(), master.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+//    Graphics2D g2d = blackWhite.createGraphics();
+//    g2d.drawImage(master, 0, 0, this);
+//    g2d.dispose();
 }
