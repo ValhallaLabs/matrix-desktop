@@ -72,7 +72,4 @@ public class TimeTracker {
 
     void stopDownTime() {
     }
-
-    //TODO: use interval for emitting control points
-
 }

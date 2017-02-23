@@ -5,6 +5,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.server.desktop.model.ActiveWindowsModel;
 
 import java.util.concurrent.CountDownLatch;
@@ -21,13 +22,13 @@ public abstract class ActiveWindowTitleListener {
     private String prevTitle = "";
     private Disposable titleReaderDisposable;
 
-    //TODO: add checks for a client setting of frequency of sending to server and provide sending, create constructor for projectID
 
+    //TODO: if we have frequence, it will work independently. If not, we will connect it to time tracker.
 
     public boolean turnOn() {
         countDownLatch = new CountDownLatch(1);
         try {
-            turnOnTitleReader();
+            startTitleReader();
             countDownLatch.await();
             logger.debug("ActiveWindowTitleListener is turned on successfully");
             return true;
@@ -37,7 +38,7 @@ public abstract class ActiveWindowTitleListener {
         }
     }
 
-    private void turnOnTitleReader() {
+    private void startTitleReader() {
         prevTitle = getProcessTitle();
         titleReaderDisposable = Observable.interval(1000, TimeUnit.MILLISECONDS)
                 .map(number -> getProcessTitle())
@@ -58,7 +59,6 @@ public abstract class ActiveWindowTitleListener {
 
     private void setNewTitle(String title) {
         addTittleToActiveWindowModelTimeMap();
-        System.out.println(activeWindowsModel.getWindowTimeMap());
         time = 0;
         prevTitle = title;
     }
@@ -80,5 +80,4 @@ public abstract class ActiveWindowTitleListener {
             titleReaderDisposable.dispose();
         }
     }
-
 }

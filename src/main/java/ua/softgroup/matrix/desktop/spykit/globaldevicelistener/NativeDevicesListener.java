@@ -34,11 +34,22 @@ public class NativeDevicesListener implements GlobalDeviceListener {
     private StringBuilder keyboardLogs;
     private double mouseFootage = 0;
     private Point prevMousePosition;
+    private int keyboardUpdateFrequently;
     private long projectId;
 
     //TODO: add checks for a client setting of frequency of sending to server and provide sending of logs, add to constructor projectID
 
-
+    /**
+     * Checks client settings from {@link CurrentSessionInfo} for screenshotUpdateFrequently.
+     * If screenshotUpdateFrequently is zero, it sets default value in 60 minutes
+     */
+//    private void checkClientSettings() {
+//        if (CurrentSessionInfo.getClientSettingsModel().getScreenshotUpdateFrequently() == 0) {
+//            screenshotUpdateFrequently = 60;
+//        } else {
+//            screenshotUpdateFrequently = CurrentSessionInfo.getClientSettingsModel().getScreenshotUpdateFrequently();
+//        }
+//    }
 
 
     public NativeDevicesListener(TimeTracker timeTracker) {
@@ -221,16 +232,16 @@ public class NativeDevicesListener implements GlobalDeviceListener {
      * Clears keyboardLogs string builder and mouseFootage count.
      * @return writeKeyboard model with keyboard logs
      */
-    @Override
-    public WriteKeyboard getKeyboardLogging() {
-        //TODO: Add to WriteKeyboard field of mouse footage and set here.
-        WriteKeyboard writeKeyboard = new WriteKeyboard(keyboardLogs.toString(), projectId);
-        keyboardLogs = new StringBuilder("");
-        return writeKeyboard;
-    };
+//    public WriteKeyboard getKeyboardLogging() {
+//        //TODO: Add to WriteKeyboard field of mouse footage and set here.
+//        WriteKeyboard writeKeyboard = new WriteKeyboard(keyboardLogs.toString(), projectId);
+//        keyboardLogs = new StringBuilder("");
+//        return writeKeyboard;
+//    }
 
     private class GlobalMouseListener implements NativeMouseInputListener {
         private final static double PIXELS_PER_METER = 3779.5275;
+
         /**
          * Send event of mouse buttons into emitters.
          * @param e native key event
@@ -258,6 +269,7 @@ public class NativeDevicesListener implements GlobalDeviceListener {
     }
 
     private class GlobalKeyListener implements NativeKeyListener {
+
         /**
          * Send event of keyboard into emitters of listeners and logging keyboard.
          * @param e native key event

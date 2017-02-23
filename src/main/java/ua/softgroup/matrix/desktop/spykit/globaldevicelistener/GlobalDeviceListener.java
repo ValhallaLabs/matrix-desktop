@@ -19,7 +19,4 @@ public interface GlobalDeviceListener {
      * @return boolean result is listener was turned off
      */
     boolean turnOff();
-
-    WriteKeyboard getKeyboardLogging();
-
 }
