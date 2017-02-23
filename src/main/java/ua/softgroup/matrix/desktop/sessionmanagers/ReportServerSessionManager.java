@@ -1,7 +1,6 @@
 package ua.softgroup.matrix.desktop.sessionmanagers;
 
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
@@ -10,6 +9,7 @@ import ua.softgroup.matrix.server.desktop.api.Constants;
 import ua.softgroup.matrix.server.desktop.api.ServerCommands;
 import ua.softgroup.matrix.server.desktop.model.ReportModel;
 import ua.softgroup.matrix.server.desktop.model.TokenModel;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Set;
@@ -33,6 +33,7 @@ public class ReportServerSessionManager {
         serverReportResponse(responseServer);
         closeSocketConnection(socket);
     }
+
     public void changeReportOnServer(ReportModel reportModel) throws IOException {
         socket = openSocketConnection();
         initOutputStreams();

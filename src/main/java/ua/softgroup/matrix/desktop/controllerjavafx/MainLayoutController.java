@@ -31,10 +31,10 @@ public class MainLayoutController {
     private static final int REPORT_LAYOUT_MIN_WIDTH = 1200;
     private static final int REPORT_LAYOUT_MIN_HEIGHT = 750;
     private static final String PROJECT_LAYOUT = "fxml/projectsLayout.fxml";
-    private static final String SETTING_LAYOUT ="fxml/settingsLayout.fxml";
+    private static final String SETTING_LAYOUT = "fxml/settingsLayout.fxml";
     private static final int SETTING_LAYOUT_MIN_WIDTH = 500;
     private static final int SETTING_LAYOUT_MIN_HEIGHT = 250;
-    private static final String INSTRUCTIONS_LAYOUT="fxml/instructionsLayout.fxml";
+    private static final String INSTRUCTIONS_LAYOUT = "fxml/instructionsLayout.fxml";
     private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 900;
     private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 600;
     private static final Logger logger = LoggerFactory.getLogger(MainLayoutController.class);
@@ -45,7 +45,7 @@ public class MainLayoutController {
 
     public void startReportLayoutWindow(ActionEvent actionEvent) {
         try {
-            Stage  primaryStage = new Stage();
+            Stage primaryStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource(REPORT_LAYOUT));
@@ -66,7 +66,7 @@ public class MainLayoutController {
 
     public void startProjectsLayoutController(BorderPane mainLayout) {
         try {
-            ClassLoader  classLoader = getClass().getClassLoader();
+            ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource(PROJECT_LAYOUT));
             AnchorPane projectsLayout = loader.load();
@@ -101,7 +101,7 @@ public class MainLayoutController {
 
     public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
         try {
-            Stage  InstructionsStage = new Stage();
+            Stage InstructionsStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource(INSTRUCTIONS_LAYOUT));

@@ -1,11 +1,15 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
 
+import com.sun.org.apache.bcel.internal.generic.FADD;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,16 +19,18 @@ import ua.softgroup.matrix.server.desktop.model.ProjectModel;
 import ua.softgroup.matrix.server.desktop.model.ReportModel;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.EventListener;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-public class ProjectsLayoutController {
+public class ProjectsLayoutController  {
 
     @FXML
     public TableView<ProjectModel> tvProjectsTable;
@@ -88,13 +94,26 @@ public class ProjectsLayoutController {
         initTable();
         getTodayDayAndSetInView();
         setFocusOnTableView();
+        countTextAndSetInView();
+        addTextLimiter(taWriteReport,999);
 
+    }
+
+    @FXML
+    private void countTextAndSetInView() {
+        taWriteReport.textProperty().addListener((observable, oldValue, newValue) -> {
+            int size=newValue.length();
+            labelSymbolsNeedReport.setText(String.valueOf(size));
+            if (size>=70){
+                btnSendReport.setDisable(false);
+            }
+        });
     }
 
     private void setFocusOnTableView() {
         tvProjectsTable.requestFocus();
-        tvProjectsTable.getSelectionModel().select(CurrentSessionInfo.getUserActiveProjects().size()-1);
-        tvProjectsTable.getFocusModel().focus(CurrentSessionInfo.getUserActiveProjects().size()-1);
+        tvProjectsTable.getSelectionModel().select(CurrentSessionInfo.getUserActiveProjects().size() - 1);
+        tvProjectsTable.getFocusModel().focus(CurrentSessionInfo.getUserActiveProjects().size() - 1);
     }
 
     private void getTodayDayAndSetInView() {
@@ -115,7 +134,7 @@ public class ProjectsLayoutController {
 
     private void setProjectInTable() {
         Set<ProjectModel> projectModelSet = CurrentSessionInfo.getUserActiveProjects();
-        if(projectModelSet!=null&&!projectModelSet.isEmpty()){
+        if (projectModelSet != null && !projectModelSet.isEmpty()) {
             projectModelSet.forEach(projectsData::add);
 //        for (ProjectModel projectModel : projectModelSet) {
 //            projectsData.add(projectModel);
@@ -124,33 +143,32 @@ public class ProjectsLayoutController {
             setOtherProjectInfoInView(projectsData.get(0));
         }
     }
+
     private void setOtherProjectInfoInView(ProjectModel projectModel) {
         CurrentSessionInfo.setProjectId(projectModel.getId());
-            labelNameSales.setText(projectModel.getAuthorName());
-            labelNameProject.setText(":" + projectModel.getTitle());
-            labelDiscribeProject.setText(projectModel.getDescription());
-           if ((projectModel.getStartDate()!=null && projectModel.getEndDate()!=null)){
+        labelNameSales.setText(projectModel.getAuthorName());
+        labelNameProject.setText(":" + projectModel.getTitle());
+        labelDiscribeProject.setText(projectModel.getDescription());
+        if ((projectModel.getStartDate() != null && projectModel.getEndDate() != null)) {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
             labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
         }
     }
 
     private void initPieChart() {
-        ObservableList<PieChart.Data>  pieChartList = FXCollections.observableArrayList(new PieChart.Data("Простой", 7),
+        ObservableList<PieChart.Data> pieChartList = FXCollections.observableArrayList(new PieChart.Data("Простой", 7),
                 new PieChart.Data("Чистое", 93));
         missPieCharts.setData(pieChartList);
     }
 
     public void chosenProject(Event event) throws IOException {
         taWriteReport.setText("");
-        btnSendReport.setDisable(false);
-       taWriteReport.setEditable(true);
-        if (tvProjectsTable.getSelectionModel().getSelectedItem()!=null){
+        taWriteReport.setEditable(true);
+        if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
             ProjectModel selectProject = tvProjectsTable.getSelectionModel().getSelectedItem();
             setReportInfoInTextAreaAndButton(selectProject);
             setOtherProjectInfoInView(selectProject);
         }
-
     }
 
     private void setReportInfoInTextAreaAndButton(ProjectModel projectModel) throws IOException {
@@ -166,10 +184,20 @@ public class ProjectsLayoutController {
     }
 
     public void saveReportToServer(ActionEvent actionEvent) throws IOException {
-        ReportModel reportModel=new ReportModel(CurrentSessionInfo.getTokenModel().getToken(),taWriteReport.getText(),CurrentSessionInfo.getProjectId(),LocalDate.now());
+        ReportModel reportModel = new ReportModel(CurrentSessionInfo.getTokenModel().getToken(), taWriteReport.getText(), CurrentSessionInfo.getProjectId(), LocalDate.now());
         reportModel.setTitle("kaban gay");
         reportServerSessionManager.saveReportToServer(reportModel);
         btnSendReport.setDisable(true);
         taWriteReport.setEditable(false);
     }
+
+    public static void addTextLimiter(final TextArea ta, final int maxLength) {
+        ta.textProperty().addListener((ov, oldValue, newValue) -> {
+            if (ta.getText().length() > maxLength) {
+                String s = ta.getText().substring(0, maxLength);
+                ta.setText(s);
+            }
+        });
+    }
+
 }

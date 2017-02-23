@@ -61,7 +61,7 @@ public class LoginLayoutController {
             labelErrorMessage.setText(EMPTY_FIElD);
             return;
         }
-       sendAuthDataToNotificationManager();
+        sendAuthDataToNotificationManager();
     }
 
     private void sendAuthDataToNotificationManager() {
@@ -94,7 +94,7 @@ public class LoginLayoutController {
             primaryStage.setMinHeight(MAIN_LAYOUT_MIN_HEIGHT);
             primaryStage.setResizable(false);
             primaryStage.show();
-            MainLayoutController mainController=loader.getController();
+            MainLayoutController mainController = loader.getController();
             mainController.startProjectsLayoutController(mainLayout);
         } catch (IOException e) {
             logger.debug("Error when start Main Layout");

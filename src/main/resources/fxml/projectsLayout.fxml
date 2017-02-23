@@ -98,7 +98,7 @@
                                     <Insets bottom="15.0" left="15.0" top="26.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label fx:id="labelDayInWord" text="Воскресенье " textFill="#3063a4">
+                              <Label fx:id="labelDayInWord" textFill="#3063a4">
                                  <HBox.margin>
                                     <Insets bottom="15.0" left="4.0" right="2.0" top="25.0" />
                                  </HBox.margin>
@@ -114,7 +114,7 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelDayInNumber" text="11.07.2017" textFill="#3063a4">
+                              <Label fx:id="labelDayInNumber" textFill="#3063a4">
                                  <HBox.margin>
                                     <Insets bottom="15.0" left="3.0" right="15.0" top="25.0" />
                                  </HBox.margin>
@@ -165,7 +165,7 @@
                                     <Image url="@../images/startTimeIcon.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="labelStartWorkToday" text="08:56">
+                              <Label fx:id="labelStartWorkToday">
                                  <padding>
                                     <Insets top="4.0" />
                                  </padding>
@@ -188,7 +188,7 @@
                                     <Image url="@../images/timeWorkIcon.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="labelTodayTotalTime" text="5h36m">
+                              <Label fx:id="labelTodayTotalTime">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
@@ -228,7 +228,7 @@
                                           <Insets left="6.0" />
                                        </FlowPane.margin>
                                     </ImageView>
-                                    <Label fx:id="labelTotalTime" prefWidth="120.0" text="136h 22m" textAlignment="CENTER">
+                                    <Label fx:id="labelTotalTime" prefWidth="120.0" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="16.0" />
                                        </font>
@@ -258,7 +258,7 @@
                                           <Insets left="6.0" />
                                        </FlowPane.margin>
                                     </ImageView>
-                                    <Label fx:id="labelDateStartProject" prefWidth="120.0" text="26.12.2016" textAlignment="CENTER">
+                                    <Label fx:id="labelDateStartProject" prefWidth="120.0" textAlignment="CENTER">
                                        <padding>
                                           <Insets left="6.0" />
                                        </padding>
@@ -285,7 +285,7 @@
                                           <Insets left="6.0" />
                                        </FlowPane.margin>
                                     </ImageView>
-                                    <Label fx:id="labelDeadLineProject" prefWidth="120.0" text="26.01.2017" textAlignment="CENTER">
+                                    <Label fx:id="labelDeadLineProject" prefWidth="120.0" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="16.0" />
                                        </font>
@@ -329,22 +329,28 @@
                            </HBox.margin></Button>
                      </children>
                   </HBox>
-                  <TextArea fx:id="taWriteReport" layoutX="-6.0" layoutY="510.0" prefHeight="185.0" prefWidth="316.0" promptText="Написать отчет.." wrapText="true" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="500.0" />
+                  <TextArea fx:id="taWriteReport" layoutX="-6.0" layoutY="510.0" onInputMethodTextChanged="#countTextAndSetInView" prefHeight="185.0" prefWidth="316.0" promptText="Написать отчет.." wrapText="true" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="500.0" />
                   <HBox layoutX="-8.0" layoutY="648.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="687.0">
                      <children>
-                        <Button fx:id="btnAttachFile" mnemonicParsing="false" prefHeight="28.0" prefWidth="130.0" styleClass="add-button" text="Прикрепить файл">
+                        <Button fx:id="btnAttachFile" mnemonicParsing="false" prefHeight="28.0" prefWidth="127.0" styleClass="add-button" text="Прикрепить файл">
                            <HBox.margin>
-                              <Insets bottom="10.0" left="4.0" right="3.0" top="10.0" />
+                              <Insets bottom="10.0" left="4.0" right="2.0" top="10.0" />
                            </HBox.margin>
+                           <font>
+                              <Font size="11.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="btnSendReport" mnemonicParsing="false" onAction="#saveReportToServer" prefHeight="28.0" prefWidth="130.0" styleClass="send-reports-button" text="Отправить отчет">
+                        <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#saveReportToServer" prefHeight="28.0" prefWidth="127.0" styleClass="send-reports-button" text="Отправить отчет">
                            <HBox.margin>
-                              <Insets bottom="10.0" left="5.0" right="8.0" top="10.0" />
+                              <Insets bottom="10.0" left="2.0" right="5.0" top="10.0" />
                            </HBox.margin>
+                           <font>
+                              <Font size="11.0" />
+                           </font>
                         </Button>
                         <Label fx:id="labelSymbolsNeedReport" text="0" textFill="#3063a4">
                            <HBox.margin>
-                              <Insets bottom="23.0" top="14.0" />
+                              <Insets bottom="23.0" top="15.0" />
                            </HBox.margin>
                            <font>
                               <Font name="System Bold" size="13.0" />
@@ -352,7 +358,7 @@
                         </Label>
                         <Label text="/70" textFill="#3063a4">
                            <HBox.margin>
-                              <Insets bottom="23.0" top="14.0" />
+                              <Insets bottom="23.0" top="15.0" />
                            </HBox.margin>
                            <font>
                               <Font name="System Bold" size="13.0" />

@@ -29,7 +29,7 @@
 .send-reports-button{
     -fx-graphic: url("/images/sendReportIcon.png");
     -fx-background-color: #3064a2;
-    -fx-font-size: 12px;
+    -fx-font-size: 11px;
     -fx-text-fill: white;
 }
 .table-row-cell:selected .table-cell {

@@ -76,7 +76,7 @@ public class ReportLayoutController {
                 labelResponsible.setText(model.getAuthorName());
                 labelProjectName.setText(model.getTitle());
                 taEditReport.setText(reportText);
-                if(model.getEndDate()!=null&&model.getStartDate()!=null){
+                if (model.getEndDate() != null && model.getStartDate() != null) {
                     labelStartDate.setText(model.getStartDate().toString());
                     labelDeadlineDate.setText(model.getEndDate().toString());
                 }
@@ -93,16 +93,16 @@ public class ReportLayoutController {
             for (ReportModel model :
                     report) {
                 reportData.add(model);
-                reportText=model.getDescription();
+                reportText = model.getDescription();
             }
             tableViewReport.setItems(reportData);
         }
     }
 
     private void checkVerifyReportAndSetButtonCondition(ReportModel reportModel) {
-        if (reportModel.isChecked()){
+        if (reportModel.isChecked()) {
             btnChangeReport.setDisable(true);
-        }else btnChangeReport.setDisable(false);
+        } else btnChangeReport.setDisable(false);
     }
 
     public void CancelReportWindow(ActionEvent actionEvent) {
@@ -110,18 +110,18 @@ public class ReportLayoutController {
     }
 
     public void ChangeReportWindow(ActionEvent actionEvent) throws IOException {
-        ReportModel reportModel=new ReportModel(CurrentSessionInfo.getTokenModel().getToken(), currentReportId,taEditReport.getText(),currentProjectId);
+        ReportModel reportModel = new ReportModel(CurrentSessionInfo.getTokenModel().getToken(), currentReportId, taEditReport.getText(), currentProjectId);
         System.out.println(reportModel.toString());
         reportModel.setTitle("dddsdsdsadasdsdsaad");
-         reportServerSessionManager.changeReportOnServer(reportModel);
+        reportServerSessionManager.changeReportOnServer(reportModel);
         ((Node) actionEvent.getSource()).getScene().getWindow().hide();
     }
 
     public void chooseReport(Event event) {
-        if (tableViewReport.getSelectionModel().getSelectedItem()!=null){
-            ReportModel selectReport=tableViewReport.getSelectionModel().getSelectedItem();
+        if (tableViewReport.getSelectionModel().getSelectedItem() != null) {
+            ReportModel selectReport = tableViewReport.getSelectionModel().getSelectedItem();
             checkVerifyReportAndSetButtonCondition(selectReport);
-            currentReportId =selectReport.getId();
+            currentReportId = selectReport.getId();
             taEditReport.setText(selectReport.getDescription());
         }
 

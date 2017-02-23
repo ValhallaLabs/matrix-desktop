@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import ua.softgroup.matrix.server.desktop.model.InstructionsModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
