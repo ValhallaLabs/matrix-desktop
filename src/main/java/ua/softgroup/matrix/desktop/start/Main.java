@@ -42,5 +42,4 @@ public class Main extends Application {
             logger.debug("Error when start Main Window");
         }
     }
-
 }

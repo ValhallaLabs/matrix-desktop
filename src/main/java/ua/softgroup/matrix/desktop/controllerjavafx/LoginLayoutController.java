@@ -4,11 +4,9 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -18,6 +16,7 @@ import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationServerSessionMa
 
 
 import java.io.IOException;
+import java.util.Optional;
 
 
 /**
@@ -31,6 +30,8 @@ public class LoginLayoutController {
     private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
     private static final String LOGO = "/images/testLogoIcon.png";
     private static final String MAIN_LAYOUT = "fxml/mainLayout.fxml";
+    private static final String ALERT_ERROR_TITLE="ERROR";
+    private static final String ALERT_CONTENT_TEXT="Target ip:port is Unreachable";
     private static final int MAIN_LAYOUT_MIN_WIDTH = 1200;
     private static final int MAIN_LAYOUT_MIN_HEIGHT = 800;
     private Stage stage;
@@ -49,6 +50,16 @@ public class LoginLayoutController {
         authenticationSessionManager = new AuthenticationServerSessionManager(this);
         addTextLimiter(loginTextField, 20);
         addTextLimiter(passwordTextField, 20);
+    }
+    public void tellUserAboutBadConnection(){
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(ALERT_ERROR_TITLE);
+        alert.setHeaderText(null);
+        alert.setContentText(ALERT_CONTENT_TEXT);
+        Optional<ButtonType> result=alert.showAndWait();
+        if(result.get()==ButtonType.OK){
+           stage.close();
+        }
     }
 
     public void setUpStage(Stage stage) {
