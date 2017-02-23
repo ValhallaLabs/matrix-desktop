@@ -54,16 +54,15 @@ public class ReportLayoutController {
     private Long currentProjectId;
     private Set<ReportModel> report;
     private String reportText;
-    private long currentReportId;
+    private Long currentReportId;
 
 
     @FXML
     private void initialize() throws IOException {
         currentProjectId = CurrentSessionInfo.getProjectId();
         reportServerSessionManager = new ReportServerSessionManager();
-        System.out.println(currentProjectId);
         if (currentProjectId != null) {
-            report = reportServerSessionManager.sendProjectData(currentProjectId);
+            report = reportServerSessionManager.sendProjectDataAndGetReportById(currentProjectId);
         }
         initReport();
         setOtherProjectInfoInView(currentProjectId);
@@ -95,7 +94,6 @@ public class ReportLayoutController {
                     report) {
                 reportData.add(model);
                 reportText=model.getDescription();
-
             }
             tableViewReport.setItems(reportData);
         }
@@ -120,9 +118,12 @@ public class ReportLayoutController {
     }
 
     public void chooseReport(Event event) {
-       ReportModel selectReport=tableViewReport.getSelectionModel().getSelectedItem();
-        checkVerifyReportAndSetButtonCondition(selectReport);
-       currentReportId =selectReport.getId();
-        taEditReport.setText(selectReport.getDescription());
+        if (tableViewReport.getSelectionModel().getSelectedItem()!=null){
+            ReportModel selectReport=tableViewReport.getSelectionModel().getSelectedItem();
+            checkVerifyReportAndSetButtonCondition(selectReport);
+            currentReportId =selectReport.getId();
+            taEditReport.setText(selectReport.getDescription());
+        }
+
     }
 }

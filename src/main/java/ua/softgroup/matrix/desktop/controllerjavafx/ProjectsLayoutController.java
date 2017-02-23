@@ -17,6 +17,7 @@ import ua.softgroup.matrix.server.desktop.model.ReportModel;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.EventListener;
 import java.util.Locale;
 import java.util.Set;
 
@@ -97,7 +98,6 @@ public class ProjectsLayoutController {
     }
 
     private void initTable() {
-        //TODO use constants
         tcIdProject.setCellValueFactory(new PropertyValueFactory<>(ID_COLUMN));
         tcAuthorName.setCellValueFactory(new PropertyValueFactory<>(AUTHOR_NAME_COLUMN));
         tcTitle.setCellValueFactory(new PropertyValueFactory<>(TITLE_COLUMN));
@@ -134,13 +134,34 @@ public class ProjectsLayoutController {
     }
 
     public void chosenProject(Event event) throws IOException {
-        ProjectModel selectProject = tvProjectsTable.getSelectionModel().getSelectedItem();
-        setOtherProjectInfoInView(selectProject);
+        taWriteReport.setText("");
+        btnSendReport.setDisable(false);
+       taWriteReport.setEditable(true);
+        if (tvProjectsTable.getSelectionModel().getSelectedItem()!=null){
+            ProjectModel selectProject = tvProjectsTable.getSelectionModel().getSelectedItem();
+            setReportInfoInTextAreaAndButton(selectProject);
+            setOtherProjectInfoInView(selectProject);
+        }
+
+    }
+
+    private void setReportInfoInTextAreaAndButton(ProjectModel projectModel) throws IOException {
+        Set<ReportModel> reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
+        for (ReportModel model :
+                reportModel) {
+            if (model.getDate().equals(LocalDate.now())) {
+                taWriteReport.setText("You have already saved a report today");
+                btnSendReport.setDisable(true);
+                taWriteReport.setEditable(false);
+            }
+        }
     }
 
     public void saveReportToServer(ActionEvent actionEvent) throws IOException {
         ReportModel reportModel=new ReportModel(CurrentSessionInfo.getTokenModel().getToken(),taWriteReport.getText(),CurrentSessionInfo.getProjectId(),LocalDate.now());
         reportModel.setTitle("kaban gay");
         reportServerSessionManager.saveReportToServer(reportModel);
+        btnSendReport.setDisable(true);
+        taWriteReport.setEditable(false);
     }
 }

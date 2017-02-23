@@ -22,7 +22,7 @@ public class ReportServerSessionManager {
     private static final Logger logger = LoggerFactory.getLogger(ReportServerSessionManager.class);
     private ObjectOutputStream objectOutputStream;
     private DataOutputStream dataOutputStems;
-    private Set<ReportModel> projectReport;
+    private static Set<ReportModel> projectReport;
     private Socket socket;
     private String responseServer;
 
@@ -40,13 +40,14 @@ public class ReportServerSessionManager {
         closeSocketConnection(socket);
     }
 
-    public Set<ReportModel> sendProjectData(long id) throws IOException {
+    public Set<ReportModel> sendProjectDataAndGetReportById(long id) throws IOException {
         socket = openSocketConnection();
         initOutputStreams();
         getProjectReportById(id);
         setReportModelToCurrentSessionInfo();
         closeSocketConnection(socket);
         return projectReport;
+
     }
 
     private void serverReportResponse(String response) {
