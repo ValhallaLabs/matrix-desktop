@@ -134,17 +134,9 @@
                                     <Image url="@../images/computerIcon.gif" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="labelNameSales" maxWidth="-Infinity" prefWidth="90.0" textFill="#3063a4">
+                              <Label fx:id="labelNameProject" prefHeight="25.0" prefWidth="280.0" textFill="#3063a4">
                                  <HBox.margin>
-                                    <Insets left="4.0" top="17.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="labelNameProject" textFill="#3063a4">
-                                 <HBox.margin>
-                                    <Insets left="2.0" right="15.0" top="18.0" />
+                                    <Insets left="5.0" right="5.0" top="15.0" />
                                  </HBox.margin>
                                  <font>
                                     <Font name="System Bold" size="13.0" />
@@ -342,13 +334,13 @@
                         </Button>
                         <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#saveReportToServer" prefHeight="28.0" prefWidth="127.0" styleClass="send-reports-button" text="Отправить отчет">
                            <HBox.margin>
-                              <Insets bottom="10.0" left="2.0" right="5.0" top="10.0" />
+                              <Insets bottom="10.0" left="2.0" right="7.0" top="10.0" />
                            </HBox.margin>
                            <font>
                               <Font size="11.0" />
                            </font>
                         </Button>
-                        <Label fx:id="labelSymbolsNeedReport" text="0" textFill="#3063a4">
+                        <Label fx:id="labelCurrentSymbols" text="0" textFill="#3063a4">
                            <HBox.margin>
                               <Insets bottom="23.0" top="15.0" />
                            </HBox.margin>
@@ -356,7 +348,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label text="/70" textFill="#3063a4">
+                        <Label fx:id="labelSymbolsNeedsToReport" text="/70" textFill="#3063a4">
                            <HBox.margin>
                               <Insets bottom="23.0" top="15.0" />
                            </HBox.margin>

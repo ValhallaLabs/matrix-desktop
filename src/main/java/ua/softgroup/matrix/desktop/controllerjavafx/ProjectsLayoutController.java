@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 import ua.softgroup.matrix.server.desktop.model.ProjectModel;
@@ -51,8 +52,6 @@ public class ProjectsLayoutController  {
     @FXML
     public Label labelDayInNumber;
     @FXML
-    public Label labelNameSales;
-    @FXML
     public Label labelNameProject;
     @FXML
     public Label labelDiscribeProject;
@@ -77,7 +76,9 @@ public class ProjectsLayoutController  {
     @FXML
     public Button btnSendReport;
     @FXML
-    public Label labelSymbolsNeedReport;
+    public Label labelSymbolsNeedsToReport;
+    @FXML
+    public Label labelCurrentSymbols;
     static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
     private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
@@ -85,6 +86,8 @@ public class ProjectsLayoutController  {
     private static final String AUTHOR_NAME_COLUMN = "authorName";
     private static final String TITLE_COLUMN = "title";
     private static final String DESCRIPTION_COLUMN = "description";
+
+
     private ReportServerSessionManager reportServerSessionManager;
 
     @FXML
@@ -96,24 +99,26 @@ public class ProjectsLayoutController  {
         setFocusOnTableView();
         countTextAndSetInView();
         addTextLimiter(taWriteReport,999);
-
     }
 
     @FXML
     private void countTextAndSetInView() {
         taWriteReport.textProperty().addListener((observable, oldValue, newValue) -> {
             int size=newValue.length();
-            labelSymbolsNeedReport.setText(String.valueOf(size));
+            labelCurrentSymbols.setText(String.valueOf(size));
             if (size>=70){
                 btnSendReport.setDisable(false);
             }
         });
     }
 
-    private void setFocusOnTableView() {
+    private void setFocusOnTableView() throws IOException {
         tvProjectsTable.requestFocus();
+
         tvProjectsTable.getSelectionModel().select(CurrentSessionInfo.getUserActiveProjects().size() - 1);
         tvProjectsTable.getFocusModel().focus(CurrentSessionInfo.getUserActiveProjects().size() - 1);
+        ProjectModel projectModel=tvProjectsTable.getSelectionModel().getSelectedItem();
+        setOtherProjectInfoInView(projectModel);
     }
 
     private void getTodayDayAndSetInView() {
@@ -146,8 +151,7 @@ public class ProjectsLayoutController  {
 
     private void setOtherProjectInfoInView(ProjectModel projectModel) {
         CurrentSessionInfo.setProjectId(projectModel.getId());
-        labelNameSales.setText(projectModel.getAuthorName());
-        labelNameProject.setText(":" + projectModel.getTitle());
+        labelNameProject.setText(projectModel.getTitle());
         labelDiscribeProject.setText(projectModel.getDescription());
         if ((projectModel.getStartDate() != null && projectModel.getEndDate() != null)) {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
