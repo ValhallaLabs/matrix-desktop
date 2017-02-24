@@ -1,6 +1,7 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -57,9 +58,10 @@ public class LoginLayoutController {
         alert.setTitle(ALERT_ERROR_TITLE);
         alert.setHeaderText(null);
         alert.setContentText(ALERT_CONTENT_TEXT);
-        Optional<ButtonType> result=alert.showAndWait();
+        Optional<ButtonType> result = alert.showAndWait();
         if(result.get()==ButtonType.OK){
-           stage.close();
+            //TODO: fix bug, not closing stage
+            stage.close();
         }
     }
 

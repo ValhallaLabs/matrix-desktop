@@ -8,6 +8,7 @@ import io.reactivex.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
+import ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
 import ua.softgroup.matrix.server.desktop.api.Constants;
@@ -39,7 +40,6 @@ public class AuthenticationServerSessionManager {
         this.loginLayoutController = loginLayoutController;
         countDownLatch = new CountDownLatch(1);
         disposableSubscription = Observable.using(this::openSocketConnection, this::createBindedObservable, this::closeSocketConnection)
-                .subscribeOn(Schedulers.io())
                 .subscribe(this::startMainLayoutAndDisposeManager, this::handleExceptions);
     }
 
@@ -63,7 +63,6 @@ public class AuthenticationServerSessionManager {
      */
     protected Observable<Boolean> createBindedObservable(Socket socket) {
         return Observable.create(this::createObservableEmitter)
-                .subscribeOn(Schedulers.io())
                 .map(userPassword -> authenticateUser(userPassword, socket))
                 .filter(this::handleServerAuthResponse)
                 .map(this::composeTokenModel)
@@ -172,7 +171,6 @@ public class AuthenticationServerSessionManager {
      * @return settingsResult result of getting client settings
      */
     private Boolean setClientSettingToCurrentSessionInfo(InputStream inputStream) throws IOException {
-        // TODO try with resources
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
         ClientSettingsModel clientSettingsModel = null;
         try {
@@ -198,7 +196,7 @@ public class AuthenticationServerSessionManager {
         } else {
             logger.debug("Authentication wasn't complete successfully");
             disposableSubscription.dispose();
-            // TODO: tell user to try to restart client or login again.
+            loginLayoutController.tellUserAboutBadConnection();
         }
     }
 
@@ -207,8 +205,8 @@ public class AuthenticationServerSessionManager {
      * @param throwable object that has to cast to throwable
      */
     private void handleExceptions(Throwable throwable) {
-        //TODO: Tell UI to show message, that client is unable to start, restart it
-        logger.debug("Unable to start client: ", throwable);
+        logger.debug("Unable to start client: {}", throwable);
+        loginLayoutController.tellUserAboutBadConnection();
     }
 
     /**
@@ -225,8 +223,8 @@ public class AuthenticationServerSessionManager {
             }
             userPasswordEmitter.onNext(userPassword);
         } catch (InterruptedException e) {
-            logger.debug("Something went wrong with sending user auth data to server: ", e);
-            //TODO: Tell UI to show message, that client is unable to start, restart it
+            logger.debug("Something went wrong with sending user auth data to server: {}", e);
+            loginLayoutController.tellUserAboutBadConnection();
         }
     }
 
