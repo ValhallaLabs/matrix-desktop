@@ -27,7 +27,7 @@
       </VBox>
       <SplitPane dividerPositions="0.7" prefHeight="750.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="140.0">
         <items>
-          <AnchorPane>
+          <AnchorPane minHeight="606.0" minWidth="820.0">
                <children>
                   <GridPane layoutX="14.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="-14.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
@@ -176,7 +176,7 @@
                   </TableView>
                </children>
             </AnchorPane>
-          <AnchorPane focusTraversable="true">
+          <AnchorPane focusTraversable="true" minHeight="606.0" minWidth="370.0">
                <opaqueInsets>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
                </opaqueInsets>
@@ -204,7 +204,7 @@
                               <Insets left="10.0" right="10.0" top="40.0" />
                            </padding>
                            <children>
-                              <Button fx:id="btnChangeReport" defaultButton="true" mnemonicParsing="false" onAction="#ChangeReportWindow" prefHeight="40.0" prefWidth="300.0" styleClass="change-report-button" text="Сhange Report" textFill="WHITE">
+                              <Button fx:id="btnChangeReport" defaultButton="true" disable="true" mnemonicParsing="false" onAction="#ChangeReportWindow" prefHeight="40.0" prefWidth="300.0" styleClass="change-report-button" text="Сhange Report" textFill="WHITE">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </VBox.margin>

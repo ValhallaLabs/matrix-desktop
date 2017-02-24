@@ -65,6 +65,7 @@ public class ReportLayoutController {
         }
         initReport();
         setOtherProjectInfoInView(currentProjectId);
+         countTextAndSetInView();
     }
 
     private void setOtherProjectInfoInView(Long id) {
@@ -123,6 +124,14 @@ public class ReportLayoutController {
             currentReportId = selectReport.getId();
             taEditReport.setText(selectReport.getDescription());
         }
-
+    }
+    @FXML
+    private void countTextAndSetInView() {
+        taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
+            int size=newValue.length();
+            if (size>=70){
+                btnChangeReport.setDisable(false);
+            }else btnChangeReport.setDisable(true);
+        });
     }
 }

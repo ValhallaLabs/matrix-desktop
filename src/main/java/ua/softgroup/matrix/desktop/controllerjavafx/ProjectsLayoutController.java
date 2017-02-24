@@ -86,8 +86,6 @@ public class ProjectsLayoutController  {
     private static final String AUTHOR_NAME_COLUMN = "authorName";
     private static final String TITLE_COLUMN = "title";
     private static final String DESCRIPTION_COLUMN = "description";
-
-
     private ReportServerSessionManager reportServerSessionManager;
 
     @FXML
@@ -118,6 +116,13 @@ public class ProjectsLayoutController  {
         tvProjectsTable.getFocusModel().focus(CurrentSessionInfo.getUserActiveProjects().size() - 1);
         ProjectModel projectModel=tvProjectsTable.getSelectionModel().getSelectedItem();
         setOtherProjectInfoInView(projectModel);
+        new Thread(() -> {
+            try {
+                setReportInfoInTextAreaAndButton(projectModel);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     private void getTodayDayAndSetInView() {
@@ -175,7 +180,9 @@ public class ProjectsLayoutController  {
     }
 
     private void setReportInfoInTextAreaAndButton(ProjectModel projectModel) throws IOException {
-        Set<ReportModel> reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
+        Set<ReportModel> reportModel = null;
+            reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
+
         for (ReportModel model :
                 reportModel) {
             if (model.getDate().equals(LocalDate.now())) {
