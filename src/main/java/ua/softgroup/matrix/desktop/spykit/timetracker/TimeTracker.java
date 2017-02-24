@@ -12,6 +12,7 @@ import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWi
 import ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.NativeDevicesListener;
 import ua.softgroup.matrix.desktop.spykit.screenshooter.ScreenShooter;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -23,6 +24,7 @@ public class TimeTracker {
     private boolean isUsed = false;
     private SpyKitListener activeWindowListener, devicesListener;
     private ScreenShooter screenShooter;
+    private CountDownLatch countDownLatch;
 
     public  TimeTracker(/*MainLayoutController mainLayoutController*/) {
 //        this.mainLayoutController = mainLayoutController;
@@ -32,10 +34,12 @@ public class TimeTracker {
      * Sends command to server about start tracking project with received id.
      * @param projectId id of the project to track
      */
-    public void startTracking(long projectId) {
+    public void startTracking(long projectId) throws InterruptedException {
         if (!isUsed) {
             turnOnSpyKitTools(projectId);
             isUsed = true;
+            startControlPointObservable();
+            (countDownLatch = new CountDownLatch(1)).await();
             logger.debug("Time tracking is started");
         } else {
             logger.debug("Time tracking was already started");
@@ -116,29 +120,10 @@ public class TimeTracker {
     private void sendControlPointToServer(long number){
         logger.debug("Control point #{}", number);
         screenShooter.makeScreenshot();
-        activeWindowListener.
+        System.out.println(activeWindowListener.getLogs());
+        System.out.println(devicesListener.getLogs());
+        System.out.println("/////////////");
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * Sends command to server about about tracking project with current id.
@@ -146,6 +131,7 @@ public class TimeTracker {
     public void stopTracking() {
         if (isUsed) {
             try {
+                countDownLatch.countDown();
                 turnOffSpyKitTools();
                 logger.debug("Time tracking is stopped");
             } catch (NativeHookException e) {
@@ -168,6 +154,9 @@ public class TimeTracker {
         devicesListener = null;
     }
 
-
+    public static void main(String[] args) throws InterruptedException {
+        TimeTracker timeTracker = new TimeTracker();
+        timeTracker.startTracking(1);
+    }
 
 }

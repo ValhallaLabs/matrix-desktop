@@ -3,6 +3,7 @@ package ua.softgroup.matrix.desktop.spykit.screenshooter;
 import com.sun.istack.internal.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.server.desktop.model.ScreenshotModel;
 
 import javax.imageio.ImageIO;
@@ -36,7 +37,7 @@ public class ScreenShooter {
             byte[] imageInByte = baos.toByteArray();
             baos.close();
             logger.debug("Screenshot was created successfully");
-            return new ScreenshotModel(imageInByte, projectId);
+            return new ScreenshotModel(CurrentSessionInfo.getTokenModel().getToken(), imageInByte, projectId);
         } catch (AWTException | IOException e) {
             logger.debug("Screenshot was created unsuccessfully", e);
         }

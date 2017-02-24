@@ -11,7 +11,7 @@ import java.util.Set;
  */
 // TODO package structure
 public class CurrentSessionInfo {
-    private static TokenModel tokenModel;
+    private static TokenModel tokenModel = new TokenModel("token");
     private static Set<ProjectModel> userActiveProjects;
     private static ClientSettingsModel clientSettingsModel;
 
