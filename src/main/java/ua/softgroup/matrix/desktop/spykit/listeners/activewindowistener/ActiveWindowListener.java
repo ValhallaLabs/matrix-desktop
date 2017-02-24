@@ -29,7 +29,6 @@ public abstract class ActiveWindowListener extends SpyKitListener {
 
     /**
      * Tries to turn on ActiveWindowListener
-     * @return result of turning of ActiveWindowListener
      */
     @Override
     public void turnOn() throws InterruptedException {
@@ -43,19 +42,26 @@ public abstract class ActiveWindowListener extends SpyKitListener {
         }
     }
 
-
     /**
      * Gets first active window title as prevTittle for correct first comparison.
      * Creates titleReader disposable.
      */
     private void startTitleReader() {
-        currentTitle = getProcessTitle();
+        addFirstWindowToTimeMap();
         titleReaderDisposable = Observable.interval(1000, TimeUnit.MILLISECONDS)
                 .map(number -> getProcessTitle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .filter(this::compareToCurrentTitle)
                 .subscribe(this::receiveTitle, Throwable::printStackTrace);
+    }
+
+    /**
+     * Adds first active window to time map
+     */
+    private void addFirstWindowToTimeMap() {
+        currentTitle = getProcessTitle();
+        addTittleToActiveWindowModelTimeMap();
     }
 
     /**
@@ -125,6 +131,8 @@ public abstract class ActiveWindowListener extends SpyKitListener {
      */
     @Override
     public synchronized ActiveWindowsModel getLogs(){
+        addTittleToActiveWindowModelTimeMap();
+        time = 0;
         return activeWindowsModel;
     }
 }
