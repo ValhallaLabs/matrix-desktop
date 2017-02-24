@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationServerSessionManager;
@@ -132,5 +133,6 @@ public class LoginLayoutController {
         }
         return false;
     }
+
 
 }

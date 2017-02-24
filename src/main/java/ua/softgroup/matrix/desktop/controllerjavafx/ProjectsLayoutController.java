@@ -8,12 +8,23 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 import ua.softgroup.matrix.server.desktop.model.ProjectModel;
@@ -87,6 +98,7 @@ public class ProjectsLayoutController  {
     private static final String TITLE_COLUMN = "title";
     private static final String DESCRIPTION_COLUMN = "description";
     private ReportServerSessionManager reportServerSessionManager;
+
 
     @FXML
     private void initialize() throws IOException {
@@ -170,6 +182,13 @@ public class ProjectsLayoutController  {
     }
 
     public void chosenProject(Event event) throws IOException {
+         MouseEvent mouseEvent=(MouseEvent)event;
+        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+            if(mouseEvent.getClickCount()==2){
+           MainLayoutController main=new MainLayoutController();
+                main.startReport(labelCurrentSymbols.getScene().getWindow());
+            }
+        }
         taWriteReport.setText("");
         taWriteReport.setEditable(true);
         if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
@@ -182,7 +201,6 @@ public class ProjectsLayoutController  {
     private void setReportInfoInTextAreaAndButton(ProjectModel projectModel) throws IOException {
         Set<ReportModel> reportModel = null;
             reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
-
         for (ReportModel model :
                 reportModel) {
             if (model.getDate().equals(LocalDate.now())) {

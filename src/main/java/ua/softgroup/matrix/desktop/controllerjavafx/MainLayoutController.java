@@ -3,6 +3,7 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -11,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +45,13 @@ public class MainLayoutController {
     @FXML
     public MenuBar menuBar;
 
+
+
     public void startReportLayoutWindow(ActionEvent actionEvent) {
+
+       startReport(menuBar.getScene().getWindow());
+    }
+     public void startReport(Window window){
         try {
             Stage primaryStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
@@ -55,7 +63,7 @@ public class MainLayoutController {
             primaryStage.setMinWidth(REPORT_LAYOUT_MIN_WIDTH);
             primaryStage.setMinHeight(REPORT_LAYOUT_MIN_HEIGHT);
             primaryStage.initModality(Modality.WINDOW_MODAL);
-            primaryStage.initOwner(menuBar.getScene().getWindow());
+            primaryStage.initOwner(window);
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {
@@ -76,7 +84,6 @@ public class MainLayoutController {
             logger.debug("Error when start Projects Window");
         }
     }
-
 
     public void startSettingLayoutWindow(ActionEvent actionEvent) {
         try {
