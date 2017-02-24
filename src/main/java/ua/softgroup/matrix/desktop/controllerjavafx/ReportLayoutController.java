@@ -56,7 +56,6 @@ public class ReportLayoutController {
     private String reportText;
     private Long currentReportId;
 
-
     @FXML
     private void initialize() throws IOException {
         currentProjectId = CurrentSessionInfo.getProjectId();

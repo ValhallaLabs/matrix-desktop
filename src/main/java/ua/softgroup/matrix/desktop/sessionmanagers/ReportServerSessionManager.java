@@ -44,8 +44,8 @@ public class ReportServerSessionManager {
     public Set<ReportModel> sendProjectDataAndGetReportById(long id) throws IOException {
         socket = openSocketConnection();
         initOutputStreams();
-        getProjectReportById(id);
-        setReportModelToCurrentSessionInfo();
+        getProjectReportsById(id);
+        setReportModelToCollection();
         closeSocketConnection(socket);
         return projectReport;
 
@@ -71,7 +71,7 @@ public class ReportServerSessionManager {
         dataOutputStems = new DataOutputStream(output);
     }
 
-    private void getProjectReportById(long id) throws IOException {
+    private void getProjectReportsById(long id) throws IOException {
         objectOutputStream.writeObject(ServerCommands.GET_REPORTS_BY_PROJECT_ID);
         objectOutputStream.flush();
         TokenModel tokenModel = CurrentSessionInfo.getTokenModel();
@@ -82,7 +82,7 @@ public class ReportServerSessionManager {
         logger.debug("Get Report by project Id");
     }
 
-    private void setReportModelToCurrentSessionInfo() throws IOException {
+    private void setReportModelToCollection() throws IOException {
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
         try {
             projectReport = (Set<ReportModel>) objectInputStream.readObject();

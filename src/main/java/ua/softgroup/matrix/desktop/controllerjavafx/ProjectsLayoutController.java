@@ -114,7 +114,6 @@ public class ProjectsLayoutController  {
 
     private void setFocusOnTableView() throws IOException {
         tvProjectsTable.requestFocus();
-
         tvProjectsTable.getSelectionModel().select(CurrentSessionInfo.getUserActiveProjects().size() - 1);
         tvProjectsTable.getFocusModel().focus(CurrentSessionInfo.getUserActiveProjects().size() - 1);
         ProjectModel projectModel=tvProjectsTable.getSelectionModel().getSelectedItem();

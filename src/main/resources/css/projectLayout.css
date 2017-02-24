@@ -36,3 +36,10 @@
     -fx-background-color: #3063a4;
     -fx-text-fill: white;
 }
+@font-face {
+    font-family: 'Roboto';
+    src: url('https://fonts.googleapis.com/css?family=Roboto');
+}
+.font-on-label{
+    -fx-font-family:"Roboto";
+}
