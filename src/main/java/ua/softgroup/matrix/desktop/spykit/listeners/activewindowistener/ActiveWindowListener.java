@@ -34,8 +34,8 @@ public abstract class ActiveWindowListener extends SpyKitListener {
     public void turnOn() throws InterruptedException {
         if (status == NOT_USED){
             startTitleReader();
-            logger.debug("ActiveWindowListener is turned on successfully");
             status = IS_USED;
+            logger.debug("ActiveWindowListener is turned on successfully");
             (countDownLatch = new CountDownLatch(1)).await();
         } else {
             logger.debug("ActiveWindowListener was turned on already");
@@ -48,7 +48,7 @@ public abstract class ActiveWindowListener extends SpyKitListener {
      */
     private void startTitleReader() {
         addFirstWindowToTimeMap();
-        titleReaderDisposable = Observable.interval(1000, TimeUnit.MILLISECONDS)
+        titleReaderDisposable = Observable.interval(1, TimeUnit.SECONDS)
                 .map(number -> getProcessTitle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())

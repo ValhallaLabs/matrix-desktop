@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
+//TODO: when server will be done, rebuild and regist
 public class TimeTracker extends SpyKitTool {
     private static final Logger logger = LoggerFactory.getLogger(TimeTracker.class);
     private MainLayoutController mainLayoutController;
@@ -27,17 +28,33 @@ public class TimeTracker extends SpyKitTool {
     private long projectId;
     private Disposable controlPointObservable;
 
+    //TODO: Uncomment, when time tracker will be merged with main part
     public  TimeTracker(/*MainLayoutController mainLayoutController,*/ long projectId) {
 //        this.mainLayoutController = mainLayoutController;
         this.projectId = projectId;
     }
 
     /**
-     * Sends command to server about start tracking project with received id.
+     * Creates new thread and calls method for set up and start time tracker
      */
     @Override
-    public void turnOn() throws InterruptedException {
+    public void turnOn() {
+        new Thread(() -> {
+            try {
+                setUpTimeTracker();
+            } catch (InterruptedException e) {
+                //TODO: global crash, turn down matrix
+                logger.debug("Time tracker crashes: {}", e);
+            }
+        }).start();
+    }
+
+    /**
+     * Sends command to server about start tracking project with received id.
+     */
+    private void setUpTimeTracker() throws InterruptedException {
         if (status == NOT_USED) {
+            //TODO: add method for sending start work command to server
             turnOnSpyKitTools();
             startControlPointObservable();
             status = IS_USED;
@@ -65,9 +82,8 @@ public class TimeTracker extends SpyKitTool {
             try {
                 turnOnActiveWindowListener();
             } catch (Exception e) {
-                logger.debug("Active windows listener crashed: {}", e);
                 //TODO: global crash, turn down matrix
-                e.printStackTrace();
+                logger.debug("Active windows listener crashed: {}", e);
             }
         }).start();
     }
@@ -92,7 +108,6 @@ public class TimeTracker extends SpyKitTool {
             } catch (Exception e) {
                 logger.debug("Devices listener crashed: {}", e);
                 //TODO: global crash, turn down matrix
-                e.printStackTrace();
             }
         }).start();
     }
@@ -119,18 +134,26 @@ public class TimeTracker extends SpyKitTool {
 
     //TODO: rewrite this method, when server problems will be resolved
     private void sendControlPointToServer(long number){
+        //Temporary realization
         logger.debug("Control point #{}", number);
         screenShooter.makeScreenshot();
         logger.debug("Active windows:{}", activeWindowListener.getLogs());
         logger.debug("Keyboard logs:{}", devicesListener.getLogs());
     }
 
-    /**
-     * Sends command to server about about tracking project with current id.
-     */
     @Override
-    public void turnOff() throws Exception {
+    public void turnOff()  {
+        try {
+            tryToTurnOffTimeTracker();
+        } catch (Exception e) {
+            //TODO: global crash, turn down matrix
+            logger.debug("Time tracker crashes: {}", e);
+        }
+    }
+
+    private void tryToTurnOffTimeTracker() throws Exception {
         if (status == IS_USED) {
+            //TODO: add method for sending end work command to server
             countDownLatch.countDown();
             turnOffSpyKitTools();
             status = WAS_USED;
@@ -161,23 +184,4 @@ public class TimeTracker extends SpyKitTool {
         //TODO: send command to server about stop downtime
         logger.debug("Down time is stopped on server");
     }
-
-    public static void main(String[] args) throws InterruptedException {
-        TimeTracker timeTracker = new TimeTracker(1);
-        logger.debug("turn on");
-        new Thread(() -> {
-            try {
-                timeTracker.turnOn();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();
-//        try {
-//            timeTracker.turnOff();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        logger.debug("turn off");
-    }
-
 }

@@ -31,7 +31,8 @@ public class ScreenShooter {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             File file = new File("scr.png");
-            ImageIO.write(getScreenCapture(), "png", new File("matrix.png"));
+//            TODO: remove it or create folder for screenshots and save it by date
+//            ImageIO.write(getScreenCapture(), "png", new File("matrix.png"));
             ImageIO.write(getScreenCapture(), "png", baos);
             baos.flush();
             byte[] imageInByte = baos.toByteArray();

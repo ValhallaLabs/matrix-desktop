@@ -80,7 +80,6 @@ public class NativeDevicesListener extends SpyKitListener {
                 .doOnNext(s -> logger.debug("Count until down time: {}", s))
                 .doOnNext(this::stopDowntime)
                 .debounce(5, TimeUnit.SECONDS)
-                .debounce(5000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::startDowntime);
     }
@@ -92,7 +91,7 @@ public class NativeDevicesListener extends SpyKitListener {
      */
     private Flowable<String> createStartCountUntilDtFlowable() {
         return Flowable.create(this::createStartCountUntilDtFlowableEmitter, BackpressureStrategy.LATEST)
-                .debounce(1000, TimeUnit.MILLISECONDS)
+                .debounce(1, TimeUnit.SECONDS)
                 .map(this::startCountUntilDt)
                 .subscribeOn(Schedulers.io());
     }

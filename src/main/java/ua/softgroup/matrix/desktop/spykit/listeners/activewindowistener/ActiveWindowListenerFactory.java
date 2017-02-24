@@ -29,6 +29,7 @@ public class ActiveWindowListenerFactory {
             logger.debug("Platform is Mac");
             return new MacOsActiveWindowListener(projectId);
         }
+        logger.debug("Platform is not detected");
         return null;
     }
 }
