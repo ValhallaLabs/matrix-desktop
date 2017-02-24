@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.spykit.globaldevicelistener;
+package ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener;
 
 import io.reactivex.*;
 import io.reactivex.disposables.Disposable;
@@ -7,13 +7,16 @@ import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
-import org.jnativehook.mouse.NativeMouseEvent;
-import org.jnativehook.mouse.NativeMouseInputListener;
+import org.jnativehook.mouse.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
+import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitListener;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
+import ua.softgroup.matrix.server.desktop.model.WriteKeyboard;
 
 import java.awt.*;
+import java.util.EventListener;
 import java.util.EventObject;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -21,7 +24,7 @@ import java.util.logging.Level;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public class NativeDevicesListener implements GlobalDeviceListener {
+public class NativeDevicesListener extends SpyKitListener {
     private static final Logger logger = LoggerFactory.getLogger(NativeDevicesListener.class);
     private static final String START_COUNT_UNTIL_DT_POINT = "Start count until downtime",
             STOP_COUNT_UNTIL_DT_POINT = "Stop count until downtime";
@@ -30,16 +33,17 @@ public class NativeDevicesListener implements GlobalDeviceListener {
     private FlowableEmitter<EventObject> startCountUntilDtEmitter, stopCountUntilDtEmitter;
     private Boolean isCountingUntilDt = false, isDowntime = false;
     private StringBuilder keyboardLogs;
-    private double mouseFootage = 0;
+    private double mouseFootage;
     private Point prevMousePosition;
+    private long projectId;
+    private EventListener globalMouseWheelListener, globalMouseListener, globalKeyListener;
 
-    public NativeDevicesListener(/*TimeTracker timeTracker*/) {
+    public NativeDevicesListener(TimeTracker timeTracker, long projectId) {
         this.timeTracker = timeTracker;
+        this.projectId = projectId;
         keyboardLogs = new StringBuilder("");
         prevMousePosition = MouseInfo.getPointerInfo().getLocation();
-        System.out.println(prevMousePosition.toString());
         offGlobalScreenLogger();
-        addListenersToGlobalListener();
     }
 
     /**
@@ -51,31 +55,18 @@ public class NativeDevicesListener implements GlobalDeviceListener {
     }
 
     /**
-     * Adds listeners of keyboard and mouse to Global screen of JNativeHook library
-     */
-    private void addListenersToGlobalListener(){
-        GlobalScreen.addNativeMouseWheelListener(this::receiveEvent);
-        GlobalMouseListener globalMouseListener = new GlobalMouseListener();
-        GlobalScreen.addNativeMouseListener(globalMouseListener);
-        GlobalScreen.addNativeMouseMotionListener(globalMouseListener);
-        GlobalScreen.addNativeKeyListener(new GlobalKeyListener());
-    }
-
-    /**
      * Tries to turn on GlobalListener.
-     * @return turnOnResult result of turning on GlobalListener
      */
     @Override
-    public boolean turnOn() {
-        downtimeControlDisposable = createDowntimeControlFlowable();
-        try {
+    public void turnOn() throws NativeHookException {
+        if (status == NOT_USED) {
+            createDowntimeControlFlowable();
+            addListenersToGlobalListener();
             GlobalScreen.registerNativeHook();
-            logger.debug("Global devices listener turn on");
-            return true;
-        } catch (NativeHookException e) {
-            downtimeControlDisposable.dispose();
-            logger.debug("Global devices listener crashed: {}", e);
-            return false;
+            status = IS_USED;
+            logger.debug("Native devices listener is turned on");
+        } else {
+            logger.debug("Native devices listener was turned on already");
         }
     }
 
@@ -84,13 +75,11 @@ public class NativeDevicesListener implements GlobalDeviceListener {
      * The flowable controls start and stop of counting downtime, and time until starts count it.
      * @return downtimeControlDisposable
      */
-    private Disposable createDowntimeControlFlowable() {
-        return Flowable.merge(createStartCountUntilDtFlowable(), createStopCountUntilDtFlowable())
+    private void createDowntimeControlFlowable() {
+        downtimeControlDisposable = Flowable.merge(createStartCountUntilDtFlowable(), createStopCountUntilDtFlowable())
                 .doOnNext(s -> logger.debug("Count until down time: {}", s))
                 .doOnNext(this::stopDowntime)
-                //TODO: uncomment when you bind Listener to main part
-//                .debounce(CurrentSessionInfo.getClientSettingsModel().getDownTime(), TimeUnit.MINUTES)
-                .debounce(5000, TimeUnit.MILLISECONDS)
+                .debounce(5, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::startDowntime);
     }
@@ -102,7 +91,7 @@ public class NativeDevicesListener implements GlobalDeviceListener {
      */
     private Flowable<String> createStartCountUntilDtFlowable() {
         return Flowable.create(this::createStartCountUntilDtFlowableEmitter, BackpressureStrategy.LATEST)
-                .debounce(1000, TimeUnit.MILLISECONDS)
+                .debounce(1, TimeUnit.SECONDS)
                 .map(this::startCountUntilDt)
                 .subscribeOn(Schedulers.io());
     }
@@ -164,7 +153,7 @@ public class NativeDevicesListener implements GlobalDeviceListener {
      */
     private String stopDowntime(String stopPoint) {
         if (isDowntime) {
-            //TODO: send to spykit command END_DOWNTIME
+            timeTracker.stopDowntime();
             logger.debug("Down time is stopped!");
             isDowntime = false;
         }
@@ -177,10 +166,23 @@ public class NativeDevicesListener implements GlobalDeviceListener {
      */
     private void startDowntime(String point){
         if (START_COUNT_UNTIL_DT_POINT.equals(point)) {
-            //TODO: send to spykit command START_DOWNTIME
+            timeTracker.startDowntime();
             logger.debug("Down time is started!");
             isDowntime = true;
         }
+    }
+
+    /**
+     * Adds listeners of keyboard and mouse to Global screen of JNativeHook library
+     */
+    private void addListenersToGlobalListener(){
+        globalMouseWheelListener = new GlobalMouseWheelListener();
+        GlobalScreen.addNativeMouseWheelListener((NativeMouseWheelListener) globalMouseWheelListener);
+        globalMouseListener = new GlobalMouseListener();
+        GlobalScreen.addNativeMouseListener((NativeMouseListener) globalMouseListener);
+        GlobalScreen.addNativeMouseMotionListener((NativeMouseMotionListener) globalMouseListener);
+        globalKeyListener = new GlobalKeyListener();
+        GlobalScreen.addNativeKeyListener((NativeKeyListener) globalKeyListener);
     }
 
     /**
@@ -194,34 +196,73 @@ public class NativeDevicesListener implements GlobalDeviceListener {
 
     /**
      * Tries to turn off GlobalListener.
-     * @return turnOffResult result of turning off GlobalListener
      */
-    public boolean turnOff() {
-        try {
+    @Override
+    public void turnOff() throws NativeHookException {
+        if (status == IS_USED) {
             downtimeControlDisposable.dispose();
+            removeListenersFromGlobalListener();
             GlobalScreen.unregisterNativeHook();
-            logger.debug("Global devices listener turn off");
-            return true;
-        } catch (NativeHookException e) {
-            logger.debug("Global devices listener crashed: {}", e);
-            return false;
+            status = WAS_USED;
+            logger.debug("Native devices listener is turned off");
+        } else {
+            logger.debug("Native devices listener was turned off already");
         }
     }
 
-    public String getKeyboardLogging() {
-        String keyboardLogsToSend = keyboardLogs.toString();
+    /**
+     * Removes listeners from {@link GlobalScreen}.
+     */
+    private void removeListenersFromGlobalListener(){
+        GlobalScreen.removeNativeMouseWheelListener((NativeMouseWheelListener) globalMouseWheelListener);
+        GlobalScreen.removeNativeMouseListener((NativeMouseListener) globalMouseListener);
+        GlobalScreen.removeNativeMouseMotionListener((NativeMouseMotionListener) globalMouseListener);
+        GlobalScreen.removeNativeKeyListener((NativeKeyListener) globalKeyListener);
+    }
+
+    /**
+     * Returns {@link WriteKeyboard} model with logs of keyboard and footage of mouse.
+     * Clears keyboardLogs string builder and mouseFootage count.
+     * @return writeKeyboard model with keyboard logs
+     */
+    @Override
+    public synchronized WriteKeyboard getLogs() {
+        //TODO: Add to WriteKeyboard field of mouse footage and set here, and then clear mouse footage
+        WriteKeyboard writeKeyboard = new WriteKeyboard(CurrentSessionInfo.getTokenModel().getToken(),
+                keyboardLogs.toString(), projectId);
         keyboardLogs = new StringBuilder("");
-        return keyboardLogsToSend;
+        return writeKeyboard;
+    }
+
+    private class GlobalMouseWheelListener implements NativeMouseWheelListener {
+
+        /**
+         * Send event of mouse wheel into emitters.
+         * @param e native key event
+         */
+        public void nativeMouseWheelMoved(NativeMouseWheelEvent e) {
+            receiveEvent(e);
+        }
     }
 
     private class GlobalMouseListener implements NativeMouseInputListener {
+        private final static double PIXELS_PER_METER = 3779.5275;
+
+        /**
+         * Send event of mouse buttons into emitters.
+         * @param e native key event
+         */
         public void nativeMousePressed(NativeMouseEvent e) {
             receiveEvent(e);
         }
 
+        /**
+         * Send event of mouse moves into emitters and calculate mouse footage in meters.
+         * @param e native key event
+         */
         public void nativeMouseMoved(NativeMouseEvent e) {
             mouseFootage += (Math.sqrt(Math.pow(e.getX() - prevMousePosition.getX(), 2) +
-                    Math.pow(e.getY() - prevMousePosition.getY(), 2)))/3779.5275;
+                    Math.pow(e.getY() - prevMousePosition.getY(), 2)))/PIXELS_PER_METER;
             prevMousePosition.setLocation(e.getX(), e.getY());
             receiveEvent(e);
         }
@@ -234,7 +275,12 @@ public class NativeDevicesListener implements GlobalDeviceListener {
     }
 
     private class GlobalKeyListener implements NativeKeyListener {
-        public void nativeKeyPressed(NativeKeyEvent e) {
+
+        /**
+         * Send event of keyboard into emitters of listeners and logging keyboard.
+         * @param e native key event
+         */
+        public synchronized void nativeKeyPressed(NativeKeyEvent e) {
             receiveEvent(e);
             keyboardLogs.append(NativeKeyEvent.getKeyText(e.getKeyCode()));
         }
@@ -242,11 +288,5 @@ public class NativeDevicesListener implements GlobalDeviceListener {
         public void nativeKeyReleased(NativeKeyEvent e) {}
 
         public void nativeKeyTyped(NativeKeyEvent e) {}
-    }
-
-
-    public static void main(String[] args) {
-        NativeDevicesListener nativeDevicesListener = new NativeDevicesListener();
-        nativeDevicesListener.turnOn();
     }
 }
