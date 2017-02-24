@@ -7,17 +7,19 @@ import java.util.Map;
 /**
  * @author Oleksandr Tyshkovets <sg.olexander@gmail.com>
  */
-public class ActiveWindowsModel implements Serializable {
+public class ActiveWindowsModel extends TokenModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long projectId;
     private Map<String, Long> windowTimeMap = new LinkedHashMap<>();
 
-    public ActiveWindowsModel(Long projectId) {
+    public ActiveWindowsModel(String token, Long projectId) {
+        super(token);
         this.projectId = projectId;
     }
 
-    public ActiveWindowsModel(Long projectId, Map<String, Long> windowTimeMap) {
+    public ActiveWindowsModel(String token, Long projectId, Map<String, Long> windowTimeMap) {
+        super(token);
         this.projectId = projectId;
         this.windowTimeMap = windowTimeMap;
     }

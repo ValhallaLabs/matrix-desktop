@@ -7,7 +7,7 @@ import com.sun.jna.platform.win32.WinDef;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-class WindowsActiveWindowListener extends ActiveWindowListener {
+public class WindowsActiveWindowListener extends ActiveWindowListener {
     private static final int MAX_TITLE_LENGTH = 1024;
 
     WindowsActiveWindowListener(long projectId) {

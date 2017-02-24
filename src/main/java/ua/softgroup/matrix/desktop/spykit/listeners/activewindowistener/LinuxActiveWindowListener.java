@@ -11,12 +11,12 @@ import com.sun.jna.ptr.PointerByReference;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-class LinuxActiveWindowListener extends ActiveWindowListener {
+public class LinuxActiveWindowListener extends ActiveWindowListener {
     private final X11 x11;
     private final XLib xlib;
     private Display display;
 
-    LinuxActiveWindowListener(long projectId) {
+    public LinuxActiveWindowListener(long projectId) {
         super(projectId);
         x11 = X11.INSTANCE;
         xlib = XLib.INSTANCE;

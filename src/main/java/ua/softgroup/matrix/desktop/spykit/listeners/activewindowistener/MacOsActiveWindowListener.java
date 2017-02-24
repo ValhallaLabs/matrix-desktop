@@ -3,9 +3,9 @@ package ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-class MacOsActiveWindowListener extends ActiveWindowListener {
+public class MacOsActiveWindowListener extends ActiveWindowListener {
 
-    MacOsActiveWindowListener(long projectId) {
+    public MacOsActiveWindowListener(long projectId) {
         super(projectId);
     }
     @Override

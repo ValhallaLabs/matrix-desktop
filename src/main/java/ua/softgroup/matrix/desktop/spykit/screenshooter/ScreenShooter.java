@@ -26,10 +26,11 @@ public class ScreenShooter {
      * @return screenshotModel model with screenshot
      */
     @Nullable
-    private ScreenshotModel makeScreenshot() {
+    public ScreenshotModel makeScreenshot() {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             File file = new File("scr.png");
+            ImageIO.write(getScreenCapture(), "png", new File("matrix.png"));
             ImageIO.write(getScreenCapture(), "png", baos);
             baos.flush();
             byte[] imageInByte = baos.toByteArray();

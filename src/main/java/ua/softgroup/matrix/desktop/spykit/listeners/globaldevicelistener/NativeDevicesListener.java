@@ -13,6 +13,7 @@ import org.jnativehook.mouse.NativeMouseWheelEvent;
 import org.jnativehook.mouse.NativeMouseWheelListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.spykit.listeners.SpyKitListener;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
 import ua.softgroup.matrix.server.desktop.model.WriteKeyboard;
@@ -231,9 +232,11 @@ public class NativeDevicesListener implements SpyKitListener {
      * Clears keyboardLogs string builder and mouseFootage count.
      * @return writeKeyboard model with keyboard logs
      */
-    public WriteKeyboard getKeyboardLogging() {
+    @Override
+    public WriteKeyboard getLogs() {
         //TODO: Add to WriteKeyboard field of mouse footage and set here, and then clear mouse footage
-        WriteKeyboard writeKeyboard = new WriteKeyboard(keyboardLogs.toString(), projectId);
+        WriteKeyboard writeKeyboard = new WriteKeyboard(CurrentSessionInfo.getTokenModel().getToken(),
+                keyboardLogs.toString(), projectId);
         keyboardLogs = new StringBuilder("");
         return writeKeyboard;
     }

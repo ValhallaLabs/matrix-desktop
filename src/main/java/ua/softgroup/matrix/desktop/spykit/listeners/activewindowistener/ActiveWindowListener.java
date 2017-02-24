@@ -5,6 +5,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.spykit.listeners.SpyKitListener;
 import ua.softgroup.matrix.server.desktop.model.ActiveWindowsModel;
 
@@ -23,8 +24,8 @@ public abstract class ActiveWindowListener implements SpyKitListener {
     private Disposable titleReaderDisposable;
     private CountDownLatch countDownLatch;
 
-    ActiveWindowListener(long projectId) {
-        activeWindowsModel = new ActiveWindowsModel(projectId);
+    public ActiveWindowListener(long projectId) {
+        activeWindowsModel = new ActiveWindowsModel(CurrentSessionInfo.getTokenModel().getToken(), projectId);
     }
 
     /**
@@ -122,7 +123,8 @@ public abstract class ActiveWindowListener implements SpyKitListener {
      * Returns activeWindowsModel with titles of active windows.
      * @return activeWindowsModel
      */
-    public synchronized ActiveWindowsModel getActiveWindowsModel(){
+    @Override
+    public synchronized ActiveWindowsModel getLogs(){
         return activeWindowsModel;
     }
 }

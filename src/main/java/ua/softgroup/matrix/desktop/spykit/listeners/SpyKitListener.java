@@ -1,6 +1,7 @@
 package ua.softgroup.matrix.desktop.spykit.listeners;
 
 import org.jnativehook.NativeHookException;
+import ua.softgroup.matrix.server.desktop.model.TokenModel;
 import ua.softgroup.matrix.server.desktop.model.WriteKeyboard;
 
 /**
@@ -18,4 +19,6 @@ public interface SpyKitListener {
      * @return boolean result is listener was turned off
      */
     void turnOff() throws NativeHookException;
+
+    <T extends TokenModel> T getLogs();
 }
