@@ -3,11 +3,11 @@ package ua.softgroup.matrix.desktop.spykit.timetracker;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import org.jnativehook.NativeHookException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.MainLayoutController;
-import ua.softgroup.matrix.desktop.spykit.listeners.SpyKitListener;
+import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
+import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitListener;
 import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWindowListenerFactory;
 import ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.NativeDevicesListener;
 import ua.softgroup.matrix.desktop.spykit.screenshooter.ScreenShooter;
@@ -18,29 +18,31 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public class TimeTracker {
-    protected static final Logger logger = LoggerFactory.getLogger(TimeTracker.class);
+public class TimeTracker extends SpyKitTool {
+    private static final Logger logger = LoggerFactory.getLogger(TimeTracker.class);
     private MainLayoutController mainLayoutController;
-    private boolean isUsed = false;
     private SpyKitListener activeWindowListener, devicesListener;
     private ScreenShooter screenShooter;
     private CountDownLatch countDownLatch;
+    private long projectId;
+    private Disposable controlPointObservable;
 
-    public  TimeTracker(/*MainLayoutController mainLayoutController*/) {
+    public  TimeTracker(/*MainLayoutController mainLayoutController,*/ long projectId) {
 //        this.mainLayoutController = mainLayoutController;
+        this.projectId = projectId;
     }
 
     /**
      * Sends command to server about start tracking project with received id.
-     * @param projectId id of the project to track
      */
-    public void startTracking(long projectId) throws InterruptedException {
-        if (!isUsed) {
-            turnOnSpyKitTools(projectId);
-            isUsed = true;
+    @Override
+    public void turnOn() throws InterruptedException {
+        if (status == NOT_USED) {
+            turnOnSpyKitTools();
             startControlPointObservable();
-            (countDownLatch = new CountDownLatch(1)).await();
+            status = IS_USED;
             logger.debug("Time tracking is started");
+            (countDownLatch = new CountDownLatch(1)).await();
         } else {
             logger.debug("Time tracking was already started");
         }
@@ -48,23 +50,21 @@ public class TimeTracker {
 
     /**
      * Call methods of initializing and turning on all spy kit tools.
-     * @param projectId id for binding tools to project
      */
-    private void turnOnSpyKitTools(long projectId) {
+    private void turnOnSpyKitTools() {
         screenShooter = new ScreenShooter(projectId);
-        starActiveWindowListenerThread(projectId);
-        starDevicesListenerThread(projectId);
+        starActiveWindowListenerThread();
+        starDevicesListenerThread();
     }
 
     /**
      * Starts thread of active window listener.
-     * @param projectId id for binding tools to project
      */
-    private void starActiveWindowListenerThread(long projectId) {
+    private void starActiveWindowListenerThread() {
         new Thread(() -> {
             try {
-                turnOnActiveWindowListener(projectId);
-            } catch (NativeHookException | InterruptedException e) {
+                turnOnActiveWindowListener();
+            } catch (Exception e) {
                 logger.debug("Active windows listener crashed: {}", e);
                 //TODO: global crash, turn down matrix
                 e.printStackTrace();
@@ -74,9 +74,8 @@ public class TimeTracker {
 
     /**
      * Initialize and turn on active window listener.
-     * @param projectId id for binding tools to project
      */
-    private void turnOnActiveWindowListener(long projectId) throws NativeHookException, InterruptedException {
+    private void turnOnActiveWindowListener() throws Exception {
         activeWindowListener = ActiveWindowListenerFactory.getListener(projectId);
         if(activeWindowListener != null) {
             activeWindowListener.turnOn();
@@ -85,13 +84,12 @@ public class TimeTracker {
 
     /**
      * Starts thread of devices listener.
-     * @param projectId id for binding tools to project
      */
-    private void starDevicesListenerThread(long projectId) {
+    private void starDevicesListenerThread() {
         new Thread(() -> {
             try {
-                turnOnDevicesListener(projectId);
-            } catch (NativeHookException | InterruptedException e) {
+                turnOnDevicesListener();
+            } catch (Exception e) {
                 logger.debug("Devices listener crashed: {}", e);
                 //TODO: global crash, turn down matrix
                 e.printStackTrace();
@@ -101,43 +99,42 @@ public class TimeTracker {
 
     /**
      * Initialize and turn on devices listener.
-     * @param projectId id for binding tools to project
      */
-    private void turnOnDevicesListener(long projectId) throws NativeHookException, InterruptedException {
+    private void turnOnDevicesListener() throws Exception {
         devicesListener = new NativeDevicesListener(this, projectId);
         devicesListener.turnOn();
     }
 
+    /**
+     * Creates observable that emits control for sending time and logs to server
+     */
     private void startControlPointObservable() {
-        Disposable controlPointObservable = Observable
-                .interval(1, TimeUnit.MINUTES)
+        controlPointObservable = Observable
+                .interval(10, TimeUnit.SECONDS)
                 .filter(number -> number != 0)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .subscribe(this::sendControlPointToServer);
     }
 
+    //TODO: rewrite this method, when server problems will be resolved
     private void sendControlPointToServer(long number){
         logger.debug("Control point #{}", number);
         screenShooter.makeScreenshot();
-        System.out.println(activeWindowListener.getLogs());
-        System.out.println(devicesListener.getLogs());
-        System.out.println("/////////////");
+        logger.debug("Active windows:{}", activeWindowListener.getLogs());
+        logger.debug("Keyboard logs:{}", devicesListener.getLogs());
     }
 
     /**
      * Sends command to server about about tracking project with current id.
      */
-    public void stopTracking() {
-        if (isUsed) {
-            try {
-                countDownLatch.countDown();
-                turnOffSpyKitTools();
-                logger.debug("Time tracking is stopped");
-            } catch (NativeHookException e) {
-                logger.debug("Time tracker crashed: {}", e);
-                //TODO: global crash, turn down matrix
-            };
+    @Override
+    public void turnOff() throws Exception {
+        if (status == IS_USED) {
+            countDownLatch.countDown();
+            turnOffSpyKitTools();
+            status = WAS_USED;
+            logger.debug("Time tracking is stopped");
         } else {
             logger.debug("Time tracking was stopped already");
         }
@@ -146,7 +143,8 @@ public class TimeTracker {
     /**
      * Call methods of initializing and turning on all spy kit tools.
      */
-    private void turnOffSpyKitTools() throws NativeHookException {
+    private void turnOffSpyKitTools() throws Exception {
+        controlPointObservable.dispose();
         screenShooter = null;
         activeWindowListener.turnOff();
         activeWindowListener = null;
@@ -154,9 +152,32 @@ public class TimeTracker {
         devicesListener = null;
     }
 
+    public void startDowntime() {
+        //TODO: send command to server about start downtime
+        logger.debug("Down time is started on server");
+    }
+
+    public void stopDowntime() {
+        //TODO: send command to server about stop downtime
+        logger.debug("Down time is stopped on server");
+    }
+
     public static void main(String[] args) throws InterruptedException {
-        TimeTracker timeTracker = new TimeTracker();
-        timeTracker.startTracking(1);
+        TimeTracker timeTracker = new TimeTracker(1);
+        logger.debug("turn on");
+        new Thread(() -> {
+            try {
+                timeTracker.turnOn();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+//        try {
+//            timeTracker.turnOff();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        logger.debug("turn off");
     }
 
 }

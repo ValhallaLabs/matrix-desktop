@@ -38,7 +38,7 @@ public class ScreenShooter {
             baos.close();
             logger.debug("Screenshot was created successfully");
             return new ScreenshotModel(CurrentSessionInfo.getTokenModel().getToken(), imageInByte, projectId);
-        } catch (AWTException | IOException e) {
+        } catch (AWTException | IOException | NullPointerException e) {
             logger.debug("Screenshot was created unsuccessfully", e);
         }
         return null;
@@ -48,7 +48,7 @@ public class ScreenShooter {
      * Gets bounds of active monitor for screenshot
      * @return rectangle area for screenshot
      */
-    private BufferedImage getScreenCapture() throws AWTException {
+    private BufferedImage getScreenCapture() throws AWTException, NullPointerException {
         return new Robot().createScreenCapture(MouseInfo.getPointerInfo().getDevice()
                 .getDefaultConfiguration().getBounds());
     }
