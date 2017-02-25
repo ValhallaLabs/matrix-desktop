@@ -32,4 +32,15 @@ public class ActiveWindowListenerFactory {
         logger.debug("Platform is not detected");
         return null;
     }
+
+    public static void main(String[] args) {
+        ActiveWindowListener activeWindowListener = ActiveWindowListenerFactory.getListener(1);
+        try {
+            activeWindowListener.turnOn();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
