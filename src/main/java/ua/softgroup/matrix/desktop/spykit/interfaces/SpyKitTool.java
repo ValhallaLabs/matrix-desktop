@@ -1,12 +1,13 @@
 package ua.softgroup.matrix.desktop.spykit.interfaces;
 
 
+import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.NOT_USED;
+
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public abstract class SpyKitTool {
-    protected static final int NOT_USED = 0, IS_USED = 1,WAS_USED = -1;
-    protected int status;
+    protected SpyKitToolStatus status = NOT_USED;
 
     /**
      * Turns on global device listener

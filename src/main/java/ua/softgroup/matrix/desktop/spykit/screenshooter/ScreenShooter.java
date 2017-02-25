@@ -1,6 +1,5 @@
 package ua.softgroup.matrix.desktop.spykit.screenshooter;
 
-import com.sun.istack.internal.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
@@ -26,11 +25,9 @@ public class ScreenShooter {
      * Tries to make screenshot
      * @return screenshotModel model with screenshot
      */
-    @Nullable
     public ScreenshotModel makeScreenshot() {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            File file = new File("scr.png");
 //            TODO: remove it or create folder for screenshots and save it by date
 //            ImageIO.write(getScreenCapture(), "png", new File("matrix.png"));
             ImageIO.write(getScreenCapture(), "png", baos);

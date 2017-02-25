@@ -7,6 +7,8 @@ import com.sun.jna.platform.unix.X11.*;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
+import java.util.Optional;
+
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
@@ -30,19 +32,17 @@ class LinuxActiveWindowListener extends ActiveWindowListener {
         xlib.XGetInputFocus(display, winRefCurrent, new IntByReference().getPointer());
         XTextProperty currentName = new XTextProperty();
         x11.XGetWMName(display, winRefCurrent.getValue(), currentName);
-        if(currentName.value != null) {
-            nameOfApp.append(currentName.value);
+        Optional.ofNullable(currentName.value).ifPresent(s -> {
+            nameOfApp.append(s);
             nameOfApp.append(" ");
-        }
+        });
         WindowByReference parentRef = new WindowByReference();
         x11.XQueryTree(display, winRefCurrent.getValue(),  new WindowByReference(), parentRef,
                 new PointerByReference(), new IntByReference());
         Window rootWindow = parentRef.getValue();
         XTextProperty rootName = new XTextProperty();
         x11.XGetWMName(display, rootWindow, rootName);
-        if(rootName.value != null) {
-            nameOfApp.append(rootName.value);
-        }
+        Optional.ofNullable(rootName.value).ifPresent(nameOfApp::append);
         return nameOfApp.toString();
     }
 

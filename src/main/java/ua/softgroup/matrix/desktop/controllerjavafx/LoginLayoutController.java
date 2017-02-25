@@ -59,6 +59,7 @@ public class LoginLayoutController {
         alert.setHeaderText(null);
         alert.setContentText(ALERT_CONTENT_TEXT);
         Optional<ButtonType> result = alert.showAndWait();
+        //TODO: potential NPE, use Optional properly
         if(result.get()==ButtonType.OK){
             //TODO: fix bug, not closing stage
             stage.close();

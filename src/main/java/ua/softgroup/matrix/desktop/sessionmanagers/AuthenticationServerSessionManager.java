@@ -83,7 +83,6 @@ public class AuthenticationServerSessionManager {
         socket.close();
     }
 
-
     /**
      * Function to create an custom Observable emitter.
      * countDownLatch.countDown() removes block of the main thread, and lets user to use userPasswordEmitter.
@@ -117,9 +116,8 @@ public class AuthenticationServerSessionManager {
         if (Constants.INVALID_USERNAME.name().equals(response) || Constants.INVALID_PASSWORD.name().equals(response)) {
             loginLayoutController.errorLoginPassword();
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     /**

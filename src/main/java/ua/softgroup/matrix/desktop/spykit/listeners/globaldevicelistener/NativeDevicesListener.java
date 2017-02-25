@@ -21,6 +21,10 @@ import java.util.EventObject;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.IS_USED;
+import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.NOT_USED;
+import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.WAS_USED;
+
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
@@ -65,9 +69,9 @@ public class NativeDevicesListener extends SpyKitListener {
             GlobalScreen.registerNativeHook();
             status = IS_USED;
             logger.debug("Native devices listener is turned on");
-        } else {
-            logger.debug("Native devices listener was turned on already");
+            return;
         }
+        logger.debug("Native devices listener was turned on already");
     }
 
     /**
@@ -205,9 +209,9 @@ public class NativeDevicesListener extends SpyKitListener {
             GlobalScreen.unregisterNativeHook();
             status = WAS_USED;
             logger.debug("Native devices listener is turned off");
-        } else {
-            logger.debug("Native devices listener was turned off already");
+            return;
         }
+        logger.debug("Native devices listener was turned off already");
     }
 
     /**

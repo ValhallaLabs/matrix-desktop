@@ -12,6 +12,10 @@ import ua.softgroup.matrix.server.desktop.model.ActiveWindowsModel;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.IS_USED;
+import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.NOT_USED;
+import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.WAS_USED;
+
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
@@ -32,14 +36,14 @@ public abstract class ActiveWindowListener extends SpyKitListener {
      */
     @Override
     public void turnOn() throws InterruptedException {
-        if (status == NOT_USED){
+        if (status == NOT_USED) {
             startTitleReader();
             status = IS_USED;
             logger.debug("ActiveWindowListener is turned on successfully");
             (countDownLatch = new CountDownLatch(1)).await();
-        } else {
-            logger.debug("ActiveWindowListener was turned on already");
+            return;
         }
+        logger.debug("ActiveWindowListener was turned on already");
     }
 
     /**
@@ -78,9 +82,8 @@ public abstract class ActiveWindowListener extends SpyKitListener {
         if(currentTitle.equals(newTitle)) {
             time++;
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     /**
@@ -103,9 +106,9 @@ public abstract class ActiveWindowListener extends SpyKitListener {
         if (activeWindowsModel.getWindowTimeMap().get(currentTitle) != null) {
             long prevTimeValue = activeWindowsModel.getWindowTimeMap().get(currentTitle);
             activeWindowsModel.getWindowTimeMap().put(currentTitle, prevTimeValue + time);
-        } else {
-            activeWindowsModel.getWindowTimeMap().put(currentTitle, time);
+            return;
         }
+        activeWindowsModel.getWindowTimeMap().put(currentTitle, time);
     }
 
     /**
@@ -120,9 +123,9 @@ public abstract class ActiveWindowListener extends SpyKitListener {
             }
             status = WAS_USED;
             logger.debug("ActiveWindow listener is turned off");
-        } else {
-            logger.debug("ActiveWindow listener was turned off already");
+            return;
         }
+        logger.debug("ActiveWindow listener was turned off already");
     }
 
     /**

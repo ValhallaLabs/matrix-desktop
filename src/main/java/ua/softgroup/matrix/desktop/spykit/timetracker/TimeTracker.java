@@ -15,6 +15,10 @@ import ua.softgroup.matrix.desktop.spykit.screenshooter.ScreenShooter;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.IS_USED;
+import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.NOT_USED;
+import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.WAS_USED;
+
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
@@ -60,9 +64,9 @@ public class TimeTracker extends SpyKitTool {
             status = IS_USED;
             logger.debug("Time tracking is started");
             (countDownLatch = new CountDownLatch(1)).await();
-        } else {
-            logger.debug("Time tracking was already started");
+            return;
         }
+        logger.debug("Time tracking was already started");
     }
 
     /**
@@ -158,9 +162,9 @@ public class TimeTracker extends SpyKitTool {
             turnOffSpyKitTools();
             status = WAS_USED;
             logger.debug("Time tracking is stopped");
-        } else {
-            logger.debug("Time tracking was stopped already");
+            return;
         }
+        logger.debug("Time tracking was stopped already");
     }
 
     /**
