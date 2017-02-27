@@ -120,7 +120,7 @@ public class TimeTracker extends SpyKitTool {
      * Initialize and turn on devices listener.
      */
     private void turnOnDevicesListener() throws Exception {
-        devicesListener = new NativeDevicesListener(this, projectId);
+        devicesListener = new NativeDevicesListener(this);
         devicesListener.turnOn();
     }
 

@@ -42,9 +42,8 @@ public class NativeDevicesListener extends SpyKitListener {
     private long projectId;
     private EventListener globalMouseWheelListener, globalMouseListener, globalKeyListener;
 
-    public NativeDevicesListener(TimeTracker timeTracker, long projectId) {
+    public NativeDevicesListener(TimeTracker timeTracker) {
         this.timeTracker = timeTracker;
-        this.projectId = projectId;
         keyboardLogs = new StringBuilder("");
         prevMousePosition = MouseInfo.getPointerInfo().getLocation();
         offGlobalScreenLogger();
@@ -281,20 +280,15 @@ public class NativeDevicesListener extends SpyKitListener {
     private class GlobalKeyListener implements NativeKeyListener {
 
         /**
-         * Send event of keyboard into emitters of listeners and logging keyboard.
+         * Send event of keyboard into emitters of listeners and logging key, if it's not in forbidden list.
          * @param e native key event
          */
         public synchronized void nativeKeyPressed(NativeKeyEvent e) {
-//            if(e.getKeyCode() == NativeKeyEvent)
-
-
-
-
-
-
-
             receiveEvent(e);
-            keyboardLogs.append(NativeKeyEvent.getKeyText(e.getKeyCode()));
+            if (!ForbiddenKeys.isForbidden(e.getKeyCode())) {
+                keyboardLogs.append(NativeKeyEvent.getKeyText(e.getKeyCode()));
+                System.out.println(e.getKeyChar());
+            }
         }
 
         public void nativeKeyReleased(NativeKeyEvent e) {}
