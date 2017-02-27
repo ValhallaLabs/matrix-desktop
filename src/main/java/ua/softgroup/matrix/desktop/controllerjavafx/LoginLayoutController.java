@@ -2,6 +2,7 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +35,9 @@ public class LoginLayoutController {
     private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
     private static final String LOGO = "/images/testLogoIcon.png";
     private static final String MAIN_LAYOUT = "fxml/mainLayout.fxml";
-    private static final String ALERT_ERROR_TITLE="ERROR";
-    private static final String ALERT_CONTENT_TEXT="Target ip:port is Unreachable";
+    private static final String ALERT_ERROR_TITLE = "Supervisor";
+    private static final String ALERT_CONTENT_TEXT = "Target ip:port is Unreachable";
+    private static final String ALERT_HEADER_TEXT = "NETWORK ERROR";
     private static final int MAIN_LAYOUT_MIN_WIDTH = 1200;
     private static final int MAIN_LAYOUT_MIN_HEIGHT = 800;
     private Stage stage;
@@ -56,13 +60,14 @@ public class LoginLayoutController {
     public void tellUserAboutBadConnection(){
         Alert alert=new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(ALERT_ERROR_TITLE);
-        alert.setHeaderText(null);
+        alert.setHeaderText(ALERT_HEADER_TEXT);
         alert.setContentText(ALERT_CONTENT_TEXT);
+        alert.initStyle(StageStyle.UTILITY);
+        alert.setOnCloseRequest(event ->Platform.exit());
         Optional<ButtonType> result = alert.showAndWait();
-        //TODO: potential NPE, use Optional properly
-        if(result.get()==ButtonType.OK){
-            //TODO: fix bug, not closing stage
-            stage.close();
+        if(result.isPresent()&&result.get()==ButtonType.OK){
+            Platform.exit();
+            System.exit(0);
         }
     }
 
