@@ -1,16 +1,41 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        maven { url "https://mini2dx.org/maven/content/repositories/thirdparty" }
+        maven { url "https://mini2dx.org/maven/content/repositories/releases" }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.mini2Dx', name: 'parcl', version: '1.0.12'
+    }
+}
+
 apply plugin: 'java'
+apply plugin: "org.mini2Dx.parcl"
 
 group   = 'ua.softgroup'
 version = '0.1-SNAPSHOT'
 
-jar {
-    manifest {
-        attributes 'Implementation-Title': 'Matrix Desktop',
-                   'Implementation-Version': version,
-                   'Main-Class': 'ua.softgroup.matrix.desktop.start.Main'
-    }
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-}
+mainClassName = "ua.softgroup.matrix.desktop.start.Main"
+parcl {
+
+      app {
+         appName = "Matrix Desktop"
+         icon = "src/main/resources/images/testLogoIcon.png"
+         applicationCategory = "Tracking"
+         displayName = 'Matrix Desktop'
+         identifier = 'ua.softgroup'
+         copyright = 'Make Java Great Again'
+         withJre("/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home")
+      }
+
+      linux {
+         binName = "matrix"
+      }
+      exe {
+         exeName = "matrix"
+      }
+   }
 
 repositories {
     mavenCentral()
@@ -20,7 +45,10 @@ repositories {
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.22'
     compile 'ch.qos.logback:logback-classic:1.1.9'
-    compile "io.reactivex.rxjava2:rxjava:2.0.5"
+    compile 'io.reactivex.rxjava2:rxjava:2.0.5'
+    compile 'com.1stleg:jnativehook:2.1.0'
+    compile 'net.java.dev.jna:jna:4.3.0'
+    compile 'net.java.dev.jna:jna-platform:4.3.0'
     testCompile 'junit:junit:4.12'
 }
 

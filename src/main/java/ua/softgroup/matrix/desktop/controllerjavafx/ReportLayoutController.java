@@ -3,22 +3,18 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
+import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 import ua.softgroup.matrix.server.desktop.model.ProjectModel;
 import ua.softgroup.matrix.server.desktop.model.ReportModel;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.util.Set;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
@@ -35,67 +31,148 @@ public class ReportLayoutController {
     public TableColumn<ReportModel, Boolean> reportTableColumnVerified;
     @FXML
     public TableColumn<ReportModel, String> reportTableColumnReport;
-
-    ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
-    private Stage primaryStage;
-
     @FXML
-    private void initialize() {
-        initReport();
+    public Button btnChangeReport;
+    @FXML
+    public Button btnCancelReport;
+    @FXML
+    public Label labelProjectName;
+    @FXML
+    public Label labelResponsible;
+    @FXML
+    public Label labelStartDate;
+    @FXML
+    public Label labelDeadlineDate;
+    @FXML
+    public TextArea taEditReport;
+    private static final String DATE_COLUMN = "date";
+    private static final String ID_COLUMN = "id";
+    private static final String CHECKED_COLUMN = "checked";
+    private static final String DESCRIPTION_COLUMN = "description";
+    private static final int MIN_TEXT_FOR_REPORT = 70;
+    private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
+    private ReportServerSessionManager reportServerSessionManager;
+    private Long currentProjectId;
+    private Set<ReportModel> report;
+    private String reportText;
+    private Long currentReportId;
+
+    /**
+     *  After Load/Parsing fxml call this method
+     * Create {@link ReportLayoutController} and if project has reports set this data in Set of ReportModel
+     * @throws IOException
+     */
+    @FXML
+    private void initialize() throws IOException {
+        currentProjectId = CurrentSessionInfo.getProjectId();
+        reportServerSessionManager = new ReportServerSessionManager();
+        if (currentProjectId != null) {
+            report = reportServerSessionManager.sendProjectDataAndGetReportById(currentProjectId);
+        }
+        initReportInTable();
+        setProjectInfoInView(currentProjectId);
+        countTextAndSetButtonCondition();
     }
 
-    public void startReportLayoutController() {
-        primaryStage = new Stage();
-        startReportLayout();
-        initReport();
-    }
-
-    private void initReport() {
-        reportTableColumnDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        reportTableColumnTime.setCellValueFactory(new PropertyValueFactory<>("id"));
-        reportTableColumnVerified.setCellValueFactory(new PropertyValueFactory<>("checked"));
-        reportTableColumnReport.setCellValueFactory(new PropertyValueFactory<>("description"));
-        reportData.add(new ReportModel(LocalDate.now(), 1, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 3, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 2, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        reportData.add(new ReportModel(LocalDate.now(), 4, true, "ddffdsggdfgdfgdfgdf"));
-        tableViewReport.setItems(reportData);
-    }
-
-    private void startReportLayout() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(classLoader.getResource("fxml/reportLayout.fxml"));
-            AnchorPane anchorPane = loader.load();
-            Scene scene = new Scene(anchorPane);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-            primaryStage.setMinWidth(1200);
-            primaryStage.setMinHeight(750);
-            primaryStage.setResizable(false);
-        } catch (IOException e) {
-            e.printStackTrace();
+    /**
+     *  Get from current project information's and set their in label view element
+     *
+     * @param id of project what user choose in project window
+     */
+    private void setProjectInfoInView(Long id) {
+        Set<ProjectModel> projectAll = CurrentSessionInfo.getUserActiveProjects();
+        for (ProjectModel model :
+                projectAll) {
+            if (model.getId() == id) {
+                labelResponsible.setText(model.getAuthorName());
+                labelProjectName.setText(model.getTitle());
+                taEditReport.setText(reportText);
+                if (model.getEndDate() != null && model.getStartDate() != null) {
+                    labelStartDate.setText(model.getStartDate().toString());
+                    labelDeadlineDate.setText(model.getEndDate().toString());
+                }
+            }
         }
     }
 
-    public void btnCancelReportWindow(ActionEvent actionEvent) {
+    /**
+     * Set connect table column with {@link ReportModel} for future pull date in this field
+     */
+    private void initReportInTable() {
+        reportTableColumnDate.setCellValueFactory(new PropertyValueFactory<>(DATE_COLUMN));
+        reportTableColumnTime.setCellValueFactory(new PropertyValueFactory<>(ID_COLUMN));
+        reportTableColumnVerified.setCellValueFactory(new PropertyValueFactory<>(CHECKED_COLUMN));
+        reportTableColumnReport.setCellValueFactory(new PropertyValueFactory<>(DESCRIPTION_COLUMN));
+        setReportInfoInView();
+    }
+
+    /**
+     * If project has report displays this data in Table View
+     */
+    private void setReportInfoInView() {
+        if (report != null && !report.isEmpty()) {
+            for (ReportModel model :
+                    report) {
+                reportData.add(model);
+                reportText = model.getDescription();
+            }
+            tableViewReport.setItems(reportData);
+        }
+    }
+
+    /**
+     * Check if this report checked or no and set disable condition of button
+     * @param reportModel current report what user selected in table
+     */
+    private void checkVerifyReportAndSetButtonCondition(ReportModel reportModel) {
+        if (reportModel.isChecked()) {
+            btnChangeReport.setDisable(true);
+        } else btnChangeReport.setDisable(false);
+    }
+
+    /**
+     * Hears when user click on button and close stage without any change
+     * @param actionEvent callback click on button
+     */
+    public void CancelAndCloseReportWindow(ActionEvent actionEvent) {
         ((Node) actionEvent.getSource()).getScene().getWindow().hide();
+    }
+
+    /**
+     * Hears when user click on button and send change {@link ReportModel} to {@link ReportLayoutController} and close stage
+     * @param actionEvent callback click on button
+     * @throws IOException
+     */
+    public void changeReport(ActionEvent actionEvent) throws IOException {
+        ReportModel reportModel = new ReportModel(CurrentSessionInfo.getTokenModel().getToken(), currentReportId, taEditReport.getText(), currentProjectId);
+        reportServerSessionManager.changeReportOnServer(reportModel);
+        ((Node) actionEvent.getSource()).getScene().getWindow().hide();
+    }
+
+    /**
+     * Hears when user click on table view,get chosen report and set  Description information in TextArea
+     * @param event callback click on table view
+     */
+    public void chooseReport(Event event) {
+        if (tableViewReport.getSelectionModel().getSelectedItem() != null) {
+            ReportModel selectReport = tableViewReport.getSelectionModel().getSelectedItem();
+            checkVerifyReportAndSetButtonCondition(selectReport);
+            currentReportId = selectReport.getId();
+            taEditReport.setText(selectReport.getDescription());
+        }
+    }
+
+    /**
+     *  Hears when text input in TextArea and if this text count >= {@value MIN_TEXT_FOR_REPORT}
+     * button for change report became active
+     */
+    @FXML
+    private void countTextAndSetButtonCondition() {
+        taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
+            int size = newValue.length();
+            if (size >= MIN_TEXT_FOR_REPORT) {
+                btnChangeReport.setDisable(false);
+            } else btnChangeReport.setDisable(true);
+        });
     }
 }

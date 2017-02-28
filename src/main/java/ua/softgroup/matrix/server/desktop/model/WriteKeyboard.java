@@ -7,6 +7,12 @@ public class WriteKeyboard extends TokenModel implements Serializable {
     private String words;
     private long projectID;
 
+    public WriteKeyboard(String token,String words, long projectID) {
+        super(token);
+        this.words = words;
+        this.projectID = projectID;
+    }
+
     public long getProjectID() {
         return projectID;
     }

@@ -5,18 +5,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 
 
 public class Main extends Application {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
-
     public static void main(String[] args) {
         logger.debug("Current time: {}", LocalDateTime.now());
         launch(args);
@@ -24,11 +21,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Stage loginStage = primaryStage;
-        loginStage.setTitle("SuperVisor");
-        startLoginLayout(loginStage);
+        startLoginLayout(primaryStage);
+
     }
 
+    /**
+     * Tells {@link Main} to open login window
+     * @param loginStage for create stage
+     */
     public void startLoginLayout(Stage loginStage) {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
@@ -39,11 +39,11 @@ public class Main extends Application {
             loginLayoutController.setUpStage(loginStage);
             Scene scene = new Scene(loginLayout);
             loginStage.setScene(scene);
-            loginStage.initStyle(StageStyle.UTILITY);
+            loginStage.setTitle("SuperVisor");
             loginStage.setResizable(false);
             loginStage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.debug("Error when start Main Window "+e);
         }
     }
 }

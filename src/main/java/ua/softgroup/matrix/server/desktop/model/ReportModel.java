@@ -1,10 +1,10 @@
 package ua.softgroup.matrix.server.desktop.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ReportModel extends TokenModel {
+public class ReportModel extends TokenModel implements Serializable {
     private static final long serialVersionUID = 1L;
-
 
     private long id;
 
@@ -20,20 +20,20 @@ public class ReportModel extends TokenModel {
 
     private LocalDate date;
 
-    public ReportModel() {
+    public ReportModel(String token) {
+        super(token);
     }
 
-    public ReportModel(LocalDate date, long id, boolean checked, String description) {
-        this.date = date;
-        this.id = id;
-        this.checked = checked;
+    public ReportModel(String token, String description, long projectId, LocalDate date) {
+        super(token);
         this.description = description;
+        this.projectId = projectId;
+        this.date = date;
     }
 
-    public ReportModel(long id, String token, String title, String description, long projectId) {
-        super.setToken(token);
+    public ReportModel(String token, long id, String description, long projectId) {
+        super(token);
         this.id = id;
-        this.title = title;
         this.description = description;
         this.projectId = projectId;
     }
@@ -98,6 +98,7 @@ public class ReportModel extends TokenModel {
     public String toString() {
         return "ReportModel{" +
                 "id=" + id +
+                "date=" + date +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", projectId=" + projectId +

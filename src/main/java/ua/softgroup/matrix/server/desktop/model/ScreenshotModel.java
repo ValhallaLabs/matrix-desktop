@@ -1,9 +1,17 @@
 package ua.softgroup.matrix.server.desktop.model;
 
-public class ScreenshotModel extends TokenModel{
+import java.io.Serializable;
+
+public class ScreenshotModel extends TokenModel implements Serializable{
     private static final long serialVersionUID = 1L;
     private byte[] file;
     private long projectID;
+
+    public ScreenshotModel(String token, byte[] file, long projectID) {
+        super(token);
+        this.file = file;
+        this.projectID = projectID;
+    }
 
     public long getProjectID() {
         return projectID;

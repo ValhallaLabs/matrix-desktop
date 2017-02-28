@@ -12,11 +12,6 @@
             <Insets />
          </BorderPane.margin>
          <menus>
-            <Menu mnemonicParsing="false" text="According">
-              <items>
-                <MenuItem mnemonicParsing="false" text="According" />
-              </items>
-            </Menu>
             <Menu fx:id="menuReport" mnemonicParsing="false" onAction="#startReportLayoutWindow" text="Report">
               <items>
                 <MenuItem mnemonicParsing="false" text="Report" />
@@ -24,10 +19,10 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Instructions">
               <items>
-                <MenuItem mnemonicParsing="false" text="Instructions" />
+                <MenuItem mnemonicParsing="false" onAction="#startInstructionsLayoutWindow" text="Instructions" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Settings">
+            <Menu mnemonicParsing="false" onAction="#startSettingLayoutWindow" text="Settings">
               <items>
                 <MenuItem mnemonicParsing="false" text="Settings" />
               </items>

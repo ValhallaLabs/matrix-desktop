@@ -13,10 +13,13 @@ public class ActiveWindowsModel extends TokenModel implements Serializable {
     private Long projectId;
     private Map<String, Long> windowTimeMap = new LinkedHashMap<>();
 
-    public ActiveWindowsModel() {
+    public ActiveWindowsModel(String token, Long projectId) {
+        super(token);
+        this.projectId = projectId;
     }
 
-    public ActiveWindowsModel(Long projectId, Map<String, Long> windowTimeMap) {
+    public ActiveWindowsModel(String token, Long projectId, Map<String, Long> windowTimeMap) {
+        super(token);
         this.projectId = projectId;
         this.windowTimeMap = windowTimeMap;
     }

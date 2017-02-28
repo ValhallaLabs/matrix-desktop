@@ -31,10 +31,12 @@
     -fx-base: rgb(0, 0, 0);
 }
 .change-report-button{
-    -fx-background-color: #A5D6A7;
+    -fx-background-color: #47d465;
+    -fx-cursor: hand;
 }
 .cancel-report-button{
-    -fx-background-color: #E57373;
+    -fx-background-color: #C62828;
+    -fx-cursor: hand;
 }
 .table-cell:filled {
     -fx-background-color: #ebebeb;
@@ -42,12 +44,4 @@
 .table-row-cell:selected .table-cell {
     -fx-background-color: #3063a4;
     -fx-text-fill: white;
-}
-.change-report-button:hover{
-    -fx-background-color:  #47d465;
-    -fx-cursor: hand;
-}
-.cancel-report-button:hover{
-    -fx-background-color: #C62828;
-    -fx-cursor: hand;
 }
