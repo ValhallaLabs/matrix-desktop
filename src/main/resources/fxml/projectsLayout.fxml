@@ -329,7 +329,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#saveReportToServer" prefHeight="31.0" prefWidth="135.0" styleClass="send-reports-button" text="Отправить отчет">
+                              <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#saveReport" prefHeight="31.0" prefWidth="135.0" styleClass="send-reports-button" text="Отправить отчет">
                                  <font>
                                     <Font size="11.0" />
                                  </font>

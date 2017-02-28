@@ -3,7 +3,6 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -45,12 +44,18 @@ public class MainLayoutController {
     @FXML
     public MenuBar menuBar;
 
-
-
+    /**
+     * Hears when user click on report menus item
+     * @param actionEvent callback click on menu
+     */
     public void startReportLayoutWindow(ActionEvent actionEvent) {
-
        startReport(menuBar.getScene().getWindow());
     }
+
+    /**
+     * Tells {@link MainLayoutController} open report window
+     * @param window Window what will be owner by modality report window
+     */
      public void startReport(Window window){
         try {
             Stage primaryStage = new Stage();
@@ -67,11 +72,15 @@ public class MainLayoutController {
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {
-            logger.debug("Error when start Report Window");
+            logger.debug("Error when start Report Window "+e);
             e.printStackTrace();
         }
     }
 
+    /**
+     * Tells {@link MainLayoutController} to open and set in the center of it project window
+     * @param mainLayout
+     */
     public void startProjectsLayoutController(BorderPane mainLayout) {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
@@ -80,11 +89,15 @@ public class MainLayoutController {
             AnchorPane projectsLayout = loader.load();
             mainLayout.setCenter(projectsLayout);
         } catch (IOException e) {
-            e.printStackTrace();
-            logger.debug("Error when start Projects Window");
+            logger.debug("Error when start Projects Window "+e);
         }
     }
 
+    /**
+     * Hears when user click on setting menus item and
+     * tells {@link MainLayoutController} to open setting window
+     * @param actionEvent callback click on menu
+     */
     public void startSettingLayoutWindow(ActionEvent actionEvent) {
         try {
             Stage settingStage = new Stage();
@@ -101,11 +114,15 @@ public class MainLayoutController {
             settingStage.setResizable(false);
             settingStage.show();
         } catch (IOException e) {
-            e.printStackTrace();
-            logger.debug("Error when start Setting Window");
+            logger.debug("Error when start Setting Window "+e);
         }
     }
 
+    /**
+     * Hears when user click on setting menus item and
+     * tells {@link MainLayoutController} to open instructions window
+     * @param actionEvent callback click on menu
+     */
     public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
         try {
             Stage InstructionsStage = new Stage();
@@ -122,8 +139,7 @@ public class MainLayoutController {
             InstructionsStage.setResizable(false);
             InstructionsStage.show();
         } catch (IOException e) {
-            e.printStackTrace();
-            logger.debug("Error when start Instructions Window");
+            logger.debug("Error when start Instructions Window "+e);
         }
     }
 }
