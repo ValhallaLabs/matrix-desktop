@@ -318,7 +318,7 @@
                         </TextArea>
                         <HBox minHeight="48.0" prefHeight="48.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="btnAttachFile" mnemonicParsing="false" prefHeight="31.0" prefWidth="135.0" styleClass="add-button" text="Прикрепить файл">
+                              <Button fx:id="btnAttachFile" mnemonicParsing="false" onAction="#attachFile" prefHeight="31.0" prefWidth="135.0" styleClass="add-button" text="Прикрепить файл">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -329,7 +329,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#saveReport" prefHeight="31.0" prefWidth="135.0" styleClass="send-reports-button" text="Отправить отчет">
+                              <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#sendReport" prefHeight="31.0" prefWidth="135.0" styleClass="send-reports-button" text="Отправить отчет">
                                  <font>
                                     <Font size="11.0" />
                                  </font>

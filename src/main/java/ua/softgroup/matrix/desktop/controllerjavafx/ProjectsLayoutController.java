@@ -11,12 +11,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 import ua.softgroup.matrix.server.desktop.model.ProjectModel;
 import ua.softgroup.matrix.server.desktop.model.ReportModel;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -83,6 +86,7 @@ public class ProjectsLayoutController {
     private static final int LIMITER_TEXT_COUNT = 999;
     private static final int MIN_TEXT_FOR_REPORT = 70;
     private ReportServerSessionManager reportServerSessionManager;
+    private File file;
 
     /**
      * After Load/Parsing fxml call this method
@@ -260,7 +264,7 @@ public class ProjectsLayoutController {
      * @param actionEvent callback click on button
      * @throws IOException
      */
-    public void saveReport(ActionEvent actionEvent) throws IOException {
+    public void sendReport(ActionEvent actionEvent) throws IOException {
         ReportModel reportModel = new ReportModel(CurrentSessionInfo.getTokenModel().getToken(), taWriteReport.getText(), CurrentSessionInfo.getProjectId(), LocalDate.now());
         reportModel.setTitle("kaban gay");
         reportServerSessionManager.saveReportToServer(reportModel);
@@ -283,4 +287,21 @@ public class ProjectsLayoutController {
         });
     }
 
+    /**
+     * Hears when user click on button and attach chosen image
+     * @param actionEvent callback click on button
+     */
+    public void attachFile(ActionEvent actionEvent) throws IOException {
+        FileChooser fileChooser= new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
+        );
+        file= fileChooser.showOpenDialog(labelCurrentSymbols.getScene().getWindow());
+        if (file!=null){
+            System.out.println("file attach");
+        }
+        byte[] attachFile= Files.readAllBytes(file.toPath());
+        System.out.println(attachFile);
+    }
 }
