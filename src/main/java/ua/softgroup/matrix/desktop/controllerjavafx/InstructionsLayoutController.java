@@ -15,28 +15,36 @@ import java.util.List;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class InstructionsLayoutController {
+
     @FXML
     public Label labelInstructions;
     @FXML
     public ListView<InstructionsModel> lvInstructions;
-
     private List<InstructionsModel> listInstructionsModel = new ArrayList<>();
     private ObservableList<InstructionsModel> content;
 
+    /**
+     * After Load/Parsing fxml call this method
+     */
     @FXML
     public void initialize() {
         initArray();
     }
 
-    private void setInstructionInView(InstructionsModel instruction) {
-        labelInstructions.setText(instruction.getContent());
-    }
-
+    /**
+     * Hears when user click on listView select item ,get data from ObservableList and set in label
+     *
+     * @param event callback click on list item
+     */
     public void chooseCurentInstructuon(Event event) {
         InstructionsModel selectProject = (InstructionsModel) lvInstructions.getSelectionModel().getSelectedItem();
-        setInstructionInView(selectProject);
+        labelInstructions.setText(selectProject.getContent());
     }
 
+    /**
+     * Init {@link InstructionsModel} data into arrayList then set this data in Observable list,
+     * and display in ListView
+     */
     private void initArray() {
         listInstructionsModel.add(new InstructionsModel("first", "\n" +
                 "Все работы и проекты не обсуждаются с людьми, не имеющими к ним отношения, т.е НЕ сотрудниками\n" +

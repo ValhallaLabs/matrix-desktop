@@ -49,6 +49,7 @@ public class ReportLayoutController {
     private static final String ID_COLUMN = "id";
     private static final String CHECKED_COLUMN = "checked";
     private static final String DESCRIPTION_COLUMN = "description";
+    private static final int MIN_TEXT_FOR_REPORT = 70;
     private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
     private ReportServerSessionManager reportServerSessionManager;
     private Long currentProjectId;
@@ -56,6 +57,11 @@ public class ReportLayoutController {
     private String reportText;
     private Long currentReportId;
 
+    /**
+     *  After Load/Parsing fxml call this method
+     * Create {@link ReportLayoutController} and if project has reports set this data in Set of ReportModel
+     * @throws IOException
+     */
     @FXML
     private void initialize() throws IOException {
         currentProjectId = CurrentSessionInfo.getProjectId();
@@ -63,12 +69,17 @@ public class ReportLayoutController {
         if (currentProjectId != null) {
             report = reportServerSessionManager.sendProjectDataAndGetReportById(currentProjectId);
         }
-        initReport();
-        setOtherProjectInfoInView(currentProjectId);
-         countTextAndSetInView();
+        initReportInTable();
+        setProjectInfoInView(currentProjectId);
+        countTextAndSetButtonCondition();
     }
 
-    private void setOtherProjectInfoInView(Long id) {
+    /**
+     *  Get from current project information's and set their in label view element
+     *
+     * @param id of project what user choose in project window
+     */
+    private void setProjectInfoInView(Long id) {
         Set<ProjectModel> projectAll = CurrentSessionInfo.getUserActiveProjects();
         for (ProjectModel model :
                 projectAll) {
@@ -84,11 +95,21 @@ public class ReportLayoutController {
         }
     }
 
-    private void initReport() {
+    /**
+     * Set connect table column with {@link ReportModel} for future pull date in this field
+     */
+    private void initReportInTable() {
         reportTableColumnDate.setCellValueFactory(new PropertyValueFactory<>(DATE_COLUMN));
         reportTableColumnTime.setCellValueFactory(new PropertyValueFactory<>(ID_COLUMN));
         reportTableColumnVerified.setCellValueFactory(new PropertyValueFactory<>(CHECKED_COLUMN));
         reportTableColumnReport.setCellValueFactory(new PropertyValueFactory<>(DESCRIPTION_COLUMN));
+        setReportInfoInView();
+    }
+
+    /**
+     * If project has report displays this data in Table View
+     */
+    private void setReportInfoInView() {
         if (report != null && !report.isEmpty()) {
             for (ReportModel model :
                     report) {
@@ -99,24 +120,39 @@ public class ReportLayoutController {
         }
     }
 
+    /**
+     * Check if this report checked or no and set disable condition of button
+     * @param reportModel current report what user selected in table
+     */
     private void checkVerifyReportAndSetButtonCondition(ReportModel reportModel) {
         if (reportModel.isChecked()) {
             btnChangeReport.setDisable(true);
         } else btnChangeReport.setDisable(false);
     }
 
-    public void CancelReportWindow(ActionEvent actionEvent) {
+    /**
+     * Hears when user click on button and close stage without any change
+     * @param actionEvent callback click on button
+     */
+    public void CancelAndCloseReportWindow(ActionEvent actionEvent) {
         ((Node) actionEvent.getSource()).getScene().getWindow().hide();
     }
 
-    public void ChangeReportWindow(ActionEvent actionEvent) throws IOException {
+    /**
+     * Hears when user click on button and send change {@link ReportModel} to {@link ReportLayoutController} and close stage
+     * @param actionEvent callback click on button
+     * @throws IOException
+     */
+    public void changeReport(ActionEvent actionEvent) throws IOException {
         ReportModel reportModel = new ReportModel(CurrentSessionInfo.getTokenModel().getToken(), currentReportId, taEditReport.getText(), currentProjectId);
-        System.out.println(reportModel.toString());
-        reportModel.setTitle("dddsdsdsadasdsdsaad");
         reportServerSessionManager.changeReportOnServer(reportModel);
         ((Node) actionEvent.getSource()).getScene().getWindow().hide();
     }
 
+    /**
+     * Hears when user click on table view,get chosen report and set  Description information in TextArea
+     * @param event callback click on table view
+     */
     public void chooseReport(Event event) {
         if (tableViewReport.getSelectionModel().getSelectedItem() != null) {
             ReportModel selectReport = tableViewReport.getSelectionModel().getSelectedItem();
@@ -125,13 +161,18 @@ public class ReportLayoutController {
             taEditReport.setText(selectReport.getDescription());
         }
     }
+
+    /**
+     *  Hears when text input in TextArea and if this text count >= {@value MIN_TEXT_FOR_REPORT}
+     * button for change report became active
+     */
     @FXML
-    private void countTextAndSetInView() {
+    private void countTextAndSetButtonCondition() {
         taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
-            int size=newValue.length();
-            if (size>=70){
+            int size = newValue.length();
+            if (size >= MIN_TEXT_FOR_REPORT) {
                 btnChangeReport.setDisable(false);
-            }else btnChangeReport.setDisable(true);
+            } else btnChangeReport.setDisable(true);
         });
     }
 }
