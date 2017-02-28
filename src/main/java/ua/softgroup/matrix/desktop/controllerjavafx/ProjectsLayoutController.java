@@ -117,14 +117,14 @@ public class ProjectsLayoutController {
     }
 
     /**
-     * At start project window select last item in Set of user active project{@link CurrentSessionInfo}
+     * At start project window select last item in Table View
      *
      * @throws IOException
      */
     private void setFocusOnTableView() throws IOException {
         tvProjectsTable.requestFocus();
-        tvProjectsTable.getSelectionModel().select(CurrentSessionInfo.getUserActiveProjects().size() - 1);
-        tvProjectsTable.getFocusModel().focus(CurrentSessionInfo.getUserActiveProjects().size() - 1);
+        tvProjectsTable.getSelectionModel().select(0);
+        tvProjectsTable.getFocusModel().focus(0);
         ProjectModel projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
         setOtherProjectInfoInView(projectModel);
         new Thread(() -> {
@@ -160,7 +160,9 @@ public class ProjectsLayoutController {
 
     /**
      * Get in{@link CurrentSessionInfo} Set of  all active project and set their in table view
+     * and sort this set by newest project id
      */
+    @SuppressWarnings("unchecked")
     private void setProjectInTable() {
         Set<ProjectModel> projectModelSet = CurrentSessionInfo.getUserActiveProjects();
         if (projectModelSet != null && !projectModelSet.isEmpty()) {
@@ -169,6 +171,7 @@ public class ProjectsLayoutController {
 //            projectsData.add(projectModel);
 //        }
             tvProjectsTable.setItems(projectsData);
+            tvProjectsTable.getSortOrder().setAll(tcIdProject);
         }
     }
 

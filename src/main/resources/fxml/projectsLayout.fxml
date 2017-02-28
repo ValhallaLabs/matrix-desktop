@@ -20,7 +20,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                      <columns>
-                        <TableColumn fx:id="tcIdProject" prefWidth="75.0" text="Id Project" />
+                        <TableColumn fx:id="tcIdProject" prefWidth="75.0" sortType="DESCENDING" text="Id Project" />
                         <TableColumn fx:id="tcAuthorName" maxWidth="4000.0" prefWidth="75.0" text="Author" />
                         <TableColumn fx:id="tcTitle" minWidth="1.0" prefWidth="1.0" text="Name" />
                         <TableColumn fx:id="tcDescription" prefWidth="92.0" text="Description" />
