@@ -1,11 +1,13 @@
-package ua.softgroup.matrix.temppackage.model.responsemodels;
+package ua.softgroup.matrix.server.desktop.model.responsemodels;
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public enum ResponseStatus {
     SUCCESS,
-    BAD_CREDENTIALS,
+    FAIL,
+    INVALID_CREDENTIALS,
+    REPORT_EXISTS,
     INVALID_TOKEN,
     REPORT_EXPIRED;
 }

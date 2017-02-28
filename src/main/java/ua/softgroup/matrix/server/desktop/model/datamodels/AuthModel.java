@@ -1,14 +1,15 @@
-package ua.softgroup.matrix.temppackage.model;
+package ua.softgroup.matrix.server.desktop.model.datamodels;
 
 import java.io.Serializable;
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public class AuthModel implements Serializable {
+public class AuthModel implements Serializable, DataModel {
     private static final long serialVersionUID = 1L;
 
     private String username;
+
     private String password;
 
     public AuthModel(String username, String password) {

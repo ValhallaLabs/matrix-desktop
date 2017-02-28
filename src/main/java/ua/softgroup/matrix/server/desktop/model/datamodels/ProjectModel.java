@@ -1,9 +1,9 @@
-package ua.softgroup.matrix.temppackage.model.responsemodels;
+package ua.softgroup.matrix.server.desktop.model.datamodels;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ProjectModel implements Serializable {
+public class ProjectModel implements Serializable, DataModel {
     private static final long serialVersionUID = 1L;
 
     private long id;
@@ -18,9 +18,27 @@ public class ProjectModel implements Serializable {
 
     private LocalDate endDate;
 
+    private TimeModel projectTime;
+
     private int rate;
 
     private String rateCurrency;
+
+    public ProjectModel() {
+    }
+
+    public ProjectModel(long id, String title, String description, String authorName, LocalDate startDate,
+                        LocalDate endDate, TimeModel projectTime, int rate, String rateCurrency) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.authorName = authorName;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.projectTime = projectTime;
+        this.rate = rate;
+        this.rateCurrency = rateCurrency;
+    }
 
     public long getId() {
         return id;
@@ -70,6 +88,14 @@ public class ProjectModel implements Serializable {
         this.endDate = endDate;
     }
 
+    public TimeModel getProjectTime() {
+        return projectTime;
+    }
+
+    public void setProjectTime(TimeModel projectTime) {
+        this.projectTime = projectTime;
+    }
+
     public int getRate() {
         return rate;
     }
@@ -84,19 +110,5 @@ public class ProjectModel implements Serializable {
 
     public void setRateCurrency(String rateCurrency) {
         this.rateCurrency = rateCurrency;
-    }
-
-    @Override
-    public String toString() {
-        return "ProjectModel{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", authorName='" + authorName + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", rate=" + rate +
-                ", rateCurrency=" + rateCurrency +
-                '}';
     }
 }

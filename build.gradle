@@ -49,6 +49,7 @@ dependencies {
     compile 'com.1stleg:jnativehook:2.1.0'
     compile 'net.java.dev.jna:jna:4.3.0'
     compile 'net.java.dev.jna:jna-platform:4.3.0'
+    compile 'com.google.guava:guava:19.0'
     testCompile 'junit:junit:4.12'
 }
 

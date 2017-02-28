@@ -1,127 +1,93 @@
 package ua.softgroup.matrix.server.desktop.api;
 
-import ua.softgroup.matrix.server.desktop.model.ActiveWindowsModel;
-import ua.softgroup.matrix.server.desktop.model.ClientSettingsModel;
-import ua.softgroup.matrix.server.desktop.model.ProjectModel;
-import ua.softgroup.matrix.server.desktop.model.ReportModel;
-import ua.softgroup.matrix.server.desktop.model.ScreenshotModel;
-import ua.softgroup.matrix.server.desktop.model.SynchronizedModel;
-import ua.softgroup.matrix.server.desktop.model.TimeModel;
-import ua.softgroup.matrix.server.desktop.model.TokenModel;
-import ua.softgroup.matrix.server.desktop.model.UserPassword;
-import ua.softgroup.matrix.server.desktop.model.WriteKeyboard;
+import ua.softgroup.matrix.server.desktop.model.datamodels.CheckPointModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.InitializeModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.SynchronizedModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.AuthModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.TimeModel;
+import ua.softgroup.matrix.server.desktop.model.requestmodels.RequestModel;
+import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseModel;
+import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseStatus;
+
+import java.util.Set;
 
 public enum ServerCommands {
 
     /**
-     * The command for a user authentication. The server expects to read the {@link UserPassword} object
-     * and then return a string token in the case of successful authentication,
-     * {@link Constants#INVALID_USERNAME}/{@link Constants#INVALID_PASSWORD} otherwise.
+     * The command for a user authentication. The server expects to read the {@link RequestModel<AuthModel>} object
+     * and then return a {@link ResponseModel<InitializeModel>} with a {@link ResponseStatus#SUCCESS}
+     * in the case of successful authentication, a {@link ResponseStatus#INVALID_CREDENTIALS} otherwise.
      */
     AUTHENTICATE,
 
     /**
-     * The command for retrieving a user's active projects. The server expects to read the {@link TokenModel} object
-     * and then return a set of {@link ProjectModel}'s.
-     */
-    GET_ALL_PROJECT,
-
-    /**
-     * The command for saving/editing a user's report. The server expects to read the {@link ReportModel} object
-     * and then return {@link Constants#REPORT_EXISTS} if user already saved a report today
-     * or {@link Constants#REPORT_EXPIRED} if user tried to edit a report that expired,
-     * {@link Constants#TOKEN_VALIDATED} otherwise.
-     */
-    SAVE_REPORT,
-
-    /**
-     * The command for retrieving a user's all reports. The server expects to read the {@link TokenModel} object
-     * and then return a set of {@link ReportModel}'s.
-     */
-    GET_ALL_REPORTS,
-
-    /**
-     * The command for retrieving a user's reports of the specified project. The server expects
-     * to read the {@link TokenModel} object and the project' id as a primitive {@code long} value sequentially.
-     * Then the server returns a set of {@link ReportModel}'s.
-     */
-    GET_REPORTS_BY_PROJECT_ID,
-
-    /**
-     * The command for saving a user's screenshot. The server expects to read the {@link ScreenshotModel} object
-     * and then return nothing.
-     */
-    SAVE_SCREENSHOT,
-
-    /**
-     * That command indicates that a user starts his work. The server expects to read the {@link TimeModel} object
-     * and then return nothing.
+     * That command indicates that a user starts his work. The server expects to read the {@link RequestModel} object
+     * and then return a {@link ResponseModel} with a {@link ResponseStatus#SUCCESS} in the case of successful start,
+     * {@link ResponseStatus#FAIL} otherwise.
      */
     START_WORK,
 
     /**
-     * That command indicates that a user ends his work. The server expects to read the {@link TimeModel} object
-     * and then return nothing.
+     * That command indicates a period of user's work. The server expects to read the {@link RequestModel<CheckPointModel>}
+     * object and then return a {@link ResponseModel<TimeModel>} with a {@link ResponseStatus#SUCCESS} in the case of
+     * successful start, {@link ResponseStatus#FAIL} otherwise.
+     */
+    CHECK_POINT,
+
+    /**
+     * That command indicates that a user ends his work. The server expects to read the {@link RequestModel} object
+     * and then return a {@link ResponseModel} with a {@link ResponseStatus#SUCCESS} in the case of successful start,
+     * {@link ResponseStatus#FAIL} otherwise.
      */
     END_WORK,
 
     /**
-     * The command for retrieving total time of the specified user's project. The server expects to read
-     * the {@link TimeModel} object and then return the {@link TimeModel} object with hours/minutes and
-     * a percentage of idling.
+     * That command indicates that starts idling. The server expects to read the {@link RequestModel} object
+     * and then return a {@link ResponseModel} with a {@link ResponseStatus#SUCCESS} in the case of successful start,
+     * {@link ResponseStatus#FAIL} otherwise.
      */
-    GET_TOTAL_TIME,
+    START_IDLE,
 
     /**
-     * The command for retrieving today's time of the specified user's project. The server expects to read
-     * the {@link TimeModel} object and then return the {@link TimeModel} object with hours/minutes.
+     * That command indicates that ends idling. The server expects to read the {@link RequestModel} object
+     * and then return a {@link ResponseModel} with a {@link ResponseStatus#SUCCESS} in the case of successful start,
+     * {@link ResponseStatus#FAIL} otherwise.
      */
-    GET_TODAY_TIME,
+    STOP_IDLE,
 
     /**
-     * The command for checking if available new setting. ABSOLUTELY MEANINGLESS AND NEEDLESS.
-     * The server expects to read a primitive {@code long} value and return a primitive {@code boolean} value.
-     */
-    CHECK_UPDATE_SETTING,
-
-    /**
-     * The command for updating client's settings. The server returns the {@link ClientSettingsModel} object.
-     */
-    UPDATE_SETTING,
-
-    /**
-     * The command for syncing with client after offline. The server expects to read
-     * the {@link SynchronizedModel} object and then return a primitive {@code boolean} flag of success/failure.
+     * The command for syncing with client after offline. The server expects to read the
+     * {@link RequestModel<SynchronizedModel>} object and then return a {@link ResponseModel} with a
+     * {@link ResponseStatus#SUCCESS} in the case of successful start, {@link ResponseStatus#FAIL} otherwise.
      */
     SYNCHRONIZED,
 
     /**
-     * That command indicates that starts idling. The server expects to read the {@link TimeModel} object
-     * and then return nothing.
+     * The command for retrieving a user's reports of the specified project. The server expects
+     * to read the {@link RequestModel}. Then the server returns a {@link ResponseModel<Set<ReportModel>>} with a
+     * {@link ResponseStatus#SUCCESS} in the case of successful start, {@link ResponseStatus#FAIL} otherwise.
      */
-    START_DOWNTIME,
+    GET_REPORTS,
 
     /**
-     * That command indicates that ends idling. The server expects to read the {@link TimeModel} object
-     * and then return nothing.
+     * The command for retrieving a user's active projects. The server expects to read the {@link RequestModel}.
+     * Then the server returns a {@link ResponseModel<Set<ProjectModel>>} with a {@link ResponseStatus#SUCCESS}
+     * in the case of successful start, {@link ResponseStatus#FAIL} otherwise.
      */
-    STOP_DOWNTIME,
+    GET_ALL_PROJECT,
 
     /**
-     * The command for saving a user's keyboard log. The server expects to read the {@link WriteKeyboard} object
-     * and then return nothing.
+     * The command for saving/editing a user's report. The server expects to read the {@link RequestModel<ReportModel>}
+     * object and then return a {@link ResponseModel} with a {@link ResponseStatus#REPORT_EXISTS} if user already saved
+     * a report today or {@link ResponseStatus#REPORT_EXPIRED} if user tried to edit a report that expired,
+     * {@link ResponseStatus#INVALID_TOKEN} otherwise.
      */
-    KEYBOARD_LOG,
-
-    /**
-     * The command for saving a user's active windows. The server expects to read
-     * the {@link ActiveWindowsModel} object and then return nothing.
-     */
-    ACTIVE_WINDOWS_LOG,
+    SAVE_REPORT,
 
     /**
      * That command close socket connection.
      */
     CLOSE
-
 }

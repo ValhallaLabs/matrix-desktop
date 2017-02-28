@@ -1,7 +1,7 @@
 package ua.softgroup.matrix.desktop.currentsessioninfo;
 
-import ua.softgroup.matrix.temppackage.model.responsemodels.InitializeModel;
-import ua.softgroup.matrix.temppackage.model.responsemodels.ProjectModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.InitializeModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
 
 import java.util.Set;
 

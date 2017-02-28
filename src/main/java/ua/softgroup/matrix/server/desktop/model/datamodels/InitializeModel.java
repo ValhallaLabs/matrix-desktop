@@ -1,11 +1,12 @@
-package ua.softgroup.matrix.temppackage.model.responsemodels;
+package ua.softgroup.matrix.server.desktop.model.datamodels;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public class InitializeModel extends ResponseModel {
+public class InitializeModel implements Serializable, DataModel {
     private static final long serialVersionUID = 1L;
 
     private String token;
@@ -17,6 +18,17 @@ public class InitializeModel extends ResponseModel {
     private long screenshotFrequency;
 
     private long checkPointFrequency;
+
+    public InitializeModel() {
+    }
+
+    public InitializeModel(String token, Set<ProjectModel> projectModels, long idlePeriod, long screenshotFrequency, long checkPointFrequency) {
+        this.token = token;
+        this.projectModels = projectModels;
+        this.idlePeriod = idlePeriod;
+        this.screenshotFrequency = screenshotFrequency;
+        this.checkPointFrequency = checkPointFrequency;
+    }
 
     public String getToken() {
         return token;

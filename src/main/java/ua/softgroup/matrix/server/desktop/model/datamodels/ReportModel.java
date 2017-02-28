@@ -1,11 +1,10 @@
-package ua.softgroup.matrix.temppackage.model.responsemodels;
+package ua.softgroup.matrix.server.desktop.model.datamodels;
 
-import ua.softgroup.matrix.server.desktop.model.TokenModel;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ReportModel implements Serializable {
+public class ReportModel implements Serializable, DataModel {
     private static final long serialVersionUID = 1L;
 
     private long id;
@@ -19,6 +18,9 @@ public class ReportModel implements Serializable {
     private LocalDate date;
 
     private String workTime;
+
+    public ReportModel() {
+    }
 
     public ReportModel(long id, String text, long projectId, boolean checked, LocalDate date, String workTime) {
         this.id = id;
