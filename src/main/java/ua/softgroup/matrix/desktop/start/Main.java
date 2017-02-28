@@ -25,6 +25,10 @@ public class Main extends Application {
 
     }
 
+    /**
+     * Tells {@link Main} to open login window
+     * @param loginStage for create stage
+     */
     public void startLoginLayout(Stage loginStage) {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
@@ -39,7 +43,7 @@ public class Main extends Application {
             loginStage.setResizable(false);
             loginStage.show();
         } catch (IOException e) {
-            logger.debug("Error when start Main Window");
+            logger.debug("Error when start Main Window "+e);
         }
     }
 }

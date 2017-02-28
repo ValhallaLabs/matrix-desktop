@@ -204,7 +204,7 @@
                               <Insets left="10.0" right="10.0" top="40.0" />
                            </padding>
                            <children>
-                              <Button fx:id="btnChangeReport" defaultButton="true" disable="true" mnemonicParsing="false" onAction="#ChangeReportWindow" prefHeight="40.0" prefWidth="300.0" styleClass="change-report-button" text="Сhange Report" textFill="WHITE">
+                              <Button fx:id="btnChangeReport" defaultButton="true" disable="true" mnemonicParsing="false" onAction="#changeReport" prefHeight="40.0" prefWidth="300.0" styleClass="change-report-button" text="Сhange Report" textFill="WHITE">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </VBox.margin>
@@ -212,7 +212,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnCancelReport" cancelButton="true" mnemonicParsing="false" onAction="#CancelReportWindow" prefHeight="40.0" prefWidth="300.0" styleClass="cancel-report-button" text="Cancel" textFill="WHITE">
+                              <Button fx:id="btnCancelReport" cancelButton="true" mnemonicParsing="false" onAction="#CancelAndCloseReportWindow" prefHeight="40.0" prefWidth="300.0" styleClass="cancel-report-button" text="Cancel" textFill="WHITE">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" top="10.0" />
                                  </VBox.margin>
