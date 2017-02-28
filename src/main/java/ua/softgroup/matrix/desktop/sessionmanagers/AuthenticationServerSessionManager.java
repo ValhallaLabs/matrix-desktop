@@ -13,7 +13,6 @@ import ua.softgroup.matrix.server.desktop.api.ServerCommands;
 import ua.softgroup.matrix.temppackage.model.AuthModel;
 import ua.softgroup.matrix.temppackage.model.responsemodels.InitializeModel;
 import ua.softgroup.matrix.temppackage.model.responsemodels.ResponseStatus;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.concurrent.CountDownLatch;
@@ -95,7 +94,6 @@ public class AuthenticationServerSessionManager {
         objectOutputStream.flush();
         return (InitializeModel) new ObjectInputStream(socket.getInputStream()).readObject();
     }
-
 
     /**
      * Checks {@link InitializeModel} response status.
