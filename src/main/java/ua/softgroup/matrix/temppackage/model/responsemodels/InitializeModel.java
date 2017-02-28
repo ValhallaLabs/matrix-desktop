@@ -18,10 +18,6 @@ public class InitializeModel extends ResponseModel {
 
     private long checkPointFrequency;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
     public String getToken() {
         return token;
     }
