@@ -15,27 +15,20 @@ import java.io.*;
  */
 public class ScreenShooter {
     private static final Logger logger = LoggerFactory.getLogger(ScreenShooter.class);
-    private long projectId;
-
-    public ScreenShooter(long projectId) {
-        this.projectId = projectId;
-    }
 
     /**
      * Tries to make screenshot
      * @return screenshotModel model with screenshot
      */
-    public ScreenshotModel makeScreenshot() {
+    public byte[] makeScreenshot() {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//            TODO: remove it or create folder for screenshots and save it by date
-//            ImageIO.write(getScreenCapture(), "png", new File("matrix.png"));
             ImageIO.write(getScreenCapture(), "png", baos);
             baos.flush();
             byte[] imageInByte = baos.toByteArray();
             baos.close();
             logger.debug("Screenshot was created successfully");
-            return new ScreenshotModel(CurrentSessionInfo.getTokenModel().getToken(), imageInByte, projectId);
+            return imageInByte;
         } catch (AWTException | IOException | NullPointerException e) {
             logger.debug("Screenshot was created unsuccessfully", e);
         }

@@ -18,8 +18,7 @@ class LinuxActiveWindowListener extends ActiveWindowListener {
     private final XLib xlib;
     private Display display;
 
-    LinuxActiveWindowListener(long projectId) {
-        super(projectId);
+    LinuxActiveWindowListener() {
         x11 = X11.INSTANCE;
         xlib = XLib.INSTANCE;
         display = x11.XOpenDisplay(null);

@@ -5,10 +5,11 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
-import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitListener;
+import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
 import ua.softgroup.matrix.server.desktop.model.ActiveWindowsModel;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -19,18 +20,13 @@ import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.WAS
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public abstract class ActiveWindowListener extends SpyKitListener {
+public abstract class ActiveWindowListener extends SpyKitTool {
     private static final Logger logger = LoggerFactory.getLogger(ActiveWindowListener.class);
     private long time;
     private String currentTitle = "";
-    private ActiveWindowsModel activeWindowsModel;
     private Disposable titleReaderDisposable;
     private CountDownLatch countDownLatch;
-
-    public ActiveWindowListener(long projectId) {
-        activeWindowsModel = new ActiveWindowsModel(CurrentSessionInfo.getTokenModel().getToken(), projectId);
-    }
-
+    private Map<String, Long> windowTimeMap = new LinkedHashMap<>();
     /**
      * Tries to turn on ActiveWindowListener
      */
@@ -103,12 +99,12 @@ public abstract class ActiveWindowListener extends SpyKitListener {
      * If not exist, it adds new title with time to window time map.
      */
     private synchronized void addTittleToActiveWindowModelTimeMap() {
-        if (activeWindowsModel.getWindowTimeMap().get(currentTitle) != null) {
-            long prevTimeValue = activeWindowsModel.getWindowTimeMap().get(currentTitle);
-            activeWindowsModel.getWindowTimeMap().put(currentTitle, prevTimeValue + time);
+        if (windowTimeMap.get(currentTitle) != null) {
+            long prevTimeValue = windowTimeMap.get(currentTitle);
+            windowTimeMap.put(currentTitle, prevTimeValue + time);
             return;
         }
-        activeWindowsModel.getWindowTimeMap().put(currentTitle, time);
+        windowTimeMap.put(currentTitle, time);
     }
 
     /**
@@ -132,10 +128,9 @@ public abstract class ActiveWindowListener extends SpyKitListener {
      * Returns activeWindowsModel with titles of active windows.
      * @return activeWindowsModel
      */
-    @Override
-    public synchronized ActiveWindowsModel getLogs(){
+    public synchronized Map<String, Long> getWindowTimeMap(){
         addTittleToActiveWindowModelTimeMap();
         time = 0;
-        return activeWindowsModel;
+        return windowTimeMap;
     }
 }

@@ -10,8 +10,7 @@ import org.jnativehook.keyboard.NativeKeyListener;
 import org.jnativehook.mouse.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
-import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitListener;
+import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
 import ua.softgroup.matrix.server.desktop.model.WriteKeyboard;
 
@@ -28,7 +27,7 @@ import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.WAS
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public class NativeDevicesListener extends SpyKitListener {
+public class NativeDevicesListener extends SpyKitTool {
     private static final Logger logger = LoggerFactory.getLogger(NativeDevicesListener.class);
     private static final String START_COUNT_UNTIL_DT_POINT = "Start count until downtime",
             STOP_COUNT_UNTIL_DT_POINT = "Stop count until downtime";
@@ -39,7 +38,6 @@ public class NativeDevicesListener extends SpyKitListener {
     private StringBuilder keyboardLogs;
     private double mouseFootage;
     private Point prevMousePosition;
-    private long projectId;
     private EventListener globalMouseWheelListener, globalMouseListener, globalKeyListener;
 
     public NativeDevicesListener(TimeTracker timeTracker) {
@@ -76,7 +74,6 @@ public class NativeDevicesListener extends SpyKitListener {
     /**
      * Creates and subscribe flowable that received items emitted by startCountFlowable and stopCountFlowable.
      * The flowable controls start and stop of counting downtime, and time until starts count it.
-     * @return downtimeControlDisposable
      */
     private void createDowntimeControlFlowable() {
         downtimeControlDisposable = Flowable.merge(createStartCountUntilDtFlowable(), createStopCountUntilDtFlowable())
@@ -228,13 +225,16 @@ public class NativeDevicesListener extends SpyKitListener {
      * Clears keyboardLogs string builder and mouseFootage count.
      * @return writeKeyboard model with keyboard logs
      */
-    @Override
-    public synchronized WriteKeyboard getLogs() {
-        //TODO: Add to WriteKeyboard field of mouse footage and set here, and then clear mouse footage
-        WriteKeyboard writeKeyboard = new WriteKeyboard(CurrentSessionInfo.getTokenModel().getToken(),
-                keyboardLogs.toString(), projectId);
-        keyboardLogs = new StringBuilder("");
-        return writeKeyboard;
+    public synchronized String getKeyboardLogs() {
+        String keyboardLogs = this.keyboardLogs.toString();
+        this.keyboardLogs = new StringBuilder("");
+        return keyboardLogs;
+    }
+
+    public synchronized double getMouseFootage() {
+        double mouseFootage = this.mouseFootage;
+        this.mouseFootage = 0;
+        return mouseFootage;
     }
 
     private class GlobalMouseWheelListener implements NativeMouseWheelListener {

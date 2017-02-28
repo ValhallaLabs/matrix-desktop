@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.MainLayoutController;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
-import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitListener;
+import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWindowListener;
 import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWindowListenerFactory;
 import ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.NativeDevicesListener;
 import ua.softgroup.matrix.desktop.spykit.screenshooter.ScreenShooter;
@@ -26,7 +26,8 @@ import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.WAS
 public class TimeTracker extends SpyKitTool {
     private static final Logger logger = LoggerFactory.getLogger(TimeTracker.class);
     private MainLayoutController mainLayoutController;
-    private SpyKitListener activeWindowListener, devicesListener;
+    private ActiveWindowListener activeWindowListener;
+    private NativeDevicesListener devicesListener;
     private ScreenShooter screenShooter;
     private CountDownLatch countDownLatch;
     private long projectId;
@@ -73,7 +74,7 @@ public class TimeTracker extends SpyKitTool {
      * Call methods of initializing and turning on all spy kit tools.
      */
     private void turnOnSpyKitTools() {
-        screenShooter = new ScreenShooter(projectId);
+        screenShooter = new ScreenShooter();
         starActiveWindowListenerThread();
         starDevicesListenerThread();
     }
@@ -96,7 +97,7 @@ public class TimeTracker extends SpyKitTool {
      * Initialize and turn on active window listener.
      */
     private void turnOnActiveWindowListener() throws Exception {
-        activeWindowListener = ActiveWindowListenerFactory.getListener(projectId);
+        activeWindowListener = ActiveWindowListenerFactory.getListener();
         if(activeWindowListener != null) {
             activeWindowListener.turnOn();
         }
@@ -141,8 +142,9 @@ public class TimeTracker extends SpyKitTool {
         //Temporary realization
         logger.debug("Control point #{}", number);
         screenShooter.makeScreenshot();
-        logger.debug("Active windows:{}", activeWindowListener.getLogs());
-        logger.debug("Keyboard logs:{}", devicesListener.getLogs());
+        logger.debug("Active windows:{}", activeWindowListener.getWindowTimeMap());
+        logger.debug("Keyboard logs:{}", devicesListener.getKeyboardLogs());
+        logger.debug("Mouse footage:{}", devicesListener.getMouseFootage());
     }
 
     @Override
