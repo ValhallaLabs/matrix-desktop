@@ -33,6 +33,17 @@ public class ReportModel implements Serializable, DataModel {
         this.workTime = workTime;
     }
 
+    public ReportModel(String text, LocalDate now) {
+        this.text=text;
+        this.date=now;
+    }
+
+    public ReportModel(Long currentReportId, String text, Long currentProjectId) {
+        this.id=currentReportId;
+        this.text=text;
+        this.projectId=currentProjectId;
+    }
+
     public long getId() {
         return id;
     }

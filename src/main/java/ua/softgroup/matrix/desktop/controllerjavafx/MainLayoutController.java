@@ -81,7 +81,7 @@ public class MainLayoutController {
      * Tells {@link MainLayoutController} to open and set in the center of it project window
      * @param mainLayout
      */
-    public void startProjectsLayoutController(BorderPane mainLayout) {
+    public void  startProjectsLayoutController(BorderPane mainLayout) {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();

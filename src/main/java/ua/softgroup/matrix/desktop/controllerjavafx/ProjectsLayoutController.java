@@ -14,8 +14,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
-import ua.softgroup.matrix.server.desktop.model.ProjectModel;
-import ua.softgroup.matrix.server.desktop.model.ReportModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -136,6 +137,8 @@ public class ProjectsLayoutController {
                 setReportInfoInTextAreaAndButton(projectModel);
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
         }).start();
     }
@@ -168,7 +171,7 @@ public class ProjectsLayoutController {
      */
     @SuppressWarnings("unchecked")
     private void setProjectInTable() {
-        Set<ProjectModel> projectModelSet = CurrentSessionInfo.getUserActiveProjects();
+        Set<ProjectModel> projectModelSet = CurrentSessionInfo.getProjectModels();
         if (projectModelSet != null && !projectModelSet.isEmpty()) {
             projectModelSet.forEach(projectsData::add);
 //        for (ProjectModel projectModel : projectModelSet) {
@@ -212,7 +215,7 @@ public class ProjectsLayoutController {
      * @param event callback click on table view
      * @throws IOException
      */
-    public void chosenProject(Event event) throws IOException {
+    public void chosenProject(Event event) throws IOException, ClassNotFoundException {
         openReportWindowOnTwoMouseClick(event);
         taWriteReport.setText("");
         taWriteReport.setEditable(true);
@@ -245,7 +248,7 @@ public class ProjectsLayoutController {
      * @param projectModel current project what user choose in table view
      * @throws IOException
      */
-    private void setReportInfoInTextAreaAndButton(ProjectModel projectModel) throws IOException {
+    private void setReportInfoInTextAreaAndButton(ProjectModel projectModel) throws IOException, ClassNotFoundException {
         Set<ReportModel> reportModel = null;
         reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
         for (ReportModel model :
@@ -265,9 +268,8 @@ public class ProjectsLayoutController {
      * @throws IOException
      */
     public void sendReport(ActionEvent actionEvent) throws IOException {
-        ReportModel reportModel = new ReportModel(CurrentSessionInfo.getTokenModel().getToken(), taWriteReport.getText(), CurrentSessionInfo.getProjectId(), LocalDate.now());
-        reportModel.setTitle("kaban gay");
-        reportServerSessionManager.saveReportToServer(reportModel);
+        ReportModel reportModel = new ReportModel(taWriteReport.getText(), LocalDate.now());
+        reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
         btnSendReport.setDisable(true);
         taWriteReport.setEditable(false);
     }
