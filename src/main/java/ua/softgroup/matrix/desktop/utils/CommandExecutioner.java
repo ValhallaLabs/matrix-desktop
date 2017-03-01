@@ -14,7 +14,7 @@ import java.net.Socket;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public class CommandExecutioner<T extends DataModel> {
+public class CommandExecutioner {
     private long projectId = -1;
 
     public CommandExecutioner() {
@@ -25,10 +25,10 @@ public class CommandExecutioner<T extends DataModel> {
     }
 
     public void sendCommand(Socket socket, ServerCommands serverCommand) throws IOException {
-        sendCommand(socket, serverCommand, new RequestModel<T>(CurrentSessionInfo.getToken(), projectId));
+        sendCommand(socket, serverCommand, new RequestModel(CurrentSessionInfo.getToken(), projectId));
     }
 
-    public void sendCommand(Socket socket, ServerCommands serverCommand, T dataModel) throws IOException {
+    public <T extends DataModel> void sendCommand(Socket socket, ServerCommands serverCommand, T dataModel) throws IOException {
         sendCommand(socket, serverCommand, new RequestModel<T>(CurrentSessionInfo.getToken(), projectId, dataModel));
     }
 
@@ -39,8 +39,8 @@ public class CommandExecutioner<T extends DataModel> {
         objectOutputStream.flush();
     }
 
-    private ResponseModel getResponse(Socket socket) throws IOException, ClassNotFoundException {
+    private <T extends DataModel> ResponseModel<T> getResponse(Socket socket) throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-        return (ResponseModel) objectInputStream.readObject();
+        return (ResponseModel<T>) objectInputStream.readObject();
     }
 }
