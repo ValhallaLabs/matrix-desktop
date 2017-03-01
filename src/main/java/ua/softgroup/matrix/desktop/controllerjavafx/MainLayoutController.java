@@ -1,9 +1,12 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
@@ -11,12 +14,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
@@ -39,6 +44,9 @@ public class MainLayoutController {
     private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 900;
     private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 600;
     private static final Logger logger = LoggerFactory.getLogger(MainLayoutController.class);
+    private static final String ALERT_ERROR_TITLE = "Supervisor";
+    private static final String ALERT_CONTENT_TEXT = "Something go wrong .Programs will be close";
+    private static final String ALERT_HEADER_TEXT = "Supervisor ERROR";
     @FXML
     public Menu menuReport;
     @FXML
@@ -145,6 +153,22 @@ public class MainLayoutController {
             InstructionsStage.show();
         } catch (IOException e) {
             logger.debug("Error when start Instructions Window " + e);
+        }
+    }
+    /**
+     * When something go wrong , create alert with message to user
+     * and then click on button close programme
+     */
+    public void tellUserAboutCrash() {
+        Alert mainAlert = new Alert(Alert.AlertType.INFORMATION);
+        mainAlert.setTitle(ALERT_ERROR_TITLE);
+        mainAlert.setHeaderText(ALERT_HEADER_TEXT);
+        mainAlert.setContentText(ALERT_CONTENT_TEXT);
+        mainAlert.initStyle(StageStyle.UTILITY);
+        mainAlert.setOnCloseRequest(event -> Platform.exit());
+        Optional<ButtonType> result = mainAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Platform.exit();
         }
     }
 }
