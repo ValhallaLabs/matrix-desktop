@@ -21,12 +21,6 @@ import java.io.IOException;
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-
-/**
- * TODO For Andrii Bei:
- * 1) Create method that will load user projects in table form CurrentSessionManager(need to use synchronization,
- * will think about it together later, just make some sketches).
- */
 public class MainLayoutController {
     private static final String REPORT_LAYOUT = "fxml/reportLayout.fxml";
     private static final int REPORT_LAYOUT_MIN_WIDTH = 1200;
