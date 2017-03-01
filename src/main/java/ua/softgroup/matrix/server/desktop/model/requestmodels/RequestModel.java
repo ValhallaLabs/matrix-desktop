@@ -15,19 +15,21 @@ public class RequestModel<T extends DataModel> implements Serializable {
 
     private long projectId;
 
-    private Optional<T> container;
+    private Optional<T> dataContainer;
 
-    public RequestModel() {
-    }
-
-    public RequestModel(Optional<T> container) {
-        this.container = container;
-    }
-
-    public RequestModel(String token, long projectId, Optional<T> container) {
+    public RequestModel(String token, long projectId) {
         this.token = token;
         this.projectId = projectId;
-        this.container = container;
+    }
+
+    public RequestModel(T dataModel) {
+        dataContainer = Optional.of(dataModel);
+    }
+
+    public RequestModel(String token, long projectId, T dataModel) {
+        this.token = token;
+        this.projectId = projectId;
+        dataContainer = Optional.of(dataModel);
     }
 
     public String getToken() {
@@ -46,11 +48,11 @@ public class RequestModel<T extends DataModel> implements Serializable {
         this.projectId = projectId;
     }
 
-    public Optional<T> getContainer() {
-        return container;
+    public Optional<T> getDataContainer() {
+        return dataContainer;
     }
 
-    public void setContainer(Optional<T> container) {
-        this.container = container;
+    public void setDataContainer(Optional<T> dataContainer) {
+        this.dataContainer = dataContainer;
     }
 }

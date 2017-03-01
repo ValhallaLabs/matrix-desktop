@@ -12,7 +12,7 @@ import java.util.Set;
 public class CurrentSessionInfo {
     private static InitializeModel initializeModel;
     private static long projectId;
-    
+
 //    public static InitializeModel getInitializeModel() {
 //        return initializeModel;
 //    }

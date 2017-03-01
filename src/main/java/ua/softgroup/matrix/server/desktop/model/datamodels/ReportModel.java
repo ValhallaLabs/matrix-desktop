@@ -19,6 +19,8 @@ public class ReportModel implements Serializable, DataModel {
 
     private String workTime;
 
+    private byte[] attachment;
+
     public ReportModel() {
     }
 
@@ -77,5 +79,13 @@ public class ReportModel implements Serializable, DataModel {
 
     public void setWorkTime(String workTime) {
         this.workTime = workTime;
+    }
+
+    public byte[] getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(byte[] attachment) {
+        this.attachment = attachment;
     }
 }

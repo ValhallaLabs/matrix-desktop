@@ -19,9 +19,9 @@ public abstract class ResponseModel<T extends DataModel> implements Serializable
         this.responseStatus = responseStatus;
     }
 
-    public ResponseModel(ResponseStatus responseStatus, Optional<T> container) {
+    public ResponseModel(ResponseStatus responseStatus, T dataModel) {
         this.responseStatus = responseStatus;
-        this.container = container;
+        container = Optional.of(dataModel);
     }
 
     public ResponseStatus getResponseStatus() {
