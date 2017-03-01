@@ -12,8 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
-import ua.softgroup.matrix.server.desktop.model.WriteKeyboard;
-
 import java.awt.*;
 import java.util.EventListener;
 import java.util.EventObject;
@@ -221,8 +219,7 @@ public class NativeDevicesListener extends SpyKitTool {
     }
 
     /**
-     * Returns {@link WriteKeyboard} model with logs of keyboard and footage of mouse.
-     * Clears keyboardLogs string builder and mouseFootage count.
+     * Returns a string object with logs of keyboard. Clears keyboardLogs string builder.
      * @return writeKeyboard model with keyboard logs
      */
     public synchronized String getKeyboardLogs() {
@@ -231,6 +228,10 @@ public class NativeDevicesListener extends SpyKitTool {
         return keyboardLogs;
     }
 
+    /**
+     * Returns a double primitive with mouse's footage. Clears mouse's footage.
+     * @return writeKeyboard model with keyboard logs
+     */
     public synchronized double getMouseFootage() {
         double mouseFootage = this.mouseFootage;
         this.mouseFootage = 0;

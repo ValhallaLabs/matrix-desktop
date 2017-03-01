@@ -11,6 +11,7 @@ import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWi
 import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWindowListenerFactory;
 import ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.NativeDevicesListener;
 import ua.softgroup.matrix.desktop.spykit.screenshooter.ScreenShooter;
+import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;

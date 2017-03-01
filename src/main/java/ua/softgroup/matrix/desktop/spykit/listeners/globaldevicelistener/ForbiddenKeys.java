@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public class ForbiddenKeys {
+class ForbiddenKeys {
     private static int[] forbiddenKeysArray = {
             NativeKeyEvent.VC_CONTROL, NativeKeyEvent.VC_ALT, NativeKeyEvent.VC_SHIFT, NativeKeyEvent.VC_CAPS_LOCK,
             NativeKeyEvent.VC_TAB, NativeKeyEvent.VC_BACKSPACE, NativeKeyEvent.VC_ENTER,
@@ -24,7 +24,7 @@ public class ForbiddenKeys {
             NativeKeyEvent.VC_F6, NativeKeyEvent.VC_F7, NativeKeyEvent.VC_F8, NativeKeyEvent.VC_F9, NativeKeyEvent.VC_F10,
             NativeKeyEvent.VC_F11, NativeKeyEvent.VC_F12};
 
-    public static boolean isForbidden(int keyCode) {
+    static boolean isForbidden(int keyCode) {
         return IntStream.of(forbiddenKeysArray).anyMatch(x -> x == keyCode);
     }
 }

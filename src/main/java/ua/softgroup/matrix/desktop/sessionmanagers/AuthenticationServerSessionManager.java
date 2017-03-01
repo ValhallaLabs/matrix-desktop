@@ -19,6 +19,8 @@ import java.io.*;
 import java.net.Socket;
 import java.util.concurrent.CountDownLatch;
 
+import static ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseStatus.SUCCESS;
+
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
@@ -102,7 +104,7 @@ public class AuthenticationServerSessionManager {
      */
     private boolean handleServerAuthResponse(ResponseModel<InitializeModel> responseModel) {
         logger.debug("Auth response status {}", responseModel.getResponseStatus());
-        if (ResponseStatus.SUCCESS != responseModel.getResponseStatus()) {
+        if (SUCCESS != responseModel.getResponseStatus()) {
             loginLayoutController.errorLoginPassword();
             return false;
         }

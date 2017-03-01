@@ -2,8 +2,6 @@ package ua.softgroup.matrix.desktop.spykit.screenshooter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
-import ua.softgroup.matrix.server.desktop.model.ScreenshotModel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

@@ -6,8 +6,6 @@ import io.reactivex.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
-import ua.softgroup.matrix.server.desktop.model.ActiveWindowsModel;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
@@ -83,7 +81,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
     }
 
     /**
-     * Calls method for adding current title to {@link ActiveWindowsModel}.
+     * Calls method for adding current title to window time map.
      * Resets time, ands set new title as current title.
      * @param newTitle new title
      */
