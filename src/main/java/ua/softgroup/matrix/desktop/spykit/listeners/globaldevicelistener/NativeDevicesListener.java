@@ -151,7 +151,7 @@ public class NativeDevicesListener extends SpyKitTool {
      */
     private String stopDowntime(String stopPoint) {
         if (isDowntime) {
-            timeTracker.stopDowntime();
+            timeTracker.stopIdle();
             logger.debug("Down time is stopped!");
             isDowntime = false;
         }
@@ -164,7 +164,7 @@ public class NativeDevicesListener extends SpyKitTool {
      */
     private void startDowntime(String point){
         if (START_COUNT_UNTIL_DT_POINT.equals(point)) {
-            timeTracker.startDowntime();
+            timeTracker.startIdle();
             logger.debug("Down time is started!");
             isDowntime = true;
         }
@@ -229,8 +229,8 @@ public class NativeDevicesListener extends SpyKitTool {
     }
 
     /**
-     * Returns a double primitive with mouse's footage. Clears mouse's footage.
-     * @return writeKeyboard model with keyboard logs
+     * Returns a double primitive with mouse's footage. Reset mouse's footage.
+     * @return mouseFootage
      */
     public synchronized double getMouseFootage() {
         double mouseFootage = this.mouseFootage;
