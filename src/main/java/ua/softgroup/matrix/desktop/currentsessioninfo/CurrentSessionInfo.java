@@ -11,7 +11,8 @@ import java.util.Set;
 // TODO package structure
 public class CurrentSessionInfo {
     private static InitializeModel initializeModel;
-
+    private static long projectId;
+    
 //    public static InitializeModel getInitializeModel() {
 //        return initializeModel;
 //    }
@@ -20,7 +21,7 @@ public class CurrentSessionInfo {
         CurrentSessionInfo.initializeModel = initializeModel;
     }
 
-    public String getToken() {
+    public static String getToken() {
         return initializeModel.getToken();
     }
 
@@ -28,7 +29,7 @@ public class CurrentSessionInfo {
 //        initializeModel.setToken(token);
 //    }
 
-    public Set<ProjectModel> getProjectModels() {
+    public static Set<ProjectModel> getProjectModels() {
         return initializeModel.getProjectModels();
     }
 
@@ -36,7 +37,7 @@ public class CurrentSessionInfo {
 //        initializeModel.setProjectModels(projectModels);
 //    }
 
-    public long getIdlePeriod() {
+    public static long getIdlePeriod() {
         return initializeModel.getIdlePeriod();
     }
 
@@ -44,7 +45,7 @@ public class CurrentSessionInfo {
 //        initializeModel.setIdlePeriod(idlePeriod);
 //    }
 
-    public long getScreenshotFrequency() {
+    public static long getScreenshotFrequency() {
         return initializeModel.getScreenshotFrequency();
     }
 
@@ -52,7 +53,7 @@ public class CurrentSessionInfo {
 //        initializeModel.setScreenshotFrequency(screenshotFrequency);
 //    }
 
-    public long getCheckPointFrequency() {
+    public static long getCheckPointFrequency() {
         return initializeModel.getCheckPointFrequency();
     }
 
