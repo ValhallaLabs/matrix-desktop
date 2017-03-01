@@ -46,17 +46,19 @@ public class MainLayoutController {
 
     /**
      * Hears when user click on report menus item
+     *
      * @param actionEvent callback click on menu
      */
     public void startReportLayoutWindow(ActionEvent actionEvent) {
-       startReport(menuBar.getScene().getWindow());
+        startReport(menuBar.getScene().getWindow());
     }
 
     /**
      * Tells {@link MainLayoutController} open report window
+     *
      * @param window Window what will be owner by modality report window
      */
-     public void startReport(Window window){
+    public void startReport(Window window) {
         try {
             Stage primaryStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
@@ -72,13 +74,14 @@ public class MainLayoutController {
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {
-            logger.debug("Error when start Report Window "+e);
+            logger.debug("Error when start Report Window " + e);
             e.printStackTrace();
         }
     }
 
     /**
      * Tells {@link MainLayoutController} to open and set in the center of it project window
+     *
      * @param mainLayout
      */
     public void startProjectsLayoutController(BorderPane mainLayout) {
@@ -89,13 +92,14 @@ public class MainLayoutController {
             AnchorPane projectsLayout = loader.load();
             mainLayout.setCenter(projectsLayout);
         } catch (IOException e) {
-            logger.debug("Error when start Projects Window "+e);
+            logger.debug("Error when start Projects Window " + e);
         }
     }
 
     /**
      * Hears when user click on setting menus item and
      * tells {@link MainLayoutController} to open setting window
+     *
      * @param actionEvent callback click on menu
      */
     public void startSettingLayoutWindow(ActionEvent actionEvent) {
@@ -114,13 +118,14 @@ public class MainLayoutController {
             settingStage.setResizable(false);
             settingStage.show();
         } catch (IOException e) {
-            logger.debug("Error when start Setting Window "+e);
+            logger.debug("Error when start Setting Window " + e);
         }
     }
 
     /**
      * Hears when user click on setting menus item and
      * tells {@link MainLayoutController} to open instructions window
+     *
      * @param actionEvent callback click on menu
      */
     public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
@@ -139,7 +144,7 @@ public class MainLayoutController {
             InstructionsStage.setResizable(false);
             InstructionsStage.show();
         } catch (IOException e) {
-            logger.debug("Error when start Instructions Window "+e);
+            logger.debug("Error when start Instructions Window " + e);
         }
     }
 }

@@ -14,14 +14,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
-import ua.softgroup.matrix.server.desktop.model.ProjectModel;
-import ua.softgroup.matrix.server.desktop.model.ReportModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Set;
 
@@ -51,7 +52,7 @@ public class ProjectsLayoutController {
     @FXML
     public Label labelNameProject;
     @FXML
-    public Label labelDiscribeProject;
+    public Label labelDescribeProject;
     @FXML
     public Label labelStartWorkToday;
     @FXML
@@ -134,7 +135,7 @@ public class ProjectsLayoutController {
         new Thread(() -> {
             try {
                 setReportInfoInTextAreaAndButton(projectModel);
-            } catch (IOException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }).start();
@@ -168,7 +169,7 @@ public class ProjectsLayoutController {
      */
     @SuppressWarnings("unchecked")
     private void setProjectInTable() {
-        Set<ProjectModel> projectModelSet = CurrentSessionInfo.getUserActiveProjects();
+        Set<ProjectModel> projectModelSet = CurrentSessionInfo.getProjectModels();
         if (projectModelSet != null && !projectModelSet.isEmpty()) {
             projectModelSet.forEach(projectsData::add);
 //        for (ProjectModel projectModel : projectModelSet) {
@@ -187,7 +188,7 @@ public class ProjectsLayoutController {
     private void setOtherProjectInfoInView(ProjectModel projectModel) {
         CurrentSessionInfo.setProjectId(projectModel.getId());
         labelNameProject.setText(projectModel.getTitle());
-        labelDiscribeProject.setText(projectModel.getDescription());
+        labelDescribeProject.setText(projectModel.getDescription());
         if ((projectModel.getStartDate() != null && projectModel.getEndDate() != null)) {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
             labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
@@ -212,7 +213,7 @@ public class ProjectsLayoutController {
      * @param event callback click on table view
      * @throws IOException
      */
-    public void chosenProject(Event event) throws IOException {
+    public void chosenProject(Event event) throws IOException, ClassNotFoundException {
         openReportWindowOnTwoMouseClick(event);
         taWriteReport.setText("");
         taWriteReport.setEditable(true);
@@ -245,7 +246,7 @@ public class ProjectsLayoutController {
      * @param projectModel current project what user choose in table view
      * @throws IOException
      */
-    private void setReportInfoInTextAreaAndButton(ProjectModel projectModel) throws IOException {
+    private void setReportInfoInTextAreaAndButton(ProjectModel projectModel) throws IOException, ClassNotFoundException {
         Set<ReportModel> reportModel = null;
         reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
         for (ReportModel model :
@@ -265,9 +266,14 @@ public class ProjectsLayoutController {
      * @throws IOException
      */
     public void sendReport(ActionEvent actionEvent) throws IOException {
-        ReportModel reportModel = new ReportModel(CurrentSessionInfo.getTokenModel().getToken(), taWriteReport.getText(), CurrentSessionInfo.getProjectId(), LocalDate.now());
-        reportModel.setTitle("kaban gay");
-        reportServerSessionManager.saveReportToServer(reportModel);
+        byte[] attachFile = new byte[0];
+        if (file.exists() && file != null) {
+            attachFile = Files.readAllBytes(file.toPath());
+            System.out.println(Arrays.toString(attachFile));
+        }
+        System.out.println(Arrays.toString(attachFile));
+        ReportModel reportModel = new ReportModel(taWriteReport.getText(), LocalDate.now(), attachFile);
+        reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
         btnSendReport.setDisable(true);
         taWriteReport.setEditable(false);
     }
@@ -275,10 +281,10 @@ public class ProjectsLayoutController {
     /**
      * Limit of amount on entry text
      *
-     * @param ta  TextField in what input text
+     * @param ta        TextField in what input text
      * @param maxLength int number of max text amount
      */
-    public static void addTextLimiter(final TextArea ta, final int maxLength) {
+    private static void addTextLimiter(final TextArea ta, final int maxLength) {
         ta.textProperty().addListener((ov, oldValue, newValue) -> {
             if (ta.getText().length() > maxLength) {
                 String s = ta.getText().substring(0, maxLength);
@@ -289,19 +295,19 @@ public class ProjectsLayoutController {
 
     /**
      * Hears when user click on button and attach chosen image
+     *
      * @param actionEvent callback click on button
      */
     public void attachFile(ActionEvent actionEvent) throws IOException {
-        FileChooser fileChooser= new FileChooser();
+        FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
         );
-        file= fileChooser.showOpenDialog(labelCurrentSymbols.getScene().getWindow());
-        if (file!=null){
+        file = fileChooser.showOpenDialog(labelCurrentSymbols.getScene().getWindow());
+        if (file != null) {
             System.out.println("file attach");
         }
-        byte[] attachFile= Files.readAllBytes(file.toPath());
-        System.out.println(attachFile);
+
     }
 }

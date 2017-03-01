@@ -2,7 +2,6 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -11,11 +10,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
-import ua.softgroup.matrix.server.desktop.model.ProjectModel;
-import ua.softgroup.matrix.server.desktop.model.ReportModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
+
 
 import java.io.IOException;
 import java.util.Set;
+
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
@@ -65,7 +66,7 @@ public class ReportLayoutController {
      * @throws IOException
      */
     @FXML
-    private void initialize() throws IOException {
+    private void initialize() throws IOException, ClassNotFoundException {
         currentProjectId = CurrentSessionInfo.getProjectId();
         reportServerSessionManager = new ReportServerSessionManager();
         if (currentProjectId != null) {
@@ -86,7 +87,7 @@ public class ReportLayoutController {
         tableViewReport.getSelectionModel().select(0);
         tableViewReport.getFocusModel().focus(0);
         ReportModel reportModel = tableViewReport.getSelectionModel().getSelectedItem();
-        taEditReport.setText(reportModel.getDescription());
+        taEditReport.setText(reportModel.getText());
     }
 
     /**
@@ -95,7 +96,7 @@ public class ReportLayoutController {
      * @param id of project what user choose in project window
      */
     private void setProjectInfoInView(Long id) {
-        Set<ProjectModel> projectAll = CurrentSessionInfo.getUserActiveProjects();
+        Set<ProjectModel> projectAll = CurrentSessionInfo.getProjectModels();
         for (ProjectModel model :
                 projectAll) {
             if (model.getId() == id) {
@@ -122,7 +123,7 @@ public class ReportLayoutController {
     }
 
     /**
-     * If project has report displays this data in Table View
+     * If project has report displays this data in Table View and sort Date column in ASCENDING type
      */
     @SuppressWarnings("unchecked")
     private void setReportInfoInView() {
@@ -130,7 +131,7 @@ public class ReportLayoutController {
             for (ReportModel model :
                     report) {
                 reportData.add(model);
-                reportText = model.getDescription();
+                reportText = model.getText();
             }
 
             tableViewReport.setItems(reportData);
@@ -162,8 +163,8 @@ public class ReportLayoutController {
      * @throws IOException
      */
     public void changeReport(ActionEvent actionEvent) throws IOException {
-        ReportModel reportModel = new ReportModel(CurrentSessionInfo.getTokenModel().getToken(), currentReportId, taEditReport.getText(), currentProjectId);
-        reportServerSessionManager.changeReportOnServer(reportModel);
+        ReportModel reportModel = new ReportModel(currentReportId, taEditReport.getText(), currentProjectId);
+        reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
         ((Node) actionEvent.getSource()).getScene().getWindow().hide();
     }
 
@@ -176,7 +177,7 @@ public class ReportLayoutController {
             ReportModel selectReport = tableViewReport.getSelectionModel().getSelectedItem();
             checkVerifyReportAndSetButtonCondition(selectReport);
             currentReportId = selectReport.getId();
-            taEditReport.setText(selectReport.getDescription());
+            taEditReport.setText(selectReport.getText());
         }
     }
 

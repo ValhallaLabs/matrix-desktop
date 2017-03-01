@@ -1,15 +1,17 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
 import javafx.collections.FXCollections;
+
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import ua.softgroup.matrix.server.desktop.model.InstructionsModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.InstructionsModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
@@ -37,7 +39,7 @@ public class InstructionsLayoutController {
      * @param event callback click on list item
      */
     public void chooseCurentInstructuon(Event event) {
-        InstructionsModel selectProject = (InstructionsModel) lvInstructions.getSelectionModel().getSelectedItem();
+        InstructionsModel selectProject = lvInstructions.getSelectionModel().getSelectedItem();
         labelInstructions.setText(selectProject.getContent());
     }
 

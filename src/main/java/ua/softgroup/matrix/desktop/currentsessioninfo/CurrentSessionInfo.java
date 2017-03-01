@@ -60,4 +60,12 @@ public class CurrentSessionInfo {
 //    public void setCheckPointFrequency(long checkPointFrequency) {
 //        initializeModel.setCheckPointFrequency(checkPointFrequency);
 //    }
+
+    public static long getProjectId() {
+        return projectId;
+    }
+
+    public static void setProjectId(long projectId) {
+        CurrentSessionInfo.projectId = projectId;
+    }
 }

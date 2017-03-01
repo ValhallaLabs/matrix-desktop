@@ -1,7 +1,6 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
 
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,12 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import javafx.stage.StageStyle;
-import javafx.stage.Window;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationServerSessionManager;
@@ -62,18 +57,18 @@ public class LoginLayoutController {
     }
 
     /**
-     *If when start programme bad connection, create alert with message to user
+     * If when start programme bad connection, create alert with message to user
      * and then click on button close programme
      */
-    public void tellUserAboutBadConnection(){
-        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+    public void tellUserAboutBadConnection() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(ALERT_ERROR_TITLE);
         alert.setHeaderText(ALERT_HEADER_TEXT);
         alert.setContentText(ALERT_CONTENT_TEXT);
         alert.initStyle(StageStyle.UTILITY);
-        alert.setOnCloseRequest(event ->Platform.exit());
+        alert.setOnCloseRequest(event -> Platform.exit());
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.isPresent()&&result.get()==ButtonType.OK){
+        if (result.isPresent() && result.get() == ButtonType.OK) {
             Platform.exit();
             System.exit(0);
         }
@@ -81,6 +76,7 @@ public class LoginLayoutController {
 
     /**
      * Hears when login window close and close current authentication session manager
+     *
      * @param stage for close stage
      */
     public void setUpStage(Stage stage) {
@@ -91,6 +87,7 @@ public class LoginLayoutController {
     /**
      * Hears when user click on button and check input field if something go wrong
      * displays message
+     *
      * @param actionEvent callback click on button
      */
     public void startMainWindow(ActionEvent actionEvent) {
@@ -149,16 +146,17 @@ public class LoginLayoutController {
             MainLayoutController mainController = loader.getController();
             mainController.startProjectsLayoutController(mainLayout);
         } catch (IOException e) {
-            logger.debug("Error when start Main Layout "+e);
+            logger.debug("Error when start Main Layout " + e);
         }
     }
 
     /**
      * Limit of amount on entry text
-     * @param tf TextField in what input text
+     *
+     * @param tf        TextField in what input text
      * @param maxLength int number of max text amount
      */
-    public static void maxInputTextLimiter(final TextField tf, final int maxLength) {
+    private static void maxInputTextLimiter(final TextField tf, final int maxLength) {
         tf.textProperty().addListener((ov, oldValue, newValue) -> {
             if (tf.getText().length() > maxLength) {
                 String s = tf.getText().substring(0, maxLength);
@@ -169,14 +167,12 @@ public class LoginLayoutController {
 
     /**
      * Check content in field on Empty
+     *
      * @param tf TextField in what we input text
      * @return boolean
      */
-    public static boolean checkTextFieldOnEmpty(TextField tf) {
-        if (tf.getText() != null && !tf.getText().isEmpty()) {
-            return true;
-        }
-        return false;
+    private static boolean checkTextFieldOnEmpty(TextField tf) {
+        return tf.getText() != null && !tf.getText().isEmpty();
     }
 
 }

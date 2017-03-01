@@ -15,22 +15,22 @@ import java.net.Socket;
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public class CommandExecutioner {
-    private long projectId = -1;
 
     public CommandExecutioner() {
     }
 
-    public CommandExecutioner(long projectId) {
-        this.projectId = projectId;
+    public void sendCommand(Socket socket, ServerCommands serverCommand) throws IOException {
+        sendCommand(socket, serverCommand, new RequestModel(CurrentSessionInfo.getToken(), -1));
     }
 
-    public void sendCommand(Socket socket, ServerCommands serverCommand) throws IOException {
+    public <T extends DataModel> void sendCommand(Socket socket, ServerCommands serverCommand, T dataModel, long projectId) throws IOException {
+        sendCommand(socket, serverCommand, new RequestModel<T>(CurrentSessionInfo.getToken(), projectId, dataModel));
+    }
+
+    public void sendCommand(Socket socket, ServerCommands serverCommand, long projectId) throws IOException {
         sendCommand(socket, serverCommand, new RequestModel(CurrentSessionInfo.getToken(), projectId));
     }
 
-    public <T extends DataModel> void sendCommand(Socket socket, ServerCommands serverCommand, T dataModel) throws IOException {
-        sendCommand(socket, serverCommand, new RequestModel<T>(CurrentSessionInfo.getToken(), projectId, dataModel));
-    }
 
     private void sendCommand(Socket socket, ServerCommands serverCommand, RequestModel requestModel) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -39,7 +39,7 @@ public class CommandExecutioner {
         objectOutputStream.flush();
     }
 
-    public <T extends DataModel> ResponseModel<T> getResponse(Socket socket) throws IOException, ClassNotFoundException {
+    public  <T extends DataModel> ResponseModel<T> getResponse(Socket socket) throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
         return (ResponseModel<T>) objectInputStream.readObject();
     }
