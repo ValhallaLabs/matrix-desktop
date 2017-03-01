@@ -151,7 +151,7 @@ public class NativeDevicesListener extends SpyKitTool {
      */
     private String stopDowntime(String stopPoint) {
         if (isDowntime) {
-            timeTracker.stopDowntime();
+            timeTracker.stopIdle();
             logger.debug("Down time is stopped!");
             isDowntime = false;
         }
@@ -164,7 +164,7 @@ public class NativeDevicesListener extends SpyKitTool {
      */
     private void startDowntime(String point){
         if (START_COUNT_UNTIL_DT_POINT.equals(point)) {
-            timeTracker.startDowntime();
+            timeTracker.startIdle();
             logger.debug("Down time is started!");
             isDowntime = true;
         }

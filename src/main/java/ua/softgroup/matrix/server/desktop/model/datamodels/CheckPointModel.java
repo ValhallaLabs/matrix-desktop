@@ -13,11 +13,11 @@ public class CheckPointModel implements Serializable, DataModel {
 
     private String keyboardLogs;
 
-    private long mouseFootage;
+    private double mouseFootage;
 
     private Map<String, Long> windowsTimeMap;
 
-    public CheckPointModel(byte[] screenshot, String keyboardLogs, long mouseFootage, Map<String, Long> windowsTimeMap) {
+    public CheckPointModel(byte[] screenshot, String keyboardLogs, double mouseFootage, Map<String, Long> windowsTimeMap) {
         this.screenshot = screenshot;
         this.keyboardLogs = keyboardLogs;
         this.mouseFootage = mouseFootage;
@@ -40,11 +40,11 @@ public class CheckPointModel implements Serializable, DataModel {
         this.keyboardLogs = keyboardLogs;
     }
 
-    public long getMouseFootage() {
+    public double getMouseFootage() {
         return mouseFootage;
     }
 
-    public void setMouseFootage(long mouseFootage) {
+    public void setMouseFootage(double mouseFootage) {
         this.mouseFootage = mouseFootage;
     }
 
