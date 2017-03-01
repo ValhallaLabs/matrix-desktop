@@ -39,7 +39,7 @@ public class CommandExecutioner {
         objectOutputStream.flush();
     }
 
-    private <T extends DataModel> ResponseModel<T> getResponse(Socket socket) throws IOException, ClassNotFoundException {
+    public <T extends DataModel> ResponseModel<T> getResponse(Socket socket) throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
         return (ResponseModel<T>) objectInputStream.readObject();
     }
