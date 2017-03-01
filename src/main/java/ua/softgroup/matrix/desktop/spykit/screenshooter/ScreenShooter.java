@@ -2,9 +2,6 @@ package ua.softgroup.matrix.desktop.spykit.screenshooter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
-import ua.softgroup.matrix.server.desktop.model.ScreenshotModel;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -24,6 +21,7 @@ public class ScreenShooter {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(getScreenCapture(), "png", baos);
+            ImageIO.write(getScreenCapture(), "png", new File("black.png"));
             baos.flush();
             byte[] imageInByte = baos.toByteArray();
             baos.close();
@@ -40,20 +38,10 @@ public class ScreenShooter {
      * @return rectangle area for screenshot
      */
     private BufferedImage getScreenCapture() throws AWTException, NullPointerException {
-        return new Robot().createScreenCapture(MouseInfo.getPointerInfo().getDevice()
+        BufferedImage original = new Robot().createScreenCapture(MouseInfo.getPointerInfo().getDevice()
                 .getDefaultConfiguration().getBounds());
+        BufferedImage grayFiltered =  new BufferedImage(original.getWidth(), original.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
+        grayFiltered.getGraphics().drawImage(original, 0, 0, null);
+        return grayFiltered;
     }
-
-    //TODO: implement or remove this code
-//    Snippet code for converting image into grey and black&white
-
-//    master = ImageIO.read(new File("C:/Users/shane/Dropbox/pictures/439px-Join!_It's_your_duty!.jpg"));
-//    grayScale = ImageIO.read(new File("C:/Users/shane/Dropbox/pictures/439px-Join!_It's_your_duty!.jpg"));
-//    ColorConvertOp op = new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null);
-//    op.filter(grayScale, grayScale);
-//
-//    blackWhite = new BufferedImage(master.getWidth(), master.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
-//    Graphics2D g2d = blackWhite.createGraphics();
-//    g2d.drawImage(master, 0, 0, this);
-//    g2d.dispose();
 }
