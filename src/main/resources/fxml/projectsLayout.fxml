@@ -20,7 +20,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                      <columns>
-                        <TableColumn fx:id="tcIdProject" prefWidth="75.0" text="Id Project" />
+                        <TableColumn fx:id="tcIdProject" prefWidth="75.0" sortType="DESCENDING" text="Id Project" />
                         <TableColumn fx:id="tcAuthorName" maxWidth="4000.0" prefWidth="75.0" text="Author" />
                         <TableColumn fx:id="tcTitle" minWidth="1.0" prefWidth="1.0" text="Name" />
                         <TableColumn fx:id="tcDescription" prefWidth="92.0" text="Description" />
@@ -318,7 +318,7 @@
                         </TextArea>
                         <HBox minHeight="48.0" prefHeight="48.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="btnAttachFile" mnemonicParsing="false" prefHeight="31.0" prefWidth="135.0" styleClass="add-button" text="Прикрепить файл">
+                              <Button fx:id="btnAttachFile" mnemonicParsing="false" onAction="#attachFile" prefHeight="31.0" prefWidth="135.0" styleClass="add-button" text="Прикрепить файл">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -329,7 +329,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#saveReport" prefHeight="31.0" prefWidth="135.0" styleClass="send-reports-button" text="Отправить отчет">
+                              <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#sendReport" prefHeight="31.0" prefWidth="135.0" styleClass="send-reports-button" text="Отправить отчет">
                                  <font>
                                     <Font size="11.0" />
                                  </font>

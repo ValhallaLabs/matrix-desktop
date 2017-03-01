@@ -2,6 +2,7 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -57,6 +58,7 @@ public class ReportLayoutController {
     private String reportText;
     private Long currentReportId;
 
+
     /**
      *  After Load/Parsing fxml call this method
      * Create {@link ReportLayoutController} and if project has reports set this data in Set of ReportModel
@@ -71,7 +73,20 @@ public class ReportLayoutController {
         }
         initReportInTable();
         setProjectInfoInView(currentProjectId);
+        setFocusOnTableView();
         countTextAndSetButtonCondition();
+    }
+
+    /**
+     * At start report window select first item in Table View {@link ReportModel}
+     * Get from current report information and set their in textArea
+     */
+    private void setFocusOnTableView() {
+        tableViewReport.requestFocus();
+        tableViewReport.getSelectionModel().select(0);
+        tableViewReport.getFocusModel().focus(0);
+        ReportModel reportModel = tableViewReport.getSelectionModel().getSelectedItem();
+        taEditReport.setText(reportModel.getDescription());
     }
 
     /**
@@ -109,6 +124,7 @@ public class ReportLayoutController {
     /**
      * If project has report displays this data in Table View
      */
+    @SuppressWarnings("unchecked")
     private void setReportInfoInView() {
         if (report != null && !report.isEmpty()) {
             for (ReportModel model :
@@ -116,7 +132,9 @@ public class ReportLayoutController {
                 reportData.add(model);
                 reportText = model.getDescription();
             }
+
             tableViewReport.setItems(reportData);
+            tableViewReport.getSortOrder().setAll(reportTableColumnDate);
         }
     }
 
@@ -150,7 +168,7 @@ public class ReportLayoutController {
     }
 
     /**
-     * Hears when user click on table view,get chosen report and set  Description information in TextArea
+     * Hears when user click on table view,get chosen report and set Description information in TextArea
      * @param event callback click on table view
      */
     public void chooseReport(Event event) {
