@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public abstract class ResponseModel<T extends DataModel> implements Serializable {
+public class ResponseModel<T extends DataModel> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private ResponseStatus responseStatus;
