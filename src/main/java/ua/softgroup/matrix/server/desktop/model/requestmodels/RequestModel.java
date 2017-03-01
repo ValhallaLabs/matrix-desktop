@@ -32,6 +32,13 @@ public class RequestModel<T extends DataModel> implements Serializable {
         dataContainer = Optional.of(dataModel);
     }
 
+    public RequestModel(String token, T dataModel) {
+        this.token = token;
+        dataContainer = Optional.of(dataModel);
+    }
+
+
+
     public String getToken() {
         return token;
     }
