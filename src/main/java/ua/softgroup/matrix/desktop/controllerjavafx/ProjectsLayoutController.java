@@ -17,12 +17,12 @@ import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Set;
 
@@ -52,7 +52,7 @@ public class ProjectsLayoutController {
     @FXML
     public Label labelNameProject;
     @FXML
-    public Label labelDiscribeProject;
+    public Label labelDescribeProject;
     @FXML
     public Label labelStartWorkToday;
     @FXML
@@ -135,9 +135,7 @@ public class ProjectsLayoutController {
         new Thread(() -> {
             try {
                 setReportInfoInTextAreaAndButton(projectModel);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }).start();
@@ -190,7 +188,7 @@ public class ProjectsLayoutController {
     private void setOtherProjectInfoInView(ProjectModel projectModel) {
         CurrentSessionInfo.setProjectId(projectModel.getId());
         labelNameProject.setText(projectModel.getTitle());
-        labelDiscribeProject.setText(projectModel.getDescription());
+        labelDescribeProject.setText(projectModel.getDescription());
         if ((projectModel.getStartDate() != null && projectModel.getEndDate() != null)) {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
             labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
@@ -268,7 +266,13 @@ public class ProjectsLayoutController {
      * @throws IOException
      */
     public void sendReport(ActionEvent actionEvent) throws IOException {
-        ReportModel reportModel = new ReportModel(taWriteReport.getText(), LocalDate.now());
+        byte[] attachFile = new byte[0];
+        if (file.exists() && file != null) {
+            attachFile = Files.readAllBytes(file.toPath());
+            System.out.println(Arrays.toString(attachFile));
+        }
+        System.out.println(Arrays.toString(attachFile));
+        ReportModel reportModel = new ReportModel(taWriteReport.getText(), LocalDate.now(), attachFile);
         reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
         btnSendReport.setDisable(true);
         taWriteReport.setEditable(false);
@@ -277,10 +281,10 @@ public class ProjectsLayoutController {
     /**
      * Limit of amount on entry text
      *
-     * @param ta  TextField in what input text
+     * @param ta        TextField in what input text
      * @param maxLength int number of max text amount
      */
-    public static void addTextLimiter(final TextArea ta, final int maxLength) {
+    private static void addTextLimiter(final TextArea ta, final int maxLength) {
         ta.textProperty().addListener((ov, oldValue, newValue) -> {
             if (ta.getText().length() > maxLength) {
                 String s = ta.getText().substring(0, maxLength);
@@ -291,19 +295,19 @@ public class ProjectsLayoutController {
 
     /**
      * Hears when user click on button and attach chosen image
+     *
      * @param actionEvent callback click on button
      */
     public void attachFile(ActionEvent actionEvent) throws IOException {
-        FileChooser fileChooser= new FileChooser();
+        FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
         );
-        file= fileChooser.showOpenDialog(labelCurrentSymbols.getScene().getWindow());
-        if (file!=null){
+        file = fileChooser.showOpenDialog(labelCurrentSymbols.getScene().getWindow());
+        if (file != null) {
             System.out.println("file attach");
         }
-        byte[] attachFile= Files.readAllBytes(file.toPath());
-        System.out.println(attachFile);
+
     }
 }

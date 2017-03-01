@@ -123,7 +123,7 @@ public class ReportLayoutController {
     }
 
     /**
-     * If project has report displays this data in Table View
+     * If project has report displays this data in Table View and sort Date column in ASCENDING type
      */
     @SuppressWarnings("unchecked")
     private void setReportInfoInView() {

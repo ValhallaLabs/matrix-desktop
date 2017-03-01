@@ -22,46 +22,47 @@ public class ReportServerSessionManager {
 
     private static final Logger logger = LoggerFactory.getLogger(ReportServerSessionManager.class);
     private  ResponseModel<ReportModel> responseModel;
-    private ReportModel reportModel;
     private Set<ReportModel> setReportModel;
     private Socket socket;
-    private String responseServer;
-    private CommandExecutioner commandExecutioner = new CommandExecutioner();
+    private CommandExecutioner commandExecutioner;
+
+
+    private Socket openSocketConnection() throws IOException {
+        Socket socket = SocketProvider.openNewConnection();
+        commandExecutioner=new CommandExecutioner();
+        logger.debug("Open socket connection");
+        return socket;
+    }
 
     public void saveOrChangeReportOnServer(ReportModel reportModel) throws IOException {
         socket = openSocketConnection();
         saveOrChangeReport(reportModel);
-        serverReportResponse(responseServer);
         closeSocketConnection(socket);
+        logger.debug("Save or change report on server");
     }
 
     public Set<ReportModel> sendProjectDataAndGetReportById(long id) throws IOException, ClassNotFoundException {
         socket = openSocketConnection();
         getProjectReportsById(id);
-        setReportModelToCollection();
+        setResponceModelToCollection();
         closeSocketConnection(socket);
+        logger.debug("Get report by id from server");
         return setReportModel;
 
     }
 
-    private void serverReportResponse(String response) {
-        logger.debug("Report Response");
-        if (ResponseStatus.REPORT_EXISTS.name().equals(response)) {
-            System.out.println("Report Already create");
-        }
-    }
-
     private void saveOrChangeReport(ReportModel reportmodel) throws IOException {
         commandExecutioner.sendCommand(socket, ServerCommands.SAVE_REPORT, reportmodel, reportmodel.getProjectId());
-        responseServer = new DataInputStream(socket.getInputStream()).readUTF();
+        logger.debug("Send save or change report to server");
     }
 
     private void getProjectReportsById(long id) throws IOException {
         commandExecutioner.sendCommand(socket,ServerCommands.GET_REPORTS,id);
-        logger.debug("Get Report by project Id");
+        logger.debug("Send id project to server");
     }
 
-    private void setReportModelToCollection() throws IOException, ClassNotFoundException {
+    @SuppressWarnings({"unchecked", "OptionalGetWithoutIsPresent"})
+    private void setResponceModelToCollection() throws IOException, ClassNotFoundException {
         try {
            responseModel= commandExecutioner.getResponse(socket);
             logger.debug("Set Report Model to Current Session successfully");
@@ -70,22 +71,18 @@ public class ReportServerSessionManager {
             logger.debug("Unable get report From Input Stream");
         }
      if(responseModel.getResponseStatus()==ResponseStatus.SUCCESS){
-         reportModel =responseModel.getContainer().get();
-         setReportModel.add(reportModel);
+         if(responseModel.getContainer().isPresent()){
+             setReportModel=(Set<ReportModel>)(responseModel.getContainer().get());
+         }
      }
 
     }
 
-    private Socket openSocketConnection() throws IOException {
-        Socket socket = SocketProvider.openNewConnection();
-        logger.debug("Open socket connection");
-        return socket;
-    }
-
     private void closeSocketConnection(Socket socket) throws IOException {
+        logger.debug("Close socket connection");
         commandExecutioner.sendCommand(socket, ServerCommands.CLOSE);
         socket.close();
-        logger.debug("Close socket connection");
+
     }
 
 }
