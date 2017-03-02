@@ -17,22 +17,22 @@ import java.util.EventListener;
 import java.util.EventObject;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
-
+import static java.util.logging.Logger.getLogger;
 import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.IS_USED;
 import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.NOT_USED;
 import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.WAS_USED;
+import static ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.CountUntilIdlePoint.START_COUNT_UNTIL_IDLE;
+import static ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.CountUntilIdlePoint.STOP_COUNT_UNTIL_IDLE;
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public class NativeDevicesListener extends SpyKitTool {
     private static final Logger logger = LoggerFactory.getLogger(NativeDevicesListener.class);
-    private static final String START_COUNT_UNTIL_DT_POINT = "Start count until downtime",
-            STOP_COUNT_UNTIL_DT_POINT = "Stop count until downtime";
     private TimeTracker timeTracker;
-    private Disposable downtimeControlDisposable;
-    private FlowableEmitter<EventObject> startCountUntilDtEmitter, stopCountUntilDtEmitter;
-    private Boolean isCountingUntilDt = false, isDowntime = false;
+    private Disposable idleControlDisposable;
+    private FlowableEmitter<EventObject> startCountUntilIdleEmitter, stopCountUntilIdleEmitter;
+    private Boolean isCountingUntilIdle = false, isIdle = false;
     private StringBuilder keyboardLogs;
     private double mouseFootage;
     private Point prevMousePosition;
@@ -42,15 +42,7 @@ public class NativeDevicesListener extends SpyKitTool {
         this.timeTracker = timeTracker;
         keyboardLogs = new StringBuilder("");
         prevMousePosition = MouseInfo.getPointerInfo().getLocation();
-        offGlobalScreenLogger();
-    }
-
-    /**
-     * Turns off default GlobalsScreen logs of events
-     */
-    private void offGlobalScreenLogger() {
-        java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GlobalScreen.class.getPackage().getName());
-        logger.setLevel(Level.OFF);
+        getLogger(GlobalScreen.class.getPackage().getName()).setLevel(Level.OFF);
     }
 
     /**
@@ -59,7 +51,7 @@ public class NativeDevicesListener extends SpyKitTool {
     @Override
     public void turnOn() throws NativeHookException {
         if (status == NOT_USED) {
-            createDowntimeControlFlowable();
+            createIdleControlFlowable();
             addListenersToGlobalListener();
             GlobalScreen.registerNativeHook();
             status = IS_USED;
@@ -71,15 +63,15 @@ public class NativeDevicesListener extends SpyKitTool {
 
     /**
      * Creates and subscribe flowable that received items emitted by startCountFlowable and stopCountFlowable.
-     * The flowable controls start and stop of counting downtime, and time until starts count it.
+     * The flowable controls start and stop of counting idle, and time until starts count it.
      */
-    private void createDowntimeControlFlowable() {
-        downtimeControlDisposable = Flowable.merge(createStartCountUntilDtFlowable(), createStopCountUntilDtFlowable())
+    private void createIdleControlFlowable() {
+        idleControlDisposable = Flowable.merge(createStartCountUntilIdleFlowable(), createStopCountUntilIdleFlowable())
                 .doOnNext(s -> logger.debug("Count until down time: {}", s))
-                .doOnNext(this::stopDowntime)
+                .doOnNext(this::stopIdle)
                 .debounce(5, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
-                .subscribe(this::startDowntime);
+                .subscribe(this::startIdle);
     }
 
     /**
@@ -87,10 +79,10 @@ public class NativeDevicesListener extends SpyKitTool {
      * A start count point emits after 1000 milliseconds after last event.
      * @return startCountFlowable
      */
-    private Flowable<String> createStartCountUntilDtFlowable() {
-        return Flowable.create(this::createStartCountUntilDtFlowableEmitter, BackpressureStrategy.LATEST)
+    private Flowable<CountUntilIdlePoint> createStartCountUntilIdleFlowable() {
+        return Flowable.create(this::createStartCountUntilIdleFlowableEmitter, BackpressureStrategy.LATEST)
                 .debounce(1, TimeUnit.SECONDS)
-                .map(this::startCountUntilDt)
+                .map(this::startCountUntilIdle)
                 .subscribeOn(Schedulers.io());
     }
 
@@ -99,30 +91,30 @@ public class NativeDevicesListener extends SpyKitTool {
      * Emits one event at the begin for start count time until downtime.
      * @param e emitter of StartCountFlowable
      */
-    private void createStartCountUntilDtFlowableEmitter(FlowableEmitter<EventObject> e) {
-        startCountUntilDtEmitter = e;
-        startCountUntilDtEmitter.onNext(new EventObject(this));
+    private void createStartCountUntilIdleFlowableEmitter(FlowableEmitter<EventObject> e) {
+        startCountUntilIdleEmitter = e;
+        startCountUntilIdleEmitter.onNext(new EventObject(this));
     }
 
     /**
-     * Sets isCountingUntilDt status true.
+     * Sets isCountingUntilIdle status true.
      * @param eventObject event of devices
-     * @return START_COUNT_UNTIL_DT_POINT point of starting count time until downtime
+     * @return START_COUNT_UNTIL_IDLE_POINT point of starting count time until downtime
      */
-    private String startCountUntilDt(EventObject eventObject) {
-        isCountingUntilDt = true;
-        return START_COUNT_UNTIL_DT_POINT;
+    private CountUntilIdlePoint startCountUntilIdle(EventObject eventObject) {
+        isCountingUntilIdle = true;
+        return START_COUNT_UNTIL_IDLE;
     }
 
     /**
      * Creates flowable that emits points of stopping count time until count downtime.
-     * A stop count point emits only if isCountingUntilDt status is true.
+     * A stop count point emits only if isCountingUntilIdle status is true.
      * @return stopCountFlowable
      */
-    private Flowable<String> createStopCountUntilDtFlowable() {
-        return Flowable.create(this::createStopCountUntilDtFlowableEmitter, BackpressureStrategy.DROP)
-                .filter(eventObject -> isCountingUntilDt)
-                .map(this::stopCountUntilDt)
+    private Flowable<CountUntilIdlePoint> createStopCountUntilIdleFlowable() {
+        return Flowable.create(this::createStopCountUntilIdleFlowableEmitter, BackpressureStrategy.DROP)
+                .filter(eventObject -> isCountingUntilIdle)
+                .map(this::stopCountUntilIdle)
                 .subscribeOn(Schedulers.io());
     }
 
@@ -130,43 +122,43 @@ public class NativeDevicesListener extends SpyKitTool {
      * Set flowable emitter into own emitter for sending events to flowable.
      * @param e emitter of StopCountFlowable
      */
-    private void createStopCountUntilDtFlowableEmitter(FlowableEmitter<EventObject> e) {
-        stopCountUntilDtEmitter = e;
+    private void createStopCountUntilIdleFlowableEmitter(FlowableEmitter<EventObject> e) {
+        stopCountUntilIdleEmitter = e;
     }
 
     /**
-     * Sets isCountingUntilDt status false.
+     * Sets isCountingUntilIdle status false.
      * @param eventObject event of devices
-     * @return STOP_COUNT_UNTIL_DT_POINT point of starting count time until downtime
+     * @return STOP_COUNT_UNTIL_IDLE_POINT point of starting count time until downtime
      */
-    private String stopCountUntilDt(EventObject eventObject) {
-        isCountingUntilDt = false;
-        return STOP_COUNT_UNTIL_DT_POINT;
+    private CountUntilIdlePoint stopCountUntilIdle(EventObject eventObject) {
+        isCountingUntilIdle = false;
+        return STOP_COUNT_UNTIL_IDLE;
     }
 
     /**
-     * Stops downtime counting if isDowntime true
+     * Stops downtime counting if isIdle true
      * @param stopPoint point of stop counting downtime
-     * @return STOP_COUNT_UNTIL_DT_POINT point of starting count time until downtime
+     * @return STOP_COUNT_UNTIL_IDLE_POINT point of starting count time until downtime
      */
-    private String stopDowntime(String stopPoint) {
-        if (isDowntime) {
+    private CountUntilIdlePoint stopIdle(CountUntilIdlePoint stopPoint) {
+        if (isIdle) {
             timeTracker.stopIdle();
-            logger.debug("Down time is stopped!");
-            isDowntime = false;
+            logger.debug("Idle is stopped!");
+            isIdle = false;
         }
         return stopPoint;
     }
 
     /**
-     * Starts downtime counting if method receive START_COUNT_UNTIL_DT_POINT
+     * Starts downtime counting if method receive START_COUNT_UNTIL_IDLE_POINT
      * @param point can be point of start or stop counting downtime
      */
-    private void startDowntime(String point){
-        if (START_COUNT_UNTIL_DT_POINT.equals(point)) {
+    private void startIdle(CountUntilIdlePoint point){
+        if (START_COUNT_UNTIL_IDLE == point) {
             timeTracker.startIdle();
-            logger.debug("Down time is started!");
-            isDowntime = true;
+            logger.debug("Idle is started!");
+            isIdle = true;
         }
     }
 
@@ -188,8 +180,8 @@ public class NativeDevicesListener extends SpyKitTool {
      * @param eventObject event which was emitted by keyboard or mouse
      */
     private void receiveEvent(EventObject eventObject) {
-        startCountUntilDtEmitter.onNext(eventObject);
-        stopCountUntilDtEmitter.onNext(eventObject);
+        startCountUntilIdleEmitter.onNext(eventObject);
+        stopCountUntilIdleEmitter.onNext(eventObject);
     }
 
     /**
@@ -198,7 +190,7 @@ public class NativeDevicesListener extends SpyKitTool {
     @Override
     public void turnOff() throws NativeHookException {
         if (status == IS_USED) {
-            downtimeControlDisposable.dispose();
+            idleControlDisposable.dispose();
             removeListenersFromGlobalListener();
             GlobalScreen.unregisterNativeHook();
             status = WAS_USED;

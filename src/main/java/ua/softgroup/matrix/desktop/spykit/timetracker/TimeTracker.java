@@ -38,9 +38,7 @@ public class TimeTracker extends SpyKitTool {
     private Disposable controlPointObservable;
     private CommandExecutioner commandExecutioner;
 
-
-    //TODO: Uncomment, when time tracker will be merged with main part
-    public  TimeTracker(/*MainLayoutController mainLayoutController,*/ long projectId) {
+    public  TimeTracker(MainLayoutController mainLayoutController, long projectId) {
         this.mainLayoutController = mainLayoutController;
         this.projectId = projectId;
         commandExecutioner = new CommandExecutioner();
