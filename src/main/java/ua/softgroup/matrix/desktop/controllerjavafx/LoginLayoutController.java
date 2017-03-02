@@ -29,7 +29,7 @@ public class LoginLayoutController {
     private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
     private static final String LOGO = "/images/testLogoIcon.png";
     private static final String MAIN_LAYOUT = "fxml/mainLayout.fxml";
-    private static final String ALERT_ERROR_TITLE = "Supervisor";
+    private static final String ALERT_TITLE_TEXT = "Supervisor";
     private static final String ALERT_CONTENT_TEXT = "Target ip:port is Unreachable";
     private static final String ALERT_HEADER_TEXT = "NETWORK ERROR";
     private static final int MAIN_LAYOUT_MIN_WIDTH = 1200;
@@ -62,7 +62,7 @@ public class LoginLayoutController {
      */
     public void tellUserAboutBadConnection() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(ALERT_ERROR_TITLE);
+        alert.setTitle(ALERT_TITLE_TEXT);
         alert.setHeaderText(ALERT_HEADER_TEXT);
         alert.setContentText(ALERT_CONTENT_TEXT);
         alert.initStyle(StageStyle.UTILITY);

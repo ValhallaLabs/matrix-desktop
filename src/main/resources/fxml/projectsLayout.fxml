@@ -75,7 +75,7 @@
                               <Insets left="10.0" top="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <Label minHeight="20.0" prefHeight="20.0" prefWidth="350.0" text="Название проекта" textFill="#c9c9c9">
+                        <Label minHeight="20.0" prefHeight="20.0" prefWidth="350.0" text="Project name" textFill="#c9c9c9">
                            <VBox.margin>
                               <Insets bottom="5.0" left="17.0" right="10.0" top="5.0" />
                            </VBox.margin>
@@ -103,7 +103,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <Label minHeight="20.0" prefHeight="20.0" prefWidth="360.0" text="Описание проекта" textFill="#c9c9c9">
+                        <Label minHeight="20.0" prefHeight="20.0" prefWidth="360.0" text="Project Description" textFill="#c9c9c9">
                            <VBox.margin>
                               <Insets bottom="3.0" left="17.0" right="10.0" top="5.0" />
                            </VBox.margin>
@@ -121,7 +121,7 @@
                         </Label>
                         <HBox minHeight="20.0" prefHeight="20.0" prefWidth="200.0">
                            <children>
-                              <Label prefWidth="170.0" text="Начало работы" textFill="#c9c9c9">
+                              <Label prefWidth="170.0" text="Getting Started" textFill="#c9c9c9">
                                  <HBox.margin>
                                     <Insets left="17.0" />
                                  </HBox.margin>
@@ -129,7 +129,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label prefWidth="170.0" text="Сегодня отработано" textFill="#c9c9c9">
+                              <Label prefWidth="170.0" text="Time Spent Today" textFill="#c9c9c9">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Label>
@@ -180,7 +180,7 @@
                                  <children>
                                     <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Label prefWidth="145.0" text="Всего отработано" textFill="#c9c9c9">
+                                          <Label prefWidth="145.0" text="Total Time" textFill="#c9c9c9">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -211,7 +211,7 @@
                                                 <Insets left="5.0" />
                                              </VBox.margin>
                                           </HBox>
-                                          <Label prefWidth="162.0" text="Дата начала проекта" textFill="#c9c9c9">
+                                          <Label prefWidth="162.0" text="Startred" textFill="#c9c9c9">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -239,7 +239,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <Label prefWidth="162.0" text="Дедлайн" textFill="#c9c9c9">
+                                          <Label prefWidth="162.0" text="Deadline" textFill="#c9c9c9">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -273,7 +273,7 @@
                               </AnchorPane>
                               <AnchorPane minHeight="168.0" minWidth="162.0" prefHeight="168.0" prefWidth="162.0">
                                  <children>
-                                    <PieChart fx:id="missPieCharts" focusTraversable="true" layoutX="-205.0" layoutY="-147.0" legendVisible="false" title="Простой" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <PieChart fx:id="missPieCharts" focusTraversable="true" layoutX="-205.0" layoutY="-147.0" legendVisible="false" title="Idle Time" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
@@ -287,7 +287,7 @@
                         </SplitPane>
                         <HBox minHeight="60.0" prefHeight="60.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="btnStart" mnemonicParsing="false" prefHeight="48.0" prefWidth="160.0" styleClass="green-button" text="Старт">
+                              <Button fx:id="btnStart" mnemonicParsing="false" prefHeight="48.0" prefWidth="160.0" styleClass="green-button" text="Start">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -298,7 +298,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnStop" mnemonicParsing="false" prefHeight="48.0" prefWidth="160.0" styleClass="red-button" text="Стоп">
+                              <Button fx:id="btnStop" mnemonicParsing="false" prefHeight="48.0" prefWidth="160.0" styleClass="red-button" text="Stop">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
@@ -311,14 +311,14 @@
                               <Insets />
                            </VBox.margin>
                         </HBox>
-                        <TextArea fx:id="taWriteReport" minHeight="200.0" onInputMethodTextChanged="#countTextAndSetInView" prefHeight="200.0" prefWidth="316.0" promptText="Написать отчет.." styleClass="font-on-label" wrapText="true">
+                        <TextArea fx:id="taWriteReport" minHeight="200.0" onInputMethodTextChanged="#countTextAndSetInView" prefHeight="200.0" prefWidth="316.0" promptText="Write a report .." styleClass="font-on-label" wrapText="true">
                            <VBox.margin>
                               <Insets left="5.0" right="5.0" />
                            </VBox.margin>
                         </TextArea>
                         <HBox minHeight="48.0" prefHeight="48.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="btnAttachFile" mnemonicParsing="false" onAction="#attachFile" prefHeight="31.0" prefWidth="135.0" styleClass="add-button" text="Прикрепить файл">
+                              <Button fx:id="btnAttachFile" mnemonicParsing="false" onAction="#attachFile" prefHeight="31.0" prefWidth="135.0" styleClass="add-button" text="Attach file">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -329,7 +329,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#sendReport" prefHeight="31.0" prefWidth="135.0" styleClass="send-reports-button" text="Отправить отчет">
+                              <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#sendReport" prefHeight="31.0" prefWidth="135.0" styleClass="send-reports-button" text="Send report">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
