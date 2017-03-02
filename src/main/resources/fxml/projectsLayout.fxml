@@ -161,7 +161,7 @@
                                     <Insets left="5.0" top="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label fx:id="labelTodayTotalTime" minWidth="140.0" prefWidth="140.0" text="5h 36m">
+                              <Label fx:id="labelTodayTotalTime" minWidth="140.0" prefWidth="140.0">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -287,7 +287,7 @@
                         </SplitPane>
                         <HBox minHeight="60.0" prefHeight="60.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="btnStart" mnemonicParsing="false" prefHeight="48.0" prefWidth="160.0" styleClass="green-button" text="Start">
+                              <Button fx:id="btnStart" mnemonicParsing="false" onAction="#startWork" prefHeight="48.0" prefWidth="160.0" styleClass="green-button" text="Start">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -298,7 +298,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnStop" mnemonicParsing="false" prefHeight="48.0" prefWidth="160.0" styleClass="red-button" text="Stop">
+                              <Button fx:id="btnStop" mnemonicParsing="false" onAction="#stopWork" prefHeight="48.0" prefWidth="160.0" styleClass="red-button" text="Stop">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>

@@ -1,10 +1,13 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
@@ -20,11 +23,13 @@ import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Set;
+import java.time.format.FormatStyle;
+import java.util.*;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
@@ -88,7 +93,9 @@ public class ProjectsLayoutController {
     private static final int MIN_TEXT_FOR_REPORT = 70;
     private ReportServerSessionManager reportServerSessionManager;
     private File file;
-
+    int timeM=0;
+    int timeH=0;
+    Timeline time;
     /**
      * After Load/Parsing fxml call this method
      * Create {@link ReportServerSessionManager}
@@ -104,6 +111,7 @@ public class ProjectsLayoutController {
         setFocusOnTableView();
         countTextAndSetInView();
         addTextLimiter(taWriteReport, LIMITER_TEXT_COUNT);
+
     }
 
     /**
@@ -308,6 +316,35 @@ public class ProjectsLayoutController {
         if (file != null) {
             System.out.println("file attach");
         }
-
     }
+
+
+    public void startWork(ActionEvent actionEvent) throws InterruptedException {
+         time=new Timeline();
+        time.setCycleCount(Timeline.INDEFINITE);
+        KeyFrame frame=new KeyFrame(javafx.util.Duration.minutes(1), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                timeM++;
+
+                if(timeM>=60){
+                    timeH++;
+                    timeM=0;
+                }
+                labelTodayTotalTime.setText(String.valueOf(timeH+"h"+timeM+"m"));
+            }
+        });
+
+       time.getKeyFrames().add(frame);
+        time.playFromStart();
+    }
+
+    public void stopWork(ActionEvent actionEvent) {
+   time.stop();
+        long test1=239;
+        long test2 =test1%60;
+        long test3=test1/60;
+        System.out.println(test3+":"+test2);
+    }
+
 }
