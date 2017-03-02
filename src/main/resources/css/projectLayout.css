@@ -4,6 +4,7 @@
     -fx-border-color: white;
     -fx-base: rgb(0, 0, 0);
 }
+
 .green-button {
     -fx-text-fill: white;
     -fx-font-weight: bold;
@@ -12,6 +13,7 @@
     -fx-font-size: 14px;
     -fx-background-color: #47d465;
 }
+
 .red-button {
     -fx-text-fill: white;
     -fx-font-family: "System";
@@ -20,26 +22,44 @@
     -fx-graphic: url("/images/stopTimeButtonIcon.png");
     -fx-background-color: #d74747;
 }
+
 .add-button {
     -fx-graphic: url("/images/attachFileIcon.png");
     -fx-background-color: #c6c6c6;
     -fx-font-size: 11px;
     -fx-text-fill: black;
 }
-.send-reports-button{
+
+.send-reports-button {
     -fx-graphic: url("/images/sendReportIcon.png");
     -fx-background-color: #3064a2;
     -fx-font-size: 11px;
     -fx-text-fill: white;
 }
+
 .table-row-cell:selected .table-cell {
     -fx-background-color: #3063a4;
     -fx-text-fill: white;
 }
+
 @font-face {
     font-family: 'Roboto';
     src: url('https://fonts.googleapis.com/css?family=Roboto');
 }
-.font-on-label{
-    -fx-font-family:"Roboto";
+
+.font-on-label {
+    -fx-font-family: "Roboto";
+}
+
+.default-color0.chart-pie {
+    -fx-pie-color: #3063a4;
+}
+
+.default-color1.chart-pie {
+    -fx-pie-color: #c6c6c6;
+}
+
+.chart-pie {
+    -fx-border-color: white;
+    -fx-background-insets: 2;
 }

@@ -7,6 +7,7 @@ import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
 import ua.softgroup.matrix.server.desktop.api.ServerCommands;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.ReportsContainerDataModel;
 import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseModel;
 import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseStatus;
 
@@ -47,7 +48,8 @@ public class ReportServerSessionManager {
      * @throws ClassNotFoundException
      */
     public Set<ReportModel> sendProjectDataAndGetReportById(long id) throws IOException, ClassNotFoundException {
-        setReportModel = commandExecutioner.sendCommandWithResponse(ServerCommands.GET_REPORTS, id);
+        setReportModel = ((ReportsContainerDataModel) commandExecutioner
+                .sendCommandWithResponse(ServerCommands.GET_REPORTS, id)).getReportModels();
         logger.debug("Get report by id from server");
         return setReportModel;
     }
