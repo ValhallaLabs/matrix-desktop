@@ -71,7 +71,7 @@ public class AuthenticationServerSessionManager {
      */
     private void closeSocketConnection(Socket socket) throws IOException {
         logger.debug("Socket connection closed");
-        commandExecutioner.sendCommand(socket, ServerCommands.CLOSE);
+        commandExecutioner.sendRawCommand(socket, ServerCommands.CLOSE);
         socket.close();
     }
 
@@ -92,8 +92,8 @@ public class AuthenticationServerSessionManager {
      * @return {@link InitializeModel} which may contains all start settings and info in case of success
      */
     private ResponseModel<InitializeModel> authenticateUser(AuthModel authModel, Socket socket) throws IOException, ClassNotFoundException {
-        commandExecutioner.sendCommand(socket, ServerCommands.AUTHENTICATE, authModel);
-        return commandExecutioner.getResponse(socket);
+        commandExecutioner.sendRawCommand(socket, ServerCommands.AUTHENTICATE, authModel);
+        return commandExecutioner.getRawResponseModel(socket);
     }
 
     /**

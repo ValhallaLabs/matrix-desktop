@@ -10,7 +10,7 @@ import java.util.Set;
  */
 // TODO package structure
 public class CurrentSessionInfo {
-    private static InitializeModel initializeModel;
+    private static InitializeModel initializeModel = new InitializeModel();
     private static long projectId;
 
 //    public static InitializeModel getInitializeModel() {

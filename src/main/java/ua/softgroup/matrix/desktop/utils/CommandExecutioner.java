@@ -23,18 +23,9 @@ public class CommandExecutioner {
         sendCommand(socket, serverCommand, new RequestModel(CurrentSessionInfo.getToken(), -1));
     }
 
-    public void sendRawCommand(Socket socket, ServerCommands serverCommand, long projectId) throws IOException {
-        sendCommand(socket, serverCommand, new RequestModel(CurrentSessionInfo.getToken(), projectId));
-    }
-
     public <T extends DataModel> void sendRawCommand(Socket socket, ServerCommands serverCommand, T dataModel)
             throws IOException {
         sendCommand(socket, serverCommand, new RequestModel<T>(CurrentSessionInfo.getToken(), dataModel));
-    }
-
-    public <T extends DataModel> void sendRawCommand(
-            Socket socket, ServerCommands serverCommand, T dataModel, long projectId) throws IOException {
-        sendCommand(socket, serverCommand, new RequestModel<T>(CurrentSessionInfo.getToken(), projectId, dataModel));
     }
 
     public  <T extends DataModel> ResponseModel<T> getRawResponseModel(Socket socket)
@@ -43,19 +34,19 @@ public class CommandExecutioner {
         return (ResponseModel<T>) objectInputStream.readObject();
     }
 
-    public <T1 extends DataModel, T2 extends DataModel> ResponseModel<T2> sendCommandWithResponse
+    public <T1 extends DataModel, T2 extends DataModel> T2 sendCommandWithResponse
             (ServerCommands serverCommands, long projectId) throws IOException, ClassNotFoundException {
         return this.<T1,T2>sendCommandWithResponse(serverCommands, new RequestModel<T1>(
                 CurrentSessionInfo.getToken(), projectId));
     }
 
-    public <T1 extends DataModel, T2 extends DataModel> ResponseModel<T2> sendCommandWithResponse
+    public <T1 extends DataModel, T2 extends DataModel> T2 sendCommandWithResponse
             (ServerCommands serverCommands, long projectId, T1 dataModel) throws IOException, ClassNotFoundException {
         return this.<T1,T2>sendCommandWithResponse(serverCommands, new RequestModel<T1>(
                 CurrentSessionInfo.getToken(), projectId, dataModel));
     }
 
-    private <T1 extends DataModel, T2 extends DataModel> ResponseModel<T2> sendCommandWithResponse(
+    private <T1 extends DataModel, T2 extends DataModel> T2 sendCommandWithResponse(
             ServerCommands serverCommands, RequestModel requestModel) throws IOException, ClassNotFoundException {
         Socket socket = SocketProvider.openNewConnection();
         sendCommand(socket, serverCommands, requestModel);

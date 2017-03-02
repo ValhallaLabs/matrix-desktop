@@ -12,15 +12,9 @@ import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWi
 import ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.NativeDevicesListener;
 import ua.softgroup.matrix.desktop.spykit.screenshooter.ScreenShooter;
 import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
-import ua.softgroup.matrix.desktop.utils.SocketProvider;
-import ua.softgroup.matrix.server.desktop.api.ServerCommands;
 import ua.softgroup.matrix.server.desktop.model.datamodels.CheckPointModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.TimeModel;
-import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseModel;
-import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseStatus;
-
 import java.io.IOException;
-import java.net.Socket;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -149,15 +143,11 @@ public class TimeTracker extends SpyKitTool {
 
     private void sendControlPointToServer(long number){
         try {
-            Socket socket = SocketProvider.openNewConnection();
-            commandExecutioner.sendCommand(socket, CHECK_POINT, getCheckpointModel(), projectId);
+            TimeModel timeModel = commandExecutioner.sendCommandWithResponse(CHECK_POINT, projectId, getCheckpointModel());
             //TODO: get TimeModel from responseModel, and set total and today time to project.
-            ResponseModel<TimeModel> responseModel = commandExecutioner.getResponse(socket);
-            commandExecutioner.sendCommand(socket, CLOSE);
-            socket.close();
         } catch (IOException | ClassNotFoundException e) {
             logger.debug("Devices listener crashed: {}", e);
-            //TODO: global crash, turn down matrix
+//            TODO: global crash, turn down matrix
         }
     }
 

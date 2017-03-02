@@ -52,12 +52,12 @@ public class ReportServerSessionManager {
     }
 
     private void saveOrChangeReport(ReportModel reportmodel) throws IOException {
-        commandExecutioner.sendCommand(socket, ServerCommands.SAVE_REPORT, reportmodel, reportmodel.getProjectId());
+//        commandExecutioner.sendCommand(socket, ServerCommands.SAVE_REPORT, reportmodel, reportmodel.getProjectId());
         logger.debug("Send save or change report to server");
     }
 
     private void getProjectReportsById(long id) throws IOException {
-        commandExecutioner.sendCommand(socket,ServerCommands.GET_REPORTS,id);
+//        commandExecutioner.sendCommand(socket,ServerCommands.GET_REPORTS,id);
         logger.debug("Send id project to server");
     }
 
@@ -80,7 +80,7 @@ public class ReportServerSessionManager {
 
     private void closeSocketConnection(Socket socket) throws IOException {
         logger.debug("Close socket connection");
-        commandExecutioner.sendCommand(socket, ServerCommands.CLOSE);
+//        commandExecutioner.sendCommand(socket, ServerCommands.CLOSE);
         socket.close();
 
     }

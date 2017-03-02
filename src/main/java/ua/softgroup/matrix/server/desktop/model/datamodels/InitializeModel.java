@@ -69,4 +69,15 @@ public class InitializeModel implements Serializable, DataModel {
     public void setCheckPointFrequency(long checkPointFrequency) {
         this.checkPointFrequency = checkPointFrequency;
     }
+
+    @Override
+    public String toString() {
+        return "InitializeModel{" +
+                "token='" + token + '\'' +
+                ", projectModels=" + projectModels +
+                ", idlePeriod=" + idlePeriod +
+                ", screenshotFrequency=" + screenshotFrequency +
+                ", checkPointFrequency=" + checkPointFrequency +
+                '}';
+    }
 }
