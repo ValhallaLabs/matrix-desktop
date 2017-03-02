@@ -3,20 +3,15 @@ package ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener;
 import io.reactivex.*;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
-import org.jnativehook.keyboard.NativeKeyEvent;
-import org.jnativehook.keyboard.NativeKeyListener;
-import org.jnativehook.mouse.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
-import java.awt.*;
-import java.util.EventListener;
+
 import java.util.EventObject;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
+
 import static java.util.logging.Logger.getLogger;
 import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.IS_USED;
 import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.NOT_USED;
@@ -27,22 +22,19 @@ import static ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public class NativeDevicesListener extends SpyKitTool {
-    private static final Logger logger = LoggerFactory.getLogger(NativeDevicesListener.class);
+public class IdleListener extends SpyKitTool {
+    private static final Logger logger = LoggerFactory.getLogger(IdleListener.class);
     private TimeTracker timeTracker;
     private Disposable idleControlDisposable;
-    private FlowableEmitter<EventObject> startCountUntilIdleEmitter, stopCountUntilIdleEmitter;
-    private Boolean isCountingUntilIdle = false, isIdle = false;
-    private StringBuilder keyboardLogs;
-    private double mouseFootage;
-    private Point prevMousePosition;
-    private EventListener globalMouseWheelListener, globalMouseListener, globalKeyListener;
+    private FlowableEmitter<EventObject> startCountUntilIdleEmitter;
+    private FlowableEmitter<EventObject> stopCountUntilIdleEmitter;
+    private boolean isCountingUntilIdle = false;
+    private boolean isIdle = false;
+    private GlobalDevicesListeners globalDevicesListeners;
 
-    public NativeDevicesListener(TimeTracker timeTracker) {
+    public IdleListener(TimeTracker timeTracker) {
         this.timeTracker = timeTracker;
-        keyboardLogs = new StringBuilder("");
-        prevMousePosition = MouseInfo.getPointerInfo().getLocation();
-        getLogger(GlobalScreen.class.getPackage().getName()).setLevel(Level.OFF);
+        globalDevicesListeners = new GlobalDevicesListeners(this);
     }
 
     /**
@@ -52,8 +44,7 @@ public class NativeDevicesListener extends SpyKitTool {
     public void turnOn() throws NativeHookException {
         if (status == NOT_USED) {
             createIdleControlFlowable();
-            addListenersToGlobalListener();
-            GlobalScreen.registerNativeHook();
+            globalDevicesListeners.turnOn();
             status = IS_USED;
             logger.debug("Native devices listener is turned on");
             return;
@@ -163,23 +154,10 @@ public class NativeDevicesListener extends SpyKitTool {
     }
 
     /**
-     * Adds listeners of keyboard and mouse to Global screen of JNativeHook library
-     */
-    private void addListenersToGlobalListener(){
-        globalMouseWheelListener = new GlobalMouseWheelListener();
-        GlobalScreen.addNativeMouseWheelListener((NativeMouseWheelListener) globalMouseWheelListener);
-        globalMouseListener = new GlobalMouseListener();
-        GlobalScreen.addNativeMouseListener((NativeMouseListener) globalMouseListener);
-        GlobalScreen.addNativeMouseMotionListener((NativeMouseMotionListener) globalMouseListener);
-        globalKeyListener = new GlobalKeyListener();
-        GlobalScreen.addNativeKeyListener((NativeKeyListener) globalKeyListener);
-    }
-
-    /**
      * Receive events from keyboard and mouse and sending its to emitters.
      * @param eventObject event which was emitted by keyboard or mouse
      */
-    private void receiveEvent(EventObject eventObject) {
+    void receiveEvent(EventObject eventObject) {
         startCountUntilIdleEmitter.onNext(eventObject);
         stopCountUntilIdleEmitter.onNext(eventObject);
     }
@@ -191,8 +169,7 @@ public class NativeDevicesListener extends SpyKitTool {
     public void turnOff() throws NativeHookException {
         if (status == IS_USED) {
             idleControlDisposable.dispose();
-            removeListenersFromGlobalListener();
-            GlobalScreen.unregisterNativeHook();
+            globalDevicesListeners.turnOff();
             status = WAS_USED;
             logger.debug("Native devices listener is turned off");
             return;
@@ -200,92 +177,27 @@ public class NativeDevicesListener extends SpyKitTool {
         logger.debug("Native devices listener was turned off already");
     }
 
-    /**
-     * Removes listeners from {@link GlobalScreen}.
-     */
-    private void removeListenersFromGlobalListener(){
-        GlobalScreen.removeNativeMouseWheelListener((NativeMouseWheelListener) globalMouseWheelListener);
-        GlobalScreen.removeNativeMouseListener((NativeMouseListener) globalMouseListener);
-        GlobalScreen.removeNativeMouseMotionListener((NativeMouseMotionListener) globalMouseListener);
-        GlobalScreen.removeNativeKeyListener((NativeKeyListener) globalKeyListener);
-    }
+
+
+
+
+
+
+
 
     /**
      * Returns a string object with logs of keyboard. Clears keyboardLogs string builder.
      * @return writeKeyboard model with keyboard logs
      */
-    public synchronized String getKeyboardLogs() {
-        String keyboardLogs = this.keyboardLogs.toString();
-        this.keyboardLogs = new StringBuilder("");
-        return keyboardLogs;
+    public String getKeyboardLogs() {
+        return globalDevicesListeners.getKeyboardLogs();
     }
 
     /**
      * Returns a double primitive with mouse's footage. Reset mouse's footage.
      * @return mouseFootage
      */
-    public synchronized double getMouseFootage() {
-        double mouseFootage = this.mouseFootage;
-        this.mouseFootage = 0;
-        return mouseFootage;
-    }
-
-    private class GlobalMouseWheelListener implements NativeMouseWheelListener {
-
-        /**
-         * Send event of mouse wheel into emitters.
-         * @param e native key event
-         */
-        public void nativeMouseWheelMoved(NativeMouseWheelEvent e) {
-            receiveEvent(e);
-        }
-    }
-
-    private class GlobalMouseListener implements NativeMouseInputListener {
-        private final static double PIXELS_PER_METER = 3779.5275;
-
-        /**
-         * Send event of mouse buttons into emitters.
-         * @param e native key event
-         */
-        public void nativeMousePressed(NativeMouseEvent e) {
-            receiveEvent(e);
-        }
-
-        /**
-         * Send event of mouse moves into emitters and calculate mouse footage in meters.
-         * @param e native key event
-         */
-        public void nativeMouseMoved(NativeMouseEvent e) {
-            mouseFootage += (Math.sqrt(Math.pow(e.getX() - prevMousePosition.getX(), 2) +
-                    Math.pow(e.getY() - prevMousePosition.getY(), 2)))/PIXELS_PER_METER;
-            prevMousePosition.setLocation(e.getX(), e.getY());
-            receiveEvent(e);
-        }
-
-        public void nativeMouseClicked(NativeMouseEvent e) {}
-
-        public void nativeMouseReleased(NativeMouseEvent e) {}
-
-        public void nativeMouseDragged(NativeMouseEvent e) {}
-    }
-
-    private class GlobalKeyListener implements NativeKeyListener {
-
-        /**
-         * Send event of keyboard into emitters of listeners and logging key, if it's not in forbidden list.
-         * @param e native key event
-         */
-        public synchronized void nativeKeyPressed(NativeKeyEvent e) {
-            receiveEvent(e);
-            if (!ForbiddenKeys.isForbidden(e.getKeyCode())) {
-                keyboardLogs.append(NativeKeyEvent.getKeyText(e.getKeyCode()));
-                System.out.println(e.getKeyChar());
-            }
-        }
-
-        public void nativeKeyReleased(NativeKeyEvent e) {}
-
-        public void nativeKeyTyped(NativeKeyEvent e) {}
+    public double getMouseFootage() {
+        return globalDevicesListeners.getMouseFootage();
     }
 }

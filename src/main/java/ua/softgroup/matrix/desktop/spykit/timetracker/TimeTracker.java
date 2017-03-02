@@ -10,7 +10,7 @@ import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
 import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWindowListener;
 import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWindowListenerFactory;
-import ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.NativeDevicesListener;
+import ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.IdleListener;
 import ua.softgroup.matrix.desktop.spykit.screenshooter.ScreenShooter;
 import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
 import ua.softgroup.matrix.server.desktop.model.datamodels.*;
@@ -31,7 +31,7 @@ public class TimeTracker extends SpyKitTool {
     private static final Logger logger = LoggerFactory.getLogger(TimeTracker.class);
     private MainLayoutController mainLayoutController;
     private ActiveWindowListener activeWindowListener;
-    private NativeDevicesListener devicesListener;
+    private IdleListener devicesListener;
     private ScreenShooter screenShooter;
     private CountDownLatch countDownLatch;
     private long projectId;
@@ -123,7 +123,7 @@ public class TimeTracker extends SpyKitTool {
      * Initialize and turn on devices listener.
      */
     private void turnOnDevicesListener() throws Exception {
-        devicesListener = new NativeDevicesListener(this);
+        devicesListener = new IdleListener(this);
         devicesListener.turnOn();
     }
 
