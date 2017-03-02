@@ -6,14 +6,17 @@ import java.util.Set;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-public class SynchronizedModel implements Serializable, DataModel {
+public class SynchronizationModel implements Serializable, DataModel {
     private static final long serialVersionUID = 1L;
 
     private Set<CheckPointModel> checkPointModels;
 
     private long idleTime;
 
-    public SynchronizedModel(Set<CheckPointModel> checkPointModels, long idleTime) {
+    public SynchronizationModel() {
+    }
+
+    public SynchronizationModel(Set<CheckPointModel> checkPointModels, long idleTime) {
         this.checkPointModels = checkPointModels;
         this.idleTime = idleTime;
     }

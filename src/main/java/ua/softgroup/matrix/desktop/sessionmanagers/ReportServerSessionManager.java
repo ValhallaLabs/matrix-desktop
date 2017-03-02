@@ -22,7 +22,6 @@ import java.util.Set;
 public class ReportServerSessionManager {
 
     private static final Logger logger = LoggerFactory.getLogger(ReportServerSessionManager.class);
-    private Set<ReportModel> setReportModel;
     private CommandExecutioner commandExecutioner;
 
     public ReportServerSessionManager() {
@@ -43,15 +42,14 @@ public class ReportServerSessionManager {
     /**
      * Send to {@link CommandExecutioner} command for get all report for this project
      * @param id  id current project get from user choice
-     * @return
+     * @return setReportModel
      * @throws IOException
      * @throws ClassNotFoundException
      */
     public Set<ReportModel> sendProjectDataAndGetReportById(long id) throws IOException, ClassNotFoundException {
-        setReportModel = ((ReportsContainerDataModel) commandExecutioner
+        Set<ReportModel> setReportModel = ((ReportsContainerDataModel) commandExecutioner
                 .sendCommandWithResponse(ServerCommands.GET_REPORTS, id)).getReportModels();
         logger.debug("Get report by id from server");
         return setReportModel;
     }
-
 }

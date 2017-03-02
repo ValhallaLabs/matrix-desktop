@@ -9,6 +9,8 @@ import java.util.Map;
 public class CheckPointModel implements Serializable, DataModel {
     private static final long serialVersionUID = 1L;
 
+    private long order;
+
     private byte[] screenshot;
 
     private String keyboardLogs;
@@ -17,11 +19,23 @@ public class CheckPointModel implements Serializable, DataModel {
 
     private Map<String, Long> windowsTimeMap;
 
-    public CheckPointModel(byte[] screenshot, String keyboardLogs, double mouseFootage, Map<String, Long> windowsTimeMap) {
+    private long idleTime; //in seconds
+
+    public CheckPointModel(long order, byte[] screenshot, String keyboardLogs, double mouseFootage, Map<String, Long> windowsTimeMap, long idleTime) {
+        this.order = order;
         this.screenshot = screenshot;
         this.keyboardLogs = keyboardLogs;
         this.mouseFootage = mouseFootage;
         this.windowsTimeMap = windowsTimeMap;
+        this.idleTime = idleTime;
+    }
+
+    public long getOrder() {
+        return order;
+    }
+
+    public void setOrder(long order) {
+        this.order = order;
     }
 
     public byte[] getScreenshot() {
@@ -54,5 +68,13 @@ public class CheckPointModel implements Serializable, DataModel {
 
     public void setWindowsTimeMap(Map<String, Long> windowsTimeMap) {
         this.windowsTimeMap = windowsTimeMap;
+    }
+
+    public long getIdleTime() {
+        return idleTime;
+    }
+
+    public void setIdleTime(long idleTime) {
+        this.idleTime = idleTime;
     }
 }

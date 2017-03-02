@@ -2,6 +2,7 @@ package ua.softgroup.matrix.desktop.currentsessioninfo;
 
 import ua.softgroup.matrix.server.desktop.model.datamodels.InitializeModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.SynchronizationModel;
 
 import java.util.Set;
 
@@ -11,6 +12,7 @@ import java.util.Set;
 // TODO package structure
 public class CurrentSessionInfo {
     private static InitializeModel initializeModel = new InitializeModel();
+    private static SynchronizationModel synchronizationModel = null;
     private static long projectId;
 
 //    public static InitializeModel getInitializeModel() {
@@ -60,6 +62,14 @@ public class CurrentSessionInfo {
 //    public void setCheckPointFrequency(long checkPointFrequency) {
 //        initializeModel.setCheckPointFrequency(checkPointFrequency);
 //    }
+
+    public static SynchronizationModel getSynchronizationModel() {
+        return synchronizationModel;
+    }
+
+    public static void setSynchronizationModel(SynchronizationModel synchronizationModel) {
+        CurrentSessionInfo.synchronizationModel = synchronizationModel;
+    }
 
     public static long getProjectId() {
         return projectId;

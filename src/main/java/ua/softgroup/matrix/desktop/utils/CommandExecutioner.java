@@ -50,7 +50,7 @@ public class CommandExecutioner {
             ServerCommands serverCommands, RequestModel requestModel) throws IOException, ClassNotFoundException {
         Socket socket = SocketProvider.openNewConnection();
         sendCommand(socket, serverCommands, requestModel);
-        return this.getResponse(socket);
+        return this.<T2>getResponse(socket);
     }
 
     public void sendCommandWithNoResponse(ServerCommands serverCommand) throws IOException, ClassNotFoundException {
