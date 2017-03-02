@@ -162,7 +162,7 @@ public class ReportLayoutController {
      * @param actionEvent callback click on button
      * @throws IOException
      */
-    public void changeReport(ActionEvent actionEvent) throws IOException {
+    public void changeReport(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         ReportModel reportModel = new ReportModel(currentReportId, taEditReport.getText(), currentProjectId);
         reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
         ((Node) actionEvent.getSource()).getScene().getWindow().hide();

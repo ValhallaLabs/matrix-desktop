@@ -265,7 +265,7 @@ public class ProjectsLayoutController {
      * @param actionEvent callback click on button
      * @throws IOException
      */
-    public void sendReport(ActionEvent actionEvent) throws IOException {
+    public void sendReport(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         byte[] attachFile = new byte[0];
         if (file.exists() && file != null) {
             attachFile = Files.readAllBytes(file.toPath());
