@@ -3,6 +3,8 @@ package ua.softgroup.matrix.server.desktop.api;
 import ua.softgroup.matrix.server.desktop.model.datamodels.CheckPointModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.InitializeModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectsContainerDataModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.ReportsContainerDataModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.SynchronizedModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.AuthModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
@@ -66,14 +68,14 @@ public enum ServerCommands {
 
     /**
      * The command for retrieving a user's reports of the specified project. The server expects
-     * to read the {@link RequestModel}. Then the server returns a {@link ResponseModel<Set<ReportModel>>} with a
-     * {@link ResponseStatus#SUCCESS} in the case of successful start, {@link ResponseStatus#FAIL} otherwise.
+     * to read the {@link RequestModel}. Then the server returns a {@link ResponseModel<ReportsContainerDataModel>}
+     * with a {@link ResponseStatus#SUCCESS} in the case of successful start, {@link ResponseStatus#FAIL} otherwise.
      */
     GET_REPORTS,
 
     /**
      * The command for retrieving a user's active projects. The server expects to read the {@link RequestModel}.
-     * Then the server returns a {@link ResponseModel<Set<ProjectModel>>} with a {@link ResponseStatus#SUCCESS}
+     * Then the server returns a {@link ResponseModel<ProjectsContainerDataModel>} with a {@link ResponseStatus#SUCCESS}
      * in the case of successful start, {@link ResponseStatus#FAIL} otherwise.
      */
     GET_ALL_PROJECT,
