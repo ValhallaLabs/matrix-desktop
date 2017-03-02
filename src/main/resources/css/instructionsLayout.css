@@ -6,8 +6,8 @@
 .split-pane > .split-pane-divider {
     -fx-background-color: transparent
 }
-.grei-background{
-    -fx-background-color: #ebebeb;
+.blue-background {
+    -fx-background-color: #3063a4;
 }
 
 .list-view .list-cell:even {
@@ -17,4 +17,7 @@
 .list-view .list-cell:odd {
     -fx-background-color: #ffffff;
     -fx-text-fill: black;
+}
+.grei-background{
+    -fx-background-color: #ebebeb;
 }

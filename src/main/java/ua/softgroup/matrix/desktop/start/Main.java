@@ -14,15 +14,20 @@ import java.time.LocalDateTime;
 
 public class Main extends Application {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) {
         logger.debug("Current time: {}", LocalDateTime.now());
         launch(args);
     }
 
+    /**
+     * Point of start Application
+     * @param primaryStage get default Stage from Application class
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         startLoginLayout(primaryStage);
-
     }
 
     /**
@@ -46,4 +51,6 @@ public class Main extends Application {
             logger.debug("Error when start Main Window "+e);
         }
     }
+
+
 }
