@@ -1,5 +1,6 @@
 package ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener;
 
+import com.google.common.base.Stopwatch;
 import io.reactivex.*;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -7,12 +8,8 @@ import org.jnativehook.NativeHookException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
-import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
-
 import java.util.EventObject;
 import java.util.concurrent.TimeUnit;
-
-import static java.util.logging.Logger.getLogger;
 import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.IS_USED;
 import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.NOT_USED;
 import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.WAS_USED;
@@ -24,16 +21,16 @@ import static ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.
  */
 public class IdleListener extends SpyKitTool {
     private static final Logger logger = LoggerFactory.getLogger(IdleListener.class);
-    private TimeTracker timeTracker;
     private Disposable idleControlDisposable;
     private FlowableEmitter<EventObject> startCountUntilIdleEmitter;
     private FlowableEmitter<EventObject> stopCountUntilIdleEmitter;
     private boolean isCountingUntilIdle = false;
     private boolean isIdle = false;
     private GlobalDevicesListeners globalDevicesListeners;
+    private Stopwatch idleStopwatch;
+    private long idleTimeSeconds;
 
-    public IdleListener(TimeTracker timeTracker) {
-        this.timeTracker = timeTracker;
+    public IdleListener() {
         globalDevicesListeners = new GlobalDevicesListeners(this);
     }
 
@@ -134,11 +131,19 @@ public class IdleListener extends SpyKitTool {
      */
     private CountUntilIdlePoint stopIdle(CountUntilIdlePoint stopPoint) {
         if (isIdle) {
-            timeTracker.stopIdle();
-            logger.debug("Idle is stopped!");
+            stopIdleStopWatch();
+            logger.debug("Idle is stopped! Total idle time of this period:{}", idleTimeSeconds);
             isIdle = false;
         }
         return stopPoint;
+    }
+
+    /**
+     * Stops idle stopwatch and adds time to general idle time.
+     */
+    private synchronized void stopIdleStopWatch() {
+        idleStopwatch.stop();
+        idleTimeSeconds += idleStopwatch.elapsed(TimeUnit.SECONDS);
     }
 
     /**
@@ -147,10 +152,17 @@ public class IdleListener extends SpyKitTool {
      */
     private void startIdle(CountUntilIdlePoint point){
         if (START_COUNT_UNTIL_IDLE == point) {
-            timeTracker.startIdle();
+            startIdleStopwatch();
             logger.debug("Idle is started!");
             isIdle = true;
         }
+    }
+
+    /**
+     * Starts idle stopwatch.
+     */
+    private void startIdleStopwatch() {
+        idleStopwatch = Stopwatch.createStarted();
     }
 
     /**
@@ -177,14 +189,6 @@ public class IdleListener extends SpyKitTool {
         logger.debug("Native devices listener was turned off already");
     }
 
-
-
-
-
-
-
-
-
     /**
      * Returns a string object with logs of keyboard. Clears keyboardLogs string builder.
      * @return writeKeyboard model with keyboard logs
@@ -199,5 +203,19 @@ public class IdleListener extends SpyKitTool {
      */
     public double getMouseFootage() {
         return globalDevicesListeners.getMouseFootage();
+    }
+
+    /**
+     * Returns a long primitive with idle time in seconds. Reset idle time.
+     * @return idleTimeSeconds
+     */
+    public synchronized long getIdleTimeSeconds() {
+        if(idleStopwatch.isRunning()) {
+            stopIdleStopWatch();
+        }
+        long idleTimeSeconds = this.idleTimeSeconds;
+        this.idleTimeSeconds = 0;
+        startIdleStopwatch();
+        return idleTimeSeconds;
     }
 }

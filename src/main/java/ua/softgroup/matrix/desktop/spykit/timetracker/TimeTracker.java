@@ -123,7 +123,7 @@ public class TimeTracker extends SpyKitTool {
      * Initialize and turn on devices listener.
      */
     private void turnOnDevicesListener() throws Exception {
-        devicesListener = new IdleListener(this);
+//        devicesListener = new IdleListener(this);
         devicesListener.turnOn();
     }
 
@@ -141,7 +141,8 @@ public class TimeTracker extends SpyKitTool {
 
     private CheckPointModel getCheckpointModel(long order) {
         return new CheckPointModel(order, screenShooter.makeScreenshot(), devicesListener.getKeyboardLogs(),
-                devicesListener.getMouseFootage(), activeWindowListener.getWindowTimeMap());
+                devicesListener.getMouseFootage(), activeWindowListener.getWindowTimeMap(),
+                devicesListener.getIdleTimeSeconds());
     }
 
     private void sendCheckPointToServer(CheckPointModel checkPointModel) {
@@ -206,25 +207,5 @@ public class TimeTracker extends SpyKitTool {
         activeWindowListener = null;
         devicesListener.turnOff();
         devicesListener = null;
-    }
-
-    public void startIdle() {
-        try {
-            commandExecutioner.sendCommandWithNoResponse(START_IDLE, projectId);
-            logger.debug("Idle is started on server");
-        } catch (IOException | ClassNotFoundException e) {
-            logger.debug("Time tracker crashes: {}", e);;
-            mainLayoutController.tellUserAboutCrash();
-        }
-    }
-
-    public void stopIdle() {
-        try {
-            commandExecutioner.sendCommandWithNoResponse(STOP_IDLE, projectId);
-            logger.debug("Idle is stoped on server");
-        } catch (IOException | ClassNotFoundException e) {
-            logger.debug("Time tracker crashes: {}", e);;
-            mainLayoutController.tellUserAboutCrash();
-        }
     }
 }

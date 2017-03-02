@@ -63,18 +63,18 @@ public class ReportServerSessionManager {
 
     @SuppressWarnings({"unchecked", "OptionalGetWithoutIsPresent"})
     private void setResponceModelToCollection() throws IOException, ClassNotFoundException {
-        try {
-           responseModel= commandExecutioner.getResponse(socket);
-            logger.debug("Set Report Model to Current Session successfully");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            logger.debug("Unable get report From Input Stream");
-        }
-     if(responseModel.getResponseStatus()==ResponseStatus.SUCCESS){
-         if(responseModel.getContainer().isPresent()){
-             setReportModel=(Set<ReportModel>)(responseModel.getContainer().get());
-         }
-     }
+//        try {
+//           responseModel= commandExecutioner.getResponse(socket);
+//            logger.debug("Set Report Model to Current Session successfully");
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//            logger.debug("Unable get report From Input Stream");
+//        }
+//     if(responseModel.getResponseStatus()==ResponseStatus.SUCCESS){
+//         if(responseModel.getContainer().isPresent()){
+//             setReportModel=(Set<ReportModel>)(responseModel.getContainer().get());
+//         }
+//     }
 
     }
 
