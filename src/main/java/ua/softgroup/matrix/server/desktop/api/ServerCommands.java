@@ -2,18 +2,15 @@ package ua.softgroup.matrix.server.desktop.api;
 
 import ua.softgroup.matrix.server.desktop.model.datamodels.CheckPointModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.InitializeModel;
-import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectsContainerDataModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ReportsContainerDataModel;
-import ua.softgroup.matrix.server.desktop.model.datamodels.SynchronizedModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.SynchronizationModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.AuthModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.TimeModel;
 import ua.softgroup.matrix.server.desktop.model.requestmodels.RequestModel;
 import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseModel;
 import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseStatus;
-
-import java.util.Set;
 
 public enum ServerCommands {
 
@@ -61,10 +58,10 @@ public enum ServerCommands {
 
     /**
      * The command for syncing with client after offline. The server expects to read the
-     * {@link RequestModel<SynchronizedModel>} object and then return a {@link ResponseModel} with a
+     * {@link RequestModel< SynchronizationModel >} object and then return a {@link ResponseModel} with a
      * {@link ResponseStatus#SUCCESS} in the case of successful start, {@link ResponseStatus#FAIL} otherwise.
      */
-    SYNCHRONIZED,
+    SYNCHRONIZE,
 
     /**
      * The command for retrieving a user's reports of the specified project. The server expects

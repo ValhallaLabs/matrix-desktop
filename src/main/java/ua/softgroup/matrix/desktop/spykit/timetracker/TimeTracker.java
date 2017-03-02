@@ -6,14 +6,15 @@ import io.reactivex.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.MainLayoutController;
+import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
 import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWindowListener;
 import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWindowListenerFactory;
 import ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.NativeDevicesListener;
 import ua.softgroup.matrix.desktop.spykit.screenshooter.ScreenShooter;
 import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
-import ua.softgroup.matrix.server.desktop.model.datamodels.CheckPointModel;
-import ua.softgroup.matrix.server.desktop.model.datamodels.TimeModel;
+import ua.softgroup.matrix.server.desktop.model.datamodels.*;
+
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +27,6 @@ import static ua.softgroup.matrix.server.desktop.api.ServerCommands.*;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-//TODO: when server will be done, rebuild and regist
 public class TimeTracker extends SpyKitTool {
     private static final Logger logger = LoggerFactory.getLogger(TimeTracker.class);
     private MainLayoutController mainLayoutController;
@@ -41,7 +41,7 @@ public class TimeTracker extends SpyKitTool {
 
     //TODO: Uncomment, when time tracker will be merged with main part
     public  TimeTracker(/*MainLayoutController mainLayoutController,*/ long projectId) {
-//        this.mainLayoutController = mainLayoutController;
+        this.mainLayoutController = mainLayoutController;
         this.projectId = projectId;
         commandExecutioner = new CommandExecutioner();
     }
@@ -55,8 +55,8 @@ public class TimeTracker extends SpyKitTool {
             try {
                 setUpTimeTracker();
             } catch (Exception e) {
-                //TODO: global crash, turn down matrix
                 logger.debug("Time tracker crashes: {}", e);
+                mainLayoutController.tellUserAboutCrash();
             }
         }).start();
     }
@@ -91,8 +91,8 @@ public class TimeTracker extends SpyKitTool {
             try {
                 turnOnActiveWindowListener();
             } catch (Exception e) {
-                //TODO: global crash, turn down matrix
                 logger.debug("Active windows listener crashed: {}", e);
+                mainLayoutController.tellUserAboutCrash();
             }
         }).start();
     }
@@ -116,7 +116,7 @@ public class TimeTracker extends SpyKitTool {
                 turnOnDevicesListener();
             } catch (Exception e) {
                 logger.debug("Devices listener crashed: {}", e);
-                //TODO: global crash, turn down matrix
+                mainLayoutController.tellUserAboutCrash();
             }
         }).start();
     }
@@ -136,33 +136,53 @@ public class TimeTracker extends SpyKitTool {
         controlPointObservable = Observable
                 .interval(10, TimeUnit.SECONDS)
                 .filter(number -> number != 0)
+                .map(this::getCheckpointModel)
                 .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .subscribe(this::sendControlPointToServer);
+                .subscribe(this::sendCheckPointToServer);
     }
 
-    private void sendControlPointToServer(long number){
-        try {
-            TimeModel timeModel = commandExecutioner.sendCommandWithResponse(CHECK_POINT, projectId, getCheckpointModel());
-            //TODO: get TimeModel from responseModel, and set total and today time to project.
-        } catch (IOException | ClassNotFoundException e) {
-            logger.debug("Devices listener crashed: {}", e);
-//            TODO: global crash, turn down matrix
-        }
-    }
-
-    private CheckPointModel getCheckpointModel() {
-        return new CheckPointModel(screenShooter.makeScreenshot(), devicesListener.getKeyboardLogs(),
+    private CheckPointModel getCheckpointModel(long order) {
+        return new CheckPointModel(order, screenShooter.makeScreenshot(), devicesListener.getKeyboardLogs(),
                 devicesListener.getMouseFootage(), activeWindowListener.getWindowTimeMap());
     }
 
+    private void sendCheckPointToServer(CheckPointModel checkPointModel) {
+        try {
+            checkSynchronization();
+            setUpdatedProjectTime(commandExecutioner.sendCommandWithResponse(CHECK_POINT, projectId, checkPointModel));
+            //TODO: update time on UI.
+        } catch (IOException | ClassNotFoundException e) {
+            logger.debug("Couldn't send checkpoint to server. Add checkpoint to synchronized model", e);
+            addCheckpointToSynchronizationModel(checkPointModel);
+        }
+    }
+
+    private void checkSynchronization() throws IOException, ClassNotFoundException {
+        if(CurrentSessionInfo.getSynchronizationModel() != null) {
+            commandExecutioner.sendCommandWithNoResponse(SYNCHRONIZE, CurrentSessionInfo.getSynchronizationModel(), projectId);
+            CurrentSessionInfo.setSynchronizationModel(null);
+        }
+    }
+
+    private void setUpdatedProjectTime(TimeModel updatedProjectTime){
+        CurrentSessionInfo.getProjectModels().stream().filter(projectModel -> projectModel.getId() == projectId)
+                .forEach(projectModel -> projectModel.setProjectTime(updatedProjectTime));
+    }
+
+    private void addCheckpointToSynchronizationModel(CheckPointModel checkPointModel) {
+        if(CurrentSessionInfo.getSynchronizationModel() == null) {
+            CurrentSessionInfo.setSynchronizationModel(new SynchronizationModel());
+        }
+        CurrentSessionInfo.getSynchronizationModel().getCheckPointModels().add(checkPointModel);
+    }
+
     @Override
-    public void turnOff()  {
+    public void turnOff() {
         try {
             tryToTurnOffTimeTracker();
         } catch (Exception e) {
-            //TODO: global crash, turn down matrix
             logger.debug("Time tracker crashes: {}", e);
+            mainLayoutController.tellUserAboutCrash();
         }
     }
 
@@ -195,8 +215,8 @@ public class TimeTracker extends SpyKitTool {
             commandExecutioner.sendCommandWithNoResponse(START_IDLE, projectId);
             logger.debug("Idle is started on server");
         } catch (IOException | ClassNotFoundException e) {
-            //TODO: global crash, turn down matrix
             logger.debug("Time tracker crashes: {}", e);;
+            mainLayoutController.tellUserAboutCrash();
         }
     }
 
@@ -205,8 +225,8 @@ public class TimeTracker extends SpyKitTool {
             commandExecutioner.sendCommandWithNoResponse(STOP_IDLE, projectId);
             logger.debug("Idle is stoped on server");
         } catch (IOException | ClassNotFoundException e) {
-            //TODO: global crash, turn down matrix
             logger.debug("Time tracker crashes: {}", e);;
+            mainLayoutController.tellUserAboutCrash();
         }
     }
 }
