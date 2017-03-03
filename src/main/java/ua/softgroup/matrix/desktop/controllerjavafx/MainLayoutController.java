@@ -60,7 +60,7 @@ public class MainLayoutController {
      *
      * @param window Window what will be owner by modality report window
      */
-    public void startReport(Window window) {
+     void startReport(Window window) {
         try {
             Stage primaryStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
@@ -84,9 +84,9 @@ public class MainLayoutController {
     /**
      * Tells {@link MainLayoutController} to open and set in the center of it project window
      *
-     * @param mainLayout
+     * @param mainLayout get BorderPane from main window
      */
-    public void startProjectsLayoutController(BorderPane mainLayout) {
+     void startProjectsLayoutController(BorderPane mainLayout) {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();

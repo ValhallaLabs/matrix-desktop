@@ -7,7 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
+
+
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
@@ -15,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
@@ -23,12 +25,8 @@ import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.*;
 
 /**
@@ -82,7 +80,7 @@ public class ProjectsLayoutController {
     public Label labelSymbolsNeedsToReport;
     @FXML
     public Label labelCurrentSymbols;
-    static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
+    private static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
     private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
     private static final String ID_COLUMN = "id";
@@ -92,26 +90,26 @@ public class ProjectsLayoutController {
     private static final int LIMITER_TEXT_COUNT = 999;
     private static final int MIN_TEXT_FOR_REPORT = 70;
     private ReportServerSessionManager reportServerSessionManager;
-    private File file;
-    int timeM=0;
-    int timeH=0;
-    Timeline time;
+    private File attachFile;
+    private long timeTodayMinutes;
+    private Timeline timeTimer;
+
     /**
      * After Load/Parsing fxml call this method
-     * Create {@link ReportServerSessionManager}
+     * Create {@link ReportServerSessionManager} and TimeTimer
      *
      * @throws IOException
      */
     @FXML
     private void initialize() throws IOException {
         reportServerSessionManager = new ReportServerSessionManager();
+        timeTimer = new Timeline();
         initPieChart();
         initProjectInTable();
         getTodayDayAndSetInView();
         setFocusOnTableView();
         countTextAndSetInView();
         addTextLimiter(taWriteReport, LIMITER_TEXT_COUNT);
-
     }
 
     /**
@@ -275,8 +273,8 @@ public class ProjectsLayoutController {
      */
     public void sendReport(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         byte[] attachFile = new byte[0];
-        if (file.exists() && file != null) {
-            attachFile = Files.readAllBytes(file.toPath());
+        if (this.attachFile.exists() && this.attachFile != null) {
+            attachFile = Files.readAllBytes(this.attachFile.toPath());
             System.out.println(Arrays.toString(attachFile));
         }
         System.out.println(Arrays.toString(attachFile));
@@ -312,39 +310,66 @@ public class ProjectsLayoutController {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
         );
-        file = fileChooser.showOpenDialog(labelCurrentSymbols.getScene().getWindow());
-        if (file != null) {
-            System.out.println("file attach");
+        attachFile = fileChooser.showOpenDialog(labelCurrentSymbols.getScene().getWindow());
+        if (attachFile != null) {
+            System.out.println("hFile attach");
         }
     }
 
-
+    /**
+     * Hears when user click on button and create Timeline with KeyFrame duration every 1 minutes
+     * and start play timer
+     *
+     * @param actionEvent callback click on button
+     * @throws InterruptedException
+     */
     public void startWork(ActionEvent actionEvent) throws InterruptedException {
-         time=new Timeline();
-        time.setCycleCount(Timeline.INDEFINITE);
-        KeyFrame frame=new KeyFrame(javafx.util.Duration.minutes(1), new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                timeM++;
 
-                if(timeM>=60){
-                    timeH++;
-                    timeM=0;
-                }
-                labelTodayTotalTime.setText(String.valueOf(timeH+"h"+timeM+"m"));
-            }
+        timeTimer.setCycleCount(Timeline.INDEFINITE);
+        if (timeTimer != null) {
+            timeTimer.stop();
+        }
+        KeyFrame frame = new KeyFrame(Duration.minutes(1), event -> {
+            calculateTimeAndSetInView();
         });
 
-       time.getKeyFrames().add(frame);
-        time.playFromStart();
+        timeTimer.getKeyFrames().add(frame);
+        timeTimer.playFromStart();
+        buttonConditionAtTimerOn();
     }
 
+    /**
+     * Hears when user click on button and stop timer
+     *
+     * @param actionEvent callback click on button
+     */
     public void stopWork(ActionEvent actionEvent) {
-   time.stop();
-        long test1=239;
-        long test2 =test1%60;
-        long test3=test1/60;
-        System.out.println(test3+":"+test2);
+        timeTimer.stop();
+        buttonConditionAtTimerOff();
+    }
+
+    /**
+     * Increment minutes and set this info into label view
+     */
+    private void calculateTimeAndSetInView() {
+        timeTodayMinutes++;
+        labelTodayTotalTime.setText(String.valueOf(timeTodayMinutes / 60 + "h " + timeTodayMinutes % 60 + "m"));
+    }
+
+    /**
+     *Set possibility click on stop button and disable start button
+     */
+    private void buttonConditionAtTimerOn() {
+        btnStart.setDisable(true);
+        btnStop.setDisable(false);
+    }
+
+    /**
+     *Set possibility click on start button and disable stop button
+     */
+    private void buttonConditionAtTimerOff() {
+        btnStart.setDisable(false);
+        btnStop.setDisable(true);
     }
 
 }
