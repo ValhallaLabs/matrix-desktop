@@ -25,6 +25,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
     private Disposable titleReaderDisposable;
     private CountDownLatch countDownLatch;
     private Map<String, Long> windowTimeMap = new LinkedHashMap<>();
+
     /**
      * Tries to turn on ActiveWindowListener
      */

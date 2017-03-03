@@ -10,13 +10,13 @@ public abstract class SpyKitTool {
     protected SpyKitToolStatus status = NOT_USED;
 
     /**
-     * Turns on global device listener
+     * Turns on spy kit tool
      * @return boolean result is listener was turned on
      */
     public abstract void turnOn() throws Exception;
 
     /**
-     * Turns off global device listener
+     * Turns off spy kit tool
      * @return boolean result is listener was turned off
      */
     public abstract void turnOff() throws Exception;
