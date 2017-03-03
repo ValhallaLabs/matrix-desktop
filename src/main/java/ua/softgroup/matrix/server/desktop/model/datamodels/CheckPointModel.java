@@ -9,7 +9,7 @@ import java.util.Map;
 public class CheckPointModel implements Serializable, DataModel {
     private static final long serialVersionUID = 1L;
 
-    private long order;
+    private long order; // just an order of checkpoint
 
     private byte[] screenshot;
 
