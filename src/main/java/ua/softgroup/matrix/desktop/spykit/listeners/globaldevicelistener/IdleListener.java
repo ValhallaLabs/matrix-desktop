@@ -26,12 +26,12 @@ public class IdleListener extends SpyKitTool {
     private FlowableEmitter<EventObject> stopCountUntilIdleEmitter;
     private boolean isCountingUntilIdle = false;
     private boolean isIdle = false;
-    private GlobalDevicesListeners globalDevicesListeners;
+    private NativeDevicesListener nativeDevicesListener;
     private Stopwatch idleStopwatch;
     private long idleTimeSeconds;
 
     public IdleListener() {
-        globalDevicesListeners = new GlobalDevicesListeners(this);
+        nativeDevicesListener = new NativeDevicesListener(this);
     }
 
     /**
@@ -41,7 +41,7 @@ public class IdleListener extends SpyKitTool {
     public void turnOn() throws NativeHookException {
         if (status == NOT_USED) {
             createIdleControlFlowable();
-            globalDevicesListeners.turnOn();
+            nativeDevicesListener.turnOn();
             status = IS_USED;
             logger.debug("Native devices listener is turned on");
             return;
@@ -181,7 +181,7 @@ public class IdleListener extends SpyKitTool {
     public void turnOff() throws NativeHookException {
         if (status == IS_USED) {
             idleControlDisposable.dispose();
-            globalDevicesListeners.turnOff();
+            nativeDevicesListener.turnOff();
             status = WAS_USED;
             logger.debug("Native devices listener is turned off");
             return;
@@ -194,7 +194,7 @@ public class IdleListener extends SpyKitTool {
      * @return writeKeyboard model with keyboard logs
      */
     public String getKeyboardLogs() {
-        return globalDevicesListeners.getKeyboardLogs();
+        return nativeDevicesListener.getKeyboardLogs();
     }
 
     /**
@@ -202,7 +202,7 @@ public class IdleListener extends SpyKitTool {
      * @return mouseFootage
      */
     public double getMouseFootage() {
-        return globalDevicesListeners.getMouseFootage();
+        return nativeDevicesListener.getMouseFootage();
     }
 
     /**

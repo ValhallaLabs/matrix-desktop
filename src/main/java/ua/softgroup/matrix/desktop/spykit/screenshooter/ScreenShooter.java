@@ -34,8 +34,8 @@ public class ScreenShooter {
     }
 
     /**
-     * Gets bounds of active monitor for screenshot
-     * @return rectangle area for screenshot
+     * Gets screen capture and applies a grey filter.
+     * @return a {@link BufferedImage} with a grey filter
      */
     private BufferedImage getScreenCapture() throws AWTException, NullPointerException {
         BufferedImage original = new Robot().createScreenCapture(MouseInfo.getPointerInfo().getDevice()

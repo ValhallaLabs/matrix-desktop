@@ -18,8 +18,8 @@ import static java.util.logging.Logger.getLogger;
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-class GlobalDevicesListeners extends SpyKitTool {
-    private static final Logger logger = LoggerFactory.getLogger(GlobalDevicesListeners.class);
+class NativeDevicesListener extends SpyKitTool {
+    private static final Logger logger = LoggerFactory.getLogger(NativeDevicesListener.class);
     private IdleListener idleListener;
     private StringBuilder keyboardLogs;
     private double mouseFootage;
@@ -28,16 +28,20 @@ class GlobalDevicesListeners extends SpyKitTool {
     private EventListener globalMouseListener;
     private EventListener globalKeyListener;
 
-    GlobalDevicesListeners(IdleListener idleListener) {
+    NativeDevicesListener(IdleListener idleListener) {
         this.idleListener = idleListener;
         keyboardLogs = new StringBuilder("");
         prevMousePosition = MouseInfo.getPointerInfo().getLocation();
         getLogger(GlobalScreen.class.getPackage().getName()).setLevel(Level.OFF);
     }
 
+    /**
+     * Turns on NativeDeviceListener.
+     * @throws NativeHookException
+     */
     @Override
     public void turnOn() throws NativeHookException {
-        addListenersToGlobalListener();
+        addListenersToGlobalScreen();
         GlobalScreen.registerNativeHook();
         logger.debug("Native devices listener is turned on");
     }
@@ -45,7 +49,7 @@ class GlobalDevicesListeners extends SpyKitTool {
     /**
      * Adds listeners of keyboard and mouse to Global screen of JNativeHook library
      */
-    private void addListenersToGlobalListener(){
+    private void addListenersToGlobalScreen(){
         globalMouseWheelListener = new GlobalMouseWheelListener();
         GlobalScreen.addNativeMouseWheelListener((NativeMouseWheelListener) globalMouseWheelListener);
         globalMouseListener = new GlobalMouseListener();
@@ -55,6 +59,10 @@ class GlobalDevicesListeners extends SpyKitTool {
         GlobalScreen.addNativeKeyListener((NativeKeyListener) globalKeyListener);
     }
 
+    /**
+     * Turns off NativeDeviceListener.
+     * @throws NativeHookException
+     */
     @Override
     public void turnOff() throws NativeHookException {
         removeListenersFromGlobalListener();

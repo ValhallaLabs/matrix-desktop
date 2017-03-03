@@ -43,20 +43,6 @@ public enum ServerCommands {
     END_WORK,
 
     /**
-     * That command indicates that starts idling. The server expects to read the {@link RequestModel} object
-     * and then return a {@link ResponseModel} with a {@link ResponseStatus#SUCCESS} in the case of successful start,
-     * {@link ResponseStatus#FAIL} otherwise.
-     */
-    START_IDLE,
-
-    /**
-     * That command indicates that ends idling. The server expects to read the {@link RequestModel} object
-     * and then return a {@link ResponseModel} with a {@link ResponseStatus#SUCCESS} in the case of successful start,
-     * {@link ResponseStatus#FAIL} otherwise.
-     */
-    STOP_IDLE,
-
-    /**
      * The command for syncing with client after offline. The server expects to read the
      * {@link RequestModel< SynchronizationModel >} object and then return a {@link ResponseModel} with a
      * {@link ResponseStatus#SUCCESS} in the case of successful start, {@link ResponseStatus#FAIL} otherwise.
@@ -71,6 +57,7 @@ public enum ServerCommands {
     GET_REPORTS,
 
     /**
+     * (Implement this command only in case of adding refresh option on client)
      * The command for retrieving a user's active projects. The server expects to read the {@link RequestModel}.
      * Then the server returns a {@link ResponseModel<ProjectsContainerDataModel>} with a {@link ResponseStatus#SUCCESS}
      * in the case of successful start, {@link ResponseStatus#FAIL} otherwise.
