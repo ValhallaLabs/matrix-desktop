@@ -26,14 +26,14 @@
 .add-button {
     -fx-graphic: url("/images/attachFileIcon.png");
     -fx-background-color: #c6c6c6;
-    -fx-font-size: 11px;
+    -fx-font-size: 12px;
     -fx-text-fill: black;
 }
 
 .send-reports-button {
     -fx-graphic: url("/images/sendReportIcon.png");
     -fx-background-color: #3064a2;
-    -fx-font-size: 11px;
+    -fx-font-size: 12px;
     -fx-text-fill: white;
 }
 
