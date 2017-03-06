@@ -218,14 +218,21 @@ public class ProjectsLayoutController {
      * @throws IOException
      */
     public void chosenProject(Event event) throws IOException, ClassNotFoundException {
-        openReportWindowOnTwoMouseClick(event);
-        taWriteReport.setText("");
-        taWriteReport.setEditable(true);
-        if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
-            ProjectModel selectProject = tvProjectsTable.getSelectionModel().getSelectedItem();
-            setReportInfoInTextAreaAndButton(selectProject);
-            setOtherProjectInfoInView(selectProject);
+        MouseEvent mouseEvent = (MouseEvent) event;
+        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+            if (mouseEvent.getClickCount() == 2) {
+               openReportWindowOnTwoMouseClick(event);
+            }else {
+                taWriteReport.setText("");
+                taWriteReport.setEditable(true);
+                if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
+                    ProjectModel selectProject = tvProjectsTable.getSelectionModel().getSelectedItem();
+                    setReportInfoInTextAreaAndButton(selectProject);
+                    setOtherProjectInfoInView(selectProject);
+                }
+            }
         }
+
     }
 
     /**
@@ -234,13 +241,8 @@ public class ProjectsLayoutController {
      * @param event callback click on table view
      */
     private void openReportWindowOnTwoMouseClick(Event event) {
-        MouseEvent mouseEvent = (MouseEvent) event;
-        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-            if (mouseEvent.getClickCount() == 2) {
-                MainLayoutController main = new MainLayoutController();
-                main.startReport(labelCurrentSymbols.getScene().getWindow());
-            }
-        }
+        MainLayoutController main = new MainLayoutController();
+        main.startReport(labelCurrentSymbols.getScene().getWindow());
     }
 
     /**
@@ -271,10 +273,10 @@ public class ProjectsLayoutController {
      */
     public void sendReport(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         byte[] attachFile = new byte[0];
-        if (this.attachFile.exists() && this.attachFile != null) {
-            attachFile = Files.readAllBytes(this.attachFile.toPath());
-            System.out.println(Arrays.toString(attachFile));
-        }
+//        if (this.attachFile.exists() && this.attachFile != null) {
+//            attachFile = Files.readAllBytes(this.attachFile.toPath());
+//            System.out.println(Arrays.toString(attachFile));
+//        }
         System.out.println(Arrays.toString(attachFile));
         ReportModel reportModel = new ReportModel(taWriteReport.getText(), LocalDate.now(), attachFile);
         reportServerSessionManager.saveOrChangeReportOnServer(reportModel);

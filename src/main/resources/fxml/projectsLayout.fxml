@@ -121,7 +121,7 @@
                         </Label>
                         <HBox minHeight="20.0" prefHeight="20.0" prefWidth="200.0">
                            <children>
-                              <Label prefWidth="170.0" text="Getting Started" textFill="#c9c9c9">
+                              <Label prefWidth="170.0" text="Arrival time" textFill="#c9c9c9">
                                  <HBox.margin>
                                     <Insets left="17.0" />
                                  </HBox.margin>

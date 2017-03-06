@@ -3,6 +3,7 @@ package ua.softgroup.matrix.desktop.sessionmanagers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
 import ua.softgroup.matrix.server.desktop.api.ServerCommands;
@@ -34,8 +35,13 @@ public class ReportServerSessionManager {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public void saveOrChangeReportOnServer(ReportModel reportModel) throws IOException, ClassNotFoundException {
-        commandExecutioner.sendCommandWithNoResponse(ServerCommands.SAVE_REPORT, reportModel, reportModel.getId());
+    public void saveOrChangeReportOnServer(ReportModel reportModel) {
+        try {
+            reportModel.setProjectId(CurrentSessionInfo.getProjectId());
+            commandExecutioner.sendCommandWithNoResponse(ServerCommands.SAVE_REPORT, reportModel,reportModel.getProjectId());
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         logger.debug("Save or change report on server");
     }
 
@@ -46,9 +52,14 @@ public class ReportServerSessionManager {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public Set<ReportModel> sendProjectDataAndGetReportById(long id) throws IOException, ClassNotFoundException {
-        Set<ReportModel> setReportModel = ((ReportsContainerDataModel) commandExecutioner
-                .sendCommandWithResponse(ServerCommands.GET_REPORTS, id)).getReportModels();
+    public Set<ReportModel> sendProjectDataAndGetReportById(long id)  {
+        Set<ReportModel> setReportModel = null;
+        try {
+            setReportModel = ((ReportsContainerDataModel) commandExecutioner
+                    .sendCommandWithResponse(ServerCommands.GET_REPORTS, id)).getReportModels();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         logger.debug("Get report by id from server");
         return setReportModel;
     }
