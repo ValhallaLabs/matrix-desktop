@@ -1,5 +1,7 @@
 package ua.softgroup.matrix.desktop.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.server.desktop.api.ServerCommands;
 import ua.softgroup.matrix.server.desktop.model.datamodels.DataModel;
@@ -19,6 +21,7 @@ import static ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseSt
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public class CommandExecutioner {
+    public static final Logger logger = LoggerFactory.getLogger(CommandExecutioner.class);
 
     /**
      * Method for sending commands to server using outer socket.
@@ -54,7 +57,9 @@ public class CommandExecutioner {
     public  <T extends DataModel> ResponseModel<T> getRawResponseModel(Socket socket)
             throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-        return (ResponseModel<T>) objectInputStream.readObject();
+        ResponseModel<T> responseModel = (ResponseModel<T>) objectInputStream.readObject();
+        logger.debug("Raw response: {}", responseModel.toString());
+        return responseModel;
     }
 
     /**
@@ -107,6 +112,7 @@ public class CommandExecutioner {
     private <T1 extends DataModel, T2 extends DataModel> T2 sendCommandWithResponse(
             ServerCommands serverCommand, RequestModel requestModel) throws IOException, ClassNotFoundException {
         Socket socket = SocketProvider.openNewConnection();
+        logger.debug("Connection is opened");
         sendCommand(socket, serverCommand, requestModel);
         return this.<T2>getResponse(socket);
     }
@@ -147,7 +153,7 @@ public class CommandExecutioner {
      */
     public <T extends DataModel> void sendCommandWithNoResponse
             (ServerCommands serverCommand, T dataModel, long projectId) throws IOException, ClassNotFoundException {
-        this.sendCommandWithNoResponse(
+        sendCommandWithNoResponse(
                 serverCommand, new RequestModel<T>(CurrentSessionInfo.getToken(), projectId, dataModel));
     }
 
@@ -164,10 +170,9 @@ public class CommandExecutioner {
     private <T extends DataModel> void sendCommandWithNoResponse(
             ServerCommands serverCommand, RequestModel<T> requestModel) throws IOException, ClassNotFoundException {
         Socket socket = SocketProvider.openNewConnection();
+        logger.debug("Connection is opened");
         sendCommand(socket, serverCommand, requestModel);
         ResponseModel responseModel = getResponse(socket);
-        sendRawCommand(socket, CLOSE);
-        socket.close();
         if (SUCCESS != responseModel.getResponseStatus()){
             throw new NullPointerException();
         }
@@ -184,6 +189,7 @@ public class CommandExecutioner {
      */
     private <T extends DataModel> void sendCommand(
             Socket socket, ServerCommands serverCommand, RequestModel<T> requestModel) throws IOException {
+        logger.debug("Server command: {}. Request model: {}", serverCommand, requestModel.toString());
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
         objectOutputStream.writeObject(serverCommand);
         objectOutputStream.writeObject(requestModel);
@@ -201,8 +207,10 @@ public class CommandExecutioner {
     private <T extends DataModel> T getResponse(Socket socket) throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
         ResponseModel<T> responseModel = (ResponseModel<T>) objectInputStream.readObject();
+        logger.debug("Response: {}", responseModel.toString());
         sendRawCommand(socket, CLOSE);
         socket.close();
+        logger.debug("Connection is closed");
         if (responseModel.getResponseStatus() == SUCCESS && responseModel.getContainer().isPresent()) {
             return responseModel.getContainer().get();
         }

@@ -3,6 +3,7 @@ package ua.softgroup.matrix.server.desktop.model.datamodels;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class ReportModel implements Serializable, DataModel {
     private static final long serialVersionUID = 1L;
@@ -99,5 +100,18 @@ public class ReportModel implements Serializable, DataModel {
 
     public void setAttachment(byte[] attachment) {
         this.attachment = attachment;
+    }
+
+    @Override
+    public String toString() {
+        return "ReportModel{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", projectId=" + projectId +
+                ", checked=" + checked +
+                ", date=" + date +
+                ", workTime='" + workTime + '\'' +
+                ", attachment=" + Arrays.toString(attachment) +
+                '}';
     }
 }

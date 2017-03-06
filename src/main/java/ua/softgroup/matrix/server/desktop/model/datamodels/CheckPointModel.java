@@ -1,6 +1,7 @@
 package ua.softgroup.matrix.server.desktop.model.datamodels;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -76,5 +77,17 @@ public class CheckPointModel implements Serializable, DataModel {
 
     public void setIdleTime(long idleTime) {
         this.idleTime = idleTime;
+    }
+
+    @Override
+    public String toString() {
+        return "CheckPointModel{" +
+                "order=" + order +
+                ", screenshot=" + Arrays.toString(screenshot) +
+                ", keyboardLogs='" + keyboardLogs + '\'' +
+                ", mouseFootage=" + mouseFootage +
+                ", windowsTimeMap=" + windowsTimeMap +
+                ", idleTime=" + idleTime +
+                '}';
     }
 }
