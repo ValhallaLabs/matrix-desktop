@@ -50,7 +50,7 @@ public class ReportLayoutController {
     private static final String DATE_COLUMN = "date";
     private static final String ID_COLUMN = "id";
     private static final String CHECKED_COLUMN = "checked";
-    private static final String DESCRIPTION_COLUMN = "description";
+    private static final String DESCRIPTION_COLUMN = "text";
     private static final int MIN_TEXT_FOR_REPORT = 70;
     private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
     private ReportServerSessionManager reportServerSessionManager;
@@ -69,13 +69,12 @@ public class ReportLayoutController {
     private void initialize() throws IOException, ClassNotFoundException {
         currentProjectId = CurrentSessionInfo.getProjectId();
         reportServerSessionManager = new ReportServerSessionManager();
-        if (currentProjectId != null) {
             report = reportServerSessionManager.sendProjectDataAndGetReportById(currentProjectId);
-        }
         initReportInTable();
         setProjectInfoInView(currentProjectId);
         setFocusOnTableView();
         countTextAndSetButtonCondition();
+
     }
 
     /**
@@ -87,6 +86,8 @@ public class ReportLayoutController {
         tableViewReport.getSelectionModel().select(0);
         tableViewReport.getFocusModel().focus(0);
         ReportModel reportModel = tableViewReport.getSelectionModel().getSelectedItem();
+        checkVerifyReportAndSetButtonCondition(reportModel);
+        currentReportId = reportModel.getId();
         taEditReport.setText(reportModel.getText());
     }
 
@@ -102,7 +103,6 @@ public class ReportLayoutController {
             if (model.getId() == id) {
                 labelResponsible.setText(model.getAuthorName());
                 labelProjectName.setText(model.getTitle());
-                taEditReport.setText(reportText);
                 if (model.getEndDate() != null && model.getStartDate() != null) {
                     labelStartDate.setText(model.getStartDate().toString());
                     labelDeadlineDate.setText(model.getEndDate().toString());
