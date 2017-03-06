@@ -9,11 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
 import java.io.IOException;
+import java.net.BindException;
+import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.time.LocalDateTime;
 
 
 public class Main extends Application {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
+    private static ServerSocket socket;
 
     public static void main(String[] args) {
         logger.debug("Current time: {}", LocalDateTime.now());
@@ -27,7 +31,19 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
+        checkIfRunning();
         startLoginLayout(primaryStage);
+    }
+
+    private static void checkIfRunning() {
+        try {
+            socket = new ServerSocket(8979, 0, InetAddress.getByAddress(new byte[] {127,0,0,1}));
+            logger.debug("Bind to localhost adapter with a zero connection queue");
+        } catch (IOException e) {
+            logger.debug("App already running");
+            //TODO: remove line below, tell user to free 8979 port
+            System.exit(1);
+        }
     }
 
     /**
