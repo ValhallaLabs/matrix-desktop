@@ -39,4 +39,12 @@ public class ResponseModel<T extends DataModel> implements Serializable {
     public void setContainer(Optional<T> container) {
         this.container = container;
     }
+
+    @Override
+    public String toString() {
+        return "ResponseModel{" +
+                "responseStatus=" + responseStatus +
+                ", container=" + container +
+                '}';
+    }
 }

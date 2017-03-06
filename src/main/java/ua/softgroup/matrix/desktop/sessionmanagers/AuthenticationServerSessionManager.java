@@ -4,6 +4,7 @@ import io.reactivex.Emitter;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
@@ -14,13 +15,11 @@ import ua.softgroup.matrix.server.desktop.api.ServerCommands;
 import ua.softgroup.matrix.server.desktop.model.datamodels.AuthModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.InitializeModel;
 import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseModel;
-import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseStatus;
 import java.io.*;
 import java.net.Socket;
 import java.util.concurrent.CountDownLatch;
 
 import static ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseStatus.SUCCESS;
-
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
@@ -29,14 +28,15 @@ public class AuthenticationServerSessionManager {
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationServerSessionManager.class);
     private LoginLayoutController loginLayoutController;
     private Emitter<AuthModel> authModelEmitter;
-    private Disposable disposableSubscription;
+    private Disposable socketDisposable;
     private CountDownLatch countDownLatch;
     private CommandExecutioner commandExecutioner;
 
     public AuthenticationServerSessionManager(LoginLayoutController loginLayoutController) {
         this.loginLayoutController = loginLayoutController;
         countDownLatch = new CountDownLatch(1);
-        disposableSubscription = Observable.using(this::openSocketConnection, this::createBindedObservable, this::closeSocketConnection)
+        socketDisposable = Observable.using(this::openSocketConnection, this::createBindedObservable, this::closeSocketConnection)
+                .subscribeOn(Schedulers.io())
                 .subscribe(this::finishAuthentication, this::handleExceptions);
     }
 
@@ -48,7 +48,7 @@ public class AuthenticationServerSessionManager {
     private Socket openSocketConnection() throws IOException {
         Socket socket = SocketProvider.openNewConnection();
         commandExecutioner = new CommandExecutioner();
-        logger.debug("Open socket connection");
+        logger.debug("Connection is opened");
         return socket;
     }
 
@@ -70,9 +70,9 @@ public class AuthenticationServerSessionManager {
      * @param socket The socket which is dependent to an observable
      */
     private void closeSocketConnection(Socket socket) throws IOException {
-        logger.debug("Socket connection closed");
         commandExecutioner.sendRawCommand(socket, ServerCommands.CLOSE);
         socket.close();
+        logger.debug("Connection is closed");
     }
 
     /**
@@ -103,7 +103,6 @@ public class AuthenticationServerSessionManager {
      * @return boolean result of authentication
      */
     private boolean handleServerAuthResponse(ResponseModel<InitializeModel> responseModel) {
-        logger.debug("Auth response status {}", responseModel.getResponseStatus());
         if (SUCCESS != responseModel.getResponseStatus()) {
             loginLayoutController.errorLoginPassword();
             return false;
@@ -121,7 +120,8 @@ public class AuthenticationServerSessionManager {
             CurrentSessionInfo.setInitializeModel(responseModel.getContainer().get());
             loginLayoutController.closeLoginLayoutAndStartMainLayout();
             logger.debug("Authentication completed");
-            disposableSubscription.dispose();
+            socketDisposable.dispose();
+            logger.debug("socketDisposable is disposed: {}", socketDisposable.isDisposed());
             return;
         }
         handleExceptions(new Exception());
@@ -159,8 +159,9 @@ public class AuthenticationServerSessionManager {
      * Method for UI to close current authentication session im emergency case.
      */
     public void closeSession(){
-        if(!disposableSubscription.isDisposed()) {
-            disposableSubscription.dispose();
+        if(!socketDisposable.isDisposed()) {
+            socketDisposable.dispose();
+            logger.debug("socketDisposable is disposed: {}", socketDisposable.isDisposed());
         }
     }
 }

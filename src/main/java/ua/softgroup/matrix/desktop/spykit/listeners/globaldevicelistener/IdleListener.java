@@ -132,7 +132,7 @@ public class IdleListener extends SpyKitTool {
     private CountUntilIdlePoint stopIdle(CountUntilIdlePoint stopPoint) {
         if (isIdle) {
             stopIdleStopWatch();
-            logger.debug("Idle is stopped! Total idle time of this period:{}", idleTimeSeconds);
+            logger.debug("Idle is stopped! Total idle time of the period:{}", idleTimeSeconds);
             isIdle = false;
         }
         return stopPoint;
