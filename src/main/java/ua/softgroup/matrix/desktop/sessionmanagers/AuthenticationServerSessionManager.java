@@ -28,14 +28,14 @@ public class AuthenticationServerSessionManager {
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationServerSessionManager.class);
     private LoginLayoutController loginLayoutController;
     private Emitter<AuthModel> authModelEmitter;
-    private Disposable disposableSubscription;
+    private Disposable socketDisposable;
     private CountDownLatch countDownLatch;
     private CommandExecutioner commandExecutioner;
 
     public AuthenticationServerSessionManager(LoginLayoutController loginLayoutController) {
         this.loginLayoutController = loginLayoutController;
         countDownLatch = new CountDownLatch(1);
-        disposableSubscription = Observable.using(this::openSocketConnection, this::createBindedObservable, this::closeSocketConnection)
+        socketDisposable = Observable.using(this::openSocketConnection, this::createBindedObservable, this::closeSocketConnection)
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::finishAuthentication, this::handleExceptions);
     }
@@ -120,7 +120,8 @@ public class AuthenticationServerSessionManager {
             CurrentSessionInfo.setInitializeModel(responseModel.getContainer().get());
             loginLayoutController.closeLoginLayoutAndStartMainLayout();
             logger.debug("Authentication completed");
-            disposableSubscription.dispose();
+            socketDisposable.dispose();
+            logger.debug("socketDisposable is disposed: {}", socketDisposable.isDisposed());
             return;
         }
         handleExceptions(new Exception());
@@ -158,8 +159,9 @@ public class AuthenticationServerSessionManager {
      * Method for UI to close current authentication session im emergency case.
      */
     public void closeSession(){
-        if(!disposableSubscription.isDisposed()) {
-            disposableSubscription.dispose();
+        if(!socketDisposable.isDisposed()) {
+            socketDisposable.dispose();
+            logger.debug("socketDisposable is disposed: {}", socketDisposable.isDisposed());
         }
     }
 }

@@ -21,7 +21,6 @@ public class ScreenShooter {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(getScreenCapture(), "png", baos);
-            ImageIO.write(getScreenCapture(), "png", new File("black.png"));
             baos.flush();
             byte[] imageInByte = baos.toByteArray();
             baos.close();
