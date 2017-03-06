@@ -57,7 +57,7 @@ public class IdleListener extends SpyKitTool {
         idleControlDisposable = Flowable.merge(createStartCountUntilIdleFlowable(), createStopCountUntilIdleFlowable())
                 .doOnNext(s -> logger.debug("Count until down time: {}", s))
                 .doOnNext(this::stopIdle)
-                .debounce(5, TimeUnit.SECONDS)
+                .debounce(10, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::startIdle);
     }
@@ -210,7 +210,7 @@ public class IdleListener extends SpyKitTool {
      * @return idleTimeSeconds
      */
     public synchronized long getIdleTimeSeconds() {
-        if(idleStopwatch.isRunning()) {
+        if(idleStopwatch != null && idleStopwatch.isRunning()) {
             stopIdleStopWatch();
         }
         long idleTimeSeconds = this.idleTimeSeconds;

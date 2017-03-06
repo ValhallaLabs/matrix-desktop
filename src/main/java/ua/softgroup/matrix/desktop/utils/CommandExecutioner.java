@@ -112,7 +112,6 @@ public class CommandExecutioner {
     private <T1 extends DataModel, T2 extends DataModel> T2 sendCommandWithResponse(
             ServerCommands serverCommand, RequestModel requestModel) throws IOException, ClassNotFoundException {
         Socket socket = SocketProvider.openNewConnection();
-        logger.debug("Connection is opened");
         sendCommand(socket, serverCommand, requestModel);
         return this.<T2>getResponse(socket);
     }
@@ -170,7 +169,6 @@ public class CommandExecutioner {
     private <T extends DataModel> void sendCommandWithNoResponse(
             ServerCommands serverCommand, RequestModel<T> requestModel) throws IOException, ClassNotFoundException {
         Socket socket = SocketProvider.openNewConnection();
-        logger.debug("Connection is opened");
         sendCommand(socket, serverCommand, requestModel);
         ResponseModel responseModel = getResponse(socket);
         if (SUCCESS != responseModel.getResponseStatus()){

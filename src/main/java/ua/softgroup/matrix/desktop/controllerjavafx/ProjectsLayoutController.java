@@ -3,6 +3,7 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,9 +15,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
+import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
 
@@ -87,10 +90,14 @@ public class ProjectsLayoutController {
     private static final String DESCRIPTION_COLUMN = "description";
     private static final int LIMITER_TEXT_COUNT = 999;
     private static final int MIN_TEXT_FOR_REPORT = 70;
+    private static final String ALERT_ERROR_TITLE = "Supervisor";
+    private static final String ALERT_CONTENT_TEXT = "Something go wrong .Programs will be close";
+    private static final String ALERT_HEADER_TEXT = "Supervisor ERROR";
     private ReportServerSessionManager reportServerSessionManager;
     private File attachFile;
     private long timeTodayMinutes;
     private Timeline timeTimer;
+    private TimeTracker timeTracker;
 
     /**
      * After Load/Parsing fxml call this method
@@ -324,7 +331,8 @@ public class ProjectsLayoutController {
      * @throws InterruptedException
      */
     public void startWork(ActionEvent actionEvent) throws InterruptedException {
-
+        timeTracker=new TimeTracker(this,CurrentSessionInfo.getProjectId());
+        timeTracker.turnOn();
         timeTimer.setCycleCount(Timeline.INDEFINITE);
         if (timeTimer != null) {
             timeTimer.stop();
@@ -346,6 +354,9 @@ public class ProjectsLayoutController {
     public void stopWork(ActionEvent actionEvent) {
         timeTimer.stop();
         buttonConditionAtTimerOff();
+        if(timeTracker!=null){
+            timeTracker.turnOff();
+        }
     }
 
     /**
@@ -370,6 +381,23 @@ public class ProjectsLayoutController {
     private void buttonConditionAtTimerOff() {
         btnStart.setDisable(false);
         btnStop.setDisable(true);
+    }
+
+    /**
+     * When something go wrong , create alert with message to user
+     * and then click on button close programme
+     */
+    public void tellUserAboutCrash() {
+        Alert mainAlert = new Alert(Alert.AlertType.INFORMATION);
+        mainAlert.setTitle(ALERT_ERROR_TITLE);
+        mainAlert.setHeaderText(ALERT_HEADER_TEXT);
+        mainAlert.setContentText(ALERT_CONTENT_TEXT);
+        mainAlert.initStyle(StageStyle.UTILITY);
+        mainAlert.setOnCloseRequest(event -> Platform.exit());
+        Optional<ButtonType> result = mainAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Platform.exit();
+        }
     }
 
 }

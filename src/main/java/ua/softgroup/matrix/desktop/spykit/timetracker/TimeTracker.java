@@ -5,7 +5,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.controllerjavafx.MainLayoutController;
+import ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus;
@@ -31,17 +31,17 @@ import static ua.softgroup.matrix.server.desktop.api.ServerCommands.*;
  */
 public class TimeTracker extends SpyKitTool {
     private static final Logger logger = LoggerFactory.getLogger(TimeTracker.class);
-    private MainLayoutController mainLayoutController;
+    private ProjectsLayoutController projectsLayoutController;
     private ActiveWindowListener activeWindowListener;
     private IdleListener idleListener;
     private ScreenShooter screenShooter;
     private CountDownLatch countDownLatch;
     private long projectId;
-    private Disposable controlPointObservable;
+    private Disposable checkPointObservable;
     private CommandExecutioner commandExecutioner;
 
-    public  TimeTracker(MainLayoutController mainLayoutController, long projectId) {
-        this.mainLayoutController = mainLayoutController;
+    public  TimeTracker(ProjectsLayoutController projectsLayoutController, long projectId) {
+        this.projectsLayoutController = projectsLayoutController;
         this.projectId = projectId;
         commandExecutioner = new CommandExecutioner();
     }
@@ -51,12 +51,13 @@ public class TimeTracker extends SpyKitTool {
      */
     @Override
     public void turnOn() {
+        logger.debug("Time tracker attempts to starts");
         new Thread(() -> {
             try {
                 setUpTimeTracker();
             } catch (Exception e) {
                 logger.debug("Time tracker crashes: {}", e);
-                mainLayoutController.tellUserAboutCrash();
+                projectsLayoutController.tellUserAboutCrash();
             }
         }).start();
     }
@@ -67,22 +68,23 @@ public class TimeTracker extends SpyKitTool {
      * @throws Exception
      */
     private void setUpTimeTracker() throws Exception {
+        logger.debug("Time tracker status: {}", status);
         if (status == NOT_USED) {
             commandExecutioner.sendCommandWithNoResponse(START_WORK, projectId);
             turnOnSpyKitTools();
-            startControlPointObservable();
+            startCheckPointObservable();
             status = IS_USED;
             logger.debug("Time tracking is started");
             (countDownLatch = new CountDownLatch(1)).await();
             return;
         }
-        logger.debug("Time tracking was already started");
     }
 
     /**
      * Call methods of initializing and turning on all spy kit tools.
      */
     private void turnOnSpyKitTools() {
+        logger.debug("Time tracker attempts to start spy kit's tools");
         screenShooter = new ScreenShooter();
         startActiveWindowListenerThread();
         startIdleListenerThread();
@@ -97,7 +99,7 @@ public class TimeTracker extends SpyKitTool {
                 turnOnActiveWindowListener();
             } catch (Exception e) {
                 logger.debug("Active windows listener crashed: {}", e);
-                mainLayoutController.tellUserAboutCrash();
+                projectsLayoutController.tellUserAboutCrash();
             }
         }).start();
     }
@@ -121,7 +123,7 @@ public class TimeTracker extends SpyKitTool {
                 turnOnIdleListener();
             } catch (Exception e) {
                 logger.debug("Idle listener crashed: {}", e);
-                mainLayoutController.tellUserAboutCrash();
+                projectsLayoutController.tellUserAboutCrash();
             }
         }).start();
     }
@@ -137,9 +139,9 @@ public class TimeTracker extends SpyKitTool {
     /**
      * Creates observable that emits control for sending time and logs to server
      */
-    private void startControlPointObservable() {
-        controlPointObservable = Observable
-                .interval(10, TimeUnit.SECONDS)
+    private void startCheckPointObservable() {
+        checkPointObservable = Observable
+                .interval(30, TimeUnit.SECONDS)
                 .filter(number -> number != 0)
                 .map(this::getCheckpointModel)
                 .subscribeOn(Schedulers.io())
@@ -167,7 +169,7 @@ public class TimeTracker extends SpyKitTool {
         try {
             checkSynchronization();
             setUpdatedProjectTime(commandExecutioner.sendCommandWithResponse(CHECK_POINT, projectId, checkPointModel));
-            //TODO: update time on UI.
+            //TODO: update time on UI, when server will be done
         } catch (IOException | ClassNotFoundException e) {
             logger.debug("Couldn't send checkpoint to server. Add checkpoint to synchronized model", e);
             addCheckpointToSynchronizationModel(checkPointModel);
@@ -216,7 +218,7 @@ public class TimeTracker extends SpyKitTool {
             tryToTurnOffTimeTracker();
         } catch (Exception e) {
             logger.debug("Time tracker crashes: {}", e);
-            mainLayoutController.tellUserAboutCrash();
+            projectsLayoutController.tellUserAboutCrash();
         }
     }
 
@@ -227,7 +229,7 @@ public class TimeTracker extends SpyKitTool {
      */
     private void tryToTurnOffTimeTracker() throws Exception {
         if (status == IS_USED) {
-            commandExecutioner.sendCommandWithNoResponse(CLOSE, projectId);
+            commandExecutioner.sendCommandWithNoResponse(END_WORK, projectId);
             countDownLatch.countDown();
             turnOffSpyKitTools();
             status = WAS_USED;
@@ -241,7 +243,7 @@ public class TimeTracker extends SpyKitTool {
      * Call methods of turning off all spy kit tools.
      */
     private void turnOffSpyKitTools() throws Exception {
-        controlPointObservable.dispose();
+        checkPointObservable.dispose();
         screenShooter = null;
         activeWindowListener.turnOff();
         activeWindowListener = null;
