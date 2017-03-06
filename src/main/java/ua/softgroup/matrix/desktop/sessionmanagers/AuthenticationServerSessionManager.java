@@ -118,10 +118,10 @@ public class AuthenticationServerSessionManager {
     private void finishAuthentication(ResponseModel<InitializeModel> responseModel){
         if(responseModel.getContainer().isPresent()) {
             CurrentSessionInfo.setInitializeModel(responseModel.getContainer().get());
-            loginLayoutController.closeLoginLayoutAndStartMainLayout();
             logger.debug("Authentication completed");
             socketDisposable.dispose();
             logger.debug("socketDisposable is disposed: {}", socketDisposable.isDisposed());
+            loginLayoutController.closeLoginLayoutAndStartMainLayout();
             return;
         }
         handleExceptions(new Exception());
