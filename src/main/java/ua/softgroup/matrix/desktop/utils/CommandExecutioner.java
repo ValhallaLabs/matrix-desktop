@@ -170,10 +170,10 @@ public class CommandExecutioner {
             ServerCommands serverCommand, RequestModel<T> requestModel) throws IOException, ClassNotFoundException {
         Socket socket = SocketProvider.openNewConnection();
         sendCommand(socket, serverCommand, requestModel);
-//        ResponseModel responseModel = getResponse(socket);
-//        if (SUCCESS != responseModel.getResponseStatus()){
-//            throw new NullPointerException();
-//        }
+        ResponseModel responseModel = getResponse(socket);
+        if (SUCCESS != responseModel.getResponseStatus()){
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -203,15 +203,15 @@ public class CommandExecutioner {
      * @throws ClassNotFoundException
      */
     private <T extends DataModel> T getResponse(Socket socket) throws IOException, ClassNotFoundException {
-//        ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-//        ResponseModel<T> responseModel = (ResponseModel<T>) objectInputStream.readObject();
-//        logger.debug("Response: {}", responseModel.toString());
+        ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+        ResponseModel<T> responseModel = (ResponseModel<T>) objectInputStream.readObject();
+        logger.debug("Response: {}", responseModel.toString());
         sendRawCommand(socket, CLOSE);
         socket.close();
         logger.debug("Connection is closed");
-//        if (responseModel.getResponseStatus() == SUCCESS && responseModel.getContainer().isPresent()) {
-//            return responseModel.getContainer().get();
-//        }
+        if (responseModel.getResponseStatus() == SUCCESS && responseModel.getContainer().isPresent()) {
+            return responseModel.getContainer().get();
+        }
         return null;
     }
 }

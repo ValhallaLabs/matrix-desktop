@@ -20,11 +20,11 @@ import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.WAS
  */
 public abstract class ActiveWindowListener extends SpyKitTool {
     private static final Logger logger = LoggerFactory.getLogger(ActiveWindowListener.class);
-    private long time;
+    private int time;
     private String currentTitle = "";
     private Disposable titleReaderDisposable;
     private CountDownLatch countDownLatch;
-    private Map<String, Long> windowTimeMap = new LinkedHashMap<>();
+    private Map<String, Integer> windowTimeMap = new LinkedHashMap<>();
 
     /**
      * Tries to turn on ActiveWindowListener
@@ -99,7 +99,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      */
     private synchronized void addTittleToActiveWindowModelTimeMap() {
         if (windowTimeMap.get(currentTitle) != null) {
-            long prevTimeValue = windowTimeMap.get(currentTitle);
+            int prevTimeValue = windowTimeMap.get(currentTitle);
             windowTimeMap.put(currentTitle, prevTimeValue + time);
             return;
         }
@@ -127,7 +127,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      * Returns activeWindowsModel with titles of active windows.
      * @return activeWindowsModel
      */
-    public synchronized Map<String, Long> getWindowTimeMap(){
+    public synchronized Map<String, Integer> getWindowTimeMap(){
         addTittleToActiveWindowModelTimeMap();
         time = 0;
         return windowTimeMap;
