@@ -5,6 +5,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import javafx.application.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
@@ -133,7 +134,7 @@ public class AuthenticationServerSessionManager {
      */
     private void handleExceptions(Throwable throwable) {
         logger.debug("Unable to start client: {}", throwable);
-        loginLayoutController.tellUserAboutBadConnection();
+        Platform.runLater(() -> loginLayoutController.tellUserAboutBadConnection());
     }
 
     /**

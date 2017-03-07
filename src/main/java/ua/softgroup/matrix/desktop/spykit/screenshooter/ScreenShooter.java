@@ -27,7 +27,7 @@ public class ScreenShooter {
             logger.debug("Screenshot was created successfully");
             return imageInByte;
         } catch (AWTException | IOException | NullPointerException e) {
-            logger.debug("Screenshot was created unsuccessfully", e);
+            logger.debug("Screenshot wasn't created unsuccessfully");
         }
         return null;
     }

@@ -141,7 +141,7 @@ public class TimeTracker extends SpyKitTool {
      */
     private void startCheckPointObservable() {
         checkPointObservable = Observable
-                .interval(30, TimeUnit.SECONDS)
+                .interval(10, TimeUnit.SECONDS)
                 .filter(number -> number != 0)
                 .map(this::getCheckpointModel)
                 .subscribeOn(Schedulers.io())

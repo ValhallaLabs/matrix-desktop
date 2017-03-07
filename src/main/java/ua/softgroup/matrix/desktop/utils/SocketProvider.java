@@ -7,8 +7,8 @@ import java.net.Socket;
  * Created by Vadim on 10.02.2017.
  */
 public class SocketProvider {
-    private static String hostName = "192.168.11.84";
-    private static int portNumber = 6666;
+    private static String hostName; //= "192.168.11.84";
+    private static int portNumber;// = 6666;
 
     public static Socket openNewConnection() throws IOException {
         return new Socket(hostName, portNumber);
