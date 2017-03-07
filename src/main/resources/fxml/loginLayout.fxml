@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
@@ -49,11 +51,34 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <CheckBox mnemonicParsing="false" text="Remember me">
-               <VBox.margin>
-                  <Insets left="4.0" />
-               </VBox.margin>
-            </CheckBox>
+            <HBox>
+               <children>
+                  <CheckBox mnemonicParsing="false" text="Remember me">
+                     <VBox.margin>
+                        <Insets left="4.0" />
+                     </VBox.margin>
+                     <HBox.margin>
+                        <Insets left="5.0" right="95.0" />
+                     </HBox.margin>
+                  </CheckBox>
+                  <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/settings.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="4.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label fx:id="labelSettings" disable="true" onMouseClicked="#openSettingsMenu" text="Settings">
+                     <VBox.margin>
+                        <Insets left="5.0" right="4.0" top="6.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+               </children>
+            </HBox>
          </children>
          <padding>
             <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />

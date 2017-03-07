@@ -4,6 +4,8 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.binding.Binding;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -213,9 +215,20 @@ public class ProjectsLayoutController {
      * Get DownTime and CleanTime and set this information in Pie Chart
      */
     private void initPieChart() {
-        ObservableList<PieChart.Data> pieChartList = FXCollections.observableArrayList(new PieChart.Data("Down Time", 7),
+        missPieCharts.getLayoutX();
+        missPieCharts.getLayoutY();
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Down Time", 7),
                 new PieChart.Data("Clean Time", 93));
-        missPieCharts.setData(pieChartList);
+        missPieCharts.setData(pieChartData);
+
+        pieChartData.forEach(data ->
+                  data.nameProperty().bind(
+                          Bindings.concat(
+                                  data.getPieValue()
+                          )
+                  )
+        );
+
     }
 
     /**
