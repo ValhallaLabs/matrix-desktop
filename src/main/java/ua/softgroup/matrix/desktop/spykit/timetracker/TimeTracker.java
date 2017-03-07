@@ -3,6 +3,7 @@ package ua.softgroup.matrix.desktop.spykit.timetracker;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import javafx.application.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController;
@@ -18,6 +19,8 @@ import ua.softgroup.matrix.server.desktop.api.ServerCommands;
 import ua.softgroup.matrix.server.desktop.model.datamodels.*;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -57,7 +60,7 @@ public class TimeTracker extends SpyKitTool {
                 setUpTimeTracker();
             } catch (Exception e) {
                 logger.debug("Time tracker crashes: {}", e);
-                projectsLayoutController.tellUserAboutCrash();
+                Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
             }
         }).start();
     }
@@ -99,7 +102,7 @@ public class TimeTracker extends SpyKitTool {
                 turnOnActiveWindowListener();
             } catch (Exception e) {
                 logger.debug("Active windows listener crashed: {}", e);
-                projectsLayoutController.tellUserAboutCrash();
+                Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
             }
         }).start();
     }
@@ -123,7 +126,7 @@ public class TimeTracker extends SpyKitTool {
                 turnOnIdleListener();
             } catch (Exception e) {
                 logger.debug("Idle listener crashed: {}", e);
-                projectsLayoutController.tellUserAboutCrash();
+                Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
             }
         }).start();
     }
@@ -205,6 +208,7 @@ public class TimeTracker extends SpyKitTool {
     private void addCheckpointToSynchronizationModel(CheckPointModel checkPointModel) {
         if(CurrentSessionInfo.getSynchronizationModel() == null) {
             CurrentSessionInfo.setSynchronizationModel(new SynchronizationModel());
+            CurrentSessionInfo.getSynchronizationModel().setCheckPointModels(new HashSet<>());
         }
         CurrentSessionInfo.getSynchronizationModel().getCheckPointModels().add(checkPointModel);
     }
@@ -218,7 +222,7 @@ public class TimeTracker extends SpyKitTool {
             tryToTurnOffTimeTracker();
         } catch (Exception e) {
             logger.debug("Time tracker crashes: {}", e);
-            projectsLayoutController.tellUserAboutCrash();
+            Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
         }
     }
 

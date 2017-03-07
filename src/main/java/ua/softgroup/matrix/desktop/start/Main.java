@@ -1,5 +1,6 @@
 package ua.softgroup.matrix.desktop.start;
 
+import com.sun.jna.platform.FileUtils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,17 +15,29 @@ import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
 
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Array;
 import java.net.BindException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Properties;
+
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 
 public class Main extends Application {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
-    private static ServerSocket socket;
+    private ServerSocket socket;
 
     public static void main(String[] args) {
         logger.debug("Current time: {}", LocalDateTime.now());
@@ -47,7 +60,7 @@ public class Main extends Application {
      * Method tries to bind application to some localhost's port to avoid multiply opening possibility.
      * In case if port is already used, client simply won't run.
      */
-    private static void checkIfRunning() {
+    private void checkIfRunning() {
         try {
             socket = new ServerSocket(8979, 0, InetAddress.getByAddress(new byte[] {127,0,0,1}));
             logger.debug("Bind to localhost adapter with a zero connection queue");
@@ -59,10 +72,10 @@ public class Main extends Application {
 
     /**
      * Method reads host and port values from config file and sets it to SocketProvider
-     * @throws ConfigurationException
      */
-    private static void readConfig() {
+    private void readConfig() {
         try {
+            checkConfigFile();
             CompositeConfiguration config = new CompositeConfiguration();
             config.addConfiguration(new PropertiesConfiguration("config.properties"));
             SocketProvider.setHostName(config.getString("host"));
@@ -70,7 +83,18 @@ public class Main extends Application {
             logger.debug("Server IP: {}:{}", SocketProvider.getHostName(), SocketProvider.getPortNumber());
         } catch (Exception e) {
             logger.debug("Server IP is not found");
-            //TODO: Show user alert to change IP & port, and save the new one to config.properties
+            //TODO: Show user alert to change IP & port, and automatically save the new one to config.properties
+        }
+    }
+
+    private void checkConfigFile() throws IOException {
+        Path path = Paths.get("config.properties");
+        byte defaultConfig[] = "host=192.168.11.84\nport=6666".getBytes();
+        try (OutputStream out = new BufferedOutputStream(Files.newOutputStream(path, CREATE_NEW))) {
+            out.write(defaultConfig, 0, defaultConfig.length);
+            logger.debug("Config file was removed. New config file is created.");
+        } catch (IOException x) {
+            logger.debug("Config file is already exist");
         }
     }
 

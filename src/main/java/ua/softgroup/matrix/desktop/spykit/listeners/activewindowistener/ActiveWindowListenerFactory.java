@@ -1,6 +1,5 @@
 package ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener;
 
-import com.sun.istack.internal.Nullable;
 import com.sun.jna.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,6 @@ public class ActiveWindowListenerFactory {
      * Returns window listener for detected platform or null if platform is unknown.
      * @return window listener
      */
-    @Nullable
     public static ActiveWindowListener getListener() {
         if (Platform.isWindows()) {
             logger.debug("Platform is Windows");
