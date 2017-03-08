@@ -65,7 +65,7 @@ public class Main extends Application {
      */
     private void checkIfRunning() {
         try {
-            socket = new ServerSocket(8009, 0, InetAddress.getByAddress(new byte[] {127,0,0,1}));
+            socket = new ServerSocket(8109, 0, InetAddress.getByAddress(new byte[] {127,0,0,1}));
             logger.debug("Bind to localhost adapter with a zero connection queue");
         } catch (IOException e) {
             logger.debug("App already running");

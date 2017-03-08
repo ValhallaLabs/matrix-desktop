@@ -22,4 +22,11 @@ public class ProjectsContainerDataModel implements Serializable, DataModel {
     public void setProjectModels(Set<ProjectModel> projectModels) {
         this.projectModels = projectModels;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectsContainerDataModel{" +
+                "projectModels=" + projectModels +
+                '}';
+    }
 }

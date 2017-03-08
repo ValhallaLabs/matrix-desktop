@@ -86,9 +86,13 @@ public class ReportLayoutController {
         tableViewReport.getSelectionModel().select(0);
         tableViewReport.getFocusModel().focus(0);
         ReportModel reportModel = tableViewReport.getSelectionModel().getSelectedItem();
-        checkVerifyReportAndSetButtonCondition(reportModel);
-        currentReportId = reportModel.getId();
-        taEditReport.setText(reportModel.getText());
+        if (report!=null&&!report.isEmpty()){
+            checkVerifyReportAndSetButtonCondition(reportModel);
+            currentReportId = reportModel.getId();
+            taEditReport.setText(reportModel.getText());
+        }
+
+
     }
 
     /**
@@ -174,7 +178,7 @@ public class ReportLayoutController {
      * @param event callback click on table view
      */
     public void chooseReport(Event event) {
-        if (tableViewReport.getSelectionModel().getSelectedItem() != null) {
+        if (tableViewReport.getSelectionModel().getSelectedItem() != null &&report!=null) {
             ReportModel selectReport = tableViewReport.getSelectionModel().getSelectedItem();
             checkVerifyReportAndSetButtonCondition(selectReport);
             currentReportId = selectReport.getId();
