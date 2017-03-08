@@ -6,6 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+        classpath ':proguard:'
         classpath group: 'org.mini2Dx', name: 'parcl', version: '1.0.12'
     }
 }

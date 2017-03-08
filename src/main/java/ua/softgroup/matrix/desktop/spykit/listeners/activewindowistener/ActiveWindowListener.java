@@ -6,6 +6,8 @@ import io.reactivex.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
+
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
@@ -20,11 +22,11 @@ import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.WAS
  */
 public abstract class ActiveWindowListener extends SpyKitTool {
     private static final Logger logger = LoggerFactory.getLogger(ActiveWindowListener.class);
-    private long time;
+    private int time;
     private String currentTitle = "";
     private Disposable titleReaderDisposable;
     private CountDownLatch countDownLatch;
-    private Map<String, Long> windowTimeMap = new LinkedHashMap<>();
+    private Map<String, Integer> windowTimeMap = new LinkedHashMap<>();
 
     /**
      * Tries to turn on ActiveWindowListener
@@ -60,6 +62,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      */
     private void addFirstWindowToTimeMap() {
         currentTitle = getProcessTitle();
+        logger.debug("Adding first title: {}", currentTitle);
         addTittleToActiveWindowModelTimeMap();
     }
 
@@ -99,7 +102,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      */
     private synchronized void addTittleToActiveWindowModelTimeMap() {
         if (windowTimeMap.get(currentTitle) != null) {
-            long prevTimeValue = windowTimeMap.get(currentTitle);
+            int prevTimeValue = windowTimeMap.get(currentTitle);
             windowTimeMap.put(currentTitle, prevTimeValue + time);
             return;
         }
@@ -127,9 +130,11 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      * Returns activeWindowsModel with titles of active windows.
      * @return activeWindowsModel
      */
-    public synchronized Map<String, Long> getWindowTimeMap(){
+    public synchronized Map<String, Integer> getWindowTimeMap(){
         addTittleToActiveWindowModelTimeMap();
         time = 0;
+        Map<String, Integer> windowTimeMap = this.windowTimeMap;
+        this.windowTimeMap = new LinkedHashMap<>();
         return windowTimeMap;
     }
 }

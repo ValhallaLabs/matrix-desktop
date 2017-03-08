@@ -15,11 +15,13 @@ import ua.softgroup.matrix.desktop.utils.SocketProvider;
 import ua.softgroup.matrix.server.desktop.api.ServerCommands;
 import ua.softgroup.matrix.server.desktop.model.datamodels.AuthModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.InitializeModel;
+import ua.softgroup.matrix.server.desktop.model.requestmodels.RequestModel;
 import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseModel;
 import java.io.*;
 import java.net.Socket;
 import java.util.concurrent.CountDownLatch;
 
+import static javafx.scene.input.KeyCode.T;
 import static ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseStatus.SUCCESS;
 
 /**
@@ -32,6 +34,10 @@ public class AuthenticationServerSessionManager {
     private Disposable socketDisposable;
     private CountDownLatch countDownLatch;
     private CommandExecutioner commandExecutioner;
+    private ObjectOutputStream objectOutputStream;
+    private ObjectInputStream objectInputStream;
+
+
 
     public AuthenticationServerSessionManager(LoginLayoutController loginLayoutController) {
         this.loginLayoutController = loginLayoutController;
@@ -49,6 +55,8 @@ public class AuthenticationServerSessionManager {
     private Socket openSocketConnection() throws IOException {
         Socket socket = SocketProvider.openNewConnection();
         commandExecutioner = new CommandExecutioner();
+        objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+        objectInputStream = new ObjectInputStream(socket.getInputStream());
         logger.debug("Connection is opened");
         return socket;
     }
@@ -71,7 +79,8 @@ public class AuthenticationServerSessionManager {
      * @param socket The socket which is dependent to an observable
      */
     private void closeSocketConnection(Socket socket) throws IOException {
-        commandExecutioner.sendRawCommand(socket, ServerCommands.CLOSE);
+        objectOutputStream.writeObject(ServerCommands.CLOSE);
+        objectOutputStream.flush();
         socket.close();
         logger.debug("Connection is closed");
     }
@@ -93,8 +102,13 @@ public class AuthenticationServerSessionManager {
      * @return {@link InitializeModel} which may contains all start settings and info in case of success
      */
     private ResponseModel<InitializeModel> authenticateUser(AuthModel authModel, Socket socket) throws IOException, ClassNotFoundException {
-        commandExecutioner.sendRawCommand(socket, ServerCommands.AUTHENTICATE, authModel);
-        return commandExecutioner.getRawResponseModel(socket);
+        objectOutputStream.writeObject(ServerCommands.AUTHENTICATE);
+        objectOutputStream.writeObject(new RequestModel(CurrentSessionInfo.getToken(), authModel));
+        objectOutputStream.flush();
+
+        ResponseModel<InitializeModel> responseModel = (ResponseModel<InitializeModel>) objectInputStream.readObject();
+        logger.debug("Raw response: {}", responseModel.toString());
+        return responseModel;
     }
 
     /**

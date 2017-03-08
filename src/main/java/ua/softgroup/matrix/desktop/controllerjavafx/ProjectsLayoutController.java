@@ -292,14 +292,15 @@ public class ProjectsLayoutController {
     private void setReportInfoInTextAreaAndButton(ProjectModel projectModel) throws IOException, ClassNotFoundException {
         Set<ReportModel> reportModel = null;
         reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
-        for (ReportModel model :
-                reportModel) {
-            if (model.getDate().equals(LocalDate.now())) {
-                taWriteReport.setText("You have already saved a report today");
-                btnSendReport.setDisable(true);
-                taWriteReport.setEditable(false);
-            }
-        }
+        //TODO: add check on null
+//        for (ReportModel model :
+//                reportModel) {
+//            if (model.getDate().equals(LocalDate.now())) {
+//                taWriteReport.setText("You have already saved a report today");
+//                btnSendReport.setDisable(true);
+//                taWriteReport.setEditable(false);
+//            }
+//        }
     }
 
     /**

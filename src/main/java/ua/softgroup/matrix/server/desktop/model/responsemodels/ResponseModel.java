@@ -13,7 +13,7 @@ public class ResponseModel<T extends DataModel> implements Serializable {
 
     private ResponseStatus responseStatus;
 
-    private Optional<T> container;
+    private Optional<T> container = Optional.absent();
 
     public ResponseModel(ResponseStatus responseStatus) {
         this.responseStatus = responseStatus;
