@@ -31,7 +31,6 @@ public class MainLayoutController {
     private static final int REPORT_LAYOUT_MIN_WIDTH = 1200;
     private static final int REPORT_LAYOUT_MIN_HEIGHT = 750;
     private static final String PROJECT_LAYOUT = "fxml/projectsLayout.fxml";
-
     private static final String INSTRUCTIONS_LAYOUT = "fxml/instructionsLayout.fxml";
     private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 900;
     private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 600;
@@ -56,7 +55,7 @@ public class MainLayoutController {
      *
      * @param window Window what will be owner by modality report window
      */
-     void startReport(Window window) {
+    void startReport(Window window) {
         try {
             Stage primaryStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
@@ -82,7 +81,7 @@ public class MainLayoutController {
      *
      * @param mainLayout get BorderPane from main window
      */
-     void startProjectsLayoutController(BorderPane mainLayout) {
+    void startProjectsLayoutController(BorderPane mainLayout) {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
@@ -94,31 +93,7 @@ public class MainLayoutController {
         }
     }
 
-    /**
-     * Hears when user click on setting menus item and
-     * tells {@link MainLayoutController} to open setting window
-     *
-     * @param actionEvent callback click on menu
-     */
-    public void startSettingLayoutWindow(ActionEvent actionEvent) {
-//        try {
-//            Stage settingStage = new Stage();
-//            ClassLoader classLoader = getClass().getClassLoader();
-//            FXMLLoader loader = new FXMLLoader();
-//            loader.setLocation(classLoader.getResource(SETTING_LAYOUT));
-//            Pane pane = loader.load();
-//            Scene scene = new Scene(pane);
-//            settingStage.setScene(scene);
-//            settingStage.setMinWidth(SETTING_LAYOUT_MIN_WIDTH);
-//            settingStage.setMinHeight(SETTING_LAYOUT_MIN_HEIGHT);
-//            settingStage.initModality(Modality.WINDOW_MODAL);
-//            settingStage.initOwner(menuBar.getScene().getWindow());
-//            settingStage.setResizable(false);
-//            settingStage.show();
-//        } catch (IOException e) {
-//            logger.debug("Error when start Setting Window " + e);
-//        }
-    }
+
 
     /**
      * Hears when user click on setting menus item and

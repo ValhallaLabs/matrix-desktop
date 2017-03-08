@@ -1,20 +1,17 @@
-.pane-grei {
+.light-blue-background {
     -fx-background-color: #9FA8DA;
 }
-.pane-whitegrei {
+.grey-background {
     -fx-background-color: #ebebeb;
-}
-.right-anchor{
-    -fx-background-color: #ebebeb;
-}
-.text-area {
-    -fx-text-box-border: transparent;
 }
 .text-area .content {
     -fx-background-color: #ebebeb;
 }
 .text-area:focused .content {
     -fx-background-color: #ebebeb;
+}
+.text-area {
+    -fx-text-box-border: transparent;
 }
 .split-pane {
     -fx-border-color: transparent;

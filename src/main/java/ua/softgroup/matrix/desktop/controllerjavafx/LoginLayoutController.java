@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
@@ -22,6 +23,7 @@ import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationServerSessionManager;
+
 import java.io.IOException;
 import java.util.Optional;
 
@@ -65,6 +67,7 @@ public class LoginLayoutController {
         authenticationSessionManager = new AuthenticationServerSessionManager(this);
         maxInputTextLimiter(loginTextField, 20);
         maxInputTextLimiter(passwordTextField, 20);
+
     }
 
 
@@ -187,6 +190,12 @@ public class LoginLayoutController {
         return tf.getText() != null && !tf.getText().isEmpty();
     }
 
+    /**
+     * Hears when user click on setting menus item and
+     * tells {@link MainLayoutController} to open setting window
+     *
+     * @param event callback click on menu
+     */
     public void openSettingsMenu(Event event) {
         try {
             Stage settingStage = new Stage();

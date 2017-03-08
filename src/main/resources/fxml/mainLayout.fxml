@@ -22,18 +22,6 @@
                 <MenuItem mnemonicParsing="false" onAction="#startInstructionsLayoutWindow" text="Instructions" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" onAction="#startSettingLayoutWindow" text="Settings">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Settings" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Language">
-              <items>
-                <MenuItem mnemonicParsing="false" text="English" />
-                  <MenuItem mnemonicParsing="false" text="Ukraine" />
-                  <MenuItem mnemonicParsing="false" text="Russian" />
-              </items>
-            </Menu>
          </menus>
         </MenuBar>
     </top>

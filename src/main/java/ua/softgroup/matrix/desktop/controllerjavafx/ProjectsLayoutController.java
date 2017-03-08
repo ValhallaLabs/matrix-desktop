@@ -11,11 +11,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -50,8 +54,6 @@ public class ProjectsLayoutController {
     @FXML
     public TableColumn tcStatus;
     @FXML
-    public PieChart missPieCharts;
-    @FXML
     public Label labelDayInWord;
     @FXML
     public Label labelDayInNumber;
@@ -83,6 +85,8 @@ public class ProjectsLayoutController {
     public Label labelSymbolsNeedsToReport;
     @FXML
     public Label labelCurrentSymbols;
+    @FXML
+    public AnchorPane containetForPieChart;
     private static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
     private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
@@ -95,11 +99,14 @@ public class ProjectsLayoutController {
     private static final String ALERT_ERROR_TITLE = "Supervisor";
     private static final String ALERT_CONTENT_TEXT = "Something go wrong .Programs will be close";
     private static final String ALERT_HEADER_TEXT = "Supervisor ERROR";
+
     private ReportServerSessionManager reportServerSessionManager;
     private File attachFile;
     private long timeTodayMinutes;
     private Timeline timeTimer;
     private TimeTracker timeTracker;
+    private DoughnutChart doughnutChart;
+    private Label labelIdle;
 
     /**
      * After Load/Parsing fxml call this method
@@ -215,20 +222,30 @@ public class ProjectsLayoutController {
      * Get DownTime and CleanTime and set this information in Pie Chart
      */
     private void initPieChart() {
-        missPieCharts.getLayoutX();
-        missPieCharts.getLayoutY();
+        createLabelForDisplayIdleTime();
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Down Time", 7),
                 new PieChart.Data("Clean Time", 93));
-        missPieCharts.setData(pieChartData);
+        doughnutChart = new DoughnutChart(pieChartData);
+        createPieChart();
+        containetForPieChart.getChildren().addAll(doughnutChart, labelIdle);
+    }
 
-        pieChartData.forEach(data ->
-                  data.nameProperty().bind(
-                          Bindings.concat(
-                                  data.getPieValue()
-                          )
-                  )
-        );
+    private void createLabelForDisplayIdleTime() {
+        labelIdle = new Label();
+        labelIdle.setText("15%");
+        labelIdle.setMaxWidth(130);
+        labelIdle.setStyle("-fx-font-weight: bold");
+        labelIdle.setFont(new Font(16));
+        labelIdle.setMaxHeight(130);
+        labelIdle.setPadding(new Insets(87, 0, 50, 68));
+    }
 
+    private void createPieChart() {
+        doughnutChart.setMaxWidth(180);
+        doughnutChart.setMaxHeight(180);
+        doughnutChart.setTitle("Idle Time");
+        doughnutChart.setLabelsVisible(false);
+        doughnutChart.setPadding(new Insets(10, 50, 15, 13));
     }
 
     /**
@@ -241,8 +258,8 @@ public class ProjectsLayoutController {
         MouseEvent mouseEvent = (MouseEvent) event;
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
             if (mouseEvent.getClickCount() == 2) {
-               openReportWindowOnTwoMouseClick(event);
-            }else {
+                openReportWindowOnTwoMouseClick(event);
+            } else {
                 taWriteReport.setText("");
                 taWriteReport.setEditable(true);
                 if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
@@ -344,7 +361,7 @@ public class ProjectsLayoutController {
      * @throws InterruptedException
      */
     public void startWork(ActionEvent actionEvent) throws InterruptedException {
-        timeTracker=new TimeTracker(this,CurrentSessionInfo.getProjectId());
+        timeTracker = new TimeTracker(this, CurrentSessionInfo.getProjectId());
         timeTracker.turnOn();
         timeTimer.setCycleCount(Timeline.INDEFINITE);
         if (timeTimer != null) {
@@ -367,7 +384,7 @@ public class ProjectsLayoutController {
     public void stopWork(ActionEvent actionEvent) {
         timeTimer.stop();
         buttonConditionAtTimerOff();
-        if(timeTracker!=null){
+        if (timeTracker != null) {
             timeTracker.turnOff();
         }
     }
@@ -381,7 +398,7 @@ public class ProjectsLayoutController {
     }
 
     /**
-     *Set possibility click on stop button and disable start button
+     * Set possibility click on stop button and disable start button
      */
     private void buttonConditionAtTimerOn() {
         btnStart.setDisable(true);
@@ -389,7 +406,7 @@ public class ProjectsLayoutController {
     }
 
     /**
-     *Set possibility click on start button and disable stop button
+     * Set possibility click on start button and disable stop button
      */
     private void buttonConditionAtTimerOff() {
         btnStart.setDisable(false);

@@ -4,7 +4,6 @@
     -fx-border-color: white;
     -fx-base: rgb(0, 0, 0);
 }
-
 .green-button {
     -fx-text-fill: white;
     -fx-font-weight: bold;
