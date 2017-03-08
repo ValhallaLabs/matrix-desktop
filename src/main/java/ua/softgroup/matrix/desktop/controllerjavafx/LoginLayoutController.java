@@ -3,12 +3,20 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.slf4j.Logger;
@@ -34,6 +42,9 @@ public class LoginLayoutController {
     private static final String ALERT_HEADER_TEXT = "NETWORK ERROR";
     private static final int MAIN_LAYOUT_MIN_WIDTH = 1200;
     private static final int MAIN_LAYOUT_MIN_HEIGHT = 800;
+    private static final String SETTING_LAYOUT = "fxml/settingsLayout.fxml";
+    private static final int SETTING_LAYOUT_MIN_WIDTH = 500;
+    private static final int SETTING_LAYOUT_MIN_HEIGHT = 250;
     private Stage stage;
     private AuthenticationServerSessionManager authenticationSessionManager;
     @FXML
@@ -55,6 +66,7 @@ public class LoginLayoutController {
         maxInputTextLimiter(loginTextField, 20);
         maxInputTextLimiter(passwordTextField, 20);
     }
+
 
     /**
      * If when start programme bad connection, create alert with message to user
@@ -173,6 +185,26 @@ public class LoginLayoutController {
      */
     private static boolean checkTextFieldOnEmpty(TextField tf) {
         return tf.getText() != null && !tf.getText().isEmpty();
+    }
+
+    public void openSettingsMenu(Event event) {
+        try {
+            Stage settingStage = new Stage();
+            ClassLoader classLoader = getClass().getClassLoader();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(classLoader.getResource(SETTING_LAYOUT));
+            Pane pane = loader.load();
+            Scene scene = new Scene(pane);
+            settingStage.setScene(scene);
+            settingStage.setMinWidth(SETTING_LAYOUT_MIN_WIDTH);
+            settingStage.setMinHeight(SETTING_LAYOUT_MIN_HEIGHT);
+            settingStage.initModality(Modality.WINDOW_MODAL);
+            settingStage.initOwner(btnLogin.getScene().getWindow());
+            settingStage.setResizable(false);
+            settingStage.show();
+        } catch (IOException e) {
+            logger.debug("Error when start Setting Window " + e);
+        }
     }
 
 }

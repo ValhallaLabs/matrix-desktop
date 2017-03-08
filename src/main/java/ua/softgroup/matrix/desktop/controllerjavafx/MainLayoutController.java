@@ -31,9 +31,7 @@ public class MainLayoutController {
     private static final int REPORT_LAYOUT_MIN_WIDTH = 1200;
     private static final int REPORT_LAYOUT_MIN_HEIGHT = 750;
     private static final String PROJECT_LAYOUT = "fxml/projectsLayout.fxml";
-    private static final String SETTING_LAYOUT = "fxml/settingsLayout.fxml";
-    private static final int SETTING_LAYOUT_MIN_WIDTH = 500;
-    private static final int SETTING_LAYOUT_MIN_HEIGHT = 250;
+
     private static final String INSTRUCTIONS_LAYOUT = "fxml/instructionsLayout.fxml";
     private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 900;
     private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 600;
@@ -103,23 +101,23 @@ public class MainLayoutController {
      * @param actionEvent callback click on menu
      */
     public void startSettingLayoutWindow(ActionEvent actionEvent) {
-        try {
-            Stage settingStage = new Stage();
-            ClassLoader classLoader = getClass().getClassLoader();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(classLoader.getResource(SETTING_LAYOUT));
-            Pane pane = loader.load();
-            Scene scene = new Scene(pane);
-            settingStage.setScene(scene);
-            settingStage.setMinWidth(SETTING_LAYOUT_MIN_WIDTH);
-            settingStage.setMinHeight(SETTING_LAYOUT_MIN_HEIGHT);
-            settingStage.initModality(Modality.WINDOW_MODAL);
-            settingStage.initOwner(menuBar.getScene().getWindow());
-            settingStage.setResizable(false);
-            settingStage.show();
-        } catch (IOException e) {
-            logger.debug("Error when start Setting Window " + e);
-        }
+//        try {
+//            Stage settingStage = new Stage();
+//            ClassLoader classLoader = getClass().getClassLoader();
+//            FXMLLoader loader = new FXMLLoader();
+//            loader.setLocation(classLoader.getResource(SETTING_LAYOUT));
+//            Pane pane = loader.load();
+//            Scene scene = new Scene(pane);
+//            settingStage.setScene(scene);
+//            settingStage.setMinWidth(SETTING_LAYOUT_MIN_WIDTH);
+//            settingStage.setMinHeight(SETTING_LAYOUT_MIN_HEIGHT);
+//            settingStage.initModality(Modality.WINDOW_MODAL);
+//            settingStage.initOwner(menuBar.getScene().getWindow());
+//            settingStage.setResizable(false);
+//            settingStage.show();
+//        } catch (IOException e) {
+//            logger.debug("Error when start Setting Window " + e);
+//        }
     }
 
     /**
