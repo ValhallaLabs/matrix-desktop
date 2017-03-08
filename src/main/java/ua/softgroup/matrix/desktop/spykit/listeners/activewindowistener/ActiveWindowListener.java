@@ -6,6 +6,8 @@ import io.reactivex.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
+
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
@@ -60,6 +62,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      */
     private void addFirstWindowToTimeMap() {
         currentTitle = getProcessTitle();
+        logger.debug("Adding first title: {}", currentTitle);
         addTittleToActiveWindowModelTimeMap();
     }
 
@@ -130,6 +133,8 @@ public abstract class ActiveWindowListener extends SpyKitTool {
     public synchronized Map<String, Integer> getWindowTimeMap(){
         addTittleToActiveWindowModelTimeMap();
         time = 0;
+        Map<String, Integer> windowTimeMap = this.windowTimeMap;
+        this.windowTimeMap = new LinkedHashMap<>();
         return windowTimeMap;
     }
 }

@@ -22,45 +22,59 @@ import static ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseSt
  */
 public class CommandExecutioner {
     public static final Logger logger = LoggerFactory.getLogger(CommandExecutioner.class);
+    private Socket socket;
+    private ObjectOutputStream objectOutputStream;
+    private ObjectInputStream objectInputStream;
 
-    /**
-     * Method for sending commands to server using outer socket.
-     * @param socket current socket connection
-     * @param serverCommand specific request command for the server
-     * @throws IOException
-     */
-    public void sendRawCommand(Socket socket, ServerCommands serverCommand) throws IOException {
-        sendCommand(socket, serverCommand, new RequestModel(CurrentSessionInfo.getToken(), -1));
+    public CommandExecutioner() {
     }
-
-    /**
-     * Method for sending commands to server using outer socket.
-     * @param socket current socket connection
-     * @param serverCommand specific request command for the server
-     * @param dataModel a DTO for a specific command
-     * @param <T> type of {@link DataModel}
-     * @throws IOException
-     */
-    public <T extends DataModel> void sendRawCommand(Socket socket, ServerCommands serverCommand, T dataModel)
-            throws IOException {
-        sendCommand(socket, serverCommand, new RequestModel<T>(CurrentSessionInfo.getToken(), dataModel));
-    }
-
-    /**
-     * Method for retrieving {@link ResponseModel} from server as an answer to client request.
-     * @param socket current socket connection
-     * @param <T> type of a {@link DataModel} in the {@link ResponseModel}
-     * @return {@link ResponseModel} received from the server
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
-    public  <T extends DataModel> ResponseModel<T> getRawResponseModel(Socket socket)
-            throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-        ResponseModel<T> responseModel = (ResponseModel<T>) objectInputStream.readObject();
-        logger.debug("Raw response: {}", responseModel.toString());
-        return responseModel;
-    }
+//
+//    public CommandExecutioner(Socket socket) throws IOException {
+//        objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+//        objectOutputStream.flush();
+//        objectInputStream = new ObjectInputStream(socket.getInputStream());
+//    }
+//
+//    /**
+//     * Method for sending commands to server using outer socket.
+//     * @param socket current socket connection
+//     * @param serverCommand specific request command for the server
+//     * @throws IOException
+//     */
+//    public void sendRawCommand(ServerCommands serverCommand) throws IOException {
+//        objectOutputStream.writeObject(serverCommand);
+//        objectOutputStream.writeObject(new RequestModel(CurrentSessionInfo.getToken(), -1));
+//        objectOutputStream.flush();
+//    }
+//
+//    /**
+//     * Method for sending commands to server using outer socket.
+//     * @param serverCommand specific request command for the server
+//     * @param dataModel a DTO for a specific command
+//     * @param <T> type of {@link DataModel}
+//     * @throws IOException
+//     */
+//    public <T extends DataModel> void sendRawCommand(ServerCommands serverCommand, T dataModel)
+//            throws IOException {
+//        sendCommand(serverCommand, new RequestModel<T>(CurrentSessionInfo.getToken(), dataModel));
+//        objectOutputStream.writeObject(serverCommand);
+//        objectOutputStream.writeObject(new RequestModel<T>(CurrentSessionInfo.getToken(), dataModel));
+//        objectOutputStream.flush();
+//    }
+//
+//    /**
+//     * Method for retrieving {@link ResponseModel} from server as an answer to client request.
+//     * @param <T> type of a {@link DataModel} in the {@link ResponseModel}
+//     * @return {@link ResponseModel} received from the server
+//     * @throws IOException
+//     * @throws ClassNotFoundException
+//     */
+//    public  <T extends DataModel> ResponseModel<T> getRawResponseModel()
+//            throws IOException, ClassNotFoundException {
+//        ResponseModel<T> responseModel = (ResponseModel<T>) objectInputStream.readObject();
+//        logger.debug("Raw response: {}", responseModel.toString());
+//        return responseModel;
+//    } sasha pidor
 
     /**
      * Method for sending commands to server for a specific project without an attachment with returning response.
@@ -111,8 +125,8 @@ public class CommandExecutioner {
      */
     private <T1 extends DataModel, T2 extends DataModel> T2 sendCommandWithResponse(
             ServerCommands serverCommand, RequestModel requestModel) throws IOException, ClassNotFoundException {
-        Socket socket = SocketProvider.openNewConnection();
-        sendCommand(socket, serverCommand, requestModel);
+        openSocketConnection();
+        sendCommand(serverCommand, requestModel);
         return this.<T2>getResponse(socket);
     }
 
@@ -168,27 +182,25 @@ public class CommandExecutioner {
      */
     private <T extends DataModel> void sendCommandWithNoResponse(
             ServerCommands serverCommand, RequestModel<T> requestModel) throws IOException, ClassNotFoundException {
-        Socket socket = SocketProvider.openNewConnection();
-        sendCommand(socket, serverCommand, requestModel);
-        ResponseModel responseModel = getResponse(socket);
-        if (SUCCESS != responseModel.getResponseStatus()){
-            throw new NullPointerException();
-        }
+        openSocketConnection();
+        sendCommand(serverCommand, requestModel);
+        getResponse(socket);
+//        if (SUCCESS != responseModel.getResponseStatus()){
+//            throw new NullPointerException();
+//        }
     }
 
     /**
      * Method for sending commands to server. It receives socket and opens {@link ObjectOutputStream} for sending
      * a command and requestModel.
-     * @param socket current socket connection
      * @param serverCommand specific request command for the server
      * @param requestModel model that may contain token, project id, and {@link DataModel}
      * @param <T> type of {@link DataModel}
      * @throws IOException
      */
-    private <T extends DataModel> void sendCommand(
-            Socket socket, ServerCommands serverCommand, RequestModel<T> requestModel) throws IOException {
+    private <T extends DataModel> void sendCommand(ServerCommands serverCommand, RequestModel<T> requestModel)
+            throws IOException {
         logger.debug("Server command: {}. Request model: {}", serverCommand, requestModel.toString());
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
         objectOutputStream.writeObject(serverCommand);
         objectOutputStream.writeObject(requestModel);
         objectOutputStream.flush();
@@ -203,15 +215,25 @@ public class CommandExecutioner {
      * @throws ClassNotFoundException
      */
     private <T extends DataModel> T getResponse(Socket socket) throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
         ResponseModel<T> responseModel = (ResponseModel<T>) objectInputStream.readObject();
         logger.debug("Response: {}", responseModel.toString());
-        sendRawCommand(socket, CLOSE);
-        socket.close();
-        logger.debug("Connection is closed");
+        closeSocketConnection();
         if (responseModel.getResponseStatus() == SUCCESS && responseModel.getContainer().isPresent()) {
             return responseModel.getContainer().get();
         }
         return null;
+    }
+
+    private void openSocketConnection() throws IOException {
+        socket = SocketProvider.openNewConnection();
+        objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+        objectInputStream = new ObjectInputStream(socket.getInputStream());
+    }
+
+    private void closeSocketConnection() throws IOException, ClassNotFoundException {
+        objectOutputStream.writeObject(ServerCommands.CLOSE);
+        objectOutputStream.flush();
+        socket.close();
+        logger.debug("Connection is closed");
     }
 }

@@ -22,7 +22,7 @@ class ForbiddenKeys {
             NativeKeyEvent.VC_PAUSE, NativeKeyEvent.VC_NUM_LOCK,
             NativeKeyEvent.VC_F1, NativeKeyEvent.VC_F2, NativeKeyEvent.VC_F3, NativeKeyEvent.VC_F4, NativeKeyEvent.VC_F5,
             NativeKeyEvent.VC_F6, NativeKeyEvent.VC_F7, NativeKeyEvent.VC_F8, NativeKeyEvent.VC_F9, NativeKeyEvent.VC_F10,
-            NativeKeyEvent.VC_F11, NativeKeyEvent.VC_F12};
+            NativeKeyEvent.VC_F11, NativeKeyEvent.VC_F12, NativeKeyEvent.VC_SPACE};
 
     static boolean isForbidden(int keyCode) {
         return IntStream.of(forbiddenKeysArray).anyMatch(x -> x == keyCode);

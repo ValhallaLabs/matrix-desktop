@@ -212,10 +212,10 @@ public class IdleListener extends SpyKitTool {
     public synchronized long getIdleTimeSeconds() {
         if(idleStopwatch != null && idleStopwatch.isRunning()) {
             stopIdleStopWatch();
+            startIdleStopwatch();
         }
         long idleTimeSeconds = this.idleTimeSeconds;
         this.idleTimeSeconds = 0;
-        startIdleStopwatch();
         return idleTimeSeconds;
     }
 }
