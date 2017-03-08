@@ -144,6 +144,7 @@ public class ReportLayoutController {
      * @param reportModel current report what user selected in table
      */
     private void checkVerifyReportAndSetButtonCondition(ReportModel reportModel) {
+        //TODO: check on null
         if (reportModel.isChecked()) {
             btnChangeReport.setDisable(true);
         } else btnChangeReport.setDisable(false);

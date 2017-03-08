@@ -55,12 +55,12 @@ public class ReportServerSessionManager {
     public Set<ReportModel> sendProjectDataAndGetReportById(long id)  {
         Set<ReportModel> setReportModel = null;
         //TODO: check on null
-//        try {
-//            setReportModel = ((ReportsContainerDataModel) commandExecutioner
-//                    .sendCommandWithResponse(ServerCommands.GET_REPORTS, id)).getReportModels();
-//        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            setReportModel = ((ReportsContainerDataModel) commandExecutioner
+                    .sendCommandWithResponse(ServerCommands.GET_REPORTS, id)).getReportModels();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         logger.debug("Get report by id from server");
         return setReportModel;
     }

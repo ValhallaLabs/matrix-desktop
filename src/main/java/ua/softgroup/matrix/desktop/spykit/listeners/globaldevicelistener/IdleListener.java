@@ -28,7 +28,7 @@ public class IdleListener extends SpyKitTool {
     private boolean isIdle = false;
     private NativeDevicesListener nativeDevicesListener;
     private Stopwatch idleStopwatch;
-    private long idleTimeSeconds;
+    private int idleTimeSeconds;
 
     public IdleListener() {
         nativeDevicesListener = new NativeDevicesListener(this);
@@ -209,12 +209,12 @@ public class IdleListener extends SpyKitTool {
      * Returns a long primitive with idle time in seconds. Reset idle time.
      * @return idleTimeSeconds
      */
-    public synchronized long getIdleTimeSeconds() {
+    public synchronized int getIdleTimeSeconds() {
         if(idleStopwatch != null && idleStopwatch.isRunning()) {
             stopIdleStopWatch();
             startIdleStopwatch();
         }
-        long idleTimeSeconds = this.idleTimeSeconds;
+        int idleTimeSeconds = this.idleTimeSeconds;
         this.idleTimeSeconds = 0;
         return idleTimeSeconds;
     }

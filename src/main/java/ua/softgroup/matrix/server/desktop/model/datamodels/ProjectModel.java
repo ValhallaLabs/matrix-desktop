@@ -111,19 +111,4 @@ public class ProjectModel implements Serializable, DataModel {
     public void setRateCurrency(String rateCurrency) {
         this.rateCurrency = rateCurrency;
     }
-
-    @Override
-    public String toString() {
-        return "ProjectModel{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", authorName='" + authorName + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", projectTime=" + projectTime +
-                ", rate=" + rate +
-                ", rateCurrency='" + rateCurrency + '\'' +
-                '}';
-    }
 }

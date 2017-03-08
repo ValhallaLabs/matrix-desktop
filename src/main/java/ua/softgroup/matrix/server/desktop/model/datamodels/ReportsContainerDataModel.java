@@ -22,11 +22,4 @@ public class ReportsContainerDataModel implements Serializable, DataModel {
     public void setReportModels(Set<ReportModel> reportModels) {
         this.reportModels = reportModels;
     }
-
-    @Override
-    public String toString() {
-        return "ReportsContainerDataModel{" +
-                "reportModels=" + reportModels +
-                '}';
-    }
 }

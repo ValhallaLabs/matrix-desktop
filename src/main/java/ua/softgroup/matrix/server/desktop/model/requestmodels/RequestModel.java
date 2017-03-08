@@ -64,13 +64,4 @@ public class RequestModel<T extends DataModel> implements Serializable {
     public void setDataContainer(Optional<T> dataContainer) {
         this.dataContainer = dataContainer;
     }
-
-    @Override
-    public String toString() {
-        return "RequestModel{" +
-                "token='" + token + '\'' +
-                ", projectId=" + projectId +
-                ", dataContainer=" + dataContainer +
-                '}';
-    }
 }

@@ -13,16 +13,16 @@ public class InitializeModel implements Serializable, DataModel {
 
     private Set<ProjectModel> projectModels;
 
-    private long idlePeriod;
+    private int idlePeriod;
 
-    private long screenshotFrequency;
+    private int screenshotFrequency;
 
-    private long checkPointFrequency;
+    private int checkPointFrequency;
 
     public InitializeModel() {
     }
 
-    public InitializeModel(String token, Set<ProjectModel> projectModels, long idlePeriod, long screenshotFrequency, long checkPointFrequency) {
+    public InitializeModel(String token, Set<ProjectModel> projectModels, int idlePeriod, int screenshotFrequency, int checkPointFrequency) {
         this.token = token;
         this.projectModels = projectModels;
         this.idlePeriod = idlePeriod;
@@ -46,27 +46,27 @@ public class InitializeModel implements Serializable, DataModel {
         this.projectModels = projectModels;
     }
 
-    public long getIdlePeriod() {
+    public int getIdlePeriod() {
         return idlePeriod;
     }
 
-    public void setIdlePeriod(long idlePeriod) {
+    public void setIdlePeriod(int idlePeriod) {
         this.idlePeriod = idlePeriod;
     }
 
-    public long getScreenshotFrequency() {
+    public int getScreenshotFrequency() {
         return screenshotFrequency;
     }
 
-    public void setScreenshotFrequency(long screenshotFrequency) {
+    public void setScreenshotFrequency(int screenshotFrequency) {
         this.screenshotFrequency = screenshotFrequency;
     }
 
-    public long getCheckPointFrequency() {
+    public int getCheckPointFrequency() {
         return checkPointFrequency;
     }
 
-    public void setCheckPointFrequency(long checkPointFrequency) {
+    public void setCheckPointFrequency(int checkPointFrequency) {
         this.checkPointFrequency = checkPointFrequency;
     }
 

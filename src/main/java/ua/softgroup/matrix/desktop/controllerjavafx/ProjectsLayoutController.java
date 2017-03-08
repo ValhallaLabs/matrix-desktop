@@ -293,14 +293,14 @@ public class ProjectsLayoutController {
         Set<ReportModel> reportModel = null;
         reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
         //TODO: add check on null
-//        for (ReportModel model :
-//                reportModel) {
-//            if (model.getDate().equals(LocalDate.now())) {
-//                taWriteReport.setText("You have already saved a report today");
-//                btnSendReport.setDisable(true);
-//                taWriteReport.setEditable(false);
-//            }
-//        }
+        for (ReportModel model :
+                reportModel) {
+            if (model.getDate().equals(LocalDate.now())) {
+                taWriteReport.setText("You have already saved a report today");
+                btnSendReport.setDisable(true);
+                taWriteReport.setEditable(false);
+            }
+        }
     }
 
     /**

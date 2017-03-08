@@ -36,12 +36,4 @@ public class SynchronizationModel implements Serializable, DataModel {
     public void setIdleTime(long idleTime) {
         this.idleTime = idleTime;
     }
-
-    @Override
-    public String toString() {
-        return "SynchronizationModel{" +
-                "checkPointModels=" + checkPointModels +
-                ", idleTime=" + idleTime +
-                '}';
-    }
 }
