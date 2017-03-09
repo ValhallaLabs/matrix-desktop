@@ -6,7 +6,6 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath ':proguard:'
         classpath group: 'org.mini2Dx', name: 'parcl', version: '1.0.12'
     }
 }
@@ -52,6 +51,7 @@ dependencies {
     compile 'net.java.dev.jna:jna:4.3.0'
     compile 'net.java.dev.jna:jna-platform:4.3.0'
     compile 'commons-configuration:commons-configuration:1.6'
+    compile 'de.huxhorn.lilith:de.huxhorn.lilith.3rdparty.junique:1.0.2'
     testCompile 'junit:junit:4.12'
 }
 

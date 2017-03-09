@@ -1,42 +1,26 @@
 package ua.softgroup.matrix.desktop.start;
 
-import com.sun.jna.platform.FileUtils;
+import it.sauronsoftware.junique.AlreadyLockedException;
+import it.sauronsoftware.junique.JUnique;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.commons.configuration.CompositeConfiguration;
-import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.commons.configuration.SystemConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.net.BindException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
-
-import static java.nio.file.StandardOpenOption.APPEND;
-import static java.nio.file.StandardOpenOption.CREATE;
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 
@@ -63,16 +47,16 @@ public class Main extends Application {
     }
 
     /**
-     * Method tries to bind application to some localhost's port to avoid multiply opening possibility.
-     * In case if port is already used, client simply won't run.
+     * Method tries to lock application to avoid multiply opening possibility by JUnique library
+     * In case if application is already running, client simply won't start.
      */
     private void checkIfRunning() {
+        String appId = "Make Matrix great again!";
         try {
-            socket = new ServerSocket(8109, 0, InetAddress.getByAddress(new byte[] {127,0,0,1}));
-            logger.debug("Bind to localhost adapter with a zero connection queue");
-        } catch (IOException e) {
-            logger.debug("App already running");
-            System.exit(1);
+            JUnique.acquireLock(appId);
+        } catch (AlreadyLockedException e) {
+            logger.debug("Application is already running!");
+            System.exit(0);
         }
     }
 
