@@ -13,6 +13,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
+import ua.softgroup.matrix.desktop.utils.ConfigManager;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
 
 import java.io.*;
@@ -42,7 +43,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         checkIfRunning();
-        readConfig();
+        ConfigManager.readConfig();
         startLoginLayout(primaryStage);
     }
 
@@ -57,34 +58,6 @@ public class Main extends Application {
         } catch (AlreadyLockedException e) {
             logger.debug("Application is already running!");
             System.exit(0);
-        }
-    }
-
-    /**
-     * Method reads host and port values from config file and sets it to SocketProvider
-     */
-    private void readConfig() {
-        try {
-            checkConfigFile();
-            CompositeConfiguration config = new CompositeConfiguration();
-            config.addConfiguration(new PropertiesConfiguration("config.properties"));
-            SocketProvider.setHostName(config.getString("host"));
-            SocketProvider.setPortNumber(config.getInt("port"));
-            logger.debug("Server IP: {}:{}", SocketProvider.getHostName(), SocketProvider.getPortNumber());
-        } catch (Exception e) {
-            logger.debug("Server IP is not found");
-            //TODO: Show user alert to change IP & port, and automatically save the new one to config.properties
-        }
-    }
-
-    private void checkConfigFile() throws IOException {
-        Path path = Paths.get("config.properties");
-        byte defaultConfig[] = "host=192.168.11.84\nport=6666".getBytes();
-        try (OutputStream out = new BufferedOutputStream(Files.newOutputStream(path, CREATE_NEW))) {
-            out.write(defaultConfig, 0, defaultConfig.length);
-            logger.debug("Config file was removed. New config file is created.");
-        } catch (IOException x) {
-            logger.debug("Config file is already exist");
         }
     }
 
