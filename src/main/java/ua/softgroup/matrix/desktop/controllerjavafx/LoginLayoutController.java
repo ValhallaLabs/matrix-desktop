@@ -30,7 +30,7 @@ public class LoginLayoutController {
     private static final Logger logger = LoggerFactory.getLogger(LoginLayoutController.class);
     private static final String EMPTY_FIElD = "Error: Please Fill All Field";
     private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
-    private static final String LOGO = "/images/logoIcon.png";
+    private static final String LOGO = "/images/lo1212.png";
     private static final String MAIN_LAYOUT = "fxml/mainLayout.fxml";
     private static final String ALERT_TITLE_TEXT = "Supervisor";
     private static final String ALERT_CONTENT_TEXT = "Target ip:port is Unreachable";

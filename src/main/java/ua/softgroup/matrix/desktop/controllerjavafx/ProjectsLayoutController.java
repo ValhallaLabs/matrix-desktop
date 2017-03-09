@@ -83,7 +83,7 @@ public class ProjectsLayoutController {
     @FXML
     public Label labelCurrentSymbols;
     @FXML
-    public AnchorPane containetForPieChart;
+    public AnchorPane containerForPieChart;
     private static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
     private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
@@ -96,7 +96,6 @@ public class ProjectsLayoutController {
     private static final String ALERT_ERROR_TITLE = "Supervisor";
     private static final String ALERT_CONTENT_TEXT = "Something go wrong .Programs will be close";
     private static final String ALERT_HEADER_TEXT = "Supervisor ERROR";
-
     private ReportServerSessionManager reportServerSessionManager;
     private File attachFile;
     private long timeTodayMinutes;
@@ -148,14 +147,17 @@ public class ProjectsLayoutController {
         tvProjectsTable.getSelectionModel().select(0);
         tvProjectsTable.getFocusModel().focus(0);
         ProjectModel projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
-        setOtherProjectInfoInView(projectModel);
-        new Thread(() -> {
-            try {
-                setReportInfoInTextAreaAndButton(projectModel);
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }).start();
+        if(projectModel!=null){
+            setOtherProjectInfoInView(projectModel);
+            new Thread(() -> {
+                try {
+                    setReportInfoInTextAreaAndButton(projectModel);
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+
     }
 
     /**
@@ -224,7 +226,7 @@ public class ProjectsLayoutController {
                 new PieChart.Data("Clean Time", 12));
         doughnutChart = new DoughnutChart(pieChartData);
         createPieChart();
-        containetForPieChart.getChildren().addAll(doughnutChart,labelIdle);
+        containerForPieChart.getChildren().addAll(doughnutChart,labelIdle);
 
     }
 
