@@ -31,7 +31,7 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <TextField focusTraversable="false" prefHeight="35.0" prefWidth="275.0" promptText="192.168.11.84" text="192.168.11.84" />
+                        <TextField fx:id="labelHost" focusTraversable="false" prefHeight="35.0" prefWidth="275.0" promptText="like 192.168.11.84" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="20.0" left="30.0" right="20.0" top="20.0" />
@@ -47,7 +47,7 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <TextField focusTraversable="false" prefHeight="35.0" prefWidth="275.0" promptText="6666" text="6666" />
+                        <TextField fx:id="labelPort" focusTraversable="false" prefHeight="35.0" prefWidth="275.0" promptText="like 6666" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="18.0" left="30.0" right="20.0" />
@@ -55,7 +55,7 @@
                   </HBox>
                   <HBox prefHeight="50.0" prefWidth="200.0" styleClass="sa">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" styleClass="save-button" text="Save">
+                        <Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveSettings" prefHeight="45.0" prefWidth="130.0" styleClass="save-button" text="Save">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -66,7 +66,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" styleClass="cancel-button" text="Cancel">
+                        <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelSettings" prefHeight="45.0" prefWidth="130.0" styleClass="cancel-button" text="Cancel">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -74,7 +74,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" styleClass="reset-button" text="Reset to Default">
+                        <Button fx:id="btnResetToDefault" mnemonicParsing="false" onAction="#resetToDefaultSettings" prefHeight="45.0" prefWidth="130.0" styleClass="reset-button" text="Reset to Default">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
