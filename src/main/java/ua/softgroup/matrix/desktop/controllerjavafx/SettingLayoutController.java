@@ -2,7 +2,6 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +12,8 @@ import ua.softgroup.matrix.desktop.utils.ConfigManager;
  */
 public class SettingLayoutController {
     public static final Logger logger = LoggerFactory.getLogger(SettingLayoutController.class);
+    private LoginLayoutController loginLayoutController;
+
     @FXML
     public TextField labelHost;
     @FXML
@@ -31,7 +32,7 @@ public class SettingLayoutController {
     public void saveSettings(ActionEvent actionEvent) {
         ConfigManager.saveNewConfig(labelHost.getText(), labelPort.getText());
         labelHost.getScene().getWindow().hide();
-        //TODO: reinitialize AuthenticationManager in login layout controller (or restart login window fully)
+        loginLayoutController.initializeAuthenticationManager();
     }
 
     public void cancelSettings(ActionEvent actionEvent) {
@@ -41,5 +42,9 @@ public class SettingLayoutController {
     public void resetToDefaultSettings(ActionEvent actionEvent) {
         ConfigManager.setConfigToDefault();
         getPortAndHostFromConfigManager();
+    }
+
+    public void setLoginLayoutController(LoginLayoutController loginLayoutController) {
+        this.loginLayoutController = loginLayoutController;
     }
 }

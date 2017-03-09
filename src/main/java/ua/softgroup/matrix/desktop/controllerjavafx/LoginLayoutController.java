@@ -1,7 +1,6 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -58,10 +57,9 @@ public class LoginLayoutController {
      */
     @FXML
     public void initialize() {
-        authenticationSessionManager = new AuthenticationServerSessionManager(this);
+        initializeAuthenticationManager();
         maxInputTextLimiter(loginTextField, 20);
         maxInputTextLimiter(passwordTextField, 20);
-
     }
 
 
@@ -75,12 +73,9 @@ public class LoginLayoutController {
         alert.setHeaderText(ALERT_HEADER_TEXT);
         alert.setContentText(ALERT_CONTENT_TEXT);
         alert.initStyle(StageStyle.UTILITY);
-        alert.setOnCloseRequest(event -> Platform.exit());
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-//            TODO: open settings window instead of exit
-//            Platform.exit();
-//            System.exit(0);
+           openSettingsWindow();
         }
     }
 
@@ -192,12 +187,18 @@ public class LoginLayoutController {
      * @param event callback click on menu
      */
     public void openSettingsMenu(Event event) {
+        openSettingsWindow();
+    }
+
+    public void openSettingsWindow(){
         try {
             Stage settingStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource(SETTING_LAYOUT));
             Pane pane = loader.load();
+            SettingLayoutController settingLayoutController = loader.getController();
+            settingLayoutController.setLoginLayoutController(this);
             Scene scene = new Scene(pane);
             settingStage.setScene(scene);
             settingStage.setMinWidth(SETTING_LAYOUT_MIN_WIDTH);
@@ -209,6 +210,10 @@ public class LoginLayoutController {
         } catch (IOException e) {
             logger.debug("Error when start Setting Window " + e);
         }
+
     }
 
+    public void initializeAuthenticationManager() {
+        authenticationSessionManager = new AuthenticationServerSessionManager(this);
+    }
 }
