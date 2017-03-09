@@ -78,8 +78,9 @@ public class LoginLayoutController {
         alert.setOnCloseRequest(event -> Platform.exit());
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            Platform.exit();
-            System.exit(0);
+//            TODO: open settings window instead of exit
+//            Platform.exit();
+//            System.exit(0);
         }
     }
 

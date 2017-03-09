@@ -22,7 +22,6 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
  */
 public class ConfigManager {
     private static final Logger logger = LoggerFactory.getLogger(ConfigManager.class);
-    private static byte defaultConfig[] = "host = 127.0.0.1\nport = 6666".getBytes();
     private static Path path = Paths.get("config.properties");
 
     /**
@@ -77,6 +76,7 @@ public class ConfigManager {
             logger.debug("Config file was set to default");
         } catch (IOException | ConfigurationException x) {
             logger.debug("Something went wrong with setting default values");
+            //TODO:tell user about big crash, and close matrix
         }
     }
 
@@ -123,6 +123,7 @@ public class ConfigManager {
             PropertiesConfiguration config = getConfig();
             config.setProperty("host", host);
             config.setProperty("port", port);
+            readConfig();
             logger.debug("New config was saved");
         } catch (IOException | ConfigurationException e) {
             logger.debug("New config wasn't saved", e);

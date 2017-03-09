@@ -31,6 +31,7 @@ public class SettingLayoutController {
     public void saveSettings(ActionEvent actionEvent) {
         ConfigManager.saveNewConfig(labelHost.getText(), labelPort.getText());
         labelHost.getScene().getWindow().hide();
+        //TODO: reinitialize AuthenticationManager in login layout controller (or restart login window fully)
     }
 
     public void cancelSettings(ActionEvent actionEvent) {
