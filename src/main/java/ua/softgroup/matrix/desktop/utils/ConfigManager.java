@@ -3,6 +3,7 @@ package ua.softgroup.matrix.desktop.utils;
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +21,9 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public class ConfigManager {
-    public static final Logger logger = LoggerFactory.getLogger(ConfigManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConfigManager.class);
+    private static byte defaultConfig[] = "host = 127.0.0.1\nport = 6666".getBytes();
+    private static Path path = Paths.get("config.properties");
 
     /**
      * Method reads host and port values from config file and sets it to SocketProvider.
@@ -28,9 +31,9 @@ public class ConfigManager {
      */
     public static void readConfig() {
         try {
-            CompositeConfiguration config = getConfig();
+            PropertiesConfiguration config = getConfig();
             SocketProvider.setHostName(config.getString("host"));
-            SocketProvider.setPortNumber(config.getInt("port"));
+            SocketProvider.setPortNumber(Integer.parseInt(config.getString("port")));
             logger.debug("Server IP: {}:{}", SocketProvider.getHostName(), SocketProvider.getPortNumber());
         } catch (ConfigurationException | IOException e) {
             logger.debug("Config is not found. Try to set to default.");
@@ -39,16 +42,17 @@ public class ConfigManager {
     }
 
     /**
-     * Method returns a {@link CompositeConfiguration} object with current configs
+     * Method returns a {@link PropertiesConfiguration} object with current configs
      * @return configs
      * @throws IOException
      * @throws ConfigurationException
      */
-    private static CompositeConfiguration getConfig() throws IOException, ConfigurationException {
+    private static PropertiesConfiguration getConfig() throws IOException, ConfigurationException {
         checkConfigFileExistence();
-        CompositeConfiguration config = new CompositeConfiguration();
-        config.addConfiguration(new PropertiesConfiguration("config.properties"));
-        return config;
+        PropertiesConfiguration propertiesConfiguration = new PropertiesConfiguration("config.properties");
+        propertiesConfiguration.setAutoSave(true);
+        propertiesConfiguration.setReloadingStrategy(new FileChangedReloadingStrategy());
+        return propertiesConfiguration;
     }
 
     /**
@@ -56,12 +60,10 @@ public class ConfigManager {
      * @throws IOException
      */
     private static void checkConfigFileExistence() throws IOException {
-        Path path = Paths.get("config.properties");
-        byte defaultConfig[] = "host=192.168.11.84\nport=6666".getBytes();
         try (OutputStream out = new BufferedOutputStream(Files.newOutputStream(path, CREATE_NEW))) {
-            out.write(defaultConfig, 0, defaultConfig.length);
-            logger.debug("Config file was removed. New config file is created.");
-        } catch (IOException x) {
+            setLocalHost();
+            logger.debug("New config file is created.");
+        } catch (IOException | ConfigurationException x) {
             logger.debug("Config file is already exist");
         }
     }
@@ -70,14 +72,17 @@ public class ConfigManager {
      * Method tries to set config to default values. In case of an exception, it will do nothing.
      */
     public static void setConfigToDefault() {
-        Path path = Paths.get("config.properties");
-        byte defaultConfig[] = "host=192.168.11.84\nport=6666".getBytes();
         try (OutputStream out = new BufferedOutputStream(Files.newOutputStream(path, CREATE))) {
-            out.write(defaultConfig, 0, defaultConfig.length);
+            setLocalHost();
             logger.debug("Config file was set to default");
-        } catch (IOException x) {
+        } catch (IOException | ConfigurationException x) {
             logger.debug("Something went wrong with setting default values");
         }
+    }
+
+    private static void setLocalHost() throws IOException, ConfigurationException {
+        getConfig().setProperty("host","127.0.0.1");
+        getConfig().setProperty("port","6666");
     }
 
     /**
@@ -112,8 +117,10 @@ public class ConfigManager {
      * @param port a String object with new port value
      */
     public static void saveNewConfig(String host, String port) {
+        logger.debug("New configs: host = {}; port = {}", host, port);
         try {
-            CompositeConfiguration config = getConfig();
+            setConfigToDefault();
+            PropertiesConfiguration config = getConfig();
             config.setProperty("host", host);
             config.setProperty("port", port);
             logger.debug("New config was saved");
