@@ -187,7 +187,7 @@ public class LoginLayoutController {
      *
      * @param event callback click on menu
      */
-    public void openSettingsMenu(Event event) {
+    public void openSettings(Event event) {
         openSettingsWindow();
     }
 

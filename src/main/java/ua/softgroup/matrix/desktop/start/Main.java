@@ -81,7 +81,7 @@ public class Main extends Application {
             loginStage.setResizable(false);
             loginStage.show();
         } catch (IOException e) {
-            logger.debug("Error when start Main Window "+e);
+            logger.debug("Error when start Login Window "+e);
         }
     }
 }
