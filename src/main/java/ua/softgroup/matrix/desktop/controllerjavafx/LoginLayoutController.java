@@ -6,17 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -37,7 +31,7 @@ public class LoginLayoutController {
     private static final Logger logger = LoggerFactory.getLogger(LoginLayoutController.class);
     private static final String EMPTY_FIElD = "Error: Please Fill All Field";
     private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
-    private static final String LOGO = "/images/testLogoIcon.png";
+    private static final String LOGO = "/images/logoIcon.png";
     private static final String MAIN_LAYOUT = "fxml/mainLayout.fxml";
     private static final String ALERT_TITLE_TEXT = "Supervisor";
     private static final String ALERT_CONTENT_TEXT = "Target ip:port is Unreachable";
@@ -67,7 +61,6 @@ public class LoginLayoutController {
         authenticationSessionManager = new AuthenticationServerSessionManager(this);
         maxInputTextLimiter(loginTextField, 20);
         maxInputTextLimiter(passwordTextField, 20);
-
     }
 
 
@@ -145,19 +138,20 @@ public class LoginLayoutController {
      */
     private void startMainControllerLayout() {
         try {
-            Stage primaryStage = new Stage();
+            Stage mainStage = new Stage();
             Image icon = new Image(getClass().getResourceAsStream(LOGO));
-            primaryStage.getIcons().add(icon);
+            mainStage.getIcons().add(icon);
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource(MAIN_LAYOUT));
             BorderPane mainLayout = loader.load();
             Scene scene = new Scene(mainLayout);
-            primaryStage.setScene(scene);
-            primaryStage.setMinWidth(MAIN_LAYOUT_MIN_WIDTH);
-            primaryStage.setMinHeight(MAIN_LAYOUT_MIN_HEIGHT);
-            primaryStage.setResizable(false);
-            primaryStage.show();
+            mainStage.setScene(scene);
+            mainStage.setMinWidth(MAIN_LAYOUT_MIN_WIDTH);
+            mainStage.setMinHeight(MAIN_LAYOUT_MIN_HEIGHT);
+            mainStage.setResizable(false);
+            mainStage.setTitle("SuperVisor");
+            mainStage.show();
             MainLayoutController mainController = loader.getController();
             mainController.startProjectsLayoutController(mainLayout);
         } catch (IOException e) {

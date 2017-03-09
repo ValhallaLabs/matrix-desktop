@@ -4,8 +4,6 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.beans.binding.Binding;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,19 +17,18 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
+import ua.softgroup.matrix.desktop.view.DoughnutChart;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -223,21 +220,21 @@ public class ProjectsLayoutController {
      */
     private void initPieChart() {
         createLabelForDisplayIdleTime();
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Down Time", 7),
-                new PieChart.Data("Clean Time", 93));
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Down Time",88),
+                new PieChart.Data("Clean Time", 12));
         doughnutChart = new DoughnutChart(pieChartData);
         createPieChart();
-        containetForPieChart.getChildren().addAll(doughnutChart, labelIdle);
+        containetForPieChart.getChildren().addAll(doughnutChart,labelIdle);
+
     }
 
     private void createLabelForDisplayIdleTime() {
-        labelIdle = new Label();
-        labelIdle.setText("15%");
-        labelIdle.setMaxWidth(130);
+        labelIdle = new Label("88%");
+        labelIdle.setMinWidth(60);
+        labelIdle.setMinHeight(20);
         labelIdle.setStyle("-fx-font-weight: bold");
         labelIdle.setFont(new Font(16));
-        labelIdle.setMaxHeight(130);
-        labelIdle.setPadding(new Insets(87, 0, 50, 68));
+        labelIdle.setPadding(new Insets(87, 0, 50, 69));
     }
 
     private void createPieChart() {

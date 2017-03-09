@@ -2,10 +2,12 @@ package ua.softgroup.matrix.desktop.start;
 
 import com.sun.jna.platform.FileUtils;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -40,6 +42,7 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 public class Main extends Application {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
+    private static final String LOGO = "/images/logoIcon.png";
     private ServerSocket socket;
 
     public static void main(String[] args) {
@@ -109,6 +112,8 @@ public class Main extends Application {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
+            Image icon = new Image(getClass().getResourceAsStream(LOGO));
+            loginStage.getIcons().add(icon);
             loader.setLocation(classLoader.getResource("fxml/loginLayout.fxml"));
             Pane loginLayout = loader.load();
             LoginLayoutController loginLayoutController = loader.getController();

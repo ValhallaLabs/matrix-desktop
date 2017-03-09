@@ -56,7 +56,6 @@ public class ReportLayoutController {
     private ReportServerSessionManager reportServerSessionManager;
     private Long currentProjectId;
     private Set<ReportModel> report;
-    private String reportText;
     private Long currentReportId;
 
 
@@ -91,8 +90,6 @@ public class ReportLayoutController {
             currentReportId = reportModel.getId();
             taEditReport.setText(reportModel.getText());
         }
-
-
     }
 
     /**
@@ -135,7 +132,6 @@ public class ReportLayoutController {
             for (ReportModel model :
                     report) {
                 reportData.add(model);
-                reportText = model.getText();
             }
 
             tableViewReport.setItems(reportData);

@@ -12,7 +12,7 @@
    <children>
       <VBox focusTraversable="true" prefHeight="100.0" prefWidth="100.0" styleClass="grey-background" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0">
          <children>
-            <Label text="LIST OF REPORT" textFill="#3063a4">
+            <Label text="LIST OF REPORTS" textFill="#3063a4">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
@@ -168,10 +168,10 @@
                   </GridPane>
                   <TableView fx:id="tableViewReport" layoutX="15.0" layoutY="115.0" onMouseClicked="#chooseReport" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="105.0">
                     <columns>
-                      <TableColumn fx:id="reportTableColumnDate" prefWidth="115.0" sortType="DESCENDING" text="Date" />
-                      <TableColumn fx:id="reportTableColumnTime" prefWidth="115.0" text=" Time" />
-                        <TableColumn fx:id="reportTableColumnVerified" prefWidth="151.0" text="Verified" />
-                        <TableColumn fx:id="reportTableColumnReport" prefWidth="385.0" text="Report" />
+                      <TableColumn fx:id="reportTableColumnDate" minWidth="100.0" prefWidth="111.0" sortType="DESCENDING" text="Date" />
+                      <TableColumn fx:id="reportTableColumnTime" minWidth="100.0" prefWidth="111.0" text=" Time" />
+                        <TableColumn fx:id="reportTableColumnVerified" minWidth="100.0" prefWidth="111.0" text="Verified" />
+                        <TableColumn fx:id="reportTableColumnReport" minWidth="300.0" prefWidth="430.0" text="Text" />
                     </columns>
                   </TableView>
                </children>

@@ -1,27 +1,23 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 import java.io.IOException;
-import java.util.Optional;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
@@ -34,13 +30,12 @@ public class MainLayoutController {
     private static final String INSTRUCTIONS_LAYOUT = "fxml/instructionsLayout.fxml";
     private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 900;
     private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 600;
+    private static final String LOGO = "/images/logoIcon.png";
     private static final Logger logger = LoggerFactory.getLogger(MainLayoutController.class);
-
     @FXML
     public Menu menuReport;
     @FXML
     public MenuBar menuBar;
-
     /**
      * Hears when user click on report menus item
      *
@@ -57,19 +52,22 @@ public class MainLayoutController {
      */
     void startReport(Window window) {
         try {
-            Stage primaryStage = new Stage();
+            Stage reportsStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource(REPORT_LAYOUT));
             AnchorPane anchorPane = loader.load();
             Scene scene = new Scene(anchorPane);
-            primaryStage.setScene(scene);
-            primaryStage.setMinWidth(REPORT_LAYOUT_MIN_WIDTH);
-            primaryStage.setMinHeight(REPORT_LAYOUT_MIN_HEIGHT);
-            primaryStage.initModality(Modality.WINDOW_MODAL);
-            primaryStage.initOwner(window);
-            primaryStage.setResizable(false);
-            primaryStage.show();
+            reportsStage.setScene(scene);
+            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
+            reportsStage.getIcons().add(logoIcon);
+            reportsStage.setMinWidth(REPORT_LAYOUT_MIN_WIDTH);
+            reportsStage.setMinHeight(REPORT_LAYOUT_MIN_HEIGHT);
+            reportsStage.initModality(Modality.WINDOW_MODAL);
+            reportsStage.setTitle("Reports Window");
+            reportsStage.initOwner(window);
+            reportsStage.setResizable(false);
+            reportsStage.show();
         } catch (IOException e) {
             logger.debug("Error when start Report Window " + e);
             e.printStackTrace();
@@ -103,19 +101,23 @@ public class MainLayoutController {
      */
     public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
         try {
-            Stage InstructionsStage = new Stage();
+
             ClassLoader classLoader = getClass().getClassLoader();
+            Stage instructionsStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource(INSTRUCTIONS_LAYOUT));
             Pane pane = loader.load();
             Scene scene = new Scene(pane);
-            InstructionsStage.setScene(scene);
-            InstructionsStage.setMinWidth(INSTRUCTIONS_LAYOUT_MIN_WIDTH);
-            InstructionsStage.setMinHeight(INSTRUCTIONS_LAYOUT_MIN_HEIGHT);
-            InstructionsStage.initModality(Modality.WINDOW_MODAL);
-            InstructionsStage.initOwner(menuBar.getScene().getWindow());
-            InstructionsStage.setResizable(false);
-            InstructionsStage.show();
+            instructionsStage.setScene(scene);
+            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
+            instructionsStage.getIcons().add(logoIcon);
+            instructionsStage.setMinWidth(INSTRUCTIONS_LAYOUT_MIN_WIDTH);
+            instructionsStage.setMinHeight(INSTRUCTIONS_LAYOUT_MIN_HEIGHT);
+            instructionsStage.initModality(Modality.WINDOW_MODAL);
+            instructionsStage.setTitle("Instructions Window");
+            instructionsStage.initOwner(menuBar.getScene().getWindow());
+            instructionsStage.setResizable(false);
+            instructionsStage.show();
         } catch (IOException e) {
             logger.debug("Error when start Instructions Window " + e);
         }

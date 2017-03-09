@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.controllerjavafx;
+package ua.softgroup.matrix.desktop.view;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
@@ -29,7 +29,9 @@ public class DoughnutChart extends PieChart {
         updateInnerCircleLayout();
     }
 
+
     private void addInnerCircleIfNotPresent() {
+
         if (getData().size() > 0) {
             Node pie = getData().get(0).getNode();
             if (pie.getParent() instanceof Pane) {
