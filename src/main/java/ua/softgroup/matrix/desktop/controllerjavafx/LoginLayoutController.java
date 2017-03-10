@@ -215,6 +215,9 @@ public class LoginLayoutController {
     }
 
     public void initializeAuthenticationManager() {
+        if(authenticationSessionManager != null) {
+            authenticationSessionManager.closeSession();
+        }
         authenticationSessionManager = new AuthenticationServerSessionManager(this);
     }
 }

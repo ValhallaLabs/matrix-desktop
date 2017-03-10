@@ -174,7 +174,7 @@ public class AuthenticationServerSessionManager {
      * Method for UI to close current authentication session im emergency case.
      */
     public void closeSession(){
-        if(!socketDisposable.isDisposed()) {
+        if(socketDisposable != null && !socketDisposable.isDisposed()) {
             socketDisposable.dispose();
             logger.debug("socketDisposable is disposed: {}", socketDisposable.isDisposed());
         }
