@@ -143,7 +143,7 @@
                                     <Insets left="7.0" top="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label fx:id="labelStartWorkToday" minWidth="140.0" prefWidth="140.0" text="08:56">
+                              <Label fx:id="labelStartWorkToday" minWidth="140.0" prefWidth="140.0" text="00:00">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>

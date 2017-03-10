@@ -36,6 +36,7 @@ public class SettingLayoutController {
     }
 
     public void cancelSettings(ActionEvent actionEvent) {
+        loginLayoutController.initializeAuthenticationManager();
         labelHost.getScene().getWindow().hide();
     }
 

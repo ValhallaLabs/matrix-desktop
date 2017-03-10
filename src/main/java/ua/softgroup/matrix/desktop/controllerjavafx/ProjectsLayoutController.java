@@ -4,12 +4,14 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -30,6 +32,7 @@ import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -103,6 +106,10 @@ public class ProjectsLayoutController {
     private TimeTracker timeTracker;
     private DoughnutChart doughnutChart;
     private Label labelIdle;
+    private double idleTimeInPercent;
+    private static ProjectModel projectModel;
+    private int timeFromServer;
+
 
     /**
      * After Load/Parsing fxml call this method
@@ -114,12 +121,12 @@ public class ProjectsLayoutController {
     private void initialize() throws IOException {
         reportServerSessionManager = new ReportServerSessionManager();
         timeTimer = new Timeline();
-        initPieChart();
         initProjectInTable();
         getTodayDayAndSetInView();
         setFocusOnTableView();
         countTextAndSetInView();
         addTextLimiter(taWriteReport, LIMITER_TEXT_COUNT);
+
     }
 
     /**
@@ -146,9 +153,10 @@ public class ProjectsLayoutController {
         tvProjectsTable.requestFocus();
         tvProjectsTable.getSelectionModel().select(0);
         tvProjectsTable.getFocusModel().focus(0);
-        ProjectModel projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
+         ProjectModel projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
         if(projectModel!=null){
             setOtherProjectInfoInView(projectModel);
+            ProjectsLayoutController.projectModel =projectModel;
             new Thread(() -> {
                 try {
                     setReportInfoInTextAreaAndButton(projectModel);
@@ -208,6 +216,16 @@ public class ProjectsLayoutController {
         CurrentSessionInfo.setProjectId(projectModel.getId());
         labelNameProject.setText(projectModel.getTitle());
         labelDescribeProject.setText(projectModel.getDescription());
+        LocalDateTime startWorkToday=projectModel.getProjectTime().getTodayStartTime();
+        if (startWorkToday!=null){
+            labelStartWorkToday.setText(String.valueOf(startWorkToday));
+        }
+        timeFromServer=projectModel.getProjectTime().getTodayTime();
+        timeTodayMinutes=timeFromServer/60;
+        System.out.println(timeTodayMinutes);
+        labelTodayTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeFromServer));
+        labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(projectModel.getProjectTime().getTotalTime()));
+        idleTimeInPercent =projectModel.getProjectTime().getIdlePercent();
         if ((projectModel.getStartDate() != null && projectModel.getEndDate() != null)) {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
             labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
@@ -215,23 +233,26 @@ public class ProjectsLayoutController {
             labelDateStartProject.setText("Unknown");
             labelDeadLineProject.setText("Unknown");
         }
+        ProjectsLayoutController.projectModel =projectModel;
+        initPieChart();
     }
 
     /**
      * Get DownTime and CleanTime and set this information in Pie Chart
      */
     private void initPieChart() {
-        createLabelForDisplayIdleTime();
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Down Time",88),
-                new PieChart.Data("Clean Time", 12));
+        double idleTime=Math.round(idleTimeInPercent);
+        double cleanTime=100-idleTime;
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Clean Time",idleTime),
+                new PieChart.Data("Idle Time",cleanTime));
         doughnutChart = new DoughnutChart(pieChartData);
+        createLabelForDisplayIdleTime();
         createPieChart();
         containerForPieChart.getChildren().addAll(doughnutChart,labelIdle);
-
     }
 
     private void createLabelForDisplayIdleTime() {
-        labelIdle = new Label("88%");
+        labelIdle = new Label(Math.round(idleTimeInPercent)+"%");
         labelIdle.setMinWidth(60);
         labelIdle.setMinHeight(20);
         labelIdle.setStyle("-fx-font-weight: bold");
@@ -291,13 +312,14 @@ public class ProjectsLayoutController {
     private void setReportInfoInTextAreaAndButton(ProjectModel projectModel) throws IOException, ClassNotFoundException {
         Set<ReportModel> reportModel = null;
         reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
-        //TODO: add check on null
-        for (ReportModel model :
-                reportModel) {
-            if (model.getDate().equals(LocalDate.now())) {
-                taWriteReport.setText("You have already saved a report today");
-                btnSendReport.setDisable(true);
-                taWriteReport.setEditable(false);
+        if(reportModel!=null&&!reportModel.isEmpty()){
+            for (ReportModel model :
+                    reportModel) {
+                if (model.getDate().equals(LocalDate.now())) {
+                    taWriteReport.setText("You have already saved a report today");
+                    btnSendReport.setDisable(true);
+                    taWriteReport.setEditable(false);
+                }
             }
         }
     }
@@ -369,6 +391,7 @@ public class ProjectsLayoutController {
         }
         KeyFrame frame = new KeyFrame(Duration.minutes(1), event -> {
             calculateTimeAndSetInView();
+
         });
 
         timeTimer.getKeyFrames().add(frame);
@@ -394,23 +417,29 @@ public class ProjectsLayoutController {
      */
     private void calculateTimeAndSetInView() {
         timeTodayMinutes++;
+        System.out.println(timeTodayMinutes);
         labelTodayTotalTime.setText(String.valueOf(timeTodayMinutes / 60 + "h " + timeTodayMinutes % 60 + "m"));
+        initPieChart();
     }
 
     /**
      * Set possibility click on stop button and disable start button
      */
     private void buttonConditionAtTimerOn() {
+
         btnStart.setDisable(true);
         btnStop.setDisable(false);
+        tvProjectsTable.setMouseTransparent(true);
     }
 
     /**
      * Set possibility click on start button and disable stop button
      */
     private void buttonConditionAtTimerOff() {
+
         btnStart.setDisable(false);
         btnStop.setDisable(true);
+        tvProjectsTable.setMouseTransparent(false);
     }
 
     /**
@@ -429,5 +458,9 @@ public class ProjectsLayoutController {
             Platform.exit();
         }
     }
-
+    private String convertFromSecondsToHoursAndMinutes(int seconds){
+        int todayTimeInHours=seconds/3600;
+        int todayTimeInMinutes=(seconds%3600)/60;
+        return String.valueOf(todayTimeInHours + "h " + todayTimeInMinutes+'m');
+    }
 }
