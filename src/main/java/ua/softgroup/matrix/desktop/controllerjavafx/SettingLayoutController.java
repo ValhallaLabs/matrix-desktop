@@ -45,7 +45,7 @@ public class SettingLayoutController {
         getPortAndHostFromConfigManager();
     }
 
-    public void setLoginLayoutController(LoginLayoutController loginLayoutController) {
+     void setLoginLayoutController(LoginLayoutController loginLayoutController) {
         this.loginLayoutController = loginLayoutController;
     }
 }
