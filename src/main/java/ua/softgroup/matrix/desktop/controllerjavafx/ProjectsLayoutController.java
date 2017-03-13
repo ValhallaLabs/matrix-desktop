@@ -108,7 +108,6 @@ public class ProjectsLayoutController {
     private Label labelIdle;
     private double idleTimeInPercent;
     private static ProjectModel projectModel;
-    private int timeFromServer;
 
 
     /**
@@ -153,10 +152,10 @@ public class ProjectsLayoutController {
         tvProjectsTable.requestFocus();
         tvProjectsTable.getSelectionModel().select(0);
         tvProjectsTable.getFocusModel().focus(0);
-         ProjectModel projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
-        if(projectModel!=null){
+        ProjectModel projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
+        if (projectModel != null) {
             setOtherProjectInfoInView(projectModel);
-            ProjectsLayoutController.projectModel =projectModel;
+            ProjectsLayoutController.projectModel = projectModel;
             new Thread(() -> {
                 try {
                     setReportInfoInTextAreaAndButton(projectModel);
@@ -216,16 +215,16 @@ public class ProjectsLayoutController {
         CurrentSessionInfo.setProjectId(projectModel.getId());
         labelNameProject.setText(projectModel.getTitle());
         labelDescribeProject.setText(projectModel.getDescription());
-        LocalDateTime startWorkToday=projectModel.getProjectTime().getTodayStartTime();
-        if (startWorkToday!=null){
+        LocalDateTime startWorkToday = projectModel.getProjectTime().getTodayStartTime();
+        if (startWorkToday != null) {
             labelStartWorkToday.setText(String.valueOf(startWorkToday));
         }
-        timeFromServer=projectModel.getProjectTime().getTodayTime();
-        timeTodayMinutes=timeFromServer/60;
+        int timeFromServer = projectModel.getProjectTime().getTodayTime();
+        timeTodayMinutes = timeFromServer / 60;
         System.out.println(timeTodayMinutes);
         labelTodayTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeFromServer));
         labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(projectModel.getProjectTime().getTotalTime()));
-        idleTimeInPercent =projectModel.getProjectTime().getIdlePercent();
+        idleTimeInPercent = projectModel.getProjectTime().getIdlePercent();
         if ((projectModel.getStartDate() != null && projectModel.getEndDate() != null)) {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
             labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
@@ -233,7 +232,7 @@ public class ProjectsLayoutController {
             labelDateStartProject.setText("Unknown");
             labelDeadLineProject.setText("Unknown");
         }
-        ProjectsLayoutController.projectModel =projectModel;
+        ProjectsLayoutController.projectModel = projectModel;
         initPieChart();
     }
 
@@ -241,18 +240,18 @@ public class ProjectsLayoutController {
      * Get DownTime and CleanTime and set this information in Pie Chart
      */
     private void initPieChart() {
-        double idleTime=Math.round(idleTimeInPercent);
-        double cleanTime=100-idleTime;
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Clean Time",idleTime),
-                new PieChart.Data("Idle Time",cleanTime));
+        double idleTime = Math.round(idleTimeInPercent);
+        double cleanTime = 100 - idleTime;
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Clean Time", idleTime),
+                new PieChart.Data("Idle Time", cleanTime));
         doughnutChart = new DoughnutChart(pieChartData);
         createLabelForDisplayIdleTime();
         createPieChart();
-        containerForPieChart.getChildren().addAll(doughnutChart,labelIdle);
+        containerForPieChart.getChildren().addAll(doughnutChart, labelIdle);
     }
 
     private void createLabelForDisplayIdleTime() {
-        labelIdle = new Label(Math.round(idleTimeInPercent)+"%");
+        labelIdle = new Label(Math.round(idleTimeInPercent) + "%");
         labelIdle.setMinWidth(60);
         labelIdle.setMinHeight(20);
         labelIdle.setStyle("-fx-font-weight: bold");
@@ -312,7 +311,7 @@ public class ProjectsLayoutController {
     private void setReportInfoInTextAreaAndButton(ProjectModel projectModel) throws IOException, ClassNotFoundException {
         Set<ReportModel> reportModel = null;
         reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
-        if(reportModel!=null&&!reportModel.isEmpty()){
+        if (reportModel != null && !reportModel.isEmpty()) {
             for (ReportModel model :
                     reportModel) {
                 if (model.getDate().equals(LocalDate.now())) {
@@ -458,9 +457,10 @@ public class ProjectsLayoutController {
             Platform.exit();
         }
     }
-    private String convertFromSecondsToHoursAndMinutes(int seconds){
-        int todayTimeInHours=seconds/3600;
-        int todayTimeInMinutes=(seconds%3600)/60;
-        return String.valueOf(todayTimeInHours + "h " + todayTimeInMinutes+'m');
+
+    private String convertFromSecondsToHoursAndMinutes(int seconds) {
+        int todayTimeInHours = seconds / 3600;
+        int todayTimeInMinutes = (seconds % 3600) / 60;
+        return String.valueOf(todayTimeInHours + "h " + todayTimeInMinutes + 'm');
     }
 }

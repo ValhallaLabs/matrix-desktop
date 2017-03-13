@@ -91,8 +91,6 @@ public class MainLayoutController {
         }
     }
 
-
-
     /**
      * Hears when user click on setting menus item and
      * tells {@link MainLayoutController} to open instructions window

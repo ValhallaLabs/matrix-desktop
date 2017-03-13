@@ -73,7 +73,6 @@ public class ReportLayoutController {
         setProjectInfoInView(currentProjectId);
         setFocusOnTableView();
         countTextAndSetButtonCondition();
-
     }
 
     /**

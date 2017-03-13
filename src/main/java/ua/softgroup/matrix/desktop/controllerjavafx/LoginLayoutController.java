@@ -19,6 +19,7 @@ import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationServerSessionMa
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.prefs.Preferences;
 
 
 /**
@@ -30,7 +31,7 @@ public class LoginLayoutController {
     private static final Logger logger = LoggerFactory.getLogger(LoginLayoutController.class);
     private static final String EMPTY_FIElD = "Error: Please Fill All Field";
     private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
-    private static final String LOGO = "/images/lo1212.png";
+    private static final String LOGO = "/images/logoIcon.png";
     private static final String MAIN_LAYOUT = "fxml/mainLayout.fxml";
     private static final String ALERT_TITLE_TEXT = "Supervisor";
     private static final String ALERT_CONTENT_TEXT = "Target ip:port is Unreachable";
@@ -42,6 +43,10 @@ public class LoginLayoutController {
     private static final int SETTING_LAYOUT_MIN_HEIGHT = 250;
     private Stage stage;
     private AuthenticationServerSessionManager authenticationSessionManager;
+    private Preferences preferences;
+    private final static String USER_NAME = "userName";
+    private final static String USER_PASSWORD = "password";
+    private final static String USER_SWITCH_SETTINGS = "false";
     @FXML
     public TextField loginTextField;
     @FXML
@@ -50,6 +55,8 @@ public class LoginLayoutController {
     public Button btnLogin;
     @FXML
     public Label labelErrorMessage;
+    @FXML
+    public CheckBox cbRememberMe;
 
     /**
      * After Load/Parsing fxml call this method
@@ -57,11 +64,33 @@ public class LoginLayoutController {
      */
     @FXML
     public void initialize() {
+        preferences = Preferences.userRoot().node(this.getClass().getName());
+        getPreferencesAndSetLoginPassword();
         initializeAuthenticationManager();
         maxInputTextLimiter(loginTextField, 20);
         maxInputTextLimiter(passwordTextField, 20);
     }
 
+    private void getPreferencesAndSetLoginPassword() {
+        if(preferences!=null){
+            loginTextField.setText(preferences.get(USER_NAME, ""));
+            passwordTextField.setText(preferences.get(USER_PASSWORD, ""));
+            cbRememberMe.setSelected(preferences.getBoolean(USER_SWITCH_SETTINGS, true));
+        }
+    }
+
+    private void saveLoginAndPasswordToPreferencesManager() {
+        if (cbRememberMe.isSelected()) {
+            preferences.put(USER_NAME, loginTextField.getText());
+            preferences.put(USER_PASSWORD, passwordTextField.getText());
+            preferences.putBoolean(USER_SWITCH_SETTINGS, true);
+        }else {
+            preferences.put(USER_NAME, "");
+            preferences.put(USER_PASSWORD, "");
+            preferences.putBoolean(USER_SWITCH_SETTINGS, false);
+        }
+
+    }
 
     /**
      * If when start programme bad connection, create alert with message to user
@@ -75,7 +104,7 @@ public class LoginLayoutController {
         alert.initStyle(StageStyle.UTILITY);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-           openSettingsWindow();
+            openSettingsWindow();
         }
     }
 
@@ -101,6 +130,7 @@ public class LoginLayoutController {
             return;
         }
         sendAuthDataToNotificationManager();
+
     }
 
     /**
@@ -128,6 +158,7 @@ public class LoginLayoutController {
     public void closeLoginLayoutAndStartMainLayout() {
         stage.close();
         startMainControllerLayout();
+        saveLoginAndPasswordToPreferencesManager();
     }
 
     /**
@@ -191,7 +222,7 @@ public class LoginLayoutController {
         openSettingsWindow();
     }
 
-    public void openSettingsWindow(){
+    private void openSettingsWindow() {
         try {
             Stage settingStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
@@ -214,7 +245,7 @@ public class LoginLayoutController {
 
     }
 
-    public void initializeAuthenticationManager() {
+     void initializeAuthenticationManager() {
         authenticationSessionManager = new AuthenticationServerSessionManager(this);
     }
 }

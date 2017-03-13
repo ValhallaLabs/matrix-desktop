@@ -23,7 +23,6 @@ public class InstructionsLayoutController {
     @FXML
     public ListView<InstructionsModel> lvInstructions;
     private List<InstructionsModel> listInstructionsModel = new ArrayList<>();
-    private ObservableList<InstructionsModel> content;
 
     /**
      * After Load/Parsing fxml call this method
@@ -94,7 +93,7 @@ public class InstructionsLayoutController {
                 "Данные шаги сделаны в целях безопастности.\n" +
                 "\n" +
                 "Рассчитываю на ваше понимание и поддержку, сенкс."));
-        content = FXCollections.observableArrayList(listInstructionsModel);
+        ObservableList<InstructionsModel> content = FXCollections.observableArrayList(listInstructionsModel);
         lvInstructions.setItems(content);
     }
 

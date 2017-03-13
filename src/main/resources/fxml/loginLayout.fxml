@@ -42,6 +42,9 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Label fx:id="labelErrorMessage" alignment="CENTER" prefHeight="19.0" prefWidth="282.0" textFill="#d74747">
                <VBox.margin>
@@ -53,7 +56,7 @@
             </Label>
             <HBox>
                <children>
-                  <CheckBox mnemonicParsing="false" text="Remember me">
+                  <CheckBox fx:id="cbRememberMe" mnemonicParsing="false" text="Remember me">
                      <VBox.margin>
                         <Insets left="4.0" />
                      </VBox.margin>
