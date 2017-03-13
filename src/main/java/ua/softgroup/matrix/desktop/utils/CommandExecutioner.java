@@ -1,21 +1,20 @@
 package ua.softgroup.matrix.desktop.utils;
 
+import ua.softgroup.matrix.api.ServerCommands;
+import ua.softgroup.matrix.api.model.datamodels.DataModel;
+import ua.softgroup.matrix.api.model.requestmodels.RequestModel;
+import ua.softgroup.matrix.api.model.responsemodels.ResponseModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
-import ua.softgroup.matrix.server.desktop.api.ServerCommands;
-import ua.softgroup.matrix.server.desktop.model.datamodels.DataModel;
-import ua.softgroup.matrix.server.desktop.model.requestmodels.RequestModel;
-import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseModel;
-import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseStatus;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import static ua.softgroup.matrix.server.desktop.api.ServerCommands.*;
-import static ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseStatus.SUCCESS;
+import static ua.softgroup.matrix.api.model.responsemodels.ResponseStatus.SUCCESS;
+
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>

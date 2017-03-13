@@ -1,13 +1,12 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
 import javafx.collections.FXCollections;
-
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import ua.softgroup.matrix.server.desktop.model.datamodels.InstructionsModel;
+import ua.softgroup.matrix.api.model.datamodels.InstructionsModel;
 
 import java.util.ArrayList;
 import java.util.List;

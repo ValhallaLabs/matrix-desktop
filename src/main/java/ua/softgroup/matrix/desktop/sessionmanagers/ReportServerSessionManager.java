@@ -3,17 +3,13 @@ package ua.softgroup.matrix.desktop.sessionmanagers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.api.ServerCommands;
+import ua.softgroup.matrix.api.model.datamodels.ReportModel;
+import ua.softgroup.matrix.api.model.datamodels.ReportsContainerDataModel;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
-import ua.softgroup.matrix.desktop.utils.SocketProvider;
-import ua.softgroup.matrix.server.desktop.api.ServerCommands;
-import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
-import ua.softgroup.matrix.server.desktop.model.datamodels.ReportsContainerDataModel;
-import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseModel;
-import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseStatus;
 
-import java.io.*;
-import java.net.Socket;
+import java.io.IOException;
 import java.util.Set;
 
 

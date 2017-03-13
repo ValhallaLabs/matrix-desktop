@@ -1,8 +1,9 @@
 package ua.softgroup.matrix.desktop.currentsessioninfo;
 
-import ua.softgroup.matrix.server.desktop.model.datamodels.InitializeModel;
-import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
-import ua.softgroup.matrix.server.desktop.model.datamodels.SynchronizationModel;
+
+import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
+import ua.softgroup.matrix.api.model.datamodels.SynchronizationModel;
+import ua.softgroup.matrix.api.model.datamodels.InitializeModel;
 
 import java.util.Set;
 

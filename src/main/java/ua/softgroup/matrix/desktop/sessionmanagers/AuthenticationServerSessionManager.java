@@ -1,28 +1,30 @@
 package ua.softgroup.matrix.desktop.sessionmanagers;
 
+import ua.softgroup.matrix.api.ServerCommands;
 import io.reactivex.Emitter;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import javafx.application.Platform;
+import ua.softgroup.matrix.api.model.datamodels.AuthModel;
+import ua.softgroup.matrix.api.model.datamodels.InitializeModel;
+import ua.softgroup.matrix.api.model.requestmodels.RequestModel;
+import ua.softgroup.matrix.api.model.responsemodels.ResponseModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
-import ua.softgroup.matrix.server.desktop.api.ServerCommands;
-import ua.softgroup.matrix.server.desktop.model.datamodels.AuthModel;
-import ua.softgroup.matrix.server.desktop.model.datamodels.InitializeModel;
-import ua.softgroup.matrix.server.desktop.model.requestmodels.RequestModel;
-import ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseModel;
-import java.io.*;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.concurrent.CountDownLatch;
 
-import static javafx.scene.input.KeyCode.T;
-import static ua.softgroup.matrix.server.desktop.model.responsemodels.ResponseStatus.SUCCESS;
+import static ua.softgroup.matrix.api.model.responsemodels.ResponseStatus.SUCCESS;
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
