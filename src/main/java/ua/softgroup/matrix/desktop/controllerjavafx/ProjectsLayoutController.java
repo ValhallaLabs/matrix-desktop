@@ -331,7 +331,7 @@ public class ProjectsLayoutController {
             for (ReportModel model :
                     reportModel) {
                 if (model.getDate().equals(LocalDate.now())) {
-                    taWriteReport.setText("You have already saved a report today");
+                    taWriteReport.setText(model.getText());
                     btnSendReport.setDisable(true);
                     taWriteReport.setEditable(false);
                 }

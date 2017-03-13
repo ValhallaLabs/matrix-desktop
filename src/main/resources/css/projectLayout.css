@@ -66,8 +66,9 @@
     -fx-font-size: 1em; /* 12 */
 }
 .mybutton-menu:hover{
-    -fx-background-color: #3b82d6;
+    -fx-background-color: #3064a2;
+    -fx-text-fill: white;
 }
 .grey-background {
-    -fx-background-color: #ebebeb;
+    -fx-background-color: #e4e4e4;
 }

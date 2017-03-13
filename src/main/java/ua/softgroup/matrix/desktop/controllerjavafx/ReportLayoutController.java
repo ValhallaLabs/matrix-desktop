@@ -67,11 +67,15 @@ public class ReportLayoutController {
     private void initialize() throws IOException, ClassNotFoundException {
         currentProjectId = CurrentSessionInfo.getProjectId();
         reportServerSessionManager = new ReportServerSessionManager();
-            report = reportServerSessionManager.sendProjectDataAndGetReportById(currentProjectId);
+        getAllReportAndSetToCollection();
         initReportInTable();
         setProjectInfoInView(currentProjectId);
         setFocusOnTableView();
         countTextAndSetButtonCondition();
+    }
+
+    private void getAllReportAndSetToCollection(){
+        report = reportServerSessionManager.sendProjectDataAndGetReportById(currentProjectId);
     }
 
     /**
@@ -79,6 +83,7 @@ public class ReportLayoutController {
      * Get from current report information and set their in textArea
      */
     private void setFocusOnTableView() {
+
         tableViewReport.requestFocus();
         tableViewReport.getSelectionModel().select(0);
         tableViewReport.getFocusModel().focus(0);
@@ -143,7 +148,7 @@ public class ReportLayoutController {
      */
     private void checkVerifyReportAndSetButtonCondition(ReportModel reportModel) {
         //TODO: check on null
-        if (reportModel.isChecked()) {
+        if (reportModel!=null&&reportModel.isChecked()) {
             btnChangeReport.setDisable(true);
         } else btnChangeReport.setDisable(false);
     }
@@ -162,9 +167,12 @@ public class ReportLayoutController {
      * @throws IOException
      */
     public void changeReport(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
-        ReportModel reportModel = new ReportModel(currentReportId, taEditReport.getText(), currentProjectId);
+        ReportModel reportModel = new ReportModel(currentReportId, taEditReport.getText());
         reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
-        ((Node) actionEvent.getSource()).getScene().getWindow().hide();
+        reportData.clear();
+        getAllReportAndSetToCollection();
+        setReportInfoInView();
+        setFocusOnTableView();
     }
 
     /**

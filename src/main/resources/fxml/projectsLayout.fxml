@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="765.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController">
+<AnchorPane prefHeight="765.0" prefWidth="1200.0" styleClass="grey-background" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController">
    <children>
       <AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <children>
@@ -25,7 +25,7 @@
                               <TableColumn fx:id="tcStatus" maxWidth="4000.0" minWidth="85.0" prefWidth="85.0" text="Status" />
                               <TableColumn fx:id="tcAuthorName" maxWidth="4000.0" minWidth="145.0" prefWidth="145.0" text="Author" />
                               <TableColumn fx:id="tcTitle" minWidth="145.0" prefWidth="145.0" text="Name" />
-                              <TableColumn fx:id="tcDescription" minWidth="393.0" prefWidth="393.0" text="Description" />
+                              <TableColumn fx:id="tcDescription" minWidth="396.0" prefWidth="396.0" text="Description" />
                            </columns>
                            <opaqueInsets>
                               <Insets />
