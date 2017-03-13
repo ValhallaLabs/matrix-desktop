@@ -61,7 +61,7 @@ public class ReportLayoutController {
     /**
      *  After Load/Parsing fxml call this method
      * Create {@link ReportLayoutController} and if project has reports set this data in Set of ReportModel
-     * @throws IOException
+     * @throws IOException+
      */
     @FXML
     private void initialize() throws IOException, ClassNotFoundException {

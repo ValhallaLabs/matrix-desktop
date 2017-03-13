@@ -11,9 +11,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-
 import javafx.scene.Scene;
-
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -28,19 +26,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.api.model.datamodels.ReportModel;
-
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
-import ua.softgroup.matrix.desktop.start.Main;
 import ua.softgroup.matrix.desktop.view.DoughnutChart;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -102,6 +95,7 @@ public class ProjectsLayoutController {
     public Label labelCurrentSymbols;
     @FXML
     public AnchorPane containerForPieChart;
+    private Stage stage;
     private static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
     private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
@@ -414,7 +408,6 @@ public class ProjectsLayoutController {
             calculateTimeAndSetInView();
 
         });
-
         timeTimer.getKeyFrames().add(frame);
         timeTimer.playFromStart();
         buttonConditionAtTimerOn();
@@ -447,7 +440,6 @@ public class ProjectsLayoutController {
      * Set possibility click on stop button and disable start button
      */
     private void buttonConditionAtTimerOn() {
-
         btnStart.setDisable(true);
         btnStop.setDisable(false);
         tvProjectsTable.setMouseTransparent(true);
@@ -457,7 +449,6 @@ public class ProjectsLayoutController {
      * Set possibility click on start button and disable stop button
      */
     private void buttonConditionAtTimerOff() {
-
         btnStart.setDisable(false);
         btnStop.setDisable(true);
         tvProjectsTable.setMouseTransparent(false);
@@ -517,7 +508,6 @@ public class ProjectsLayoutController {
 
     public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
         try {
-
             ClassLoader classLoader = getClass().getClassLoader();
             Stage instructionsStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
@@ -537,5 +527,16 @@ public class ProjectsLayoutController {
         } catch (IOException e) {
             logger.debug("Error when start Instructions Window " + e);
         }
+    }
+
+    public void setUpStage(Stage mainLayout) {
+        this.stage=mainLayout;
+        stage.setOnCloseRequest(event -> {
+            if (timeTracker != null) {
+                timeTracker.turnOff();
+            }
+            System.exit(0);
+        });
+
     }
 }

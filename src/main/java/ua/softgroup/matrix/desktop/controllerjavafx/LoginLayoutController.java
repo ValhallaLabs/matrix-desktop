@@ -33,7 +33,6 @@ public class LoginLayoutController {
     private static final String EMPTY_FIElD = "Error: Please Fill All Field";
     private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
     private static final String LOGO = "/images/logoIcon.png";
-    private static final String MAIN_LAYOUT = "fxml/mainLayout.fxml";
     private static final String ALERT_TITLE_TEXT = "Supervisor";
     private static final String ALERT_CONTENT_TEXT = "Target ip:port is Unreachable";
     private static final String ALERT_HEADER_TEXT = "NETWORK ERROR";
@@ -177,10 +176,13 @@ public class LoginLayoutController {
             AnchorPane mainLayout = loader.load();
             Scene scene = new Scene(mainLayout);
             mainStage.setScene(scene);
+            ProjectsLayoutController projectsLayoutController=loader.getController();
+            projectsLayoutController.setUpStage(mainStage);
             mainStage.setMinWidth(MAIN_LAYOUT_MIN_WIDTH);
             mainStage.setMinHeight(MAIN_LAYOUT_MIN_HEIGHT);
             mainStage.setResizable(false);
             mainStage.setTitle("SuperVisor");
+
             mainStage.show();
         } catch (IOException e) {
             logger.debug("Error when start Main Layout " + e);
@@ -239,14 +241,13 @@ public class LoginLayoutController {
             settingStage.setMinHeight(SETTING_LAYOUT_MIN_HEIGHT);
             settingStage.initModality(Modality.WINDOW_MODAL);
             settingStage.initOwner(btnLogin.getScene().getWindow());
+            settingLayoutController.setUpStage(settingStage);
             settingStage.setResizable(false);
             settingStage.show();
         } catch (IOException e) {
             logger.debug("Error when start Setting Window " + e);
         }
-
     }
-
 
      void initializeAuthenticationManager() {
         if (authenticationSessionManager != null) {
