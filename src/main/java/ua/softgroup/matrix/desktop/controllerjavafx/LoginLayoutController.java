@@ -226,6 +226,8 @@ public class LoginLayoutController {
         try {
             Stage settingStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
+            Image icon = new Image(getClass().getResourceAsStream(LOGO));
+            settingStage.getIcons().add(icon);
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource(SETTING_LAYOUT));
             Pane pane = loader.load();
