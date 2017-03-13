@@ -57,3 +57,17 @@
 .default-color1.chart-pie {
     -fx-pie-color: #c6c6c6;
 }
+.mybutton-menu{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 1em; /* 12 */
+}
+.mybutton-menu:hover{
+    -fx-background-color: #3b82d6;
+}
+.grey-background {
+    -fx-background-color: #ebebeb;
+}

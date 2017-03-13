@@ -10,21 +10,30 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
+import ua.softgroup.matrix.desktop.start.Main;
 import ua.softgroup.matrix.desktop.view.DoughnutChart;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
@@ -90,6 +99,7 @@ public class ProjectsLayoutController {
     private static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
     private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
+    private static final Logger logger = LoggerFactory.getLogger(LoginLayoutController.class);
     private static final String ID_COLUMN = "id";
     private static final String AUTHOR_NAME_COLUMN = "authorName";
     private static final String TITLE_COLUMN = "title";
@@ -99,6 +109,13 @@ public class ProjectsLayoutController {
     private static final String ALERT_ERROR_TITLE = "Supervisor";
     private static final String ALERT_CONTENT_TEXT = "Something go wrong .Programs will be close";
     private static final String ALERT_HEADER_TEXT = "Supervisor ERROR";
+    private static final String REPORT_LAYOUT = "fxml/reportLayout.fxml";
+    private static final int REPORT_LAYOUT_MIN_WIDTH = 1200;
+    private static final int REPORT_LAYOUT_MIN_HEIGHT = 765;
+    private static final String INSTRUCTIONS_LAYOUT = "fxml/instructionsLayout.fxml";
+    private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 900;
+    private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 600;
+    private static final String LOGO = "/images/logoIcon.png";
     private ReportServerSessionManager reportServerSessionManager;
     private File attachFile;
     private long timeTodayMinutes;
@@ -297,8 +314,7 @@ public class ProjectsLayoutController {
      * @param event callback click on table view
      */
     private void openReportWindowOnTwoMouseClick(Event event) {
-        MainLayoutController main = new MainLayoutController();
-        main.startReport(labelCurrentSymbols.getScene().getWindow());
+       startReportWindow();
     }
 
     /**
@@ -462,5 +478,58 @@ public class ProjectsLayoutController {
         int todayTimeInHours = seconds / 3600;
         int todayTimeInMinutes = (seconds % 3600) / 60;
         return String.valueOf(todayTimeInHours + "h " + todayTimeInMinutes + 'm');
+    }
+
+    public void startReportLayoutWindow(ActionEvent actionEvent) {
+    startReportWindow();
+    }
+
+    private void startReportWindow(){
+        try {
+            Stage reportsStage = new Stage();
+            ClassLoader classLoader = getClass().getClassLoader();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(classLoader.getResource(REPORT_LAYOUT));
+            AnchorPane anchorPane = loader.load();
+            Scene scene = new Scene(anchorPane);
+            reportsStage.setScene(scene);
+            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
+            reportsStage.getIcons().add(logoIcon);
+            reportsStage.setMinWidth(REPORT_LAYOUT_MIN_WIDTH);
+            reportsStage.setMinHeight(REPORT_LAYOUT_MIN_HEIGHT);
+            reportsStage.initModality(Modality.WINDOW_MODAL);
+            reportsStage.setTitle("Reports Window");
+            reportsStage.initOwner(labelDateStartProject.getScene().getWindow());
+            reportsStage.setResizable(false);
+            reportsStage.show();
+        } catch (IOException e) {
+            logger.debug("Error when start Report Window " + e);
+            e.printStackTrace();
+        }
+
+    }
+
+    public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
+        try {
+
+            ClassLoader classLoader = getClass().getClassLoader();
+            Stage instructionsStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(classLoader.getResource(INSTRUCTIONS_LAYOUT));
+            Pane pane = loader.load();
+            Scene scene = new Scene(pane);
+            instructionsStage.setScene(scene);
+            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
+            instructionsStage.getIcons().add(logoIcon);
+            instructionsStage.setMinWidth(INSTRUCTIONS_LAYOUT_MIN_WIDTH);
+            instructionsStage.setMinHeight(INSTRUCTIONS_LAYOUT_MIN_HEIGHT);
+            instructionsStage.initModality(Modality.WINDOW_MODAL);
+            instructionsStage.setTitle("Instructions Window");
+            instructionsStage.initOwner(labelDayInNumber.getScene().getWindow());
+            instructionsStage.setResizable(false);
+            instructionsStage.show();
+        } catch (IOException e) {
+            logger.debug("Error when start Instructions Window " + e);
+        }
     }
 }

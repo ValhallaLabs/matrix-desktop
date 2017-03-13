@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -39,6 +40,7 @@ public class LoginLayoutController {
     private static final int MAIN_LAYOUT_MIN_WIDTH = 1200;
     private static final int MAIN_LAYOUT_MIN_HEIGHT = 800;
     private static final String SETTING_LAYOUT = "fxml/settingLayout.fxml";
+    private static final String PROJECT_LAYOUT = "fxml/projectsLayout.fxml";
     private static final int SETTING_LAYOUT_MIN_WIDTH = 500;
     private static final int SETTING_LAYOUT_MIN_HEIGHT = 250;
     private Stage stage;
@@ -171,8 +173,8 @@ public class LoginLayoutController {
             mainStage.getIcons().add(icon);
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(classLoader.getResource(MAIN_LAYOUT));
-            BorderPane mainLayout = loader.load();
+            loader.setLocation(classLoader.getResource(PROJECT_LAYOUT));
+            AnchorPane mainLayout = loader.load();
             Scene scene = new Scene(mainLayout);
             mainStage.setScene(scene);
             mainStage.setMinWidth(MAIN_LAYOUT_MIN_WIDTH);
@@ -180,8 +182,6 @@ public class LoginLayoutController {
             mainStage.setResizable(false);
             mainStage.setTitle("SuperVisor");
             mainStage.show();
-            MainLayoutController mainController = loader.getController();
-            mainController.startProjectsLayoutController(mainLayout);
         } catch (IOException e) {
             logger.debug("Error when start Main Layout " + e);
         }
@@ -214,7 +214,7 @@ public class LoginLayoutController {
 
     /**
      * Hears when user click on setting menus item and
-     * tells {@link MainLayoutController} to open setting window
+     * tells {@link ProjectsLayoutController} to open setting window
      *
      * @param event callback click on menu
      */
