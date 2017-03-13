@@ -1,11 +1,11 @@
 package ua.softgroup.matrix.desktop.sessionmanagers;
 
 
-import api.ServerCommands;
-import model.datamodels.ReportModel;
-import model.datamodels.ReportsContainerDataModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.api.ServerCommands;
+import ua.softgroup.matrix.api.model.datamodels.ReportModel;
+import ua.softgroup.matrix.api.model.datamodels.ReportsContainerDataModel;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
 

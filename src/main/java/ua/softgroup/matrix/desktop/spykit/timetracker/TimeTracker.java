@@ -4,9 +4,9 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import javafx.application.Platform;
-import model.datamodels.CheckPointModel;
-import model.datamodels.SynchronizationModel;
-import model.datamodels.TimeModel;
+import ua.softgroup.matrix.api.model.datamodels.CheckPointModel;
+import ua.softgroup.matrix.api.model.datamodels.SynchronizationModel;
+import ua.softgroup.matrix.api.model.datamodels.TimeModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController;
@@ -24,7 +24,7 @@ import java.util.HashSet;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static api.ServerCommands.*;
+import static ua.softgroup.matrix.api.ServerCommands.*;
 import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.*;
 
 /**

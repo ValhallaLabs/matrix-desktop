@@ -1,16 +1,16 @@
 package ua.softgroup.matrix.desktop.sessionmanagers;
 
-import api.ServerCommands;
+import ua.softgroup.matrix.api.ServerCommands;
 import io.reactivex.Emitter;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import javafx.application.Platform;
-import model.datamodels.AuthModel;
-import model.datamodels.InitializeModel;
-import model.requestmodels.RequestModel;
-import model.responsemodels.ResponseModel;
+import ua.softgroup.matrix.api.model.datamodels.AuthModel;
+import ua.softgroup.matrix.api.model.datamodels.InitializeModel;
+import ua.softgroup.matrix.api.model.requestmodels.RequestModel;
+import ua.softgroup.matrix.api.model.responsemodels.ResponseModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
@@ -24,7 +24,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.concurrent.CountDownLatch;
 
-import static model.responsemodels.ResponseStatus.SUCCESS;
+import static ua.softgroup.matrix.api.model.responsemodels.ResponseStatus.SUCCESS;
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>

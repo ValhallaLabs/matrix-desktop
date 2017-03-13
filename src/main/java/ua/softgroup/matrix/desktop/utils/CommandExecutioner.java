@@ -1,9 +1,9 @@
 package ua.softgroup.matrix.desktop.utils;
 
-import api.ServerCommands;
-import model.datamodels.DataModel;
-import model.requestmodels.RequestModel;
-import model.responsemodels.ResponseModel;
+import ua.softgroup.matrix.api.ServerCommands;
+import ua.softgroup.matrix.api.model.datamodels.DataModel;
+import ua.softgroup.matrix.api.model.requestmodels.RequestModel;
+import ua.softgroup.matrix.api.model.responsemodels.ResponseModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
@@ -13,7 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import static model.responsemodels.ResponseStatus.SUCCESS;
+import static ua.softgroup.matrix.api.model.responsemodels.ResponseStatus.SUCCESS;
 
 
 /**
