@@ -4,6 +4,9 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import javafx.application.Platform;
+import model.datamodels.CheckPointModel;
+import model.datamodels.SynchronizationModel;
+import model.datamodels.TimeModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController;
@@ -15,19 +18,14 @@ import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWi
 import ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.IdleListener;
 import ua.softgroup.matrix.desktop.spykit.screenshooter.ScreenShooter;
 import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
-import ua.softgroup.matrix.server.desktop.api.ServerCommands;
-import ua.softgroup.matrix.server.desktop.model.datamodels.*;
 
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.IS_USED;
-import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.NOT_USED;
-import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.WAS_USED;
-import static ua.softgroup.matrix.server.desktop.api.ServerCommands.*;
+import static api.ServerCommands.*;
+import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.*;
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>

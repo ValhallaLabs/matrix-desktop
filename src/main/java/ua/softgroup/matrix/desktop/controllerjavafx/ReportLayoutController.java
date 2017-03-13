@@ -8,11 +8,10 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.datamodels.ProjectModel;
+import model.datamodels.ReportModel;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
-import ua.softgroup.matrix.server.desktop.model.datamodels.ProjectModel;
-import ua.softgroup.matrix.server.desktop.model.datamodels.ReportModel;
-
 
 import java.io.IOException;
 import java.util.Set;
