@@ -94,7 +94,7 @@
                                           <Insets bottom="5.0" left="17.0" right="5.0" top="5.0" />
                                        </HBox.margin>
                                     </ImageView>
-                                    <Label fx:id="labelNameProject" prefHeight="25.0" prefWidth="300.0" styleClass="font-on-label" textFill="#3063a4">
+                                    <Label fx:id="labelNameProject" prefHeight="25.0" prefWidth="300.0" styleClass="font-on-label" text="None" textFill="#3063a4">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
@@ -112,7 +112,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelDescribeProject" alignment="TOP_LEFT" prefHeight="70.0" prefWidth="350.0" styleClass="font-on-label" text="Label" wrapText="true">
+                              <Label fx:id="labelDescribeProject" alignment="TOP_LEFT" prefHeight="70.0" prefWidth="350.0" styleClass="font-on-label" text="None" wrapText="true">
                                  <VBox.margin>
                                     <Insets left="17.0" right="5.0" />
                                  </VBox.margin>
@@ -231,7 +231,7 @@
                                                             <Insets left="15.0" right="2.0" top="4.0" />
                                                          </HBox.margin>
                                                       </ImageView>
-                                                      <Label fx:id="labelDateStartProject" prefWidth="140.0" textAlignment="CENTER">
+                                                      <Label fx:id="labelDateStartProject" prefWidth="140.0" text="Unknown" textAlignment="CENTER">
                                                          <font>
                                                             <Font name="System Bold" size="16.0" />
                                                          </font>
@@ -259,7 +259,7 @@
                                                             <Insets left="15.0" right="2.0" top="5.0" />
                                                          </HBox.margin>
                                                       </ImageView>
-                                                      <Label fx:id="labelDeadLineProject" prefWidth="150.0" textAlignment="CENTER">
+                                                      <Label fx:id="labelDeadLineProject" prefWidth="150.0" text="Unknown" textAlignment="CENTER">
                                                          <font>
                                                             <Font name="System Bold" size="16.0" />
                                                          </font>

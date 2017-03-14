@@ -99,6 +99,7 @@ public class ProjectsLayoutController {
     private static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
     private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
+    private static DateTimeFormatter todayStartTime = DateTimeFormatter.ofPattern("HH:mm");
     private static final Logger logger = LoggerFactory.getLogger(LoginLayoutController.class);
     private static final String ID_COLUMN = "id";
     private static final String AUTHOR_NAME_COLUMN = "authorName";
@@ -119,12 +120,12 @@ public class ProjectsLayoutController {
     private ReportServerSessionManager reportServerSessionManager;
     private File attachFile;
     private long timeTodayMinutes;
-    private Timeline timeTimer;
+    private Timeline timeLine;
     private TimeTracker timeTracker;
     private DoughnutChart doughnutChart;
     private Label labelIdle;
     private double idleTimeInPercent;
-    private static ProjectModel projectModel;
+
 
 
     /**
@@ -136,7 +137,6 @@ public class ProjectsLayoutController {
     @FXML
     private void initialize() throws IOException {
         reportServerSessionManager = new ReportServerSessionManager();
-        timeTimer = new Timeline();
         initProjectInTable();
         getTodayDayAndSetInView();
         setFocusOnTableView();
@@ -171,8 +171,7 @@ public class ProjectsLayoutController {
         tvProjectsTable.getFocusModel().focus(0);
         ProjectModel projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
         if (projectModel != null) {
-            setOtherProjectInfoInView(projectModel);
-            ProjectsLayoutController.projectModel = projectModel;
+            setProjectInfoInView(projectModel);
             new Thread(() -> {
                 try {
                     setReportInfoInTextAreaAndButton(projectModel);
@@ -213,6 +212,7 @@ public class ProjectsLayoutController {
     @SuppressWarnings("unchecked")
     private void setProjectInTable() {
         Set<ProjectModel> projectModelSet = CurrentSessionInfo.getProjectModels();
+        System.out.println(projectModelSet);
         if (projectModelSet != null && !projectModelSet.isEmpty()) {
             projectModelSet.forEach(projectsData::add);
 //        for (ProjectModel projectModel : projectModelSet) {
@@ -220,7 +220,12 @@ public class ProjectsLayoutController {
 //        }
             tvProjectsTable.setItems(projectsData);
             tvProjectsTable.getSortOrder().setAll(tcIdProject);
+        } else {
+            taWriteReport.setDisable(true);
+            btnStart.setDisable(true);
+            btnAttachFile.setDisable(true);
         }
+
     }
 
     /**
@@ -228,13 +233,13 @@ public class ProjectsLayoutController {
      *
      * @param projectModel current project what user choose in table view
      */
-    private void setOtherProjectInfoInView(ProjectModel projectModel) {
+    private void setProjectInfoInView(ProjectModel projectModel) {
         CurrentSessionInfo.setProjectId(projectModel.getId());
         labelNameProject.setText(projectModel.getTitle());
         labelDescribeProject.setText(projectModel.getDescription());
         LocalDateTime startWorkToday = projectModel.getProjectTime().getTodayStartTime();
         if (startWorkToday != null) {
-            labelStartWorkToday.setText(String.valueOf(startWorkToday));
+            labelStartWorkToday.setText(String.valueOf(startWorkToday.format(todayStartTime)));
         }
         int timeFromServer = projectModel.getProjectTime().getTodayTime();
         timeTodayMinutes = timeFromServer / 60;
@@ -245,11 +250,7 @@ public class ProjectsLayoutController {
         if ((projectModel.getStartDate() != null && projectModel.getEndDate() != null)) {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
             labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
-        } else {
-            labelDateStartProject.setText("Unknown");
-            labelDeadLineProject.setText("Unknown");
         }
-        ProjectsLayoutController.projectModel = projectModel;
         initPieChart();
     }
 
@@ -301,7 +302,7 @@ public class ProjectsLayoutController {
                 if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
                     ProjectModel selectProject = tvProjectsTable.getSelectionModel().getSelectedItem();
                     setReportInfoInTextAreaAndButton(selectProject);
-                    setOtherProjectInfoInView(selectProject);
+                    setProjectInfoInView(selectProject);
                 }
             }
         }
@@ -333,7 +334,7 @@ public class ProjectsLayoutController {
                 if (model.getDate().equals(LocalDate.now())) {
                     taWriteReport.setText(model.getText());
                     btnSendReport.setDisable(true);
-                    taWriteReport.setEditable(false);
+                    taWriteReport.setMouseTransparent(false);
                 }
             }
         }
@@ -398,18 +399,19 @@ public class ProjectsLayoutController {
      * @throws InterruptedException
      */
     public void startWork(ActionEvent actionEvent) throws InterruptedException {
+        timeLine = new Timeline();
         timeTracker = new TimeTracker(this, CurrentSessionInfo.getProjectId());
         timeTracker.turnOn();
-        timeTimer.setCycleCount(Timeline.INDEFINITE);
-        if (timeTimer != null) {
-            timeTimer.stop();
+
+        if (timeLine != null) {
+            timeLine.stop();
         }
         KeyFrame frame = new KeyFrame(Duration.minutes(1), event -> {
             calculateTimeAndSetInView();
-
         });
-        timeTimer.getKeyFrames().add(frame);
-        timeTimer.playFromStart();
+        timeLine.getKeyFrames().add(frame);
+        timeLine.setCycleCount(Timeline.INDEFINITE);
+        timeLine.playFromStart();
         buttonConditionAtTimerOn();
     }
 
@@ -419,11 +421,13 @@ public class ProjectsLayoutController {
      * @param actionEvent callback click on button
      */
     public void stopWork(ActionEvent actionEvent) {
-        timeTimer.stop();
-        buttonConditionAtTimerOff();
+        if (timeLine !=null){
+            timeLine.stop();
+        }
         if (timeTracker != null) {
             timeTracker.turnOff();
         }
+        buttonConditionAtTimerOff();
     }
 
     /**
@@ -534,6 +538,7 @@ public class ProjectsLayoutController {
         stage.setOnCloseRequest(event -> {
             if (timeTracker != null) {
                 timeTracker.turnOff();
+                timeLine.stop();
             }
             System.exit(0);
         });

@@ -184,7 +184,7 @@
                <children>
                   <VBox focusTraversable="true" prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="25.0" prefWidth="283.0" text="REPORT RESULT:" textFill="#3063a4">
+                        <Label alignment="CENTER" prefHeight="25.0" prefWidth="283.0" text="REPORT TEXT:" textFill="#3063a4">
                            <VBox.margin>
                               <Insets left="10.0" top="100.0" />
                            </VBox.margin>
