@@ -27,11 +27,13 @@ public class ReportLayoutController {
     @FXML
     public TableColumn<ReportModel, Integer> reportTableColumnDate;
     @FXML
-    public TableColumn<ReportModel, Long> reportTableColumnTime;
+    public TableColumn<ReportModel, String> reportTableColumnTime;
     @FXML
     public TableColumn<ReportModel, Boolean> reportTableColumnVerified;
     @FXML
     public TableColumn<ReportModel, String> reportTableColumnReport;
+    @FXML
+    public TableColumn<ReportModel,Double> reportTableCoefficient;
     @FXML
     public Button btnChangeReport;
     @FXML
@@ -46,17 +48,19 @@ public class ReportLayoutController {
     public Label labelDeadlineDate;
     @FXML
     public TextArea taEditReport;
+
     private static final String DATE_COLUMN = "date";
-    private static final String ID_COLUMN = "id";
     private static final String CHECKED_COLUMN = "checked";
     private static final String DESCRIPTION_COLUMN = "text";
+    private static final String WORK_TIME_COLUMN="currency";
+    private static final String COEFFICIENT_COLUMN="coefficient";
     private static final int MIN_TEXT_FOR_REPORT = 70;
+
     private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
     private ReportServerSessionManager reportServerSessionManager;
     private Long currentProjectId;
     private Set<ReportModel> report;
     private Long currentReportId;
-
 
     /**
      *  After Load/Parsing fxml call this method
@@ -71,7 +75,6 @@ public class ReportLayoutController {
         initReportInTable();
         setProjectInfoInView(currentProjectId);
         setFocusOnTableView();
-        countTextAndSetButtonCondition();
     }
 
     private void getAllReportAndSetToCollection(){
@@ -89,7 +92,7 @@ public class ReportLayoutController {
         tableViewReport.getFocusModel().focus(0);
         ReportModel reportModel = tableViewReport.getSelectionModel().getSelectedItem();
         if (report!=null&&!report.isEmpty()){
-            checkVerifyReportAndSetButtonCondition(reportModel);
+            countTextAndSetButtonCondition(reportModel);
             currentReportId = reportModel.getId();
             taEditReport.setText(reportModel.getText());
         }
@@ -120,9 +123,10 @@ public class ReportLayoutController {
      */
     private void initReportInTable() {
         reportTableColumnDate.setCellValueFactory(new PropertyValueFactory<>(DATE_COLUMN));
-        reportTableColumnTime.setCellValueFactory(new PropertyValueFactory<>(ID_COLUMN));
+        reportTableColumnTime.setCellValueFactory(new PropertyValueFactory<>(WORK_TIME_COLUMN));
         reportTableColumnVerified.setCellValueFactory(new PropertyValueFactory<>(CHECKED_COLUMN));
         reportTableColumnReport.setCellValueFactory(new PropertyValueFactory<>(DESCRIPTION_COLUMN));
+        reportTableCoefficient.setCellValueFactory(new PropertyValueFactory<>(COEFFICIENT_COLUMN));
         setReportInfoInView();
     }
 
@@ -134,23 +138,12 @@ public class ReportLayoutController {
         if (report != null && !report.isEmpty()) {
             for (ReportModel model :
                     report) {
+              model.setCurrency(convertFromSecondsToHoursAndMinutes(model.getWorkTime())+" x "+model.getRate()+convertFromCurrencyToSymbol(model.getCurrency()));
                 reportData.add(model);
             }
-
             tableViewReport.setItems(reportData);
             tableViewReport.getSortOrder().setAll(reportTableColumnDate);
         }
-    }
-
-    /**
-     * Check if this report checked or no and set disable condition of button
-     * @param reportModel current report what user selected in table
-     */
-    private void checkVerifyReportAndSetButtonCondition(ReportModel reportModel) {
-        //TODO: check on null
-        if (reportModel!=null&&reportModel.isChecked()) {
-            btnChangeReport.setDisable(true);
-        } else btnChangeReport.setDisable(false);
     }
 
     /**
@@ -170,9 +163,14 @@ public class ReportLayoutController {
         ReportModel reportModel = new ReportModel(currentReportId, taEditReport.getText());
         reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
         reportData.clear();
+        notifyChangeInTableViewDynamic(reportModel);
+
+    }
+
+    private void notifyChangeInTableViewDynamic(ReportModel report) {
         getAllReportAndSetToCollection();
         setReportInfoInView();
-        setFocusOnTableView();
+        taEditReport.setText(report.getText());
     }
 
     /**
@@ -182,7 +180,7 @@ public class ReportLayoutController {
     public void chooseReport(Event event) {
         if (tableViewReport.getSelectionModel().getSelectedItem() != null &&report!=null) {
             ReportModel selectReport = tableViewReport.getSelectionModel().getSelectedItem();
-            checkVerifyReportAndSetButtonCondition(selectReport);
+          countTextAndSetButtonCondition(selectReport);
             currentReportId = selectReport.getId();
             taEditReport.setText(selectReport.getText());
         }
@@ -193,12 +191,27 @@ public class ReportLayoutController {
      * button for change report became active
      */
     @FXML
-    private void countTextAndSetButtonCondition() {
+    private void countTextAndSetButtonCondition(ReportModel reportModel) {
         taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
             int size = newValue.length();
-            if (size >= MIN_TEXT_FOR_REPORT) {
+            if (size >= MIN_TEXT_FOR_REPORT&&!reportModel.isChecked()) {
                 btnChangeReport.setDisable(false);
-            } else btnChangeReport.setDisable(true);
+                taEditReport.setEditable(true);
+            } else {
+                btnChangeReport.setDisable(true);
+                taEditReport.setEditable(false);
+            }
         });
     }
+
+    private String convertFromSecondsToHoursAndMinutes(int seconds) {
+        int todayTimeInHours = seconds / 3600;
+        int todayTimeInMinutes = (seconds % 3600) / 60;
+        return String.valueOf(todayTimeInHours + "h " + todayTimeInMinutes + 'm');
+    }
+
+    private String convertFromCurrencyToSymbol(String currency) {
+        return "USD".equals(currency) ? "$" : "₴";
+    }
+
 }

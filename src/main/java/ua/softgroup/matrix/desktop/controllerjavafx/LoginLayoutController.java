@@ -70,6 +70,7 @@ public class LoginLayoutController {
         initializeAuthenticationManager();
         maxInputTextLimiter(loginTextField, 20);
         maxInputTextLimiter(passwordTextField, 20);
+        loginTextField.requestFocus();
     }
 
     private void getPreferencesAndSetLoginPassword() {

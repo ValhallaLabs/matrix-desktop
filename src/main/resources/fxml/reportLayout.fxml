@@ -156,7 +156,7 @@
                                     <Insets left="5.0" />
                                  </padding>
                                  <font>
-                                    <Font name="System Bold Italic" size="13.0" />
+                                    <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
                            </children>
@@ -169,9 +169,10 @@
                   <TableView fx:id="tableViewReport" layoutX="15.0" layoutY="115.0" onMouseClicked="#chooseReport" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="105.0">
                     <columns>
                       <TableColumn fx:id="reportTableColumnDate" minWidth="100.0" prefWidth="111.0" sortType="DESCENDING" text="Date" />
-                      <TableColumn fx:id="reportTableColumnTime" minWidth="100.0" prefWidth="111.0" text=" Time" />
                         <TableColumn fx:id="reportTableColumnVerified" minWidth="100.0" prefWidth="111.0" text="Verified" />
-                        <TableColumn fx:id="reportTableColumnReport" minWidth="300.0" prefWidth="430.0" text="Text" />
+                      <TableColumn fx:id="reportTableColumnTime" minWidth="100.0" prefWidth="111.0" text=" Time/Rate" />
+                        <TableColumn fx:id="reportTableCoefficient" minWidth="70.0" prefWidth="70.0" text="Coef" />
+                        <TableColumn fx:id="reportTableColumnReport" minWidth="364.0" prefWidth="364.0" text="Text" />
                     </columns>
                   </TableView>
                </children>
