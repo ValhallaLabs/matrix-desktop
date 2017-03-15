@@ -33,8 +33,8 @@ public class ReportServerSessionManager {
      */
     public void saveOrChangeReportOnServer(ReportModel reportModel) {
         try {
-            reportModel.setProjectId(CurrentSessionInfo.getProjectId());
-            commandExecutioner.sendCommandWithNoResponse(ServerCommands.SAVE_REPORT, reportModel,reportModel.getProjectId());
+            commandExecutioner.sendCommandWithNoResponse(ServerCommands.SAVE_REPORT, reportModel,
+                    CurrentSessionInfo.getProjectId());
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

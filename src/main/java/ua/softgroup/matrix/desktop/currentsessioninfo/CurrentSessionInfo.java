@@ -40,7 +40,7 @@ public class CurrentSessionInfo {
 //        initializeModel.setProjectModels(projectModels);
 //    }
 
-    public static long getIdlePeriod() {
+    public static int getIdlePeriod() {
         return initializeModel.getIdlePeriod();
     }
 
@@ -48,7 +48,7 @@ public class CurrentSessionInfo {
 //        initializeModel.setIdlePeriod(idlePeriod);
 //    }
 
-    public static long getScreenshotFrequency() {
+    public static int getScreenshotFrequency() {
         return initializeModel.getScreenshotFrequency();
     }
 
@@ -56,8 +56,8 @@ public class CurrentSessionInfo {
 //        initializeModel.setScreenshotFrequency(screenshotFrequency);
 //    }
 
-    public static long getCheckPointFrequency() {
-        return initializeModel.getCheckPointFrequency();
+    public static int getCheckPointPeriod() {
+        return initializeModel.getCheckPointPeriod();
     }
 
 //    public void setCheckPointFrequency(long checkPointFrequency) {
