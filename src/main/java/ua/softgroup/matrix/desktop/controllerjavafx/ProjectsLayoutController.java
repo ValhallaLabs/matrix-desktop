@@ -20,7 +20,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -34,6 +33,7 @@ import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
 import ua.softgroup.matrix.desktop.view.DoughnutChart;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -540,7 +540,7 @@ public class ProjectsLayoutController {
         });
 
     }
-    public void synchronizedLocalTimeWorkWithServer(int seconds){
-        timeTodayMinutes=seconds;
+    public void synchronizedLocalTimeWorkWithServer(){
+        //TODO: retrieve all time from current project's Project models
     }
 }

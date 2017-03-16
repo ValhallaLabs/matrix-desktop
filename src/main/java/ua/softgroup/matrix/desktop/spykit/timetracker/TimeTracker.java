@@ -175,7 +175,7 @@ public class TimeTracker extends SpyKitTool {
         try {
             checkSynchronization();
             setUpdatedProjectTime(commandExecutioner.sendCommandWithResponse(CHECK_POINT, projectId, checkPointModel));
-            //TODO: update time on UI, when server will be done
+            projectsLayoutController.synchronizedLocalTimeWorkWithServer();
         } catch (IOException | ClassNotFoundException e) {
             logger.debug("Couldn't send checkpoint to server. Add checkpoint to synchronized model", e);
             addCheckpointToSynchronizationModel(checkPointModel);
