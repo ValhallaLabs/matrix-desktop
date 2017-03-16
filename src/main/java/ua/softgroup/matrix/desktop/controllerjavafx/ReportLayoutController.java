@@ -162,6 +162,7 @@ public class ReportLayoutController {
      * @param actionEvent callback click on button
      */
     public void changeReport(ActionEvent actionEvent) {
+
         ReportModel reportModel = new ReportModel(currentReportId, taEditReport.getText());
         reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
         reportData.clear();

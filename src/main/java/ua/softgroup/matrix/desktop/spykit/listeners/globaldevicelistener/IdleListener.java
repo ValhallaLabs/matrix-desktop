@@ -7,6 +7,7 @@ import io.reactivex.schedulers.Schedulers;
 import org.jnativehook.NativeHookException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
 import java.util.EventObject;
 import java.util.concurrent.TimeUnit;
@@ -57,7 +58,7 @@ public class IdleListener extends SpyKitTool {
         idleControlDisposable = Flowable.merge(createStartCountUntilIdleFlowable(), createStopCountUntilIdleFlowable())
                 .doOnNext(s -> logger.debug("Count until down time: {}", s))
                 .doOnNext(this::stopIdle)
-                .debounce(10, TimeUnit.SECONDS)
+                .debounce(CurrentSessionInfo.getIdlePeriod(), TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::startIdle);
     }
@@ -126,16 +127,16 @@ public class IdleListener extends SpyKitTool {
 
     /**
      * Stops downtime counting if isIdle true
-     * @param stopPoint point of stop counting downtime
+     * @param point point of stop counting downtime
      * @return STOP_COUNT_UNTIL_IDLE_POINT point of starting count time until downtime
      */
-    private CountUntilIdlePoint stopIdle(CountUntilIdlePoint stopPoint) {
+    private CountUntilIdlePoint stopIdle(CountUntilIdlePoint point) {
         if (isIdle) {
             stopIdleStopWatch();
             logger.debug("Idle is stopped! Total idle time of the period:{}", idleTimeSeconds);
             isIdle = false;
         }
-        return stopPoint;
+        return point;
     }
 
     /**

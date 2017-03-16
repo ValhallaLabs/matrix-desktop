@@ -64,7 +64,7 @@ public class TimeTracker extends SpyKitTool {
     }
 
     /**
-     * If Time tracker is not used, method sends {@link ServerCommands#START_WORK} to server, turns on spy kit tools,
+     * If Time tracker is not used, method sends a START_WORK command to server, turns on spy kit tools,
      * starts control point observable and changed on {@link SpyKitToolStatus#IS_USED}
      * @throws Exception
      */
@@ -138,11 +138,11 @@ public class TimeTracker extends SpyKitTool {
     }
 
     /**
-     * Creates observable that emits control for sending time and logs to server
+     * Creates observable that emits checkpoints for sending time and logs to server
      */
     private void startCheckPointObservable() {
         checkPointObservable = Observable
-                .interval(4, TimeUnit.SECONDS)
+                .interval(CurrentSessionInfo.getCheckPointPeriod(), TimeUnit.SECONDS)
                 .filter(number -> number != 0)
                 .map(this::getCheckpointModel)
                 .subscribeOn(Schedulers.io())
@@ -150,18 +150,23 @@ public class TimeTracker extends SpyKitTool {
     }
 
     /**
-     * Creates check point model with all required logs.
+     * Creates check point model with all required logs. Checks
      * @param order order of checkpoint
      * @return {@link CheckPointModel}
      */
     private CheckPointModel getCheckpointModel(long order) {
-        return new CheckPointModel(order, screenShooter.makeScreenshot(), idleListener.getKeyboardLogs(),
+        byte[] screenshot = null;
+        if (CurrentSessionInfo.getScreenshotFrequency() != 0 &&
+                order % CurrentSessionInfo.getScreenshotFrequency() == 0) {
+            screenshot = screenShooter.makeScreenshot();
+        }
+        return new CheckPointModel(order, screenshot, idleListener.getKeyboardLogs(),
                 idleListener.getMouseFootage(), activeWindowListener.getWindowTimeMap(),
                 idleListener.getIdleTimeSeconds());
     }
 
     /**
-     * Calls method of checking synchronization, then tries to send {@link ServerCommands#CHECK_POINT} to server and
+     * Calls method of checking synchronization, then tries to send a CHECK_POINT command to server and
      * retrieve {@link TimeModel} with update total and today time. In case of failure, it calls method of
      * adding checkpoint to synchronize model.
      * @param checkPointModel with logs for server
@@ -225,7 +230,7 @@ public class TimeTracker extends SpyKitTool {
     }
 
     /**
-     * If time tracker has status {@link SpyKitToolStatus#IS_USED}, it sends a {@link ServerCommands#END_WORK} to
+     * If time tracker has status {@link SpyKitToolStatus#IS_USED}, it sends a END_WORK command to
      * server, then calls method of turning off spykit tools and changes status on {@link SpyKitToolStatus#WAS_USED}
      * @throws Exception
      */
