@@ -70,7 +70,7 @@
                         <Insets left="5.0" right="60.0" />
                      </HBox.margin>
                      <font>
-                        <Font name="DejaVu Sans" size="12.0" />
+                        <Font name="DejaVu Sans" size="13.0" />
                      </font>
                   </CheckBox>
                   <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
@@ -89,7 +89,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <font>
-                        <Font name="DejaVu Sans" size="12.0" />
+                        <Font name="DejaVu Sans" size="13.0" />
                      </font>
                   </Label>
                </children>
