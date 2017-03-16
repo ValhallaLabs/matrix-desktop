@@ -336,7 +336,7 @@ public class ProjectsLayoutController {
 
     private void viewConditionAtReportAlreadyExist() {
         btnSendReport.setDisable(true);
-        taWriteReport.setMouseTransparent(false);
+        taWriteReport.setMouseTransparent(true);
     }
 
     /**
