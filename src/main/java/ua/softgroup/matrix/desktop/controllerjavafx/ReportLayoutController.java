@@ -33,7 +33,7 @@ public class ReportLayoutController {
     @FXML
     public TableColumn<ReportModel, String> reportTableColumnReport;
     @FXML
-    public TableColumn<ReportModel,Double> reportTableCoefficient;
+    public TableColumn<ReportModel, Double> reportTableCoefficient;
     @FXML
     public Button btnChangeReport;
     @FXML
@@ -52,10 +52,10 @@ public class ReportLayoutController {
     private static final String DATE_COLUMN = "date";
     private static final String CHECKED_COLUMN = "checked";
     private static final String DESCRIPTION_COLUMN = "text";
-    private static final String WORK_TIME_COLUMN="currency";
-    private static final String COEFFICIENT_COLUMN="coefficient";
+    private static final String WORK_TIME_COLUMN = "currency";
+    private static final String COEFFICIENT_COLUMN = "coefficient";
     private static final int MIN_TEXT_FOR_REPORT = 70;
-    private static final String UNKNOWN_DATA="Unknown";
+    private static final String UNKNOWN_DATA = "Unknown";
     private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
     private ReportServerSessionManager reportServerSessionManager;
     private Long currentProjectId;
@@ -63,8 +63,9 @@ public class ReportLayoutController {
     private Long currentReportId;
 
     /**
-     *  After Load/Parsing fxml call this method
+     * After Load/Parsing fxml call this method
      * Create {@link ReportLayoutController} and if project has reports set this data in Set of ReportModel
+     *
      * @throws IOException+
      */
     @FXML
@@ -77,7 +78,7 @@ public class ReportLayoutController {
         setFocusOnTableView();
     }
 
-    private void getAllReportAndSetToCollection(){
+    private void getAllReportAndSetToCollection() {
         report = reportServerSessionManager.sendProjectDataAndGetReportById(currentProjectId);
     }
 
@@ -86,20 +87,22 @@ public class ReportLayoutController {
      * Get from current report information and set their in textArea
      */
     private void setFocusOnTableView() {
-
         tableViewReport.requestFocus();
         tableViewReport.getSelectionModel().select(0);
         tableViewReport.getFocusModel().focus(0);
         ReportModel reportModel = tableViewReport.getSelectionModel().getSelectedItem();
-        if (report!=null&&!report.isEmpty()){
+        if (report != null && !report.isEmpty()) {
             countTextAndSetButtonCondition(reportModel);
             currentReportId = reportModel.getId();
-            taEditReport.setText(reportModel.getText());
+            if (reportModel.getText() != null) {
+                taEditReport.setText(reportModel.getText());
+            }
+
         }
     }
 
     /**
-     *  Get from current project information's and set their in label view element
+     * Get from current project information's and set their in label view element
      *
      * @param id of project what user choose in project window
      */
@@ -113,7 +116,7 @@ public class ReportLayoutController {
                 if (model.getEndDate() != null && model.getStartDate() != null) {
                     labelStartDate.setText(model.getStartDate().toString());
                     labelDeadlineDate.setText(model.getEndDate().toString());
-                }else {
+                } else {
                     labelStartDate.setText(UNKNOWN_DATA);
                     labelDeadlineDate.setText(UNKNOWN_DATA);
                 }
@@ -141,7 +144,7 @@ public class ReportLayoutController {
         if (report != null && !report.isEmpty()) {
             for (ReportModel model :
                     report) {
-              model.setCurrency(convertFromSecondsToHoursAndMinutes(model.getWorkTime())+" x "+model.getRate()+convertFromCurrencyToSymbol(model.getCurrency()));
+                model.setCurrency(convertFromSecondsToHoursAndMinutes(model.getWorkTime()) + " x " + model.getRate() + convertFromCurrencyToSymbol(model.getCurrency()));
                 reportData.add(model);
             }
             tableViewReport.setItems(reportData);
@@ -151,6 +154,7 @@ public class ReportLayoutController {
 
     /**
      * Hears when user click on button and close stage without any change
+     *
      * @param actionEvent callback click on button
      */
     public void CancelAndCloseReportWindow(ActionEvent actionEvent) {
@@ -159,6 +163,7 @@ public class ReportLayoutController {
 
     /**
      * Hears when user click on button and send change {@link ReportModel} to {@link ReportLayoutController} and close stage
+     *
      * @param actionEvent callback click on button
      */
     public void changeReport(ActionEvent actionEvent) {
@@ -178,36 +183,36 @@ public class ReportLayoutController {
 
     /**
      * Hears when user click on table view,get chosen report and set Description information in TextArea
+     *
      * @param event callback click on table view
      */
     public void chooseReport(Event event) {
-        if (tableViewReport.getSelectionModel().getSelectedItem() != null &&report!=null) {
+        if (tableViewReport.getSelectionModel().getSelectedItem() != null && report != null) {
             ReportModel selectReport = tableViewReport.getSelectionModel().getSelectedItem();
-          countTextAndSetButtonCondition(selectReport);
+
+            countTextAndSetButtonCondition(selectReport);
             currentReportId = selectReport.getId();
-            taEditReport.setText(selectReport.getText());
+            if (selectReport.getText() != null) {
+                taEditReport.setText(selectReport.getText());
+            }
+
         }
     }
 
     /**
-     *  Hears when text input in TextArea and if this text count >= {@value MIN_TEXT_FOR_REPORT}
+     * Hears when text input in TextArea and if this text count >= {@value MIN_TEXT_FOR_REPORT}
      * button for change report became active
      */
     @FXML
     private void countTextAndSetButtonCondition(ReportModel reportModel) {
         taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
             int size = newValue.length();
-            if(reportModel.getText()!=null){
-                if (size >= MIN_TEXT_FOR_REPORT&&!reportModel.isChecked()) {
-                    btnChangeReport.setDisable(false);
-                    taEditReport.setEditable(true);
-                } else {
-                    btnChangeReport.setDisable(true);
-                    System.out.println("fucl");
-                    taEditReport.setEditable(false);
-                }
+            if (size >= MIN_TEXT_FOR_REPORT && !reportModel.isChecked()) {
+                btnChangeReport.setDisable(false);
+                taEditReport.setEditable(true);
+            } else {
+                btnChangeReport.setDisable(true);
             }
-
         });
     }
 

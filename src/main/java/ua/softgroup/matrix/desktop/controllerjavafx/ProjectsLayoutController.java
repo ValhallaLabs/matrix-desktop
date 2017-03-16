@@ -152,13 +152,14 @@ public class ProjectsLayoutController {
      * button for send report became active
      */
     @FXML
-    private void countTextAndSetInView()throws IOException {
+    private void countTextAndSetInView()throws NullPointerException {
         taWriteReport.textProperty().addListener((observable, oldValue, newValue) -> {
-            int size = newValue.length();
-            labelCurrentSymbols.setText(String.valueOf(size));
-            if (size >= MIN_TEXT_FOR_REPORT) {
-                btnSendReport.setDisable(false);
-            } else btnSendReport.setDisable(true);
+                int size = newValue.length();
+            System.out.println(size);
+                labelCurrentSymbols.setText(String.valueOf(size));
+                if (size >= MIN_TEXT_FOR_REPORT) {
+                    btnSendReport.setDisable(false);
+                } else btnSendReport.setDisable(true);
         });
     }
 
@@ -325,7 +326,7 @@ public class ProjectsLayoutController {
         if (reportModel != null && !reportModel.isEmpty()) {
             for (ReportModel model :
                     reportModel) {
-                if (model.getDate().equals(LocalDate.now())) {
+                if (model.getDate().equals(LocalDate.now())&&model.getText()!=null) {
                     taWriteReport.setText(model.getText());
                     viewConditionAtReportAlreadyExist();
                 }
@@ -335,7 +336,7 @@ public class ProjectsLayoutController {
 
     private void viewConditionAtReportAlreadyExist() {
         btnSendReport.setDisable(true);
-        taWriteReport.setMouseTransparent(false);
+        taWriteReport.setMouseTransparent(true);
     }
 
     /**
