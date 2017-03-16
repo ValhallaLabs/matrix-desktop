@@ -196,7 +196,6 @@ public class ReportLayoutController {
     private void countTextAndSetButtonCondition(ReportModel reportModel) {
         taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
             int size = newValue.length();
-            if(reportModel.getText()!=null){
                 if (size >= MIN_TEXT_FOR_REPORT&&!reportModel.isChecked()) {
                     btnChangeReport.setDisable(false);
                     taEditReport.setEditable(true);
@@ -205,8 +204,6 @@ public class ReportLayoutController {
                     System.out.println("fucl");
                     taEditReport.setEditable(false);
                 }
-            }
-
         });
     }
 
