@@ -123,14 +123,17 @@ public class ProjectsLayoutController {
     private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 600;
     private static final String LOGO = "/images/logoIcon.png";
     private static final String UNKNOWN_DATA="Unknown";
+    private static final String UNLIMITED_DATA="Unlimited";
     private ReportServerSessionManager reportServerSessionManager;
     private File attachFile;
-    private long timeTodayMinutes;
+    private int timeTodayInSeconds;
+    private int timeTotalInSeconds;
     private Timeline timeLine;
     private TimeTracker timeTracker;
     private DoughnutChart doughnutChart;
     private Label labelIdle;
     private double idleTimeInPercent;
+    private ProjectModel projectModel;
 
     /**
      * After Load/Parsing fxml call this method
@@ -169,7 +172,7 @@ public class ProjectsLayoutController {
         tvProjectsTable.requestFocus();
         tvProjectsTable.getSelectionModel().select(0);
         tvProjectsTable.getFocusModel().focus(0);
-        ProjectModel projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
+        projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
         if (projectModel != null) {
             setProjectInfoInView(projectModel);
             new Thread(() -> {
@@ -232,23 +235,26 @@ public class ProjectsLayoutController {
      */
     private void setProjectInfoInView(ProjectModel projectModel) {
         CurrentSessionInfo.setProjectId(projectModel.getId());
-        idleTimeInPercent = projectModel.getProjectTime().getIdlePercent();
-        int timeFromServer = projectModel.getProjectTime().getTodayTime();
-        timeTodayMinutes = timeFromServer / 60;
         if (projectModel.getProjectTime().getTodayStartTime()!= null) {
             labelStartWorkToday.setText(String.valueOf(projectModel.getProjectTime().getTodayStartTime().format(todayStartTime)));
-        }else labelStartWorkToday.setText("--:--");
-        labelTodayTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeFromServer));
-        labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(projectModel.getProjectTime().getTotalTime()));
+        }
         labelNameProject.setText(projectModel.getTitle());
         labelDescribeProject.setText(projectModel.getDescription());
+        setDynamicInfo(projectModel);
+    }
 
+    private void setDynamicInfo(ProjectModel projectModel) {
+        idleTimeInPercent = projectModel.getProjectTime().getIdlePercent();
+        timeTodayInSeconds =  projectModel.getProjectTime().getTodayTime();
+        timeTotalInSeconds =projectModel.getProjectTime().getTotalTime();
+        labelTodayTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTodayInSeconds));
+        labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTotalInSeconds));
         if ((projectModel.getStartDate() != null && projectModel.getEndDate() != null)) {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
             labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
         }else {
             labelDateStartProject.setText(UNKNOWN_DATA);
-            labelDeadLineProject.setText(UNKNOWN_DATA);
+            labelDeadLineProject.setText(UNLIMITED_DATA);
         }
         initPieChart();
     }
@@ -295,9 +301,9 @@ public class ProjectsLayoutController {
                 taWriteReport.setText("");
                 taWriteReport.setEditable(true);
                 if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
-                    ProjectModel selectProject = tvProjectsTable.getSelectionModel().getSelectedItem();
-                    setReporTextInTextArea(selectProject);
-                    setProjectInfoInView(selectProject);
+                   projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
+                    setReporTextInTextArea(projectModel);
+                    setProjectInfoInView(projectModel);
                 }
             }
         }
@@ -398,11 +404,10 @@ public class ProjectsLayoutController {
         timeLine = new Timeline();
         timeTracker = new TimeTracker(this, CurrentSessionInfo.getProjectId());
         timeTracker.turnOn();
-
         if (timeLine != null) {
             timeLine.stop();
         }
-        KeyFrame frame = new KeyFrame(Duration.minutes(1), event -> {
+        KeyFrame frame = new KeyFrame(Duration.seconds(1), event -> {
             calculateTimeAndSetInView();
         });
         timeLine.getKeyFrames().add(frame);
@@ -423,6 +428,12 @@ public class ProjectsLayoutController {
         if (timeTracker != null) {
             timeTracker.turnOff();
         }
+
+        System.out.println(projectModel.getProjectTime().getTodayTime());
+        System.out.println(projectModel.getProjectTime().getTotalTime());
+        projectModel.getProjectTime().setTotalTime(timeTotalInSeconds);
+        projectModel.getProjectTime().setTodayTime(timeTodayInSeconds);
+        setDynamicInfo(projectModel);
         buttonConditionAtTimerOff();
     }
 
@@ -430,9 +441,10 @@ public class ProjectsLayoutController {
      * Increment minutes and set this info into label view
      */
     private void calculateTimeAndSetInView() {
-        timeTodayMinutes++;
-        System.out.println(timeTodayMinutes);
-        labelTodayTotalTime.setText(String.valueOf(timeTodayMinutes / 60 + "h " + timeTodayMinutes % 60 + "m"));
+        timeTodayInSeconds++;
+        timeTotalInSeconds++;
+        labelTodayTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTodayInSeconds));
+        labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTotalInSeconds));
         initPieChart();
     }
 
@@ -541,6 +553,7 @@ public class ProjectsLayoutController {
 
     }
     public void synchronizedLocalTimeWorkWithServer(){
+        setDynamicInfo(projectModel);
         //TODO: retrieve all time from current project's Project models
     }
 }

@@ -56,6 +56,7 @@ public class ReportLayoutController {
     private static final String COEFFICIENT_COLUMN="coefficient";
     private static final int MIN_TEXT_FOR_REPORT = 70;
     private static final String UNKNOWN_DATA="Unknown";
+    private static final String UNLIMITED_DATA="Unlimited";
     private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
     private ReportServerSessionManager reportServerSessionManager;
     private Long currentProjectId;
@@ -86,7 +87,6 @@ public class ReportLayoutController {
      * Get from current report information and set their in textArea
      */
     private void setFocusOnTableView() {
-
         tableViewReport.requestFocus();
         tableViewReport.getSelectionModel().select(0);
         tableViewReport.getFocusModel().focus(0);
@@ -115,7 +115,7 @@ public class ReportLayoutController {
                     labelDeadlineDate.setText(model.getEndDate().toString());
                 }else {
                     labelStartDate.setText(UNKNOWN_DATA);
-                    labelDeadlineDate.setText(UNKNOWN_DATA);
+                    labelDeadlineDate.setText(UNLIMITED_DATA);
                 }
             }
         }
