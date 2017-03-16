@@ -4,6 +4,7 @@
     -fx-border-color: white;
     -fx-base: rgb(0, 0, 0);
 }
+
 .green-button {
     -fx-text-fill: white;
     -fx-font-weight: bold;
@@ -57,18 +58,28 @@
 .default-color1.chart-pie {
     -fx-pie-color: #c6c6c6;
 }
-.mybutton-menu{
+
+.mybutton-menu {
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-background-radius: 0;
     -fx-background-color: transparent;
-    -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 1em; /* 12 */
 }
-.mybutton-menu:hover{
+
+.mybutton-menu:hover {
     -fx-background-color: #3064a2;
     -fx-text-fill: white;
 }
+
 .grey-background {
     -fx-background-color: #e4e4e4;
+}
+
+#labelIdle {
+    -fx-min-width: 60;
+    -fx-min-height: 20;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
 }

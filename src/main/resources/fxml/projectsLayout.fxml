@@ -10,10 +10,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="765.0" prefWidth="1200.0" styleClass="grey-background" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController">
    <children>
-      <AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+      <AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0">
          <children>
             <SplitPane dividerPositions="0.715" layoutX="244.0" layoutY="191.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
@@ -94,7 +93,7 @@
                                           <Insets bottom="5.0" left="17.0" right="5.0" top="5.0" />
                                        </HBox.margin>
                                     </ImageView>
-                                    <Label fx:id="labelNameProject" prefHeight="25.0" prefWidth="300.0" styleClass="font-on-label" text="None" textFill="#3063a4">
+                                    <Label fx:id="labelNameProject" prefHeight="25.0" prefWidth="300.0" styleClass="font-on-label" text="Nonefgdfgdfgdfdfgdfgdfdfdfgdfg" textFill="#3063a4">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
@@ -112,7 +111,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelDescribeProject" alignment="TOP_LEFT" prefHeight="70.0" prefWidth="350.0" styleClass="font-on-label" text="None" wrapText="true">
+                              <Label fx:id="labelDescribeProject" alignment="TOP_LEFT" prefHeight="70.0" prefWidth="350.0" styleClass="font-on-label" text="Nonedfdfsdssggdfdgghgfhfgfghgfhgfhgfhgfhf" wrapText="true">
                                  <VBox.margin>
                                     <Insets left="17.0" right="5.0" />
                                  </VBox.margin>
@@ -147,7 +146,7 @@
                                           <Insets left="7.0" top="5.0" />
                                        </HBox.margin>
                                     </ImageView>
-                                    <Label fx:id="labelStartWorkToday" minWidth="140.0" prefWidth="140.0" text="00:00">
+                                    <Label fx:id="labelStartWorkToday" minWidth="140.0" prefWidth="140.0" text="--:--">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
@@ -312,7 +311,7 @@
                               </TextArea>
                               <HBox focusTraversable="true" minHeight="48.0" prefHeight="48.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="btnAttachFile" mnemonicParsing="false" onAction="#attachFile" prefHeight="31.0" prefWidth="135.0" styleClass="add-button" text="Attach file">
+                                    <Button fx:id="btnAttachFile" mnemonicParsing="false" onAction="#attachFile" prefHeight="31.0" prefWidth="130.0" styleClass="add-button" text="Attach file">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
@@ -323,7 +322,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#sendReport" prefHeight="31.0" prefWidth="135.0" styleClass="send-reports-button" text="Send report">
+                                    <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#sendReport" prefHeight="31.0" prefWidth="130.0" styleClass="send-reports-button" text="Send report">
                                        <font>
                                           <Font size="11.0" />
                                        </font>

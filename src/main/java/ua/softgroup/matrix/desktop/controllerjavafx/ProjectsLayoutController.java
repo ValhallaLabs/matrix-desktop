@@ -37,7 +37,6 @@ import ua.softgroup.matrix.desktop.view.DoughnutChart;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Locale;
@@ -95,6 +94,8 @@ public class ProjectsLayoutController {
     public Label labelCurrentSymbols;
     @FXML
     public AnchorPane containerForPieChart;
+    @FXML
+    public Button menuReport;
     private Stage stage;
     private static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
     private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -111,12 +112,17 @@ public class ProjectsLayoutController {
     private static final String ALERT_CONTENT_TEXT = "Something go wrong .Programs will be close";
     private static final String ALERT_HEADER_TEXT = "Supervisor ERROR";
     private static final String REPORT_LAYOUT = "fxml/reportLayout.fxml";
+    private static final String REPORT_LAYOUT_TITLE = "Reports Window";
     private static final int REPORT_LAYOUT_MIN_WIDTH = 1200;
     private static final int REPORT_LAYOUT_MIN_HEIGHT = 765;
     private static final String INSTRUCTIONS_LAYOUT = "fxml/instructionsLayout.fxml";
+    private static final String INSTRUCTIONS_LAYOUT_TITLE = "Instructions Window";
+    private static final String PIE_CHART_TITLE="Idle Time";
+    private static final String FILE_CHOOSER_TITLE="Open Resource File";
     private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 900;
     private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 600;
     private static final String LOGO = "/images/logoIcon.png";
+    private static final String UNKNOWN_DATA="Unknown";
     private ReportServerSessionManager reportServerSessionManager;
     private File attachFile;
     private long timeTodayMinutes;
@@ -126,16 +132,12 @@ public class ProjectsLayoutController {
     private Label labelIdle;
     private double idleTimeInPercent;
 
-
-
     /**
      * After Load/Parsing fxml call this method
      * Create {@link ReportServerSessionManager} and TimeTimer
-     *
-     * @throws IOException
      */
     @FXML
-    private void initialize() throws IOException {
+    private void initialize()  throws IOException {
         reportServerSessionManager = new ReportServerSessionManager();
         initProjectInTable();
         getTodayDayAndSetInView();
@@ -150,7 +152,7 @@ public class ProjectsLayoutController {
      * button for send report became active
      */
     @FXML
-    private void countTextAndSetInView() {
+    private void countTextAndSetInView()throws IOException {
         taWriteReport.textProperty().addListener((observable, oldValue, newValue) -> {
             int size = newValue.length();
             labelCurrentSymbols.setText(String.valueOf(size));
@@ -162,8 +164,6 @@ public class ProjectsLayoutController {
 
     /**
      * At start project window select last item in Table View
-     *
-     * @throws IOException
      */
     private void setFocusOnTableView() throws IOException {
         tvProjectsTable.requestFocus();
@@ -173,11 +173,7 @@ public class ProjectsLayoutController {
         if (projectModel != null) {
             setProjectInfoInView(projectModel);
             new Thread(() -> {
-                try {
-                    setReportInfoInTextAreaAndButton(projectModel);
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+                setReporTextInTextArea(projectModel);
             }).start();
         }
 
@@ -212,20 +208,21 @@ public class ProjectsLayoutController {
     @SuppressWarnings("unchecked")
     private void setProjectInTable() {
         Set<ProjectModel> projectModelSet = CurrentSessionInfo.getProjectModels();
-        System.out.println(projectModelSet);
         if (projectModelSet != null && !projectModelSet.isEmpty()) {
             projectModelSet.forEach(projectsData::add);
-//        for (ProjectModel projectModel : projectModelSet) {
-//            projectsData.add(projectModel);
-//        }
             tvProjectsTable.setItems(projectsData);
             tvProjectsTable.getSortOrder().setAll(tcIdProject);
         } else {
-            taWriteReport.setDisable(true);
-            btnStart.setDisable(true);
-            btnAttachFile.setDisable(true);
+            viewConditionAtNullProjectModels();
         }
 
+    }
+
+    private void viewConditionAtNullProjectModels() {
+        taWriteReport.setDisable(true);
+        btnStart.setDisable(true);
+        btnAttachFile.setDisable(true);
+        menuReport.setDisable(true);
     }
 
     /**
@@ -235,21 +232,23 @@ public class ProjectsLayoutController {
      */
     private void setProjectInfoInView(ProjectModel projectModel) {
         CurrentSessionInfo.setProjectId(projectModel.getId());
-        labelNameProject.setText(projectModel.getTitle());
-        labelDescribeProject.setText(projectModel.getDescription());
-        LocalDateTime startWorkToday = projectModel.getProjectTime().getTodayStartTime();
-        if (startWorkToday != null) {
-            labelStartWorkToday.setText(String.valueOf(startWorkToday.format(todayStartTime)));
-        }
+        idleTimeInPercent = projectModel.getProjectTime().getIdlePercent();
         int timeFromServer = projectModel.getProjectTime().getTodayTime();
         timeTodayMinutes = timeFromServer / 60;
-        System.out.println(timeTodayMinutes);
+        if (projectModel.getProjectTime().getTodayStartTime()!= null) {
+            labelStartWorkToday.setText(String.valueOf(projectModel.getProjectTime().getTodayStartTime().format(todayStartTime)));
+        }else labelStartWorkToday.setText("--:--");
         labelTodayTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeFromServer));
         labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(projectModel.getProjectTime().getTotalTime()));
-        idleTimeInPercent = projectModel.getProjectTime().getIdlePercent();
+        labelNameProject.setText(projectModel.getTitle());
+        labelDescribeProject.setText(projectModel.getDescription());
+
         if ((projectModel.getStartDate() != null && projectModel.getEndDate() != null)) {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
             labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
+        }else {
+            labelDateStartProject.setText(UNKNOWN_DATA);
+            labelDeadLineProject.setText(UNKNOWN_DATA);
         }
         initPieChart();
     }
@@ -261,7 +260,7 @@ public class ProjectsLayoutController {
         double idleTime = Math.round(idleTimeInPercent);
         double cleanTime = 100 - idleTime;
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Clean Time", idleTime),
-                new PieChart.Data("Idle Time", cleanTime));
+                new PieChart.Data(PIE_CHART_TITLE, cleanTime));
         doughnutChart = new DoughnutChart(pieChartData);
         createLabelForDisplayIdleTime();
         createPieChart();
@@ -270,17 +269,14 @@ public class ProjectsLayoutController {
 
     private void createLabelForDisplayIdleTime() {
         labelIdle = new Label(Math.round(idleTimeInPercent) + "%");
-        labelIdle.setMinWidth(60);
-        labelIdle.setMinHeight(20);
-        labelIdle.setStyle("-fx-font-weight: bold");
-        labelIdle.setFont(new Font(16));
+        labelIdle.setId("labelIdle");
         labelIdle.setPadding(new Insets(87, 0, 50, 69));
     }
 
     private void createPieChart() {
         doughnutChart.setMaxWidth(180);
         doughnutChart.setMaxHeight(180);
-        doughnutChart.setTitle("Idle Time");
+        doughnutChart.setTitle(PIE_CHART_TITLE);
         doughnutChart.setLabelsVisible(false);
         doughnutChart.setPadding(new Insets(10, 50, 15, 13));
     }
@@ -289,9 +285,8 @@ public class ProjectsLayoutController {
      * Hears when user click on table view select project and set TextArea Editable
      *
      * @param event callback click on table view
-     * @throws IOException
      */
-    public void chosenProject(Event event) throws IOException, ClassNotFoundException {
+    public void chosenProject(Event event)throws IOException, ClassNotFoundException {
         MouseEvent mouseEvent = (MouseEvent) event;
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
             if (mouseEvent.getClickCount() == 2) {
@@ -301,7 +296,7 @@ public class ProjectsLayoutController {
                 taWriteReport.setEditable(true);
                 if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
                     ProjectModel selectProject = tvProjectsTable.getSelectionModel().getSelectedItem();
-                    setReportInfoInTextAreaAndButton(selectProject);
+                    setReporTextInTextArea(selectProject);
                     setProjectInfoInView(selectProject);
                 }
             }
@@ -323,9 +318,8 @@ public class ProjectsLayoutController {
      * displays this information in TextArea
      *
      * @param projectModel current project what user choose in table view
-     * @throws IOException
      */
-    private void setReportInfoInTextAreaAndButton(ProjectModel projectModel) throws IOException, ClassNotFoundException {
+    private void setReporTextInTextArea(ProjectModel projectModel)  {
         Set<ReportModel> reportModel = null;
         reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
         if (reportModel != null && !reportModel.isEmpty()) {
@@ -333,18 +327,21 @@ public class ProjectsLayoutController {
                     reportModel) {
                 if (model.getDate().equals(LocalDate.now())) {
                     taWriteReport.setText(model.getText());
-                    btnSendReport.setDisable(true);
-                    taWriteReport.setMouseTransparent(false);
+                    viewConditionAtReportAlreadyExist();
                 }
             }
         }
+    }
+
+    private void viewConditionAtReportAlreadyExist() {
+        btnSendReport.setDisable(true);
+        taWriteReport.setMouseTransparent(false);
     }
 
     /**
      * Hears when user click on button and send information about report to {@link ReportServerSessionManager}
      *
      * @param actionEvent callback click on button
-     * @throws IOException
      */
     public void sendReport(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         byte[] attachFile = new byte[0];
@@ -355,8 +352,7 @@ public class ProjectsLayoutController {
         System.out.println(Arrays.toString(attachFile));
         ReportModel reportModel = new ReportModel(taWriteReport.getText(), LocalDate.now(), attachFile);
         reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
-        btnSendReport.setDisable(true);
-        taWriteReport.setEditable(false);
+          viewConditionAtReportAlreadyExist();
     }
 
     /**
@@ -379,15 +375,15 @@ public class ProjectsLayoutController {
      *
      * @param actionEvent callback click on button
      */
-    public void attachFile(ActionEvent actionEvent) throws IOException {
+    public void attachFile(ActionEvent actionEvent) throws IOException  {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
+        fileChooser.setTitle(FILE_CHOOSER_TITLE);
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
         );
         attachFile = fileChooser.showOpenDialog(labelCurrentSymbols.getScene().getWindow());
         if (attachFile != null) {
-            System.out.println("hFile attach");
+            System.out.println("File attach");
         }
     }
 
@@ -499,7 +495,7 @@ public class ProjectsLayoutController {
             reportsStage.setMinWidth(REPORT_LAYOUT_MIN_WIDTH);
             reportsStage.setMinHeight(REPORT_LAYOUT_MIN_HEIGHT);
             reportsStage.initModality(Modality.WINDOW_MODAL);
-            reportsStage.setTitle("Reports Window");
+            reportsStage.setTitle(REPORT_LAYOUT_TITLE);
             reportsStage.initOwner(labelDateStartProject.getScene().getWindow());
             reportsStage.setResizable(false);
             reportsStage.show();
@@ -524,7 +520,7 @@ public class ProjectsLayoutController {
             instructionsStage.setMinWidth(INSTRUCTIONS_LAYOUT_MIN_WIDTH);
             instructionsStage.setMinHeight(INSTRUCTIONS_LAYOUT_MIN_HEIGHT);
             instructionsStage.initModality(Modality.WINDOW_MODAL);
-            instructionsStage.setTitle("Instructions Window");
+            instructionsStage.setTitle(INSTRUCTIONS_LAYOUT_TITLE);
             instructionsStage.initOwner(labelDayInNumber.getScene().getWindow());
             instructionsStage.setResizable(false);
             instructionsStage.show();
@@ -543,5 +539,8 @@ public class ProjectsLayoutController {
             System.exit(0);
         });
 
+    }
+    public void synchronizedLocalTimeWorkWithServer(int seconds){
+        timeTodayMinutes=seconds;
     }
 }

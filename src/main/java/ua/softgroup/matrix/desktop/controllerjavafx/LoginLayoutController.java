@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -39,9 +38,12 @@ public class LoginLayoutController {
     private static final int MAIN_LAYOUT_MIN_WIDTH = 1200;
     private static final int MAIN_LAYOUT_MIN_HEIGHT = 800;
     private static final String SETTING_LAYOUT = "fxml/settingLayout.fxml";
+    private static final String SETTING_LAYOUT_TITLE ="Setting";
     private static final String PROJECT_LAYOUT = "fxml/projectsLayout.fxml";
+    private static final String PROJECT_LAYOUT_TITLE = "SuperVisor";
     private static final int SETTING_LAYOUT_MIN_WIDTH = 500;
     private static final int SETTING_LAYOUT_MIN_HEIGHT = 250;
+
     private Stage stage;
     private AuthenticationServerSessionManager authenticationSessionManager;
     private Preferences preferences;
@@ -158,32 +160,31 @@ public class LoginLayoutController {
      */
     public void closeLoginLayoutAndStartMainLayout() {
         stage.close();
-        startMainControllerLayout();
+        startProjectsControllerLayout();
         saveLoginAndPasswordToPreferencesManager();
     }
 
     /**
      * Tells {@link LoginLayoutController} to open main Window and send to project layout stage
      */
-    private void startMainControllerLayout() {
+    private void startProjectsControllerLayout() {
         try {
-            Stage mainStage = new Stage();
+            Stage projectsStage = new Stage();
             Image icon = new Image(getClass().getResourceAsStream(LOGO));
-            mainStage.getIcons().add(icon);
+            projectsStage.getIcons().add(icon);
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource(PROJECT_LAYOUT));
-            AnchorPane mainLayout = loader.load();
-            Scene scene = new Scene(mainLayout);
-            mainStage.setScene(scene);
+            AnchorPane projectsLayout = loader.load();
+            Scene scene = new Scene(projectsLayout);
+            projectsStage.setScene(scene);
             ProjectsLayoutController projectsLayoutController=loader.getController();
-            projectsLayoutController.setUpStage(mainStage);
-            mainStage.setMinWidth(MAIN_LAYOUT_MIN_WIDTH);
-            mainStage.setMinHeight(MAIN_LAYOUT_MIN_HEIGHT);
-            mainStage.setResizable(false);
-            mainStage.setTitle("SuperVisor");
-
-            mainStage.show();
+            projectsLayoutController.setUpStage(projectsStage);
+            projectsStage.setMinWidth(MAIN_LAYOUT_MIN_WIDTH);
+            projectsStage.setMinHeight(MAIN_LAYOUT_MIN_HEIGHT);
+            projectsStage.setResizable(false);
+            projectsStage.setTitle(PROJECT_LAYOUT_TITLE);
+            projectsStage.show();
         } catch (IOException e) {
             logger.debug("Error when start Main Layout " + e);
         }
@@ -239,6 +240,7 @@ public class LoginLayoutController {
             settingStage.setScene(scene);
             settingStage.setMinWidth(SETTING_LAYOUT_MIN_WIDTH);
             settingStage.setMinHeight(SETTING_LAYOUT_MIN_HEIGHT);
+            settingStage.setTitle(SETTING_LAYOUT_TITLE);
             settingStage.initModality(Modality.WINDOW_MODAL);
             settingStage.initOwner(btnLogin.getScene().getWindow());
             settingLayoutController.setUpStage(settingStage);

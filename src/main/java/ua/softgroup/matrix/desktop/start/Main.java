@@ -22,6 +22,8 @@ import java.time.LocalDateTime;
 public class Main extends Application {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
     private static final String LOGO = "/images/logoIcon.png";
+    private static final String LOGIN_LAYOUT = "fxml/loginLayout.fxml";
+    private static final String LOGIN_LAYOUT_TITLE = "SuperVisor";
     private ServerSocket socket;
 
     public static void main(String[] args) {
@@ -59,19 +61,19 @@ public class Main extends Application {
      * Tells {@link Main} to open login window
      * @param loginStage for create stage
      */
-    public void startLoginLayout(Stage loginStage) {
+    private void startLoginLayout(Stage loginStage) {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
             Image icon = new Image(getClass().getResourceAsStream(LOGO));
             loginStage.getIcons().add(icon);
-            loader.setLocation(classLoader.getResource("fxml/loginLayout.fxml"));
+            loader.setLocation(classLoader.getResource(LOGIN_LAYOUT));
             Pane loginLayout = loader.load();
-            LoginLayoutController loginLayoutController = loader.getController();
+             LoginLayoutController loginLayoutController =loader.getController();
             loginLayoutController.setUpStage(loginStage);
             Scene scene = new Scene(loginLayout);
             loginStage.setScene(scene);
-            loginStage.setTitle("SuperVisor");
+            loginStage.setTitle(LOGIN_LAYOUT_TITLE);
             loginStage.setResizable(false);
             loginStage.show();
         } catch (IOException e) {

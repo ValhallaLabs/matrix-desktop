@@ -55,7 +55,7 @@ public class ReportLayoutController {
     private static final String WORK_TIME_COLUMN="currency";
     private static final String COEFFICIENT_COLUMN="coefficient";
     private static final int MIN_TEXT_FOR_REPORT = 70;
-
+    private static final String UNKNOWN_DATA="Unknown";
     private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
     private ReportServerSessionManager reportServerSessionManager;
     private Long currentProjectId;
@@ -113,6 +113,9 @@ public class ReportLayoutController {
                 if (model.getEndDate() != null && model.getStartDate() != null) {
                     labelStartDate.setText(model.getStartDate().toString());
                     labelDeadlineDate.setText(model.getEndDate().toString());
+                }else {
+                    labelStartDate.setText(UNKNOWN_DATA);
+                    labelDeadlineDate.setText(UNKNOWN_DATA);
                 }
             }
         }
@@ -157,9 +160,8 @@ public class ReportLayoutController {
     /**
      * Hears when user click on button and send change {@link ReportModel} to {@link ReportLayoutController} and close stage
      * @param actionEvent callback click on button
-     * @throws IOException
      */
-    public void changeReport(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+    public void changeReport(ActionEvent actionEvent) {
         ReportModel reportModel = new ReportModel(currentReportId, taEditReport.getText());
         reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
         reportData.clear();
@@ -194,13 +196,17 @@ public class ReportLayoutController {
     private void countTextAndSetButtonCondition(ReportModel reportModel) {
         taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
             int size = newValue.length();
-            if (size >= MIN_TEXT_FOR_REPORT&&!reportModel.isChecked()) {
-                btnChangeReport.setDisable(false);
-                taEditReport.setEditable(true);
-            } else {
-                btnChangeReport.setDisable(true);
-                taEditReport.setEditable(false);
+            if(reportModel.getText()!=null){
+                if (size >= MIN_TEXT_FOR_REPORT&&!reportModel.isChecked()) {
+                    btnChangeReport.setDisable(false);
+                    taEditReport.setEditable(true);
+                } else {
+                    btnChangeReport.setDisable(true);
+                    System.out.println("fucl");
+                    taEditReport.setEditable(false);
+                }
             }
+
         });
     }
 
