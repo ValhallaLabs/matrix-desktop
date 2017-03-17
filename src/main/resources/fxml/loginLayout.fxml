@@ -24,94 +24,101 @@
 <Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="320.0" styleClass="base-font" stylesheets="@../css/loginLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController">
 
     <children>
-      <StackPane>
+      <VBox prefHeight="280.0">
          <children>
-            <VBox fx:id="vboxLoginWindow" disable="true" prefHeight="300.0" prefWidth="320.0">
+            <StackPane>
                <children>
-                      <Label text="SuperVisor" textFill="#3063a4">
-                     <font>
-                        <Font name="System Bold" size="27.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="68.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                      <TextField fx:id="loginTextField" alignment="CENTER" prefHeight="45.0" prefWidth="270.0" promptText="username" styleClass="text-area">
-                     <VBox.margin>
-                        <Insets bottom="5.0" top="8.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </TextField>
-                      <PasswordField fx:id="passwordTextField" alignment="CENTER" prefHeight="45.0" prefWidth="270.0" promptText="password" styleClass="text-area">
-                     <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </PasswordField>
-                  <Button fx:id="btnLogin" defaultButton="true" mnemonicParsing="false" onAction="#startMainWindow" prefHeight="45.0" prefWidth="270.0" styleClass="btn-login" text="login">
-                     <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Label fx:id="labelErrorMessage" alignment="CENTER" prefHeight="19.0" prefWidth="282.0" textFill="#d74747">
-                     <VBox.margin>
-                        <Insets left="4.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <HBox>
+                  <VBox fx:id="vboxLoginWindow" disable="true" prefHeight="300.0" prefWidth="320.0">
                      <children>
-                        <CheckBox fx:id="cbRememberMe" mnemonicParsing="false" text="Remember me">
-                           <VBox.margin>
-                              <Insets left="4.0" />
-                           </VBox.margin>
-                           <HBox.margin>
-                              <Insets left="5.0" right="60.0" />
-                           </HBox.margin>
+                            <Label text="SuperVisor" textFill="#3063a4">
                            <font>
-                              <Font name="DejaVu Sans" size="13.0" />
+                              <Font name="System Bold" size="27.0" />
                            </font>
-                        </CheckBox>
-                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/settings.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets right="4.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label fx:id="labelSettings" onMouseClicked="#openSettings" text="Settings">
                            <VBox.margin>
-                              <Insets left="5.0" right="4.0" top="6.0" />
+                              <Insets bottom="10.0" left="68.0" top="10.0" />
                            </VBox.margin>
+                        </Label>
+                            <TextField fx:id="loginTextField" alignment="CENTER" prefHeight="45.0" prefWidth="270.0" promptText="username" styleClass="text-area">
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="8.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </TextField>
+                            <PasswordField fx:id="passwordTextField" alignment="CENTER" prefHeight="45.0" prefWidth="270.0" promptText="password" styleClass="text-area">
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </PasswordField>
+                        <Button fx:id="btnLogin" defaultButton="true" mnemonicParsing="false" onAction="#startMainWindow" prefHeight="45.0" prefWidth="270.0" styleClass="btn-login" text="login">
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                        </Button>
+                        <Label fx:id="labelErrorMessage" alignment="CENTER" prefHeight="19.0" prefWidth="282.0" textFill="#d74747">
+                           <VBox.margin>
+                              <Insets left="4.0" />
+                           </VBox.margin>
                            <font>
-                              <Font name="DejaVu Sans" size="13.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
                      </children>
-                  </HBox>
+                     <padding>
+                        <Insets left="25.0" right="25.0" top="15.0" />
+                     </padding>
+                  </VBox>
+                  <ProgressIndicator fx:id="progIndWaitConnection" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" />
+               </children>
+            </StackPane>
+            <HBox>
+               <children>
+                  <CheckBox fx:id="cbRememberMe" disable="true" mnemonicParsing="false" text="Remember me">
+                     <VBox.margin>
+                        <Insets left="4.0" />
+                     </VBox.margin>
+                     <HBox.margin>
+                        <Insets left="5.0" right="60.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="DejaVu Sans" size="13.0" />
+                     </font>
+                  </CheckBox>
+                  <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/settings.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="4.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label fx:id="labelSettings" onMouseClicked="#openSettings" text="Settings">
+                     <VBox.margin>
+                        <Insets left="5.0" right="4.0" top="6.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="DejaVu Sans" size="13.0" />
+                     </font>
+                  </Label>
                </children>
                <padding>
-                  <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
+                  <Insets left="25.0" right="25.0" />
                </padding>
-            </VBox>
-            <ProgressIndicator fx:id="progIndWaitConnection" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" />
+            </HBox>
          </children>
-      </StackPane>
+      </VBox>
     </children>
 </Pane>

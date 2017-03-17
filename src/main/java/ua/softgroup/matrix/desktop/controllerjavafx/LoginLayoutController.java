@@ -77,18 +77,20 @@ public class LoginLayoutController {
         maxInputTextLimiter(loginTextField, 20);
         maxInputTextLimiter(passwordTextField, 20);
         loginTextField.requestFocus();
-//        unlockLoginWindowAfterConnect();
+
     }
 
     public void unlockLoginWindowAfterConnect(){
         vboxLoginWindow.setDisable(false);
         progIndWaitConnection.setVisible(false);
         progIndWaitConnection.setDisable(true);
+        cbRememberMe.setDisable(false);
     }
     private void showProgressIndicator(){
         vboxLoginWindow.setDisable(true);
         progIndWaitConnection.setVisible(true);
         progIndWaitConnection.setDisable(false);
+        cbRememberMe.setDisable(true);
     }
 
     private void getPreferencesAndSetLoginPassword() {
