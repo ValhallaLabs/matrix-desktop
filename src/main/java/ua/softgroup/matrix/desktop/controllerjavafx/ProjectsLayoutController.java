@@ -159,12 +159,11 @@ public class ProjectsLayoutController {
     @FXML
     private void countTextAndSetInView()throws NullPointerException {
         taWriteReport.textProperty().addListener((observable, oldValue, newValue) -> {
-                int size = newValue.length();
-            System.out.println(size);
-                labelCurrentSymbols.setText(String.valueOf(size));
-                if (size >= MIN_TEXT_FOR_REPORT) {
-                    btnSendReport.setDisable(false);
-                } else btnSendReport.setDisable(true);
+            int size = newValue.length();
+            labelCurrentSymbols.setText(String.valueOf(size));
+            if (size >= MIN_TEXT_FOR_REPORT) {
+                btnSendReport.setDisable(false);
+            } else btnSendReport.setDisable(true);
         });
     }
 
@@ -264,10 +263,8 @@ public class ProjectsLayoutController {
         if (projectModel.getProjectTime().getTodayStartTime() != null) {
             labelStartWorkToday.setText(String.valueOf(projectModel
                     .getProjectTime().getTodayStartTime().format(todayStartTime)));
-            System.out.println(projectModel.getProjectTime().getTodayStartTime());
             return;
         }
-        System.out.println("null");
         labelStartWorkToday.setText("--:--");
     }
 
@@ -352,7 +349,6 @@ public class ProjectsLayoutController {
     }
 
     private void viewConditionAtReportAlreadyExist() {
-        System.out.println("fdfdsfreewredsdfgdfgfd");
         btnSendReport.setDisable(true);
         taWriteReport.setMouseTransparent(true);
     }

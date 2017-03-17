@@ -73,6 +73,7 @@ public class ReportLayoutController {
     private void initialize() throws IOException, ClassNotFoundException {
         currentProjectId = CurrentSessionInfo.getProjectId();
         reportServerSessionManager = new ReportServerSessionManager();
+        //TODO: fix this part. You have to be sure that server returned reports, and only then load them into.
         getAllReportAndSetToCollection();
         initReportInTable();
         setProjectInfoInView(currentProjectId);

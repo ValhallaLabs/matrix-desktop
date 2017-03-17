@@ -55,7 +55,7 @@ public class ReportServerSessionManager {
             setReportModel = ((ReportsContainerDataModel) commandExecutioner
                     .sendCommandWithResponse(ServerCommands.GET_REPORTS, id)).getReportModels();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            logger.debug("Reports was get unsuccessfully", e);
         }
         logger.debug("Get report by id from server");
         return setReportModel;
