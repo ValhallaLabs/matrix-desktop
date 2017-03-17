@@ -168,7 +168,6 @@ public class ReportLayoutController {
      * @param actionEvent callback click on button
      */
     public void changeReport(ActionEvent actionEvent) {
-
         ReportModel reportModel = new ReportModel(currentReportId, taEditReport.getText());
         reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
         reportData.clear();
@@ -190,12 +189,11 @@ public class ReportLayoutController {
     public void chooseReport(Event event) {
         if (tableViewReport.getSelectionModel().getSelectedItem() != null && report != null) {
             ReportModel selectReport = tableViewReport.getSelectionModel().getSelectedItem();
-
             countTextAndSetButtonCondition(selectReport);
             currentReportId = selectReport.getId();
             if (selectReport.getText() != null) {
                 taEditReport.setText(selectReport.getText());
-            }
+            }else taEditReport.setText("");
 
         }
     }

@@ -264,8 +264,10 @@ public class ProjectsLayoutController {
         if (projectModel.getProjectTime().getTodayStartTime() != null) {
             labelStartWorkToday.setText(String.valueOf(projectModel
                     .getProjectTime().getTodayStartTime().format(todayStartTime)));
+            System.out.println(projectModel.getProjectTime().getTodayStartTime());
             return;
         }
+        System.out.println("null");
         labelStartWorkToday.setText("--:--");
     }
 
@@ -308,6 +310,7 @@ public class ProjectsLayoutController {
             if (mouseEvent.getClickCount() == 2) {
                 openReportWindowOnTwoMouseClick(event);
             } else {
+                taWriteReport.setMouseTransparent(false);
                 taWriteReport.setText("");
                 taWriteReport.setEditable(true);
                 if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
@@ -349,6 +352,7 @@ public class ProjectsLayoutController {
     }
 
     private void viewConditionAtReportAlreadyExist() {
+        System.out.println("fdfdsfreewredsdfgdfgfd");
         btnSendReport.setDisable(true);
         taWriteReport.setMouseTransparent(true);
     }
@@ -449,7 +453,7 @@ public class ProjectsLayoutController {
         timeTodayInSeconds++;
         timeTotalInSeconds++;
         labelTodayTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTodayInSeconds));
-        labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTotalInSeconds));
+       labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTotalInSeconds));
         initPieChart();
     }
 

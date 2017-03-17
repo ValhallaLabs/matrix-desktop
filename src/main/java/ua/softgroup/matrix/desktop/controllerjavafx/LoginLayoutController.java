@@ -7,9 +7,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -43,7 +45,6 @@ public class LoginLayoutController {
     private static final String PROJECT_LAYOUT_TITLE = "SuperVisor";
     private static final int SETTING_LAYOUT_MIN_WIDTH = 500;
     private static final int SETTING_LAYOUT_MIN_HEIGHT = 250;
-
     private Stage stage;
     private AuthenticationServerSessionManager authenticationSessionManager;
     private Preferences preferences;
@@ -60,6 +61,10 @@ public class LoginLayoutController {
     public Label labelErrorMessage;
     @FXML
     public CheckBox cbRememberMe;
+    @FXML
+    public VBox vboxLoginWindow;
+    @FXML
+    public ProgressIndicator progIndWaitConnection;
 
     /**
      * After Load/Parsing fxml call this method
@@ -73,6 +78,13 @@ public class LoginLayoutController {
         maxInputTextLimiter(loginTextField, 20);
         maxInputTextLimiter(passwordTextField, 20);
         loginTextField.requestFocus();
+        waitConnectionWithServer();
+    }
+
+    public void waitConnectionWithServer(){
+        vboxLoginWindow.setDisable(false);
+        progIndWaitConnection.setVisible(false);
+        progIndWaitConnection.setDisable(true);
     }
 
     private void getPreferencesAndSetLoginPassword() {
