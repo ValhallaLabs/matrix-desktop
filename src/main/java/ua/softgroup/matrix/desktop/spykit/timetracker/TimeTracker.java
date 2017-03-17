@@ -143,7 +143,7 @@ public class TimeTracker extends SpyKitTool {
     private void startCheckPointObservable() {
         checkPointObservable = Observable
                 .interval(CurrentSessionInfo.getCheckPointPeriod(), TimeUnit.SECONDS)
-                .filter(number -> number != 0)
+//                .filter(number -> number != 0)
                 .map(this::getCheckpointModel)
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::sendCheckPointToServer);
@@ -174,8 +174,8 @@ public class TimeTracker extends SpyKitTool {
     private void sendCheckPointToServer(CheckPointModel checkPointModel) {
         try {
             checkSynchronization();
-            setUpdatedProjectTime(commandExecutioner.sendCommandWithResponse(CHECK_POINT, projectId, checkPointModel));
-//            Platform.runLater(() -> projectsLayoutController.synchronizedLocalTimeWorkWithServer(updatedProjectTimeModel));
+            TimeModel updatedProjectTime = commandExecutioner.sendCommandWithResponse(CHECK_POINT, projectId, checkPointModel);
+            Platform.runLater(() -> projectsLayoutController.synchronizedLocalTimeWorkWithServer(updatedProjectTime));
         } catch (IOException | ClassNotFoundException e) {
             logger.debug("Couldn't send checkpoint to server. Add checkpoint to synchronized model", e);
             addCheckpointToSynchronizationModel(checkPointModel);
@@ -193,15 +193,6 @@ public class TimeTracker extends SpyKitTool {
             commandExecutioner.sendCommandWithNoResponse(SYNCHRONIZE, CurrentSessionInfo.getSynchronizationModel(), projectId);
             CurrentSessionInfo.setSynchronizationModel(null);
         }
-    }
-
-    /**
-     * Updates project time in project models specified by current project id.
-     * @param updatedProjectTime
-     */
-    private void setUpdatedProjectTime(TimeModel updatedProjectTime){
-        Platform.runLater(() ->
-                projectsLayoutController.synchronizedLocalTimeWorkWithServer(updatedProjectTime));
     }
 
     /**
@@ -236,7 +227,8 @@ public class TimeTracker extends SpyKitTool {
      */
     private void tryToTurnOffTimeTracker() throws Exception {
         if (status == IS_USED) {
-            setUpdatedProjectTime(commandExecutioner.sendCommandWithResponse(END_WORK, projectId));
+            sendCheckPointToServer(getCheckpointModel(1488));
+            commandExecutioner.sendCommandWithResponse(END_WORK, projectId);
             countDownLatch.countDown();
             turnOffSpyKitTools();
             status = WAS_USED;

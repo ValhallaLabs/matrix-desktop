@@ -236,15 +236,18 @@ public class ProjectsLayoutController {
      */
     private void setProjectInfoInView(ProjectModel projectModel) {
         CurrentSessionInfo.setProjectId(projectModel.getId());
-        if (projectModel.getProjectTime().getTodayStartTime()!= null) {
-            labelStartWorkToday.setText(String.valueOf(projectModel.getProjectTime().getTodayStartTime().format(todayStartTime)));
-        }
         labelNameProject.setText(projectModel.getTitle());
         labelDescribeProject.setText(projectModel.getDescription());
         setDynamicInfo();
     }
 
     private void setDynamicInfo() {
+        if (projectModel.getProjectTime().getTodayStartTime()!= null) {
+            System.out.println("not null");
+            labelStartWorkToday.setText(String.valueOf(projectModel.getProjectTime().getTodayStartTime().format(todayStartTime)));
+        } else {
+            System.out.println("null");
+        }
         idleTimeInPercent = projectModel.getProjectTime().getIdlePercent();
         timeTodayInSeconds =  projectModel.getProjectTime().getTodayTime();
         timeTotalInSeconds =projectModel.getProjectTime().getTotalTime();
@@ -258,6 +261,8 @@ public class ProjectsLayoutController {
             labelDeadLineProject.setText(UNLIMITED_DATA);
         }
         initPieChart();
+        logger.debug("Time on UI is up-to-date with server");
+
     }
 
     /**
@@ -430,11 +435,7 @@ public class ProjectsLayoutController {
             timeTracker.turnOff();
         }
 
-        System.out.println(projectModel.getProjectTime().getTodayTime());
-        System.out.println(projectModel.getProjectTime().getTotalTime());
-        projectModel.getProjectTime().setTotalTime(timeTotalInSeconds);
-        projectModel.getProjectTime().setTodayTime(timeTodayInSeconds);
-        setDynamicInfo();
+//        setDynamicInfo();
         buttonConditionAtTimerOff();
     }
 
@@ -555,6 +556,7 @@ public class ProjectsLayoutController {
     }
     public void synchronizedLocalTimeWorkWithServer(TimeModel updatedProjectTime){
         projectModel.setProjectTime(updatedProjectTime);
+        logger.debug("Project model is updated: {}", updatedProjectTime.toString());
         setDynamicInfo();
     }
 }
