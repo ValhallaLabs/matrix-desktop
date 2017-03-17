@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -78,13 +77,18 @@ public class LoginLayoutController {
         maxInputTextLimiter(loginTextField, 20);
         maxInputTextLimiter(passwordTextField, 20);
         loginTextField.requestFocus();
-        waitConnectionWithServer();
+//        unlockLoginWindowAfterConnect();
     }
 
-    public void waitConnectionWithServer(){
+    public void unlockLoginWindowAfterConnect(){
         vboxLoginWindow.setDisable(false);
         progIndWaitConnection.setVisible(false);
         progIndWaitConnection.setDisable(true);
+    }
+    private void showProgressIndicator(){
+        vboxLoginWindow.setDisable(true);
+        progIndWaitConnection.setVisible(true);
+        progIndWaitConnection.setDisable(false);
     }
 
     private void getPreferencesAndSetLoginPassword() {
@@ -255,7 +259,6 @@ public class LoginLayoutController {
             settingStage.setTitle(SETTING_LAYOUT_TITLE);
             settingStage.initModality(Modality.WINDOW_MODAL);
             settingStage.initOwner(btnLogin.getScene().getWindow());
-            settingLayoutController.setUpStage(settingStage);
             settingStage.setResizable(false);
             settingStage.show();
         } catch (IOException e) {
@@ -264,9 +267,10 @@ public class LoginLayoutController {
     }
 
      void initializeAuthenticationManager() {
-        if (authenticationSessionManager != null) {
+         showProgressIndicator();
+         if (authenticationSessionManager != null) {
             authenticationSessionManager.closeSession();
-        }
-        authenticationSessionManager = new AuthenticationServerSessionManager(this);
+         }
+         authenticationSessionManager = new AuthenticationServerSessionManager(this);
     }
 }

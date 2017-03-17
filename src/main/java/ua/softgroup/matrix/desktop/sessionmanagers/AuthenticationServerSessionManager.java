@@ -59,6 +59,7 @@ public class AuthenticationServerSessionManager {
         commandExecutioner = new CommandExecutioner();
         objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
         objectInputStream = new ObjectInputStream(socket.getInputStream());
+        loginLayoutController.unlockLoginWindowAfterConnect();
         logger.debug("Connection is opened");
         return socket;
     }

@@ -3,7 +3,6 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +38,6 @@ public class SettingLayoutController {
     }
 
     public void cancelSettings(ActionEvent actionEvent) {
-        loginLayoutController.initializeAuthenticationManager();
         labelHost.getScene().getWindow().hide();
     }
 
@@ -50,11 +48,5 @@ public class SettingLayoutController {
 
      void setLoginLayoutController(LoginLayoutController loginLayoutController) {
         this.loginLayoutController = loginLayoutController;
-    }
-
-    public void setUpStage(Stage mainLayout) {
-        this.stage=mainLayout;
-        stage.setOnCloseRequest(event ->loginLayoutController.initializeAuthenticationManager());
-
     }
 }
