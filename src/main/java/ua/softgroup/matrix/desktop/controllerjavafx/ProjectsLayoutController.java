@@ -293,6 +293,7 @@ public class ProjectsLayoutController {
             if (mouseEvent.getClickCount() == 2) {
                 openReportWindowOnTwoMouseClick(event);
             } else {
+                taWriteReport.setMouseTransparent(false);
                 taWriteReport.setText("");
                 taWriteReport.setEditable(true);
                 if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
@@ -335,6 +336,7 @@ public class ProjectsLayoutController {
     }
 
     private void viewConditionAtReportAlreadyExist() {
+        System.out.println("fdfdsfreewredsdfgdfgfd");
         btnSendReport.setDisable(true);
         taWriteReport.setMouseTransparent(true);
     }
@@ -432,7 +434,6 @@ public class ProjectsLayoutController {
      */
     private void calculateTimeAndSetInView() {
         timeTodayMinutes++;
-        System.out.println(timeTodayMinutes);
         labelTodayTotalTime.setText(String.valueOf(timeTodayMinutes / 60 + "h " + timeTodayMinutes % 60 + "m"));
         initPieChart();
     }
