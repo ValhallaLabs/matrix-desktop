@@ -240,10 +240,10 @@ public class ProjectsLayoutController {
         }
         labelNameProject.setText(projectModel.getTitle());
         labelDescribeProject.setText(projectModel.getDescription());
-        setDynamicInfo(projectModel);
+        setDynamicInfo();
     }
 
-    private void setDynamicInfo(ProjectModel projectModel) {
+    private void setDynamicInfo() {
         idleTimeInPercent = projectModel.getProjectTime().getIdlePercent();
         timeTodayInSeconds =  projectModel.getProjectTime().getTodayTime();
         timeTotalInSeconds =projectModel.getProjectTime().getTotalTime();
@@ -433,7 +433,7 @@ public class ProjectsLayoutController {
         System.out.println(projectModel.getProjectTime().getTotalTime());
         projectModel.getProjectTime().setTotalTime(timeTotalInSeconds);
         projectModel.getProjectTime().setTodayTime(timeTodayInSeconds);
-        setDynamicInfo(projectModel);
+        setDynamicInfo();
         buttonConditionAtTimerOff();
     }
 
@@ -553,7 +553,7 @@ public class ProjectsLayoutController {
 
     }
     public void synchronizedLocalTimeWorkWithServer(){
-        setDynamicInfo(projectModel);
+        setDynamicInfo();
         //TODO: retrieve all time from current project's Project models
     }
 }
