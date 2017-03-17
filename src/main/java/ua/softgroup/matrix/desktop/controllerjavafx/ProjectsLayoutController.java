@@ -29,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.api.model.datamodels.ReportModel;
+import ua.softgroup.matrix.api.model.datamodels.TimeModel;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
@@ -552,8 +553,8 @@ public class ProjectsLayoutController {
         });
 
     }
-    public void synchronizedLocalTimeWorkWithServer(){
+    public void synchronizedLocalTimeWorkWithServer(TimeModel updatedProjectTime){
+        projectModel.setProjectTime(updatedProjectTime);
         setDynamicInfo();
-        //TODO: retrieve all time from current project's Project models
     }
 }
