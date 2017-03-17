@@ -4,11 +4,11 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import javafx.application.Platform;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.api.model.datamodels.CheckPointModel;
 import ua.softgroup.matrix.api.model.datamodels.SynchronizationModel;
 import ua.softgroup.matrix.api.model.datamodels.TimeModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
@@ -71,7 +71,8 @@ public class TimeTracker extends SpyKitTool {
     private void setUpTimeTracker() throws Exception {
         logger.debug("Time tracker status: {}", status);
         if (status == NOT_USED) {
-            commandExecutioner.sendCommandWithNoResponse(START_WORK, projectId);
+            TimeModel timeModel = commandExecutioner.sendCommandWithResponse(START_WORK, projectId);
+            Platform.runLater(() -> projectsLayoutController.updateArrivalTime(timeModel.getTodayStartTime()));
             turnOnSpyKitTools();
             startCheckPointObservable();
             status = IS_USED;
@@ -143,7 +144,7 @@ public class TimeTracker extends SpyKitTool {
     private void startCheckPointObservable() {
         checkPointObservable = Observable
                 .interval(CurrentSessionInfo.getCheckPointPeriod(), TimeUnit.SECONDS)
-                .filter(number -> number != 0)
+//                .filter(number -> number != 0)
                 .map(this::getCheckpointModel)
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::sendCheckPointToServer);
@@ -174,8 +175,8 @@ public class TimeTracker extends SpyKitTool {
     private void sendCheckPointToServer(CheckPointModel checkPointModel) {
         try {
             checkSynchronization();
-            setUpdatedProjectTime(commandExecutioner.sendCommandWithResponse(CHECK_POINT, projectId, checkPointModel));
-            //TODO: update time on UI, when server will be done
+            TimeModel updatedProjectTime = commandExecutioner.sendCommandWithResponse(CHECK_POINT, projectId, checkPointModel);
+            Platform.runLater(() -> projectsLayoutController.synchronizedLocalTimeWorkWithServer(updatedProjectTime));
         } catch (IOException | ClassNotFoundException e) {
             logger.debug("Couldn't send checkpoint to server. Add checkpoint to synchronized model", e);
             addCheckpointToSynchronizationModel(checkPointModel);
@@ -193,15 +194,6 @@ public class TimeTracker extends SpyKitTool {
             commandExecutioner.sendCommandWithNoResponse(SYNCHRONIZE, CurrentSessionInfo.getSynchronizationModel(), projectId);
             CurrentSessionInfo.setSynchronizationModel(null);
         }
-    }
-
-    /**
-     * Updates project time in project models specified by current project id.
-     * @param updatedProjectTime
-     */
-    private void setUpdatedProjectTime(TimeModel updatedProjectTime){
-        CurrentSessionInfo.getProjectModels().stream().filter(projectModel -> projectModel.getId() == projectId)
-                .forEach(projectModel -> projectModel.setProjectTime(updatedProjectTime));
     }
 
     /**
@@ -236,7 +228,8 @@ public class TimeTracker extends SpyKitTool {
      */
     private void tryToTurnOffTimeTracker() throws Exception {
         if (status == IS_USED) {
-            commandExecutioner.sendCommandWithNoResponse(END_WORK, projectId);
+            sendCheckPointToServer(getCheckpointModel(1488));
+            commandExecutioner.sendCommandWithResponse(END_WORK, projectId);
             countDownLatch.countDown();
             turnOffSpyKitTools();
             status = WAS_USED;

@@ -55,7 +55,8 @@ public class ReportLayoutController {
     private static final String WORK_TIME_COLUMN = "currency";
     private static final String COEFFICIENT_COLUMN = "coefficient";
     private static final int MIN_TEXT_FOR_REPORT = 70;
-    private static final String UNKNOWN_DATA = "Unknown";
+    private static final String UNKNOWN_DATA="Unknown";
+    private static final String UNLIMITED_DATA="Unlimited";
     private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
     private ReportServerSessionManager reportServerSessionManager;
     private Long currentProjectId;
@@ -118,7 +119,7 @@ public class ReportLayoutController {
                     labelDeadlineDate.setText(model.getEndDate().toString());
                 } else {
                     labelStartDate.setText(UNKNOWN_DATA);
-                    labelDeadlineDate.setText(UNKNOWN_DATA);
+                    labelDeadlineDate.setText(UNLIMITED_DATA);
                 }
             }
         }
