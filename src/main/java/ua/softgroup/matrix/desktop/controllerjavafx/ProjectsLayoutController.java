@@ -38,6 +38,7 @@ import ua.softgroup.matrix.desktop.view.DoughnutChart;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Locale;
@@ -175,12 +176,11 @@ public class ProjectsLayoutController {
         tvProjectsTable.getFocusModel().focus(0);
         projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
         if (projectModel != null) {
-            setProjectInfoInView(projectModel);
+            setProjectInfoInView();
             new Thread(() -> {
-                setReporTextInTextArea(projectModel);
+                setReporTextInTextArea();
             }).start();
         }
-
     }
 
     /**
@@ -232,22 +232,17 @@ public class ProjectsLayoutController {
     /**
      * Get from current project information's and set their in label view element
      *
-     * @param projectModel current project what user choose in table view
+//     * @param projectModel current project what user choose in table view
      */
-    private void setProjectInfoInView(ProjectModel projectModel) {
+    private void setProjectInfoInView() {
         CurrentSessionInfo.setProjectId(projectModel.getId());
         labelNameProject.setText(projectModel.getTitle());
         labelDescribeProject.setText(projectModel.getDescription());
+        setArrivalTime();
         setDynamicInfo();
     }
 
     private void setDynamicInfo() {
-        if (projectModel.getProjectTime().getTodayStartTime()!= null) {
-            System.out.println("not null");
-            labelStartWorkToday.setText(String.valueOf(projectModel.getProjectTime().getTodayStartTime().format(todayStartTime)));
-        } else {
-            System.out.println("null");
-        }
         idleTimeInPercent = projectModel.getProjectTime().getIdlePercent();
         timeTodayInSeconds =  projectModel.getProjectTime().getTodayTime();
         timeTotalInSeconds =projectModel.getProjectTime().getTotalTime();
@@ -262,7 +257,15 @@ public class ProjectsLayoutController {
         }
         initPieChart();
         logger.debug("Time on UI is up-to-date with server");
+    }
 
+    private void setArrivalTime() {
+        if (projectModel.getProjectTime().getTodayStartTime() != null) {
+            labelStartWorkToday.setText(String.valueOf(projectModel
+                    .getProjectTime().getTodayStartTime().format(todayStartTime)));
+            return;
+        }
+        labelStartWorkToday.setText("--:--");
     }
 
     /**
@@ -308,12 +311,11 @@ public class ProjectsLayoutController {
                 taWriteReport.setEditable(true);
                 if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
                    projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
-                    setReporTextInTextArea(projectModel);
-                    setProjectInfoInView(projectModel);
+                    setReporTextInTextArea();
+                    setProjectInfoInView();
                 }
             }
         }
-
     }
 
     /**
@@ -329,9 +331,9 @@ public class ProjectsLayoutController {
      * Gets all reports for chosen project and if today user already saved report
      * displays this information in TextArea
      *
-     * @param projectModel current project what user choose in table view
+     //* @param projectModel current project what user choose in table view
      */
-    private void setReporTextInTextArea(ProjectModel projectModel)  {
+    private void setReporTextInTextArea()  {
         Set<ReportModel> reportModel = null;
         reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
         if (reportModel != null && !reportModel.isEmpty()) {
@@ -552,11 +554,17 @@ public class ProjectsLayoutController {
             }
             System.exit(0);
         });
-
     }
+
     public void synchronizedLocalTimeWorkWithServer(TimeModel updatedProjectTime){
         projectModel.setProjectTime(updatedProjectTime);
         logger.debug("Project model is updated: {}", updatedProjectTime.toString());
         setDynamicInfo();
+    }
+
+    public void updateArrivalTime(LocalDateTime arrivalTime){
+        projectModel.getProjectTime().setTodayStartTime(arrivalTime);
+        logger.debug("arrival time:", String.valueOf(arrivalTime.format(todayStartTime)));
+        setArrivalTime();
     }
 }

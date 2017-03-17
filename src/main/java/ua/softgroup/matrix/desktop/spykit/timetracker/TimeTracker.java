@@ -4,11 +4,11 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import javafx.application.Platform;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.api.model.datamodels.CheckPointModel;
 import ua.softgroup.matrix.api.model.datamodels.SynchronizationModel;
 import ua.softgroup.matrix.api.model.datamodels.TimeModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
@@ -71,7 +71,8 @@ public class TimeTracker extends SpyKitTool {
     private void setUpTimeTracker() throws Exception {
         logger.debug("Time tracker status: {}", status);
         if (status == NOT_USED) {
-            commandExecutioner.sendCommandWithNoResponse(START_WORK, projectId);
+            TimeModel timeModel = commandExecutioner.sendCommandWithResponse(START_WORK, projectId);
+            Platform.runLater(() -> projectsLayoutController.updateArrivalTime(timeModel.getTodayStartTime()));
             turnOnSpyKitTools();
             startCheckPointObservable();
             status = IS_USED;
