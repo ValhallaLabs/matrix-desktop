@@ -12,40 +12,61 @@ import ua.softgroup.matrix.desktop.utils.ConfigManager;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class SettingLayoutController {
+
     public static final Logger logger = LoggerFactory.getLogger(SettingLayoutController.class);
     private LoginLayoutController loginLayoutController;
-
     @FXML
     public TextField labelHost;
     @FXML
     public TextField labelPort;
-    private Stage stage;
 
+    /**
+     * After Load/Parsing fxml call this method
+     */
     @FXML
     public void initialize() {
         getPortAndHostFromConfigManager();
     }
 
+    /**
+     * Set in label and port label data from config manager
+     */
     private void getPortAndHostFromConfigManager() {
         labelHost.setText(ConfigManager.getHost());
         labelPort.setText(ConfigManager.getPort());
     }
 
+    /**
+     * Hears when user click on button and get data from port and host field also hide setting window
+     * @param actionEvent callback click on button
+     */
     public void saveSettings(ActionEvent actionEvent) {
         ConfigManager.saveNewConfig(labelHost.getText(), labelPort.getText());
         labelHost.getScene().getWindow().hide();
         loginLayoutController.initializeAuthenticationManager();
     }
 
+    /**
+     * Hears when user click on button and hide setting window
+     * @param actionEvent callback click on button
+     */
     public void cancelSettings(ActionEvent actionEvent) {
         labelHost.getScene().getWindow().hide();
     }
 
+    /**
+     *Hears when user click on button and call default setting of host and port
+     * @param actionEvent callback click on button
+     */
     public void resetToDefaultSettings(ActionEvent actionEvent) {
         ConfigManager.setConfigToDefault();
         getPortAndHostFromConfigManager();
     }
 
+    /**
+     * Set {@link LoginLayoutController}
+     * @param loginLayoutController modality window of setting window get from login window
+     */
      void setLoginLayoutController(LoginLayoutController loginLayoutController) {
         this.loginLayoutController = loginLayoutController;
     }
