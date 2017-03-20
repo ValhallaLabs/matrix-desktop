@@ -416,7 +416,7 @@ public class ProjectsLayoutController {
         if (timeLine != null) {
             timeLine.stop();
         }
-        KeyFrame frame = new KeyFrame(Duration.seconds(1), event -> {
+        KeyFrame frame = new KeyFrame(Duration.minutes(1), event -> {
             calculateTimeAndSetInView();
         });
         timeLine.getKeyFrames().add(frame);
@@ -446,10 +446,10 @@ public class ProjectsLayoutController {
      * Increment minutes and set this info into label view
      */
     private void calculateTimeAndSetInView() {
-        timeTodayInSeconds++;
-        timeTotalInSeconds++;
+        timeTodayInSeconds += 60;
+        timeTotalInSeconds += 60;
         labelTodayTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTodayInSeconds));
-       labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTotalInSeconds));
+        labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTotalInSeconds));
         initPieChart();
     }
 
