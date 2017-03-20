@@ -142,11 +142,10 @@ public class ProjectsLayoutController {
      * Create {@link ReportServerSessionManager} and TimeTimer
      */
     @FXML
-    private void initialize()  throws IOException {
+    private void initialize()   {
         reportServerSessionManager = new ReportServerSessionManager();
         initProjectInTable();
         getTodayDayAndSetInView();
-        setFocusOnTableView();
         countTextAndSetInView();
         addTextLimiter(taWriteReport, LIMITER_TEXT_COUNT);
 
@@ -157,7 +156,7 @@ public class ProjectsLayoutController {
      * button for send report became active
      */
     @FXML
-    private void countTextAndSetInView()throws NullPointerException {
+    private void countTextAndSetInView() {
         taWriteReport.textProperty().addListener((observable, oldValue, newValue) -> {
             int size = newValue.length();
             labelCurrentSymbols.setText(String.valueOf(size));
@@ -170,7 +169,7 @@ public class ProjectsLayoutController {
     /**
      * At start project window select last item in Table View
      */
-    private void setFocusOnTableView() throws IOException {
+    private void setFocusOnTableView() {
         tvProjectsTable.requestFocus();
         tvProjectsTable.getSelectionModel().select(0);
         tvProjectsTable.getFocusModel().focus(0);
@@ -216,6 +215,7 @@ public class ProjectsLayoutController {
             projectModelSet.forEach(projectsData::add);
             tvProjectsTable.setItems(projectsData);
             tvProjectsTable.getSortOrder().setAll(tcIdProject);
+            setFocusOnTableView();
         } else {
             viewConditionAtNullProjectModels();
         }
@@ -301,7 +301,7 @@ public class ProjectsLayoutController {
      *
      * @param event callback click on table view
      */
-    public void chosenProject(Event event)throws IOException, ClassNotFoundException {
+    public void chosenProject(Event event) {
         MouseEvent mouseEvent = (MouseEvent) event;
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
             if (mouseEvent.getClickCount() == 2) {
@@ -335,8 +335,7 @@ public class ProjectsLayoutController {
      //* @param projectModel current project what user choose in table view
      */
     private void setReporTextInTextArea()  {
-        Set<ReportModel> reportModel = null;
-        reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
+        Set<ReportModel>  reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
         if (reportModel != null && !reportModel.isEmpty()) {
             for (ReportModel model :
                     reportModel) {
@@ -358,7 +357,7 @@ public class ProjectsLayoutController {
      *
      * @param actionEvent callback click on button
      */
-    public void sendReport(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+    public void sendReport(ActionEvent actionEvent) {
         byte[] attachFile = new byte[0];
 //        if (this.attachFile.exists() && this.attachFile != null) {
 //            attachFile = Files.readAllBytes(this.attachFile.toPath());
@@ -390,7 +389,7 @@ public class ProjectsLayoutController {
      *
      * @param actionEvent callback click on button
      */
-    public void attachFile(ActionEvent actionEvent) throws IOException  {
+    public void attachFile(ActionEvent actionEvent)  {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle(FILE_CHOOSER_TITLE);
         fileChooser.getExtensionFilters().addAll(
@@ -407,9 +406,8 @@ public class ProjectsLayoutController {
      * and start play timer
      *
      * @param actionEvent callback click on button
-     * @throws InterruptedException
      */
-    public void startWork(ActionEvent actionEvent) throws InterruptedException {
+    public void startWork(ActionEvent actionEvent)  {
         timeLine = new Timeline();
         timeTracker = new TimeTracker(this, CurrentSessionInfo.getProjectId());
         timeTracker.turnOn();

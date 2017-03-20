@@ -50,7 +50,6 @@ public class ReportServerSessionManager {
      */
     public Set<ReportModel> sendProjectDataAndGetReportById(long id)  {
         Set<ReportModel> setReportModel = null;
-        //TODO: check on null
         try {
             setReportModel = ((ReportsContainerDataModel) commandExecutioner
                     .sendCommandWithResponse(ServerCommands.GET_REPORTS, id)).getReportModels();
