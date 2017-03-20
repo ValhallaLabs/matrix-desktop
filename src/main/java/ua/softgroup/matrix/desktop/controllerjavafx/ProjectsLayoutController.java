@@ -435,8 +435,7 @@ public class ProjectsLayoutController {
         if (timeTracker != null) {
             timeTracker.turnOff();
         }
-
-//        setDynamicInfo();
+        
         buttonConditionAtTimerOff();
     }
 
@@ -448,7 +447,7 @@ public class ProjectsLayoutController {
         timeTotalInSeconds += 60;
         labelTodayTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTodayInSeconds));
         labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTotalInSeconds));
-        initPieChart();
+
     }
 
     /**
