@@ -20,11 +20,11 @@
                      <children>
                         <TableView fx:id="tvProjectsTable" onMouseClicked="#chosenProject" prefHeight="750.0" prefWidth="876.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
                            <columns>
-                              <TableColumn fx:id="tcIdProject" minWidth="85.0" prefWidth="85.0" sortType="DESCENDING" text="Id" />
-                              <TableColumn fx:id="tcStatus" maxWidth="4000.0" minWidth="85.0" prefWidth="85.0" text="Status" />
-                              <TableColumn fx:id="tcAuthorName" maxWidth="4000.0" minWidth="145.0" prefWidth="145.0" text="Author" />
-                              <TableColumn fx:id="tcTitle" minWidth="145.0" prefWidth="145.0" text="Name" />
-                              <TableColumn fx:id="tcDescription" minWidth="393.0" prefWidth="393.0" text="Description" />
+                              <TableColumn fx:id="tcIdProject" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" sortType="DESCENDING" text="Id" />
+                              <TableColumn fx:id="tcStatus" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" text="Status" />
+                              <TableColumn fx:id="tcAuthorName" maxWidth="300.0" minWidth="145.0" prefWidth="145.0" text="Author" />
+                              <TableColumn fx:id="tcTitle" maxWidth="300.0" minWidth="145.0" prefWidth="145.0" text="Name" />
+                              <TableColumn fx:id="tcDescription" maxWidth="700.0" minWidth="397.0" prefWidth="397.0" text="Description" />
                            </columns>
                            <opaqueInsets>
                               <Insets />
@@ -111,7 +111,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelDescribeProject" alignment="TOP_LEFT" prefHeight="70.0" prefWidth="350.0" styleClass="font-on-label" text="Label" wrapText="true">
+                              <Label fx:id="labelDescribeProject" alignment="TOP_LEFT" prefHeight="70.0" prefWidth="350.0" styleClass="font-on-label" wrapText="true">
                                  <VBox.margin>
                                     <Insets left="17.0" right="5.0" />
                                  </VBox.margin>
@@ -146,7 +146,7 @@
                                           <Insets left="7.0" top="5.0" />
                                        </HBox.margin>
                                     </ImageView>
-                                    <Label fx:id="labelStartWorkToday" minWidth="140.0" prefWidth="140.0" text="00:00">
+                                    <Label fx:id="labelStartWorkToday" minWidth="140.0" prefWidth="140.0" text="--:--">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>

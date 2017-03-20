@@ -67,20 +67,24 @@ public class ReportLayoutController {
      * After Load/Parsing fxml call this method
      * Create {@link ReportLayoutController} and if project has reports set this data in Set of ReportModel
      *
-     * @throws IOException+
      */
     @FXML
-    private void initialize() throws IOException, ClassNotFoundException {
+    private void initialize() {
         currentProjectId = CurrentSessionInfo.getProjectId();
         reportServerSessionManager = new ReportServerSessionManager();
-        //TODO: fix this part. You have to be sure that server returned reports, and only then load them into.
         getAllReportAndSetToCollection();
-        initReportInTable();
-        setProjectInfoInView(currentProjectId);
-        setFocusOnTableView();
+
+    }
+    private void getAllReportAndSetToCollection() {
+        initializeReport();
+        if(report!=null&&!report.isEmpty()){
+            initReportInTable();
+            setProjectInfoInView(currentProjectId);
+            setFocusOnTableView();
+        }
     }
 
-    private void getAllReportAndSetToCollection() {
+    private void initializeReport() {
         report = reportServerSessionManager.sendProjectDataAndGetReportById(currentProjectId);
     }
 
@@ -93,14 +97,11 @@ public class ReportLayoutController {
         tableViewReport.getSelectionModel().select(0);
         tableViewReport.getFocusModel().focus(0);
         ReportModel reportModel = tableViewReport.getSelectionModel().getSelectedItem();
-        if (report != null && !report.isEmpty()) {
             countTextAndSetButtonCondition(reportModel);
             currentReportId = reportModel.getId();
             if (reportModel.getText() != null) {
                 taEditReport.setText(reportModel.getText());
             }
-
-        }
     }
 
     /**
@@ -143,7 +144,6 @@ public class ReportLayoutController {
      */
     @SuppressWarnings("unchecked")
     private void setReportInfoInView() {
-        if (report != null && !report.isEmpty()) {
             for (ReportModel model :
                     report) {
                 model.setCurrency(convertFromSecondsToHoursAndMinutes(model.getWorkTime()) + " x " + model.getRate() + convertFromCurrencyToSymbol(model.getCurrency()));
@@ -151,7 +151,6 @@ public class ReportLayoutController {
             }
             tableViewReport.setItems(reportData);
             tableViewReport.getSortOrder().setAll(reportTableColumnDate);
-        }
     }
 
     /**
@@ -177,7 +176,7 @@ public class ReportLayoutController {
     }
 
     private void notifyChangeInTableViewDynamic(ReportModel report) {
-        getAllReportAndSetToCollection();
+        initializeReport();
         setReportInfoInView();
         taEditReport.setText(report.getText());
     }
@@ -195,7 +194,6 @@ public class ReportLayoutController {
             if (selectReport.getText() != null) {
                 taEditReport.setText(selectReport.getText());
             }else taEditReport.setText("");
-
         }
     }
 
