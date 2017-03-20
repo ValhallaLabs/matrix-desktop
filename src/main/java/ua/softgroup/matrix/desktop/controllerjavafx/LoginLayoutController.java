@@ -39,7 +39,7 @@ public class LoginLayoutController {
     private static final int MAIN_LAYOUT_MIN_WIDTH = 1200;
     private static final int MAIN_LAYOUT_MIN_HEIGHT = 800;
     private static final String SETTING_LAYOUT = "fxml/settingLayout.fxml";
-    private static final String SETTING_LAYOUT_TITLE ="Setting";
+    private static final String SETTING_LAYOUT_TITLE ="Settings";
     private static final String PROJECT_LAYOUT = "fxml/projectsLayout.fxml";
     private static final String PROJECT_LAYOUT_TITLE = "SuperVisor";
     private static final int SETTING_LAYOUT_MIN_WIDTH = 500;
@@ -67,7 +67,6 @@ public class LoginLayoutController {
 
     /**
      * After Load/Parsing fxml call this method
-     * Create {@link AuthenticationServerSessionManager}
      */
     @FXML
     public void initialize() {
@@ -80,12 +79,19 @@ public class LoginLayoutController {
 
     }
 
+    /**
+     * Set possibility click on VBox panel and dismiss ProgressIndicator
+     */
     public void unlockLoginWindowAfterConnect(){
         vboxLoginWindow.setDisable(false);
         progIndWaitConnection.setVisible(false);
         progIndWaitConnection.setDisable(true);
         cbRememberMe.setDisable(false);
     }
+
+    /**
+     * Set impossibility click on VBox panel and show ProgressIndicator
+     */
     private void showProgressIndicator(){
         vboxLoginWindow.setDisable(true);
         progIndWaitConnection.setVisible(true);
@@ -93,6 +99,9 @@ public class LoginLayoutController {
         cbRememberMe.setDisable(true);
     }
 
+    /**
+     * If preferences saved, set automatically user login and password in special field
+     */
     private void getPreferencesAndSetLoginPassword() {
         if (preferences != null) {
             loginTextField.setText(preferences.get(USER_NAME, ""));
@@ -101,6 +110,10 @@ public class LoginLayoutController {
         }
     }
 
+    /**
+     * Check state checkbox, and if he is Selected put user login and password to preferences,
+     * else set empty field
+     */
     private void saveLoginAndPasswordToPreferencesManager() {
         if (cbRememberMe.isSelected()) {
             preferences.put(USER_NAME, loginTextField.getText());
@@ -183,7 +196,7 @@ public class LoginLayoutController {
     }
 
     /**
-     * Tells {@link LoginLayoutController} to open main Window and send to project layout stage
+     * Tells {@link LoginLayoutController} to open project window
      */
     private void startProjectsControllerLayout() {
         try {
@@ -210,7 +223,6 @@ public class LoginLayoutController {
 
     /**
      * Limit of amount on entry text
-     *
      * @param tf        TextField in what input text
      * @param maxLength int number of max text amount
      */
@@ -225,7 +237,6 @@ public class LoginLayoutController {
 
     /**
      * Check content in field on Empty
-     *
      * @param tf TextField in what we input text
      * @return boolean
      */
@@ -234,15 +245,16 @@ public class LoginLayoutController {
     }
 
     /**
-     * Hears when user click on setting menus item and
-     * tells {@link ProjectsLayoutController} to open setting window
-     *
+     * Hears when user click on setting menus
      * @param event callback click on menu
      */
     public void openSettings(Event event) {
         openSettingsWindow();
     }
 
+    /**
+     * Tell to{@link LoginLayoutController} open settings window
+     */
     private void openSettingsWindow() {
         try {
             Stage settingStage = new Stage();
@@ -268,6 +280,9 @@ public class LoginLayoutController {
         }
     }
 
+    /**
+     * Create {@link AuthenticationServerSessionManager}
+     */
      void initializeAuthenticationManager() {
          showProgressIndicator();
          if (authenticationSessionManager != null) {

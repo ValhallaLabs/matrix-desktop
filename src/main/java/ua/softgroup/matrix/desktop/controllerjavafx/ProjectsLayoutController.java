@@ -119,13 +119,13 @@ public class ProjectsLayoutController {
     private static final int REPORT_LAYOUT_MIN_HEIGHT = 765;
     private static final String INSTRUCTIONS_LAYOUT = "fxml/instructionsLayout.fxml";
     private static final String INSTRUCTIONS_LAYOUT_TITLE = "Instructions Window";
-    private static final String PIE_CHART_TITLE="Idle Time";
-    private static final String FILE_CHOOSER_TITLE="Open Resource File";
+    private static final String PIE_CHART_TITLE = "Idle Time";
+    private static final String FILE_CHOOSER_TITLE = "Open Resource File";
     private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 900;
     private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 600;
     private static final String LOGO = "/images/logoIcon.png";
-    private static final String UNKNOWN_DATA="Unknown";
-    private static final String UNLIMITED_DATA="Unlimited";
+    private static final String UNKNOWN_DATA = "Unknown";
+    private static final String UNLIMITED_DATA = "Unlimited";
     private ReportServerSessionManager reportServerSessionManager;
     private File attachFile;
     private int timeTodayInSeconds;
@@ -139,10 +139,10 @@ public class ProjectsLayoutController {
 
     /**
      * After Load/Parsing fxml call this method
-     * Create {@link ReportServerSessionManager} and TimeTimer
+     * Create {@link ReportServerSessionManager}
      */
     @FXML
-    private void initialize()   {
+    private void initialize() {
         reportServerSessionManager = new ReportServerSessionManager();
         initProjectInTable();
         getTodayDayAndSetInView();
@@ -152,7 +152,7 @@ public class ProjectsLayoutController {
     }
 
     /**
-     * Hears when text input in TextArea and if this text count >= {@value MIN_TEXT_FOR_REPORT}
+     * Hears when input text in TextArea and if this text count >= {@value MIN_TEXT_FOR_REPORT}
      * button for send report became active
      */
     @FXML
@@ -167,7 +167,7 @@ public class ProjectsLayoutController {
     }
 
     /**
-     * At start project window select last item in Table View
+     * At start project window ,focus and select newest item in Table View
      */
     private void setFocusOnTableView() {
         tvProjectsTable.requestFocus();
@@ -222,6 +222,9 @@ public class ProjectsLayoutController {
 
     }
 
+    /**
+     * If Project window start without any project, set disable on view, for impossible to do anything
+     */
     private void viewConditionAtNullProjectModels() {
         taWriteReport.setDisable(true);
         btnStart.setDisable(true);
@@ -230,9 +233,7 @@ public class ProjectsLayoutController {
     }
 
     /**
-     * Get from current project information's and set their in label view element
-     *
-//     * @param projectModel current project what user choose in table view
+     * Get from current project information's about name project and him description and set into special label for this fields
      */
     private void setProjectInfoInView() {
         CurrentSessionInfo.setProjectId(projectModel.getId());
@@ -242,16 +243,19 @@ public class ProjectsLayoutController {
         setDynamicInfo();
     }
 
+    /**
+     * Get from current project information's about time ,idle time,start and deadline date and set into special view for this fields
+     */
     private void setDynamicInfo() {
         idleTimeInPercent = projectModel.getProjectTime().getIdlePercent();
-        timeTodayInSeconds =  projectModel.getProjectTime().getTodayTime();
-        timeTotalInSeconds =projectModel.getProjectTime().getTotalTime();
+        timeTodayInSeconds = projectModel.getProjectTime().getTodayTime();
+        timeTotalInSeconds = projectModel.getProjectTime().getTotalTime();
         labelTodayTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTodayInSeconds));
         labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTotalInSeconds));
         if ((projectModel.getStartDate() != null && projectModel.getEndDate() != null)) {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
             labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
-        }else {
+        } else {
             labelDateStartProject.setText(UNKNOWN_DATA);
             labelDeadLineProject.setText(UNLIMITED_DATA);
         }
@@ -259,6 +263,9 @@ public class ProjectsLayoutController {
         logger.debug("Time on UI is up-to-date with server");
     }
 
+    /**
+     * Get from current project information about arrival time today and set in special label
+     */
     private void setArrivalTime() {
         if (projectModel.getProjectTime().getTodayStartTime() != null) {
             labelStartWorkToday.setText(String.valueOf(projectModel
@@ -269,7 +276,8 @@ public class ProjectsLayoutController {
     }
 
     /**
-     * Get DownTime and CleanTime and set this information in Pie Chart
+     * Get DownTime and CleanTime and set this information to collections,
+     * add into anchor pane label and pie chart and set on project window
      */
     private void initPieChart() {
         double idleTime = Math.round(idleTimeInPercent);
@@ -282,12 +290,18 @@ public class ProjectsLayoutController {
         containerForPieChart.getChildren().addAll(doughnutChart, labelIdle);
     }
 
+    /**
+     * Create label view and set idle percent in it
+     */
     private void createLabelForDisplayIdleTime() {
         labelIdle = new Label(Math.round(idleTimeInPercent) + "%");
         labelIdle.setId("labelIdle");
         labelIdle.setPadding(new Insets(87, 0, 50, 69));
     }
 
+    /**
+     * Create custom PieChart with given options
+     */
     private void createPieChart() {
         doughnutChart.setMaxWidth(180);
         doughnutChart.setMaxHeight(180);
@@ -311,7 +325,7 @@ public class ProjectsLayoutController {
                 taWriteReport.setText("");
                 taWriteReport.setEditable(true);
                 if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
-                   projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
+                    projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
                     setReporTextInTextArea();
                     setProjectInfoInView();
                 }
@@ -325,21 +339,21 @@ public class ProjectsLayoutController {
      * @param event callback click on table view
      */
     private void openReportWindowOnTwoMouseClick(Event event) {
-       startReportWindow();
+        startReportWindow();
     }
 
     /**
      * Gets all reports for chosen project and if today user already saved report
      * displays this information in TextArea
-     *
-     //* @param projectModel current project what user choose in table view
+     * <p>
+     * //* @param projectModel current project what user choose in table view
      */
-    private void setReporTextInTextArea()  {
-        Set<ReportModel>  reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
+    private void setReporTextInTextArea() {
+        Set<ReportModel> reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
         if (reportModel != null && !reportModel.isEmpty()) {
             for (ReportModel model :
                     reportModel) {
-                if (model.getDate().equals(LocalDate.now())&&model.getText()!=null) {
+                if (model.getDate().equals(LocalDate.now()) && model.getText() != null) {
                     taWriteReport.setText(model.getText());
                     viewConditionAtReportAlreadyExist();
                 }
@@ -347,6 +361,9 @@ public class ProjectsLayoutController {
         }
     }
 
+    /**
+     * Set disable on button and mouseTransparent on text field
+     */
     private void viewConditionAtReportAlreadyExist() {
         btnSendReport.setDisable(true);
         taWriteReport.setMouseTransparent(true);
@@ -366,7 +383,7 @@ public class ProjectsLayoutController {
         System.out.println(Arrays.toString(attachFile));
         ReportModel reportModel = new ReportModel(taWriteReport.getText(), LocalDate.now(), attachFile);
         reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
-          viewConditionAtReportAlreadyExist();
+        viewConditionAtReportAlreadyExist();
     }
 
     /**
@@ -389,7 +406,7 @@ public class ProjectsLayoutController {
      *
      * @param actionEvent callback click on button
      */
-    public void attachFile(ActionEvent actionEvent)  {
+    public void attachFile(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle(FILE_CHOOSER_TITLE);
         fileChooser.getExtensionFilters().addAll(
@@ -402,12 +419,12 @@ public class ProjectsLayoutController {
     }
 
     /**
-     * Hears when user click on button and create Timeline with KeyFrame duration every 1 minutes
-     * and start play timer
+     * Hears when user click on button and create Timeline with KeyFrame duration
+     * and start play timer and timeTracker
      *
      * @param actionEvent callback click on button
      */
-    public void startWork(ActionEvent actionEvent)  {
+    public void startWork(ActionEvent actionEvent) {
         timeLine = new Timeline();
         timeTracker = new TimeTracker(this, CurrentSessionInfo.getProjectId());
         timeTracker.turnOn();
@@ -429,18 +446,18 @@ public class ProjectsLayoutController {
      * @param actionEvent callback click on button
      */
     public void stopWork(ActionEvent actionEvent) {
-        if (timeLine !=null){
+        if (timeLine != null) {
             timeLine.stop();
         }
         if (timeTracker != null) {
             timeTracker.turnOff();
         }
-        
+
         buttonConditionAtTimerOff();
     }
 
     /**
-     * Increment minutes and set this info into label view
+     * Increment timeToday and timeTotal on 60  and set this information in special field with given formatting
      */
     private void calculateTimeAndSetInView() {
         timeTodayInSeconds += 60;
@@ -485,16 +502,28 @@ public class ProjectsLayoutController {
         }
     }
 
+    /**
+     * Convert Seconds to Hours and Minutes format
+     * @param seconds current time what we want convert
+     * @return String of Hours and Minutes
+     */
     private String convertFromSecondsToHoursAndMinutes(int seconds) {
         int todayTimeInHours = seconds / 3600;
         int todayTimeInMinutes = (seconds % 3600) / 60;
         return String.valueOf(todayTimeInHours + "h " + todayTimeInMinutes + 'm');
     }
 
+    /**
+     *  Hears when user click on label
+     * @param actionEvent  callback click on label
+     */
     public void startReportLayoutWindow(ActionEvent actionEvent) {
     startReportWindow();
     }
 
+    /**
+     *  Tells {@link ProjectsLayoutController} to open report window
+     */
     private void startReportWindow(){
         try {
             Stage reportsStage = new Stage();
@@ -520,6 +549,9 @@ public class ProjectsLayoutController {
 
     }
 
+    /**
+     *  Tells {@link ProjectsLayoutController} to open instructions window
+     */
     public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
@@ -543,6 +575,10 @@ public class ProjectsLayoutController {
         }
     }
 
+    /**
+     * Hears when user exit from program's  and stop timeTracker if he forget stop him ,and close all programms command
+     * @param mainLayout send layout were we start and create project window
+     */
     public void setUpStage(Stage mainLayout) {
         this.stage=mainLayout;
         stage.setOnCloseRequest(event -> {
@@ -554,12 +590,20 @@ public class ProjectsLayoutController {
         });
     }
 
+    /**
+     * Set actual time to current project model
+     * @param updatedProjectTime get actual time
+     */
     public void synchronizedLocalTimeWorkWithServer(TimeModel updatedProjectTime){
         projectModel.setProjectTime(updatedProjectTime);
         logger.debug("Project model is updated: {}", updatedProjectTime.toString());
         setDynamicInfo();
     }
 
+    /**
+     *Set actual arrival tim to project model
+     * @param arrivalTime get actual arrival time
+     */
     public void updateArrivalTime(LocalDateTime arrivalTime){
         projectModel.getProjectTime().setTodayStartTime(arrivalTime);
         logger.debug("arrival time:", String.valueOf(arrivalTime.format(todayStartTime)));

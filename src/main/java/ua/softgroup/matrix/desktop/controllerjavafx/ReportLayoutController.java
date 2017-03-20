@@ -66,7 +66,6 @@ public class ReportLayoutController {
     /**
      * After Load/Parsing fxml call this method
      * Create {@link ReportLayoutController} and if project has reports set this data in Set of ReportModel
-     *
      */
     @FXML
     private void initialize() {
@@ -75,6 +74,10 @@ public class ReportLayoutController {
         getAllReportAndSetToCollection();
 
     }
+
+    /**
+     * Check on null and is Empty Set of report
+     */
     private void getAllReportAndSetToCollection() {
         initializeReport();
         if(report!=null&&!report.isEmpty()){
@@ -84,6 +87,9 @@ public class ReportLayoutController {
         }
     }
 
+    /**
+     * Create {@link ReportServerSessionManager}
+     */
     private void initializeReport() {
         report = reportServerSessionManager.sendProjectDataAndGetReportById(currentProjectId);
     }
@@ -163,11 +169,10 @@ public class ReportLayoutController {
     }
 
     /**
-     * Hears when user click on button and send change {@link ReportModel} to {@link ReportLayoutController} and close stage
-     *
+     * Hears when user click on button and send report also clear data in collections
      * @param actionEvent callback click on button
      */
-    public void changeReport(ActionEvent actionEvent) {
+    public void createOrChangeReport(ActionEvent actionEvent) {
         ReportModel reportModel = new ReportModel(currentReportId, taEditReport.getText());
         reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
         reportData.clear();
@@ -175,6 +180,10 @@ public class ReportLayoutController {
 
     }
 
+    /**
+     * Set report what we create ore change in the text area
+      * @param report report what we create or change
+     */
     private void notifyChangeInTableViewDynamic(ReportModel report) {
         initializeReport();
         setReportInfoInView();
@@ -214,12 +223,22 @@ public class ReportLayoutController {
         });
     }
 
+    /**
+     * Convert Seconds to Hours and Minutes format
+     * @param seconds current time what we want convert
+     * @return String of Hours and Minutes
+     */
     private String convertFromSecondsToHoursAndMinutes(int seconds) {
         int todayTimeInHours = seconds / 3600;
         int todayTimeInMinutes = (seconds % 3600) / 60;
         return String.valueOf(todayTimeInHours + "h " + todayTimeInMinutes + 'm');
     }
 
+    /**
+     * Check what currency we have and return necessary symbol for it
+     * @param currency current currency what we get
+     * @return String symbol of currency
+     */
     private String convertFromCurrencyToSymbol(String currency) {
         return "USD".equals(currency) ? "$" : "₴";
     }
