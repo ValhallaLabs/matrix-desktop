@@ -103,7 +103,7 @@ public class ProjectsLayoutController {
     private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
     private static DateTimeFormatter todayStartTime = DateTimeFormatter.ofPattern("HH:mm");
-    private static final Logger logger = LoggerFactory.getLogger(LoginLayoutController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProjectsLayoutController.class);
     private static final String ID_COLUMN = "id";
     private static final String AUTHOR_NAME_COLUMN = "authorName";
     private static final String TITLE_COLUMN = "title";
