@@ -126,6 +126,10 @@ public class ProjectsLayoutController {
     private static final String LOGO = "/images/logoIcon.png";
     private static final String UNKNOWN_DATA = "Unknown";
     private static final String UNLIMITED_DATA = "Unlimited";
+    private static final String CONTROL_LAYOUT = "fxml/controlLayout.fxml";
+    private static final String CONTROL_LAYOUT_TITLE = "Control Window";
+    private static final int CONTROL_LAYOUT_MIN_WIDTH =1200;
+    private static final int CONTROL_LAYOUT_MIN_HEIGHT =765;
     private ReportServerSessionManager reportServerSessionManager;
     private File attachFile;
     private int timeTodayInSeconds;
@@ -551,6 +555,7 @@ public class ProjectsLayoutController {
 
     /**
      *  Tells {@link ProjectsLayoutController} to open instructions window
+     * @param actionEvent callback click on label
      */
     public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
         try {
@@ -572,6 +577,33 @@ public class ProjectsLayoutController {
             instructionsStage.show();
         } catch (IOException e) {
             logger.debug("Error when start Instructions Window " + e);
+        }
+    }
+
+    /**
+     * Tells {@link ProjectsLayoutController} to open control window
+     * @param actionEvent callback click on label
+     */
+    public void starControlLayoutWindow(ActionEvent actionEvent) {
+        try {
+            ClassLoader classLoader=getClass().getClassLoader();
+            Stage controlStage= new Stage();
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(classLoader.getResource(CONTROL_LAYOUT));
+            AnchorPane pane= loader.load();
+            Scene scene=new Scene(pane);
+            controlStage.setScene(scene);
+            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
+            controlStage.getIcons().add(logoIcon);
+            controlStage.setMinWidth(CONTROL_LAYOUT_MIN_WIDTH);
+            controlStage.setMinHeight(CONTROL_LAYOUT_MIN_HEIGHT);
+            controlStage.initModality(Modality.WINDOW_MODAL);
+            controlStage.setTitle(CONTROL_LAYOUT_TITLE);
+            controlStage.initOwner(labelDayInNumber.getScene().getWindow());
+            controlStage.setResizable(false);
+            controlStage.show();
+        } catch (IOException e) {
+            logger.debug("Error when start Control Window" + e);
         }
     }
 
@@ -609,4 +641,6 @@ public class ProjectsLayoutController {
         logger.debug("arrival time:", String.valueOf(arrivalTime.format(todayStartTime)));
         setArrivalTime();
     }
+
+
 }
