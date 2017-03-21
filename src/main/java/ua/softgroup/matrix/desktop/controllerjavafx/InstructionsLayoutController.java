@@ -6,10 +6,11 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import ua.softgroup.matrix.server.desktop.model.InstructionsModel;
+import ua.softgroup.matrix.api.model.datamodels.InstructionsModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
@@ -21,7 +22,6 @@ public class InstructionsLayoutController {
     @FXML
     public ListView<InstructionsModel> lvInstructions;
     private List<InstructionsModel> listInstructionsModel = new ArrayList<>();
-    private ObservableList<InstructionsModel> content;
 
     /**
      * After Load/Parsing fxml call this method
@@ -37,7 +37,7 @@ public class InstructionsLayoutController {
      * @param event callback click on list item
      */
     public void chooseCurentInstructuon(Event event) {
-        InstructionsModel selectProject = (InstructionsModel) lvInstructions.getSelectionModel().getSelectedItem();
+        InstructionsModel selectProject = lvInstructions.getSelectionModel().getSelectedItem();
         labelInstructions.setText(selectProject.getContent());
     }
 
@@ -92,7 +92,7 @@ public class InstructionsLayoutController {
                 "Данные шаги сделаны в целях безопастности.\n" +
                 "\n" +
                 "Рассчитываю на ваше понимание и поддержку, сенкс."));
-        content = FXCollections.observableArrayList(listInstructionsModel);
+        ObservableList<InstructionsModel> content = FXCollections.observableArrayList(listInstructionsModel);
         lvInstructions.setItems(content);
     }
 

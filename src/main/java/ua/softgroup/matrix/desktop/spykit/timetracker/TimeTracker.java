@@ -3,39 +3,48 @@ package ua.softgroup.matrix.desktop.spykit.timetracker;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import javafx.application.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.controllerjavafx.MainLayoutController;
+import ua.softgroup.matrix.api.model.datamodels.CheckPointModel;
+import ua.softgroup.matrix.api.model.datamodels.SynchronizationModel;
+import ua.softgroup.matrix.api.model.datamodels.TimeModel;
+import ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController;
+import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
-import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitListener;
+import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus;
+import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWindowListener;
 import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWindowListenerFactory;
-import ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.NativeDevicesListener;
+import ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.IdleListener;
 import ua.softgroup.matrix.desktop.spykit.screenshooter.ScreenShooter;
+import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
 
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.IS_USED;
-import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.NOT_USED;
-import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.WAS_USED;
+import static ua.softgroup.matrix.api.ServerCommands.*;
+import static ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus.*;
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
-//TODO: when server will be done, rebuild and regist
 public class TimeTracker extends SpyKitTool {
     private static final Logger logger = LoggerFactory.getLogger(TimeTracker.class);
-    private MainLayoutController mainLayoutController;
-    private SpyKitListener activeWindowListener, devicesListener;
+    private ProjectsLayoutController projectsLayoutController;
+    private ActiveWindowListener activeWindowListener;
+    private IdleListener idleListener;
     private ScreenShooter screenShooter;
     private CountDownLatch countDownLatch;
     private long projectId;
-    private Disposable controlPointObservable;
+    private Disposable checkPointObservable;
+    private CommandExecutioner commandExecutioner;
 
-    //TODO: Uncomment, when time tracker will be merged with main part
-    public  TimeTracker(/*MainLayoutController mainLayoutController,*/ long projectId) {
-//        this.mainLayoutController = mainLayoutController;
+    public  TimeTracker(ProjectsLayoutController projectsLayoutController, long projectId) {
+        this.projectsLayoutController = projectsLayoutController;
         this.projectId = projectId;
+        commandExecutioner = new CommandExecutioner();
     }
 
     /**
@@ -43,51 +52,56 @@ public class TimeTracker extends SpyKitTool {
      */
     @Override
     public void turnOn() {
+        logger.debug("Time tracker attempts to starts");
         new Thread(() -> {
             try {
                 setUpTimeTracker();
-            } catch (InterruptedException e) {
-                //TODO: global crash, turn down matrix
+            } catch (Exception e) {
                 logger.debug("Time tracker crashes: {}", e);
+                Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
             }
         }).start();
     }
 
     /**
-     * Sends command to server about start tracking project with received id.
+     * If Time tracker is not used, method sends a START_WORK command to server, turns on spy kit tools,
+     * starts control point observable and changed on {@link SpyKitToolStatus#IS_USED}
+     * @throws Exception
      */
-    private void setUpTimeTracker() throws InterruptedException {
+    private void setUpTimeTracker() throws Exception {
+        logger.debug("Time tracker status: {}", status);
         if (status == NOT_USED) {
-            //TODO: add method for sending start work command to server
+            TimeModel timeModel = commandExecutioner.sendCommandWithResponse(START_WORK, projectId);
+            Platform.runLater(() -> projectsLayoutController.updateArrivalTime(timeModel.getTodayStartTime()));
             turnOnSpyKitTools();
-            startControlPointObservable();
+            startCheckPointObservable();
             status = IS_USED;
             logger.debug("Time tracking is started");
             (countDownLatch = new CountDownLatch(1)).await();
             return;
         }
-        logger.debug("Time tracking was already started");
     }
 
     /**
      * Call methods of initializing and turning on all spy kit tools.
      */
     private void turnOnSpyKitTools() {
-        screenShooter = new ScreenShooter(projectId);
-        starActiveWindowListenerThread();
-        starDevicesListenerThread();
+        logger.debug("Time tracker attempts to start spy kit's tools");
+        screenShooter = new ScreenShooter();
+        startActiveWindowListenerThread();
+        startIdleListenerThread();
     }
 
     /**
      * Starts thread of active window listener.
      */
-    private void starActiveWindowListenerThread() {
+    private void startActiveWindowListenerThread() {
         new Thread(() -> {
             try {
                 turnOnActiveWindowListener();
             } catch (Exception e) {
-                //TODO: global crash, turn down matrix
                 logger.debug("Active windows listener crashed: {}", e);
+                Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
             }
         }).start();
     }
@@ -96,68 +110,126 @@ public class TimeTracker extends SpyKitTool {
      * Initialize and turn on active window listener.
      */
     private void turnOnActiveWindowListener() throws Exception {
-        activeWindowListener = ActiveWindowListenerFactory.getListener(projectId);
+        activeWindowListener = ActiveWindowListenerFactory.getListener();
         if(activeWindowListener != null) {
             activeWindowListener.turnOn();
         }
     }
 
     /**
-     * Starts thread of devices listener.
+     * Starts thread of idle listener.
      */
-    private void starDevicesListenerThread() {
+    private void startIdleListenerThread() {
         new Thread(() -> {
             try {
-                turnOnDevicesListener();
+                turnOnIdleListener();
             } catch (Exception e) {
-                logger.debug("Devices listener crashed: {}", e);
-                //TODO: global crash, turn down matrix
+                logger.debug("Idle listener crashed: {}", e);
+                Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
             }
         }).start();
     }
 
     /**
-     * Initialize and turn on devices listener.
+     * Initialize and turn on idle listener.
      */
-    private void turnOnDevicesListener() throws Exception {
-        devicesListener = new NativeDevicesListener(this);
-        devicesListener.turnOn();
+    private void turnOnIdleListener() throws Exception {
+        idleListener = new IdleListener();
+        idleListener.turnOn();
     }
 
     /**
-     * Creates observable that emits control for sending time and logs to server
+     * Creates observable that emits checkpoints for sending time and logs to server
      */
-    private void startControlPointObservable() {
-        controlPointObservable = Observable
-                .interval(10, TimeUnit.SECONDS)
-                .filter(number -> number != 0)
+    private void startCheckPointObservable() {
+        checkPointObservable = Observable
+                .interval(CurrentSessionInfo.getCheckPointPeriod(), TimeUnit.SECONDS)
+//                .filter(number -> number != 0)
+                .map(this::getCheckpointModel)
                 .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .subscribe(this::sendControlPointToServer);
+                .subscribe(this::sendCheckPointToServer);
     }
 
-    //TODO: rewrite this method, when server problems will be resolved
-    private void sendControlPointToServer(long number){
-        //Temporary realization
-        logger.debug("Control point #{}", number);
-        screenShooter.makeScreenshot();
-        logger.debug("Active windows:{}", activeWindowListener.getLogs());
-        logger.debug("Keyboard logs:{}", devicesListener.getLogs());
+    /**
+     * Creates check point model with all required logs. Checks
+     * @param order order of checkpoint
+     * @return {@link CheckPointModel}
+     */
+    private CheckPointModel getCheckpointModel(long order) {
+        byte[] screenshot = null;
+        if (CurrentSessionInfo.getScreenshotFrequency() != 0 &&
+                order % CurrentSessionInfo.getScreenshotFrequency() == 0) {
+            screenshot = screenShooter.makeScreenshot();
+        }
+        return new CheckPointModel(order, screenshot, idleListener.getKeyboardLogs(),
+                idleListener.getMouseFootage(), activeWindowListener.getWindowTimeMap(),
+                idleListener.getIdleTimeSeconds());
     }
 
-    @Override
-    public void turnOff()  {
+    /**
+     * Calls method of checking synchronization, then tries to send a CHECK_POINT command to server and
+     * retrieve {@link TimeModel} with update total and today time. In case of failure, it calls method of
+     * adding checkpoint to synchronize model.
+     * @param checkPointModel with logs for server
+     */
+    private void sendCheckPointToServer(CheckPointModel checkPointModel) {
         try {
-            tryToTurnOffTimeTracker();
-        } catch (Exception e) {
-            //TODO: global crash, turn down matrix
-            logger.debug("Time tracker crashes: {}", e);
+            checkSynchronization();
+            TimeModel updatedProjectTime = commandExecutioner.sendCommandWithResponse(CHECK_POINT, projectId, checkPointModel);
+            Platform.runLater(() -> projectsLayoutController.synchronizedLocalTimeWorkWithServer(updatedProjectTime));
+        } catch (IOException | ClassNotFoundException e) {
+            logger.debug("Couldn't send checkpoint to server. Add checkpoint to synchronized model", e);
+            addCheckpointToSynchronizationModel(checkPointModel);
         }
     }
 
+    /**
+     * Checks presence of a synchronization model and in case of presence tries to send it to server, and then
+     * removes it.
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    private void checkSynchronization() throws IOException, ClassNotFoundException {
+        if(CurrentSessionInfo.getSynchronizationModel() != null) {
+            commandExecutioner.sendCommandWithNoResponse(SYNCHRONIZE, CurrentSessionInfo.getSynchronizationModel(), projectId);
+            CurrentSessionInfo.setSynchronizationModel(null);
+        }
+    }
+
+    /**
+     * Adds checkPoint to synchronization model.
+     * @param checkPointModel model that wasn't send to server.
+     */
+    private void addCheckpointToSynchronizationModel(CheckPointModel checkPointModel) {
+        if(CurrentSessionInfo.getSynchronizationModel() == null) {
+            CurrentSessionInfo.setSynchronizationModel(new SynchronizationModel());
+            CurrentSessionInfo.getSynchronizationModel().setCheckPointModels(new HashSet<>());
+        }
+        CurrentSessionInfo.getSynchronizationModel().getCheckPointModels().add(checkPointModel);
+    }
+
+    /**
+     * Calls method of trying to turn off time tracker
+     */
+    @Override
+    public void turnOff() {
+        try {
+            tryToTurnOffTimeTracker();
+        } catch (Exception e) {
+            logger.debug("Time tracker crashes: {}", e);
+            Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
+        }
+    }
+
+    /**
+     * If time tracker has status {@link SpyKitToolStatus#IS_USED}, it sends a END_WORK command to
+     * server, then calls method of turning off spykit tools and changes status on {@link SpyKitToolStatus#WAS_USED}
+     * @throws Exception
+     */
     private void tryToTurnOffTimeTracker() throws Exception {
         if (status == IS_USED) {
-            //TODO: add method for sending end work command to server
+            sendCheckPointToServer(getCheckpointModel(1488));
+            commandExecutioner.sendCommandWithResponse(END_WORK, projectId);
             countDownLatch.countDown();
             turnOffSpyKitTools();
             status = WAS_USED;
@@ -168,24 +240,14 @@ public class TimeTracker extends SpyKitTool {
     }
 
     /**
-     * Call methods of initializing and turning on all spy kit tools.
+     * Call methods of turning off all spy kit tools.
      */
     private void turnOffSpyKitTools() throws Exception {
-        controlPointObservable.dispose();
+        checkPointObservable.dispose();
         screenShooter = null;
         activeWindowListener.turnOff();
         activeWindowListener = null;
-        devicesListener.turnOff();
-        devicesListener = null;
-    }
-
-    public void startDowntime() {
-        //TODO: send command to server about start downtime
-        logger.debug("Down time is started on server");
-    }
-
-    public void stopDowntime() {
-        //TODO: send command to server about stop downtime
-        logger.debug("Down time is stopped on server");
+        idleListener.turnOff();
+        idleListener = null;
     }
 }

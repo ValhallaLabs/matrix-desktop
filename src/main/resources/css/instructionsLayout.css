@@ -6,15 +6,22 @@
 .split-pane > .split-pane-divider {
     -fx-background-color: transparent
 }
-.grei-background{
-    -fx-background-color: #ebebeb;
-}
-
 .list-view .list-cell:even {
-    -fx-background-color: #ebebeb;
-    -fx-text-fill: black;
+    -fx-background-color: #9FA8DA;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
 }
 .list-view .list-cell:odd {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #ebebeb;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+.grey-background{
+    -fx-background-color: #ebebeb;
+    -fx-text-fill: black;
+}.blue-background{
+    -fx-background-color: #3063a4;
     -fx-text-fill: black;
 }

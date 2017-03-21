@@ -1,6 +1,9 @@
-.btn {
+.btn-login {
     -fx-background-color: #3063a4;
     -fx-text-fill: #ffffff;
+}
+.button:hover{
+    -fx-background-color: #3b82d6;
 }
 .text-area{
     -fx-background-color:#ECF0F1 ;

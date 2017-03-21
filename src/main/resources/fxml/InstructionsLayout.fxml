@@ -7,46 +7,46 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/instructionsLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.InstructionsLayoutController">
-   <children>
-      <Pane focusTraversable="true" prefHeight="100.0" prefWidth="200.0" styleClass="grei-background" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <Label prefWidth="850.0" text="Instructions" textFill="#3063a4">
-               <padding>
-                  <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
-               </padding>
-               <font>
-                  <Font name="System Bold" size="40.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <SplitPane dividerPositions="0.35" layoutX="122.0" layoutY="152.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="130.0">
-        <items>
-          <AnchorPane minHeight="446.0" minWidth="297.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <ListView fx:id="lvInstructions" layoutX="56.0" layoutY="105.0" onMouseClicked="#chooseCurentInstructuon" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="446.0" minWidth="553.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <ScrollPane prefViewportHeight="498.0" prefViewportWidth="583.048828125" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <content>
-                        <Label fx:id="labelInstructions" alignment="TOP_LEFT" layoutY="-14.0" prefHeight="450.0" prefWidth="555.0" styleClass="grei-background" text="Choose you instructions" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                           </padding>
-                        </Label>
-                     </content>
-                  </ScrollPane>
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
-   </children>
+    <children>
+        <Pane focusTraversable="true" prefHeight="100.0" prefWidth="200.0" styleClass="blue-background" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="20.0">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            <children>
+                <Label prefWidth="850.0" text="Instructions" textFill="#ebebeb">
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="15.0" top="20.0" />
+                    </padding>
+                    <font>
+                        <Font name="System Bold" size="40.0" />
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <SplitPane dividerPositions="0.3" layoutX="122.0" layoutY="152.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="130.0">
+            <items>
+                <AnchorPane minHeight="446.0" minWidth="254.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <ListView fx:id="lvInstructions" layoutX="56.0" layoutY="105.0" onMouseClicked="#chooseCurentInstructuon" prefHeight="446.0" prefWidth="254.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="446.0" minWidth="596.0" prefHeight="446.0" prefWidth="596.0">
+                    <children>
+                        <ScrollPane hbarPolicy="NEVER" prefViewportHeight="498.0" prefViewportWidth="583.048828125" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <content>
+                                <Label fx:id="labelInstructions" alignment="TOP_LEFT" layoutY="-14.0" minHeight="446.0" minWidth="575.0" prefWidth="575.0" styleClass="grey-background" text="A main advantage of using the built-in JavaFX layout panes is that the size and alignment of nodes is handled by the pane. As the pane is resized, the nodes are resized according to their preferred size range preferences. Note that not all node classes are resizable. UI controls and layout panes are resizable, but shapes, Text objects, and Group objects are not resizable and are treated as rigid objects in a layout.If you want more control over the size of controls in your UI, you can set their preferred size range directly. The layout pane then uses your settings to determine the size of the control. To manage the position of the controls, you can use the alignment properties for the layout panes.This topic provides simple examples for sizing and aligning nodes in a pane. The LayoutSizingAligning.java file contains the source code for the samples described in this topic. The LayoutSizingAligning.zip file contains the NetBeans IDE project for the sample.Sizing NodesLayouts query the preferred size of their nodes by invoking the prefWidth(height) and prefHeight(width) methods. By default, UI controls compute default values for their preferred size that is based on the content of the control. For example, the computed size of a Button object is determined by the length of the text and the size of the font used for the label, plus the size of any image. Typically, the computed size is just big enough for the control and the label to be fully visible.UI controls also provide default minimum and maximum sizes that are based on the typical usage of the control. For example, the maximum size of a Button object defaults to its preferred size because you don't usually want buttons to grow arbitrarily large. However, the maximum size of a ScrollPane object is unbounded because typically you do want them to grow to fill their spaces.You can use the default size constraints of nodes, or you can set them to provide the look that you A main advantage of using the built-in JavaFX layout panes is that the size and alignment of nodes is handled by the pane. As the pane is resized, the nodes are resized according to their preferred size range preferences. Note that not all node classes are resizable. UI controls and layout panes are resizable, but shapes, Text objects, and Group objects are not resizable and are treated as rigid objects in a layout.If you want more control over the size of controls in your UI, you can set their preferred size range directly. The layout pane then uses your settings to determine the size of the control. To manage the position of the controls, you can use the alignment properties for the layout panes.This topic provides simple examples for sizing and aligning nodes in a pane. The LayoutSizingAligning.java file contains the source code for the samples described in this topic. The LayoutSizingAligning.zip file contains the NetBeans IDE project for the sample.Sizing NodesLayouts query the preferred size of their nodes by invoking the prefWidth(height) and prefHeight(width) methods. By default, UI controls compute default values for their preferred size that is based on the content of the control. For example, the computed size of a Button object is determined by the length of the text and the size of the font used for the label, plus the size of any image. Typically, the computed size is just big enough for the control and the label to be fully visible.UI controls also provide default minimum and maximum sizes that are based on the typical usage of the control. For example, the maximum size of a Button object defaults to its preferred size because you don't usually want buttons to grow arbitrarily large. However, the maximum size of a ScrollPane object is unbounded because typically you do want them to grow to fill their spaces.You can use the default size constraints of nodes, or you can set them to provide the look that you " wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="15.0" right="15.0" top="15.0" />
+                                    </padding>
+                                </Label>
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
 </AnchorPane>

@@ -1,9 +1,9 @@
 package ua.softgroup.matrix.desktop.currentsessioninfo;
 
-import ua.softgroup.matrix.server.desktop.model.ClientSettingsModel;
-import ua.softgroup.matrix.server.desktop.model.ProjectModel;
-import ua.softgroup.matrix.server.desktop.model.ReportModel;
-import ua.softgroup.matrix.server.desktop.model.TokenModel;
+
+import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
+import ua.softgroup.matrix.api.model.datamodels.SynchronizationModel;
+import ua.softgroup.matrix.api.model.datamodels.InitializeModel;
 
 import java.util.Set;
 
@@ -12,42 +12,71 @@ import java.util.Set;
  */
 // TODO package structure
 public class CurrentSessionInfo {
-    private static TokenModel tokenModel = new TokenModel("token");
-    private static Set<ProjectModel> userActiveProjects;
-    private static ClientSettingsModel clientSettingsModel;
+    private static InitializeModel initializeModel = new InitializeModel();
+    private static SynchronizationModel synchronizationModel = null;
     private static long projectId;
 
+//    public static InitializeModel getInitializeModel() {
+//        return initializeModel;
+//    }
 
-    public static TokenModel getTokenModel() {
-        return tokenModel;
+    public static void setInitializeModel(InitializeModel initializeModel) {
+        CurrentSessionInfo.initializeModel = initializeModel;
     }
 
-    public static void setTokenModel(TokenModel tokenModel) {
-        CurrentSessionInfo.tokenModel = tokenModel;
+    public static String getToken() {
+        return initializeModel.getToken();
     }
 
-    public static Set<ProjectModel> getUserActiveProjects() {
-        return userActiveProjects;
+//    public void setToken(String token) {
+//        initializeModel.setToken(token);
+//    }
+
+    public static Set<ProjectModel> getProjectModels() {
+        return initializeModel.getProjectModels();
     }
 
-    public static void setUserActiveProjects(Set<ProjectModel> userActiveProjects) {
-        CurrentSessionInfo.userActiveProjects = userActiveProjects;
+//    public void setProjectModels(Set<ProjectModel> projectModels) {
+//        initializeModel.setProjectModels(projectModels);
+//    }
+
+    public static int getIdlePeriod() {
+        return initializeModel.getIdlePeriod();
     }
 
-    public static ClientSettingsModel getClientSettingsModel() {
-        return clientSettingsModel;
+//    public void setIdlePeriod(long idlePeriod) {
+//        initializeModel.setIdlePeriod(idlePeriod);
+//    }
+
+    public static int getScreenshotFrequency() {
+        return initializeModel.getScreenshotFrequency();
     }
 
-    public static void setClientSettingsModel(ClientSettingsModel clientSettingsModel) {
-        CurrentSessionInfo.clientSettingsModel = clientSettingsModel;
+//    public void setScreenshotFrequency(long screenshotFrequency) {
+//        initializeModel.setScreenshotFrequency(screenshotFrequency);
+//    }
+
+    public static int getCheckPointPeriod() {
+        return initializeModel.getCheckPointPeriod();
     }
 
-    public static void setProjectId(long id){
-        CurrentSessionInfo.projectId = id;
+//    public void setCheckPointFrequency(long checkPointFrequency) {
+//        initializeModel.setCheckPointFrequency(checkPointFrequency);
+//    }
+
+    public static SynchronizationModel getSynchronizationModel() {
+        return synchronizationModel;
     }
 
-    public static long getProjectId(){
+    public static void setSynchronizationModel(SynchronizationModel synchronizationModel) {
+        CurrentSessionInfo.synchronizationModel = synchronizationModel;
+    }
+
+    public static long getProjectId() {
         return projectId;
     }
 
+    public static void setProjectId(long projectId) {
+        CurrentSessionInfo.projectId = projectId;
+    }
 }

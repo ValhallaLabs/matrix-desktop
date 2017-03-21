@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.image.*?>
@@ -9,363 +10,359 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController">
+<AnchorPane prefHeight="765.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.ProjectsLayoutController">
    <children>
-      <SplitPane dividerPositions="0.715" layoutX="244.0" layoutY="191.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane minHeight="738.0" minWidth="854.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <TableView fx:id="tvProjectsTable" onMouseClicked="#chosenProject" prefHeight="750.0" prefWidth="876.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                     <columns>
-                        <TableColumn fx:id="tcIdProject" prefWidth="75.0" text="Id Project" />
-                        <TableColumn fx:id="tcAuthorName" maxWidth="4000.0" prefWidth="75.0" text="Author" />
-                        <TableColumn fx:id="tcTitle" minWidth="1.0" prefWidth="1.0" text="Name" />
-                        <TableColumn fx:id="tcDescription" prefWidth="92.0" text="Description" />
-                        <TableColumn fx:id="tcStatus" maxWidth="4000.0" prefWidth="75.0" text="Status" />
-                     </columns>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </TableView>
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="738.0" minWidth="338.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <VBox layoutX="39.0" layoutY="31.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+         <children>
+            <SplitPane dividerPositions="0.715" layoutX="244.0" layoutY="191.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <items>
+                <AnchorPane focusTraversable="true" minHeight="738.0" minWidth="854.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <HBox minHeight="30.0" prefHeight="30.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/calendarIcon.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="7.0" right="3.0" top="12.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label fx:id="labelDayInWord" textFill="#3063a4">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Label text="-" textFill="#3063a4">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Label fx:id="labelDayInNumber" textFill="#3063a4">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets left="10.0" top="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <Label minHeight="20.0" prefHeight="20.0" prefWidth="350.0" text="Название проекта" textFill="#c9c9c9">
-                           <VBox.margin>
-                              <Insets bottom="5.0" left="17.0" right="10.0" top="5.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <HBox minWidth="25.0" prefHeight="25.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/computerIcon.gif" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="17.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label fx:id="labelNameProject" prefHeight="25.0" prefWidth="300.0" styleClass="font-on-label" textFill="#3063a4">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets right="5.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <Label minHeight="20.0" prefHeight="20.0" prefWidth="360.0" text="Описание проекта" textFill="#c9c9c9">
-                           <VBox.margin>
-                              <Insets bottom="3.0" left="17.0" right="10.0" top="5.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="labelDiscribeProject" alignment="TOP_LEFT" prefHeight="70.0" prefWidth="350.0" styleClass="font-on-label" text="Label" wrapText="true">
-                           <VBox.margin>
-                              <Insets left="17.0" right="5.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <HBox minHeight="20.0" prefHeight="20.0" prefWidth="200.0">
-                           <children>
-                              <Label prefWidth="170.0" text="Начало работы" textFill="#c9c9c9">
-                                 <HBox.margin>
-                                    <Insets left="17.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label prefWidth="170.0" text="Сегодня отработано" textFill="#c9c9c9">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font></Label>
-                           </children>
-                        </HBox>
-                        <HBox minHeight="40.0" prefHeight="40.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/startTimeIcon.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="7.0" top="5.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label fx:id="labelStartWorkToday" minWidth="140.0" prefWidth="140.0" text="08:56">
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/timeWorkIcon.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label fx:id="labelTodayTotalTime" minWidth="140.0" prefWidth="140.0" text="5h 36m">
-                                 <HBox.margin>
-                                    <Insets left="5.0" right="5.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets left="10.0" top="6.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <SplitPane dividerPositions="0.5" minHeight="170.0" prefHeight="170.0" prefWidth="200.0">
-                           <items>
-                              <AnchorPane minHeight="168.0" minWidth="158.0" prefHeight="168.0" prefWidth="158.0">
-                                 <children>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <Label prefWidth="145.0" text="Всего отработано" textFill="#c9c9c9">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets left="15.0" top="10.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <HBox prefHeight="38.0" prefWidth="200.0">
-                                             <children>
-                                                <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../images/timeWorkIcon.png" />
-                                                   </image>
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" right="2.0" top="5.0" />
-                                                   </HBox.margin>
-                                                </ImageView>
-                                                <Label fx:id="labelTotalTime" prefWidth="140.0" text="136h 22m" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="System Bold" size="16.0" />
-                                                   </font>
-                                                   <HBox.margin>
-                                                      <Insets left="2.0" right="3.0" top="1.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets left="5.0" />
-                                             </VBox.margin>
-                                          </HBox>
-                                          <Label prefWidth="162.0" text="Дата начала проекта" textFill="#c9c9c9">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets left="15.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <HBox prefHeight="38.0" prefWidth="200.0">
-                                             <children>
-                                                <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../images/calendarIcon.png" />
-                                                   </image>
-                                                   <HBox.margin>
-                                                      <Insets left="15.0" right="2.0" top="4.0" />
-                                                   </HBox.margin>
-                                                </ImageView>
-                                                <Label fx:id="labelDateStartProject" prefWidth="140.0" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="System Bold" size="16.0" />
-                                                   </font>
-                                                   <HBox.margin>
-                                                      <Insets right="3.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                          <Label prefWidth="162.0" text="Дедлайн" textFill="#c9c9c9">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets left="15.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <HBox prefHeight="38.0" prefWidth="200.0">
-                                             <children>
-                                                <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../images/calendarIcon.png" />
-                                                   </image>
-                                                   <HBox.margin>
-                                                      <Insets left="15.0" right="2.0" top="5.0" />
-                                                   </HBox.margin>
-                                                </ImageView>
-                                                <Label fx:id="labelDeadLineProject" prefWidth="150.0" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="System Bold" size="16.0" />
-                                                   </font>
-                                                   <HBox.margin>
-                                                      <Insets right="3.0" top="1.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane minHeight="168.0" minWidth="162.0" prefHeight="168.0" prefWidth="162.0">
-                                 <children>
-                                    <PieChart fx:id="missPieCharts" focusTraversable="true" layoutX="-205.0" layoutY="-147.0" legendVisible="false" title="Простой" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                    </PieChart>
-                                 </children>
-                              </AnchorPane>
-                           </items>
-                           <VBox.margin>
-                              <Insets left="5.0" right="5.0" />
-                           </VBox.margin>
-                        </SplitPane>
-                        <HBox minHeight="60.0" prefHeight="60.0" prefWidth="200.0">
-                           <children>
-                              <Button fx:id="btnStart" mnemonicParsing="false" prefHeight="48.0" prefWidth="160.0" styleClass="green-button" text="Старт">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="7.0" right="6.0" top="5.0" />
-                                 </HBox.margin>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                              <Button fx:id="btnStop" mnemonicParsing="false" prefHeight="48.0" prefWidth="160.0" styleClass="red-button" text="Стоп">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                           </children>
-                           <VBox.margin>
+                        <TableView fx:id="tvProjectsTable" onMouseClicked="#chosenProject" prefHeight="750.0" prefWidth="876.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="tcIdProject" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" sortType="DESCENDING" text="Id" />
+                              <TableColumn fx:id="tcStatus" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" text="Status" />
+                              <TableColumn fx:id="tcAuthorName" maxWidth="300.0" minWidth="145.0" prefWidth="145.0" text="Author" />
+                              <TableColumn fx:id="tcTitle" maxWidth="300.0" minWidth="145.0" prefWidth="145.0" text="Name" />
+                              <TableColumn fx:id="tcDescription" maxWidth="700.0" minWidth="397.0" prefWidth="397.0" text="Description" />
+                           </columns>
+                           <opaqueInsets>
                               <Insets />
-                           </VBox.margin>
-                        </HBox>
-                        <TextArea fx:id="taWriteReport" minHeight="200.0" onInputMethodTextChanged="#countTextAndSetInView" prefHeight="200.0" prefWidth="316.0" promptText="Написать отчет.." styleClass="font-on-label" wrapText="true">
-                           <VBox.margin>
-                              <Insets left="5.0" right="5.0" />
-                           </VBox.margin>
-                        </TextArea>
-                        <HBox minHeight="48.0" prefHeight="48.0" prefWidth="200.0">
-                           <children>
-                              <Button fx:id="btnAttachFile" mnemonicParsing="false" prefHeight="31.0" prefWidth="135.0" styleClass="add-button" text="Прикрепить файл">
-                                 <font>
-                                    <Font size="11.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="5.0" top="4.0" />
-                                 </HBox.margin>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                              <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#saveReport" prefHeight="31.0" prefWidth="135.0" styleClass="send-reports-button" text="Отправить отчет">
-                                 <font>
-                                    <Font size="11.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets top="4.0" />
-                                 </HBox.margin>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                              <Label fx:id="labelCurrentSymbols" text="0" textFill="#3063a4">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="6.0" top="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Label fx:id="labelSymbolsNeedsToReport" text="/70" textFill="#3063a4">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="8.0" />
-                           </VBox.margin>
-                        </HBox>
+                           </opaqueInsets>
+                        </TableView>
                      </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+                  </AnchorPane>
+                <AnchorPane focusTraversable="true" minHeight="738.0" minWidth="338.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <VBox focusTraversable="true" layoutX="39.0" layoutY="31.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox minHeight="30.0" prefHeight="30.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/calendarIcon.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="7.0" right="3.0" top="12.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label fx:id="labelDayInWord" textFill="#3063a4">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label text="-" textFill="#3063a4">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="labelDayInNumber" textFill="#3063a4">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Label minHeight="20.0" prefHeight="20.0" prefWidth="350.0" text="Project name" textFill="#c9c9c9">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="17.0" right="10.0" top="5.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <HBox minWidth="25.0" prefHeight="25.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/computerIcon.gif" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="17.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label fx:id="labelNameProject" prefHeight="25.0" prefWidth="300.0" styleClass="font-on-label" textFill="#3063a4">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <Label minHeight="20.0" prefHeight="20.0" prefWidth="360.0" text="Project Description" textFill="#c9c9c9">
+                                 <VBox.margin>
+                                    <Insets bottom="3.0" left="17.0" right="10.0" top="5.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelDescribeProject" alignment="TOP_LEFT" prefHeight="70.0" prefWidth="350.0" styleClass="font-on-label" wrapText="true">
+                                 <VBox.margin>
+                                    <Insets left="17.0" right="5.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <HBox minHeight="20.0" prefHeight="20.0" prefWidth="200.0">
+                                 <children>
+                                    <Label prefWidth="170.0" text="Arrival time" textFill="#c9c9c9">
+                                       <HBox.margin>
+                                          <Insets left="17.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefWidth="170.0" text="Time Spent Today" textFill="#c9c9c9">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox minHeight="40.0" prefHeight="40.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/startTimeIcon.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="7.0" top="5.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label fx:id="labelStartWorkToday" minWidth="140.0" prefWidth="140.0" text="--:--">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/timeWorkIcon.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label fx:id="labelTodayTotalTime" minWidth="140.0" prefWidth="140.0" text="0h 0m">
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="6.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <SplitPane dividerPositions="0.5" minHeight="170.0" prefHeight="170.0" prefWidth="200.0">
+                                 <items>
+                                    <AnchorPane minHeight="168.0" minWidth="158.0" prefHeight="168.0" prefWidth="158.0">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <Label prefWidth="145.0" text="Total Time" textFill="#c9c9c9">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets left="15.0" top="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <HBox prefHeight="38.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/timeWorkIcon.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" right="2.0" top="5.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                      <Label fx:id="labelTotalTime" prefWidth="140.0" text="0h 0m" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font name="System Bold" size="16.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="2.0" right="3.0" top="1.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets left="5.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <Label prefWidth="162.0" text="Startred" textFill="#c9c9c9">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets left="15.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <HBox prefHeight="38.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/calendarIcon.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="15.0" right="2.0" top="4.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                      <Label fx:id="labelDateStartProject" prefWidth="140.0" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font name="System Bold" size="16.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets right="3.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <Label prefWidth="162.0" text="Deadline" textFill="#c9c9c9">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets left="15.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <HBox prefHeight="38.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/calendarIcon.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="15.0" right="2.0" top="5.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                      <Label fx:id="labelDeadLineProject" prefWidth="150.0" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font name="System Bold" size="16.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets right="3.0" top="1.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="containerForPieChart" minHeight="168.0" minWidth="162.0" prefHeight="168.0" prefWidth="162.0" />
+                                 </items>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </VBox.margin>
+                              </SplitPane>
+                              <HBox focusTraversable="true" minHeight="60.0" prefHeight="60.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="btnStart" mnemonicParsing="false" onAction="#startWork" prefHeight="48.0" prefWidth="160.0" styleClass="green-button" text="Start">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="7.0" right="6.0" top="5.0" />
+                                       </HBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button fx:id="btnStop" defaultButton="true" disable="true" mnemonicParsing="false" onAction="#stopWork" prefHeight="48.0" prefWidth="160.0" styleClass="red-button" text="Stop">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <TextArea fx:id="taWriteReport" focusTraversable="false" minHeight="200.0" onInputMethodTextChanged="#countTextAndSetInView" prefHeight="200.0" prefWidth="316.0" promptText="Write a report .." styleClass="font-on-label" wrapText="true">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </VBox.margin>
+                              </TextArea>
+                              <HBox focusTraversable="true" minHeight="48.0" prefHeight="48.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="btnAttachFile" mnemonicParsing="false" onAction="#attachFile" prefHeight="31.0" prefWidth="135.0" styleClass="add-button" text="Attach file">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="5.0" top="4.0" />
+                                       </HBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#sendReport" prefHeight="31.0" prefWidth="135.0" styleClass="send-reports-button" text="Send report">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="4.0" />
+                                       </HBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Label fx:id="labelCurrentSymbols" text="0" textFill="#3063a4">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="6.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="labelSymbolsNeedsToReport" text="/70" textFill="#3063a4">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="8.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </AnchorPane>
+      <Button fx:id="menuReport" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#startReportLayoutWindow" styleClass="mybutton-menu" text="Report" />
+      <Button layoutX="82.0" layoutY="2.0" mnemonicParsing="false" onAction="#startInstructionsLayoutWindow" styleClass="mybutton-menu" text="Instructions" />
    </children>
 </AnchorPane>

@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="500.0" stylesheets="@../css/settingLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.SettingLayoutController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="500.0" stylesheets="@../css/settingLayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.SettingLayoutController">
    <children>
       <AnchorPane layoutX="4.0" prefHeight="250.0" prefWidth="492.0">
          <children>
@@ -23,15 +27,15 @@
                   </Label>
                   <HBox prefHeight="50.0" prefWidth="200.0">
                      <children>
-                        <Label prefHeight="35.0" prefWidth="140.0" text="Connection Host:" textFill="#3063a4">
+                        <Label prefHeight="35.0" text="Connection Host:" textFill="#3063a4">
                            <HBox.margin>
-                              <Insets right="5.0" />
+                              <Insets left="4.0" right="10.0" />
                            </HBox.margin>
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <TextField focusTraversable="false" prefHeight="35.0" prefWidth="165.0" promptText="192.168.11.84" text="192.168.11.84" />
+                        <TextField fx:id="labelHost" focusTraversable="false" prefHeight="35.0" prefWidth="275.0" promptText="like 192.168.11.84" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="20.0" left="30.0" right="20.0" top="20.0" />
@@ -39,15 +43,15 @@
                   </HBox>
                   <HBox prefHeight="50.0" prefWidth="200.0">
                      <children>
-                        <Label prefHeight="35.0" prefWidth="140.0" text="Connection Port:" textFill="#3063a4">
+                        <Label prefHeight="35.0" text="Connection Port:" textFill="#3063a4">
                            <HBox.margin>
-                              <Insets right="5.0" />
+                              <Insets left="4.0" right="13.0" />
                            </HBox.margin>
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <TextField focusTraversable="false" prefHeight="35.0" prefWidth="165.0" promptText="6666" text="6666" />
+                        <TextField fx:id="labelPort" focusTraversable="false" prefHeight="35.0" prefWidth="275.0" promptText="like 6666" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="18.0" left="30.0" right="20.0" />
@@ -55,28 +59,28 @@
                   </HBox>
                   <HBox prefHeight="50.0" prefWidth="200.0" styleClass="sa">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" styleClass="save-button" text="Save">
+                        <Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveSettings" prefHeight="45.0" prefWidth="130.0" styleClass="save-button" text="Save">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
                            <font>
-                              <Font name="System Bold" size="14.0" />
+                              <Font name="DejaVu Sans Bold" size="12.0" />
                            </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" styleClass="cancel-button" text="Cancel">
+                        <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelSettings" prefHeight="45.0" prefWidth="130.0" styleClass="cancel-button" text="Cancel">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
                            <font>
-                              <Font name="System Bold" size="14.0" />
+                              <Font name="DejaVu Sans Bold" size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" styleClass="reset-button" text="Reset to Default">
+                        <Button fx:id="btnResetToDefault" mnemonicParsing="false" onAction="#resetToDefaultSettings" prefHeight="45.0" prefWidth="130.0" styleClass="reset-button" text="Reset to Default">
                            <font>
-                              <Font name="System Bold" size="14.0" />
+                              <Font name="DejaVu Sans Bold" size="12.0" />
                            </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />

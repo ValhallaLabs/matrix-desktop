@@ -10,10 +10,6 @@ import com.sun.jna.platform.win32.WinDef;
 class WindowsActiveWindowListener extends ActiveWindowListener {
     private static final int MAX_TITLE_LENGTH = 1024;
 
-    WindowsActiveWindowListener(long projectId) {
-        super(projectId);
-    }
-
     @Override
     protected String getProcessTitle() {
         char[] buffer = new char[MAX_TITLE_LENGTH * 2];
