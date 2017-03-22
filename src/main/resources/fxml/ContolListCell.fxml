@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" stylesheets="@../css/controlListCell.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" stylesheets="@../css/controlListCell.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.controllerjavafx.ControlListViewCell">
    <children>
       <VBox layoutX="20.0" layoutY="20.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -44,7 +44,7 @@
                   </Pane>
                   <Pane prefHeight="26.0" prefWidth="537.0" styleClass="grey-background" GridPane.columnIndex="1">
                      <children>
-                        <Label fx:id="labelProjectName" prefHeight="30.0" prefWidth="250.0" text="21.16.2017">
+                        <Label fx:id="labelDate" prefHeight="30.0" prefWidth="250.0" text="21.16.2017">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -59,7 +59,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="labelResponsible" prefHeight="30.0" prefWidth="250.0" text="Valgalla project">
+                        <Label fx:id="labelProject" prefHeight="30.0" prefWidth="250.0" text="Valgalla project">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -119,7 +119,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="1">
                      <children>
-                        <Label fx:id="labelProjectName1" prefHeight="26.0" prefWidth="250.0" text="Unknown">
+                        <Label fx:id="labelStart" prefHeight="26.0" prefWidth="250.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -134,7 +134,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="labelResponsible1" prefHeight="26.0" prefWidth="250.0" text="Unknown">
+                        <Label fx:id="labelEnd" prefHeight="26.0" prefWidth="250.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -149,7 +149,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.columnIndex="2">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="130.0" text="SUPERVISOR ID:" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="164.0" text="SUPERVISOR ID :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -164,7 +164,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="140.0" text="DEADLINE :" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="140.0" text="CHECKED :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -179,7 +179,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="3">
                      <children>
-                        <Label fx:id="labelStartDate" prefHeight="26.0" prefWidth="125.0" text="Unknown">
+                        <Label fx:id="labelSupervisorId" prefHeight="26.0" prefWidth="125.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -194,7 +194,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="labelDeadlineDate" prefHeight="26.0" prefWidth="125.0" text="Unknown">
+                        <Label fx:id="labelChecked" prefHeight="26.0" prefWidth="125.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -254,7 +254,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="labelProjectName11" prefHeight="26.0" prefWidth="250.0" text="Unknown">
+                        <Label fx:id="labelWorkSeconds" prefHeight="26.0" prefWidth="250.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -269,7 +269,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <Label fx:id="labelProjectName12" prefHeight="26.0" prefWidth="250.0" text="Unknown">
+                        <Label fx:id="labelIdleSeconds" prefHeight="26.0" prefWidth="250.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -284,7 +284,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <Label fx:id="labelProjectName13" prefHeight="26.0" prefWidth="250.0" text="Unknown">
+                        <Label fx:id="labelIdlePercentage" prefHeight="26.0" prefWidth="250.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -299,7 +299,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="130.0" text="START :" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="130.0" text="RATE :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -314,7 +314,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="130.0" text="START :" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="130.0" text="COEFFICIENT :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -329,7 +329,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="130.0" text="START :" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="130.0" text="CURRENCY :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -344,7 +344,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="labelDeadlineDate1" prefHeight="26.0" prefWidth="125.0" text="Unknown">
+                        <Label fx:id="labelRate" prefHeight="26.0" prefWidth="125.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -359,7 +359,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="3" GridPane.rowIndex="3">
                      <children>
-                        <Label fx:id="labelDeadlineDate2" prefHeight="26.0" prefWidth="125.0" text="Unknown">
+                        <Label fx:id="labelCoefficient" prefHeight="26.0" prefWidth="125.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -374,7 +374,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <children>
-                        <Label fx:id="labelDeadlineDate3" prefHeight="26.0" prefWidth="125.0" text="Unknown">
+                        <Label fx:id="labelCurrency" prefHeight="26.0" prefWidth="125.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -407,9 +407,9 @@
             </GridPane>
          </children>
       </VBox>
-      <ScrollPane hbarPolicy="NEVER" prefViewportHeight="136.0" prefViewportWidth="753.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="248.0">
+      <ScrollPane hbarPolicy="NEVER" prefViewportHeight="136.0" prefViewportWidth="753.0" styleClass="grey-background" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="248.0">
          <content>
-            <Label alignment="TOP_LEFT" prefWidth="748.0" styleClass="grey-background" text=" to tables, project and report column name.Save reports on Server.Possibilite change reports on serverCreate complete server session manager for reports.Add const field to tables, project and report column name.Save reports on Server.Possibilite change reports on serverCreate complete server session manager for reports.Add const field to tables, project and report column name.Save reports on Server.Possibilite change reports on server.Create complete server session manager for reports.Add const field to tables, project and report column name.Save reports on Server.Possibilite change reports on serverCreate complete server session manager for reports.Add const field to tables, project and report column name.Save reports on Server.Possibilite change reports on serverCreate complete server session manager for reports.Add const field to tables, project and report column name.Save reports on Server.Possibilite change reports on serverCreate complete server session manager for reports.Add const field to tables, project and report column name.Save reports on Server.Possibilite change re to tables, project and report column name.Save reports on Server.Possibilite change reports on serverCreate complete server session manager for reports.Add const field to tables, project and report column name.Save reports on Server.Possibilite change reports on serverCreate complete server session manager for reports.Add const field to tables, project and report column name.Save reports on Server.Possibilite change reports on server.Create complete server session manager for reports.Add const field to tables, project and report column name.Save reports on Server.Possibilite change reports on serverCreate complete server session manager for reports.Add const field to tables, project and report column name.Save reports on Server.Possibilite change reports on serverCreate complete server session manager for reports.Add const field to tables, project and report column name.Save reports on Server.Possibilite change reports on serverCreate complete server session manager for reports.Add const field to tables, project and report column name.Save reports on Server.Possibilite change reports on serverports on server" wrapText="true">
+            <Label fx:id="labelTextReport" alignment="TOP_LEFT" prefWidth="748.0" text="Итак, вы трудились много дней (а может и ночей), и вот ваше первое гибридное мобильное приложение готово. Оно достаточно стабильно, большинство критичных багов закрыто. Остались мелкие, но помня о том, что перфекционизм — зло, вы принимаете волевое решение выложить приложение. Итак, вы трудились много дней (а может и ночей), и вот ваше первое гибридное мобильное приложение готово. Оно достаточно стабильно, большинство критичных багов закрыто. Остались мелкие, но помня о том, что перфекционизм — зло, вы принимаете волевое решение выложить приложение.Итак, вы трудились много дней (а может и ночей), и вот ваше первое гибридное мобильное приложение готово. Оно достаточно стабильно, большинство критичных багов закрыто. Остались мелкие, но помня о том, что перфекционизм — зло, вы пр" wrapText="true">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
                </padding>
