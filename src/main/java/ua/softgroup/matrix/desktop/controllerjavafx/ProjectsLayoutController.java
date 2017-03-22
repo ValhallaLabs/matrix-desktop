@@ -598,8 +598,8 @@ public class ProjectsLayoutController {
             controlStage.setMinWidth(CONTROL_LAYOUT_MIN_WIDTH);
             controlStage.setMinHeight(CONTROL_LAYOUT_MIN_HEIGHT);
             controlStage.initModality(Modality.WINDOW_MODAL);
-            controlStage.setTitle(CONTROL_LAYOUT_TITLE);
             controlStage.initOwner(labelDayInNumber.getScene().getWindow());
+            controlStage.setTitle(CONTROL_LAYOUT_TITLE);
             controlStage.setResizable(false);
             controlStage.show();
         } catch (IOException e) {

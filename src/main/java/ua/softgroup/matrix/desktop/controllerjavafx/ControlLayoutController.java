@@ -4,7 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.util.Callback;
 import ua.softgroup.matrix.desktop.model.ReportControlModel;
 
 import java.net.URL;
@@ -23,11 +25,19 @@ public class ControlLayoutController implements Initializable {
 
     public ControlLayoutController() {
         controlList = FXCollections.observableArrayList();
-        controlList.addAll(new ReportControlModel(LocalDate.now(), 1, "20", "20", 7, 8, 6, 7, true, 4.5, 5, 6, "fdfdsfdsfds"));
+        controlList.addAll(new ReportControlModel(LocalDate.now(), 1, "20", "20", 7, 8, 6, 7, true, 4.5, 5, 6, "fdfdsfdsfds"),
+                new ReportControlModel(LocalDate.now(), 1, "20", "20", 7, 8, 6, 7, true, 4.5, 5, 6, "fdfdsfdsfds"),
+                new ReportControlModel(LocalDate.now(), 1, "20", "20", 7, 8, 6, 7, true, 4.5, 5, 6, "fdfdsfdsfds"));
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         listViewReportDetails.setItems(controlList);
+        listViewReportDetails.setCellFactory(new Callback<ListView<ReportControlModel>, ListCell<ReportControlModel>>() {
+            @Override
+            public ListCell<ReportControlModel> call(ListView<ReportControlModel> param) {
+                return new ControlListViewCell();
+            }
+        });
     }
 }

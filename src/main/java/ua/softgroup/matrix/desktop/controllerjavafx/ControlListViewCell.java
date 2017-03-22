@@ -1,9 +1,13 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.layout.AnchorPane;
 import ua.softgroup.matrix.desktop.model.ReportControlModel;
+
+import java.io.IOException;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
@@ -35,9 +39,51 @@ public class ControlListViewCell extends ListCell<ReportControlModel> {
     public Label labelCurrency;
     @FXML
     public Label labelTextReport;
+    @FXML
+    public AnchorPane anchorPane;
+    private  FXMLLoader mLoader;
 
     @Override
     protected void updateItem(ReportControlModel item, boolean empty) {
         super.updateItem(item, empty);
+        if (empty || item == null) {
+            setText(null);
+            setGraphic(null);
+        }else{
+
+
+       if(mLoader==null) {
+           mLoader = new FXMLLoader(getClass().getResource("/fxml/controlListCell.fxml"));
+           mLoader.setController(this);
+
+           try {
+               mLoader.load();
+           } catch (IOException e) {
+               System.out.println("Error when start Control List Cell Window" + e.toString());
+           }
+       }
+       if (item.getDate()!=null){
+           labelDate.setText(String.valueOf(item.getDate()));
+       }
+
+        labelProject.setText("fdfd");
+            labelStart.setText(item.getStartWork());
+            labelEnd.setText(item.getEndWork());
+            labelSupervisorId.setText(String.valueOf(item.getSupervisorId()));
+            labelChecked.setText(String.valueOf(item.isChecked()));
+            labelWorkSeconds.setText(String.valueOf(item.getWorkSecond()));
+            labelIdleSeconds.setText(String.valueOf(item.getIdleSecond()));
+            labelIdlePercentage.setText(String.valueOf(item.getIdlePercentage()));
+            labelRate.setText(String.valueOf(item.getRate()));
+            labelCoefficient.setText(String.valueOf(item.getCoefficient()));
+            if (item.getCurrency()==1){
+                labelCurrency.setText("$");
+            }else labelCurrency.setText("₴");
+            labelTextReport.setText(item.getText());
+
+            setText(null);
+            setGraphic(anchorPane);
+
+       }
     }
 }

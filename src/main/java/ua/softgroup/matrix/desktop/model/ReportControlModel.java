@@ -1,11 +1,12 @@
 package ua.softgroup.matrix.desktop.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-public class ReportControlModel {
+public class ReportControlModel implements Serializable {
     private LocalDate date;
     private long projectId;
     private String startWork;
