@@ -25,12 +25,17 @@
                   <ListView fx:id="listViewReportDetails" layoutY="134.0" prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
                   <HBox layoutX="102.0" layoutY="-8.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="663.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
+                        <TextField fx:id="testUsers">
+                           <HBox.margin>
+                              <Insets top="40.0" />
+                           </HBox.margin>
+                        </TextField>
                         <Label text="Choose work period from">
                            <padding>
                               <Insets left="80.0" right="10.0" top="40.0" />
                            </padding>
                         </Label>
-                        <DatePicker>
+                        <DatePicker fx:id="calendarFromDate">
                            <HBox.margin>
                               <Insets right="30.0" top="35.0" />
                            </HBox.margin>
@@ -43,12 +48,12 @@
                               <Insets right="10.0" />
                            </padding>
                         </Label>
-                        <DatePicker>
+                        <DatePicker fx:id="calendarToDate">
                            <HBox.margin>
                               <Insets right="40.0" top="35.0" />
                            </HBox.margin>
                         </DatePicker>
-                        <Button mnemonicParsing="false" text="Show">098
+                        <Button mnemonicParsing="false" onMouseClicked="#show" text="Show">098
                            <HBox.margin>
                               <Insets top="35.0" />
                            </HBox.margin>

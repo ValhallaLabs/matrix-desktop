@@ -54,6 +54,8 @@ dependencies {
     compile 'net.java.dev.jna:jna:4.3.0'
     compile 'net.java.dev.jna:jna-platform:4.3.0'
     compile 'commons-configuration:commons-configuration:1.6'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-jackson:2.2.0'
     compile 'de.huxhorn.lilith:de.huxhorn.lilith.3rdparty.junique:1.0.2'
     testCompile 'junit:junit:4.12'
 }

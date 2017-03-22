@@ -66,23 +66,23 @@ public class ControlListViewCell extends ListCell<ReportControlModel> {
            labelDate.setText(String.valueOf(item.getDate()));
        }
 
-        labelProject.setText("fdfd");
-            labelStart.setText(item.getStartWork());
-            labelEnd.setText(item.getEndWork());
-            labelSupervisorId.setText(String.valueOf(item.getSupervisorId()));
-            labelChecked.setText(String.valueOf(item.isChecked()));
-            labelWorkSeconds.setText(String.valueOf(item.getWorkSecond()));
-            labelIdleSeconds.setText(String.valueOf(item.getIdleSecond()));
-            labelIdlePercentage.setText(String.valueOf(item.getIdlePercentage()));
-            labelRate.setText(String.valueOf(item.getRate()));
-            labelCoefficient.setText(String.valueOf(item.getCoefficient()));
-            if (item.getCurrency()==1){
-                labelCurrency.setText("$");
-            }else labelCurrency.setText("₴");
-            labelTextReport.setText(item.getText());
-
-            setText(null);
-            setGraphic(anchorPane);
+//        labelProject.setText("fdfd");
+//            labelStart.setText(item.getStartWork());
+//            labelEnd.setText(item.getEndWork());
+//            labelSupervisorId.setText(String.valueOf(item.getSupervisorId()));
+//            labelChecked.setText(String.valueOf(item.isChecked()));
+//            labelWorkSeconds.setText(String.valueOf(item.getWorkSecond()));
+//            labelIdleSeconds.setText(String.valueOf(item.getIdleSecond()));
+//            labelIdlePercentage.setText(String.valueOf(item.getIdlePercentage()));
+//            labelRate.setText(String.valueOf(item.getRate()));
+//            labelCoefficient.setText(String.valueOf(item.getCoefficient()));
+//            if (item.getCurrency()==1){
+//                labelCurrency.setText("$");
+//            }else labelCurrency.setText("₴");
+//            labelTextReport.setText(item.getText());
+//
+//            setText(null);
+//            setGraphic(anchorPane);
 
        }
     }
