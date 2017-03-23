@@ -31,4 +31,12 @@ public class WorkPeriod {
     public void setEnd(String end) {
         this.end = end;
     }
+
+    @Override
+    public String toString() {
+        return "WorkPeriod{" +
+                "start='" + start + '\'' +
+                ", end='" + end + '\'' +
+                '}';
+    }
 }

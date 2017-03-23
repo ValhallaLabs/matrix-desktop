@@ -163,4 +163,25 @@ public class DayJson {
     public void setWorkPeriods(Set<WorkPeriod> workPeriods) {
         this.workPeriods = workPeriods;
     }
+
+    @Override
+    public String toString() {
+        return "DayJson{" +
+                "id=" + id +
+                ", entityType='" + entityType + '\'' +
+                ", date='" + date + '\'' +
+                ", start='" + start + '\'' +
+                ", end='" + end + '\'' +
+                ", workSeconds=" + workSeconds +
+                ", idleSeconds=" + idleSeconds +
+                ", idlePercentage=" + idlePercentage +
+                ", checked=" + checked +
+                ", jailerId=" + jailerId +
+                ", coefficient=" + coefficient +
+                ", reportText='" + reportText + '\'' +
+                ", rate=" + rate +
+                ", currencyId=" + currencyId +
+                ", workPeriods=" + workPeriods +
+                '}';
+    }
 }

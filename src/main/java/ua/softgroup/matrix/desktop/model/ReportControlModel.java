@@ -52,4 +52,15 @@ public class ReportControlModel implements Serializable {
     public void setWorkDays(Set<DayJson> workDays) {
         this.workDays = workDays;
     }
+
+    @Override
+    public String toString() {
+        return "ReportControlModel{" +
+                "date='" + date + '\'' +
+                ", totalWorkSeconds=" + totalWorkSeconds +
+                ", totalIdleSeconds=" + totalIdleSeconds +
+                ", totalIdlePercentage=" + totalIdlePercentage +
+                ", workDays=" + workDays +
+                '}';
+    }
 }
