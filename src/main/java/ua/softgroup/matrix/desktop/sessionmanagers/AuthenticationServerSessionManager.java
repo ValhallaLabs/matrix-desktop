@@ -1,21 +1,20 @@
 package ua.softgroup.matrix.desktop.sessionmanagers;
 
-import ua.softgroup.matrix.api.ServerCommands;
 import io.reactivex.Emitter;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import javafx.application.Platform;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.api.ServerCommands;
 import ua.softgroup.matrix.api.model.datamodels.AuthModel;
 import ua.softgroup.matrix.api.model.datamodels.InitializeModel;
 import ua.softgroup.matrix.api.model.requestmodels.RequestModel;
 import ua.softgroup.matrix.api.model.responsemodels.ResponseModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
-import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
 
 import java.io.IOException;
@@ -35,11 +34,8 @@ public class AuthenticationServerSessionManager {
     private Emitter<AuthModel> authModelEmitter;
     private Disposable socketDisposable;
     private CountDownLatch countDownLatch;
-    private CommandExecutioner commandExecutioner;
     private ObjectOutputStream objectOutputStream;
     private ObjectInputStream objectInputStream;
-
-
 
     public AuthenticationServerSessionManager(LoginLayoutController loginLayoutController) {
         this.loginLayoutController = loginLayoutController;
@@ -56,7 +52,6 @@ public class AuthenticationServerSessionManager {
      */
     private Socket openSocketConnection() throws IOException {
         Socket socket = SocketProvider.openNewConnection();
-        commandExecutioner = new CommandExecutioner();
         objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
         objectInputStream = new ObjectInputStream(socket.getInputStream());
         loginLayoutController.unlockLoginWindowAfterConnect();
@@ -108,7 +103,6 @@ public class AuthenticationServerSessionManager {
         objectOutputStream.writeObject(ServerCommands.AUTHENTICATE);
         objectOutputStream.writeObject(new RequestModel(CurrentSessionInfo.getToken(), authModel));
         objectOutputStream.flush();
-
         ResponseModel<InitializeModel> responseModel = (ResponseModel<InitializeModel>) objectInputStream.readObject();
         logger.debug("Raw response: {}", responseModel.toString());
         return responseModel;

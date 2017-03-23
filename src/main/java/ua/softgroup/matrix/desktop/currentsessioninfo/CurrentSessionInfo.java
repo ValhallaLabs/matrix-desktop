@@ -1,6 +1,5 @@
 package ua.softgroup.matrix.desktop.currentsessioninfo;
 
-
 import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.api.model.datamodels.SynchronizationModel;
 import ua.softgroup.matrix.api.model.datamodels.InitializeModel;
@@ -8,7 +7,7 @@ import ua.softgroup.matrix.api.model.datamodels.InitializeModel;
 import java.util.Set;
 
 /**
- * Created by Vadim on 10.02.2017.
+ * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public class CurrentSessionInfo {
     private static InitializeModel initializeModel = new InitializeModel();

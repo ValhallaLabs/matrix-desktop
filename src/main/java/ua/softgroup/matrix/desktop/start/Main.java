@@ -13,8 +13,7 @@ import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
 import ua.softgroup.matrix.desktop.utils.ConfigManager;
 
-import java.io.*;
-import java.net.ServerSocket;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 
@@ -24,7 +23,6 @@ public class Main extends Application {
     private static final String LOGO = "/images/logoIcon.png";
     private static final String LOGIN_LAYOUT = "fxml/loginLayout.fxml";
     private static final String LOGIN_LAYOUT_TITLE = "SuperVisor";
-    private ServerSocket socket;
 
     public static void main(String[] args) {
         String matrixLogo ="\n" +
@@ -42,9 +40,6 @@ public class Main extends Application {
                 "                            Make Matrix Great Again!\n";
 
         logger.info(matrixLogo);
-
-
-
         logger.debug("Current time: {}", LocalDateTime.now());
         launch(args);
     }

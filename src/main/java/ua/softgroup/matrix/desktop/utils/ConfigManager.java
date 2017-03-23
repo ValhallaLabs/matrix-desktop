@@ -1,6 +1,5 @@
 package ua.softgroup.matrix.desktop.utils;
 
-import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
@@ -77,11 +76,12 @@ public class ConfigManager {
         } catch (IOException | ConfigurationException x) {
             logger.debug("Something went wrong with setting default values");
             //TODO:tell user about big crash, and close matrix
+            System.exit(0);
         }
     }
 
     private static void setLocalHost() throws IOException, ConfigurationException {
-        getConfig().setProperty("host","127.0.0.1");
+        getConfig().setProperty("host","192.168.11.84");
         getConfig().setProperty("port","6666");
     }
 

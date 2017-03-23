@@ -144,7 +144,6 @@ public class TimeTracker extends SpyKitTool {
     private void startCheckPointObservable() {
         checkPointObservable = Observable
                 .interval(CurrentSessionInfo.getCheckPointPeriod(), TimeUnit.SECONDS)
-//                .filter(number -> number != 0)
                 .map(this::getCheckpointModel)
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::sendCheckPointToServer);
@@ -228,7 +227,7 @@ public class TimeTracker extends SpyKitTool {
      */
     private void tryToTurnOffTimeTracker() throws Exception {
         if (status == IS_USED) {
-            sendCheckPointToServer(getCheckpointModel(1488));
+            sendCheckPointToServer(getCheckpointModel(0));
             commandExecutioner.sendCommandWithResponse(END_WORK, projectId);
             countDownLatch.countDown();
             turnOffSpyKitTools();

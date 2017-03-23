@@ -17,12 +17,11 @@ import java.util.Set;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class ReportServerSessionManager {
-
     private static final Logger logger = LoggerFactory.getLogger(ReportServerSessionManager.class);
     private CommandExecutioner commandExecutioner;
 
     public ReportServerSessionManager() {
-        commandExecutioner=new CommandExecutioner();
+        commandExecutioner = new CommandExecutioner();
     }
 
     /**
@@ -56,7 +55,6 @@ public class ReportServerSessionManager {
         } catch (IOException | ClassNotFoundException e) {
             logger.debug("Reports was get unsuccessfully", e);
         }
-        logger.debug("Get report by id from server");
         return setReportModel;
     }
 }

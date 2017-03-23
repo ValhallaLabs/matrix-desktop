@@ -25,56 +25,6 @@ public class CommandExecutioner {
     private ObjectOutputStream objectOutputStream;
     private ObjectInputStream objectInputStream;
 
-    public CommandExecutioner() {
-    }
-//
-//    public CommandExecutioner(Socket socket) throws IOException {
-//        objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-//        objectOutputStream.flush();
-//        objectInputStream = new ObjectInputStream(socket.getInputStream());
-//    }
-//
-//    /**
-//     * Method for sending commands to server using outer socket.
-//     * @param socket current socket connection
-//     * @param serverCommand specific request command for the server
-//     * @throws IOException
-//     */
-//    public void sendRawCommand(ServerCommands serverCommand) throws IOException {
-//        objectOutputStream.writeObject(serverCommand);
-//        objectOutputStream.writeObject(new RequestModel(CurrentSessionInfo.getToken(), -1));
-//        objectOutputStream.flush();
-//    }
-//
-//    /**
-//     * Method for sending commands to server using outer socket.
-//     * @param serverCommand specific request command for the server
-//     * @param dataModel a DTO for a specific command
-//     * @param <T> type of {@link DataModel}
-//     * @throws IOException
-//     */
-//    public <T extends DataModel> void sendRawCommand(ServerCommands serverCommand, T dataModel)
-//            throws IOException {
-//        sendCommand(serverCommand, new RequestModel<T>(CurrentSessionInfo.getToken(), dataModel));
-//        objectOutputStream.writeObject(serverCommand);
-//        objectOutputStream.writeObject(new RequestModel<T>(CurrentSessionInfo.getToken(), dataModel));
-//        objectOutputStream.flush();
-//    }
-//
-//    /**
-//     * Method for retrieving {@link ResponseModel} from server as an answer to client request.
-//     * @param <T> type of a {@link DataModel} in the {@link ResponseModel}
-//     * @return {@link ResponseModel} received from the server
-//     * @throws IOException
-//     * @throws ClassNotFoundException
-//     */
-//    public  <T extends DataModel> ResponseModel<T> getRawResponseModel()
-//            throws IOException, ClassNotFoundException {
-//        ResponseModel<T> responseModel = (ResponseModel<T>) objectInputStream.readObject();
-//        logger.debug("Raw response: {}", responseModel.toString());
-//        return responseModel;
-//    } sasha pidor
-
     /**
      * Method for sending commands to server for a specific project without an attachment with returning response.
      * Creates {@link RequestModel} for specified type and calls main sendCommandWithResponse method.
@@ -113,7 +63,7 @@ public class CommandExecutioner {
     /**
      * Method for sending commands to server with returning response. It opens a new socket connection with server,
      * sends the command to the server using the method sendCommand. Then it return a response received through the
-     * getResponse method. In case of the {@link ResponseStatus#FAIL} it may throw {@link NullPointerException}.
+     * getResponse method. In case of a ResponseStatus "FAIL" it may throw {@link NullPointerException}.
      * @param serverCommand specific request command for the server
      * @param requestModel model that may contain token, project id, and {@link DataModel}
      * @param <T1> type of {@link DataModel} in {@link RequestModel}
@@ -172,7 +122,7 @@ public class CommandExecutioner {
     /**
      * Method for sending commands to server without returning response. It opens a new socket connection with server,
      * sends the command to the server using the method sendCommand. Then it receive a response from the server and
-     * close socket. In case of the {@link ResponseStatus#FAIL} it may throw {@link NullPointerException}.
+     * close socket. In case of the ResponseStatus "FAIL" it may throw {@link NullPointerException}.
      * @param serverCommand specific request command for the server
      * @param requestModel model that may contain token, project id, and {@link DataModel}
      * @param <T> type of {@link DataModel}

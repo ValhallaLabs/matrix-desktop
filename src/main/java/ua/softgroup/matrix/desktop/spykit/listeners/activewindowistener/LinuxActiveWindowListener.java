@@ -16,16 +16,16 @@ import java.util.Optional;
 class LinuxActiveWindowListener extends ActiveWindowListener {
     private final X11 x11;
     private final XLib xlib;
-    private Display display;
 
     LinuxActiveWindowListener() {
         x11 = X11.INSTANCE;
         xlib = XLib.INSTANCE;
-        display = x11.XOpenDisplay(null);
+
     }
 
     @Override
     protected String getProcessTitle() {
+        Display display = x11.XOpenDisplay(null);
         StringBuilder nameOfApp = new StringBuilder("");
         WindowByReference winRefCurrent = new WindowByReference();
         xlib.XGetInputFocus(display, winRefCurrent, new IntByReference().getPointer());
