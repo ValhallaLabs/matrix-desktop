@@ -4,14 +4,17 @@ import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
-import org.jnativehook.mouse.*;
+import org.jnativehook.mouse.NativeMouseEvent;
+import org.jnativehook.mouse.NativeMouseInputListener;
+import org.jnativehook.mouse.NativeMouseWheelEvent;
+import org.jnativehook.mouse.NativeMouseWheelListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
 
 import java.awt.*;
-import java.util.EventListener;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 
 import static java.util.logging.Logger.getLogger;
 
@@ -24,14 +27,12 @@ class NativeDevicesListener extends SpyKitTool {
     private StringBuilder keyboardLogs;
     private double mouseFootage;
     private Point prevMousePosition;
-    private EventListener globalMouseWheelListener;
-    private EventListener globalMouseListener;
-    private EventListener globalKeyListener;
 
     NativeDevicesListener(IdleListener idleListener) {
         this.idleListener = idleListener;
         keyboardLogs = new StringBuilder("");
         prevMousePosition = MouseInfo.getPointerInfo().getLocation();
+        LogManager.getLogManager().reset();
         getLogger(GlobalScreen.class.getPackage().getName()).setLevel(Level.OFF);
     }
 
@@ -42,7 +43,9 @@ class NativeDevicesListener extends SpyKitTool {
     @Override
     public void turnOn() throws NativeHookException {
         addListenersToGlobalScreen();
-        GlobalScreen.registerNativeHook();
+        if (!GlobalScreen.isNativeHookRegistered()) {
+            GlobalScreen.registerNativeHook();
+        }
         logger.debug("Native devices listener is turned on");
     }
 
@@ -50,13 +53,11 @@ class NativeDevicesListener extends SpyKitTool {
      * Adds listeners of keyboard and mouse to Global screen of JNativeHook library
      */
     private void addListenersToGlobalScreen(){
-        globalMouseWheelListener = new GlobalMouseWheelListener();
-        GlobalScreen.addNativeMouseWheelListener((NativeMouseWheelListener) globalMouseWheelListener);
-        globalMouseListener = new GlobalMouseListener();
-        GlobalScreen.addNativeMouseListener((NativeMouseListener) globalMouseListener);
-        GlobalScreen.addNativeMouseMotionListener((NativeMouseMotionListener) globalMouseListener);
-        globalKeyListener = new GlobalKeyListener();
-        GlobalScreen.addNativeKeyListener((NativeKeyListener) globalKeyListener);
+        GlobalScreen.addNativeMouseWheelListener(new GlobalMouseWheelListener());
+        GlobalMouseListener globalMouseListener = new GlobalMouseListener();
+        GlobalScreen.addNativeMouseListener(globalMouseListener);
+        GlobalScreen.addNativeMouseMotionListener(globalMouseListener);
+        GlobalScreen.addNativeKeyListener(new GlobalKeyListener());
     }
 
     /**
@@ -65,20 +66,20 @@ class NativeDevicesListener extends SpyKitTool {
      */
     @Override
     public void turnOff() throws NativeHookException {
-        removeListenersFromGlobalListener();
-        GlobalScreen.unregisterNativeHook();
+//        removeListenersFromGlobalListener();
+//        GlobalScreen.unregisterNativeHook();
         logger.debug("Native devices listener is turned off");
     }
 
-    /**
-     * Removes listeners from {@link GlobalScreen}.
-     */
-    private void removeListenersFromGlobalListener(){
-        GlobalScreen.removeNativeMouseWheelListener((NativeMouseWheelListener) globalMouseWheelListener);
-        GlobalScreen.removeNativeMouseListener((NativeMouseListener) globalMouseListener);
-        GlobalScreen.removeNativeMouseMotionListener((NativeMouseMotionListener) globalMouseListener);
-        GlobalScreen.removeNativeKeyListener((NativeKeyListener) globalKeyListener);
-    }
+//    /**
+//     * Removes listeners from {@link GlobalScreen}.
+//     */
+//    private void removeListenersFromGlobalListener(){
+//        GlobalScreen.removeNativeMouseWheelListener((NativeMouseWheelListener) globalMouseWheelListener);
+//        GlobalScreen.removeNativeMouseListener((NativeMouseListener) globalMouseListener);
+//        GlobalScreen.removeNativeMouseMotionListener((NativeMouseMotionListener) globalMouseListener);
+//        GlobalScreen.removeNativeKeyListener((NativeKeyListener) globalKeyListener);
+//    }
 
     /**
      * Returns a string object with logs of keyboard. Clears keyboardLogs string builder.
