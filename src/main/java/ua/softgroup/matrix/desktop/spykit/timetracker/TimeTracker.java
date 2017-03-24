@@ -175,10 +175,13 @@ public class TimeTracker extends SpyKitTool {
         try {
             checkSynchronization();
             TimeModel updatedProjectTime = commandExecutioner.sendCommandWithResponse(CHECK_POINT, projectId, checkPointModel);
-//            Platform.runLater(() -> projectsLayoutController.synchronizedLocalTimeWorkWithServer(updatedProjectTime));
+            Platform.runLater(() -> projectsLayoutController.synchronizedLocalTimeWorkWithServer(updatedProjectTime));
         } catch (IOException | ClassNotFoundException e) {
             logger.debug("Couldn't send checkpoint to server. Add checkpoint to synchronized model", e);
             addCheckpointToSynchronizationModel(checkPointModel);
+        } catch (CommandExecutioner.FailResponseException e) {
+            logger.debug("Access denied", e);
+            //TODO: inform user that something went wrong with server, or possibly someone accessed via user login to. Shut down matrix.
         }
     }
 
@@ -190,7 +193,12 @@ public class TimeTracker extends SpyKitTool {
      */
     private void checkSynchronization() throws IOException, ClassNotFoundException {
         if(CurrentSessionInfo.getSynchronizationModel() != null) {
-            commandExecutioner.sendCommandWithNoResponse(SYNCHRONIZE, CurrentSessionInfo.getSynchronizationModel(), projectId);
+            try {
+                commandExecutioner.sendCommandWithNoResponse(SYNCHRONIZE, CurrentSessionInfo.getSynchronizationModel(), projectId);
+            } catch (CommandExecutioner.FailResponseException e) {
+                logger.debug("Access denied", e);
+                //TODO: inform user that something went wrong with server, or possibly someone accessed via user login to. Shut down matrix.
+            }
             CurrentSessionInfo.setSynchronizationModel(null);
         }
     }

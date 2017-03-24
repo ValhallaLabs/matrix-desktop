@@ -29,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.api.model.datamodels.ReportModel;
+import ua.softgroup.matrix.api.model.datamodels.TimeModel;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
@@ -348,7 +349,7 @@ public class ProjectsLayoutController {
      * //* @param projectModel current project what user choose in table view
      */
     private void setReporTextInTextArea() {
-        Set<ReportModel> reportModel = reportServerSessionManager.sendProjectDataAndGetReportById(projectModel.getId());
+        Set<ReportModel> reportModel = reportServerSessionManager.getReportsByProjectId(projectModel.getId());
         if (reportModel != null && !reportModel.isEmpty()) {
             for (ReportModel model :
                     reportModel) {
@@ -589,15 +590,15 @@ public class ProjectsLayoutController {
         });
     }
 
-//    /**
-//     * Set actual time to current project model
-//     * @param updatedProjectTime get actual time
-//     */
-//    public void synchronizedLocalTimeWorkWithServer(TimeModel updatedProjectTime){
-//        projectModel.setProjectTime(updatedProjectTime);
-//        logger.debug("Project model is updated: {}", updatedProjectTime.toString());
-//        setDynamicInfo();
-//    }
+    /**
+     * Set actual time to current project model
+     * @param updatedProjectTime get actual time
+     */
+    public void synchronizedLocalTimeWorkWithServer(TimeModel updatedProjectTime){
+        projectModel.setProjectTime(updatedProjectTime);
+        logger.debug("Project model is updated: {}", updatedProjectTime.toString());
+        setDynamicInfo();
+    }
 
     /**
      *Set actual arrival tim to project model

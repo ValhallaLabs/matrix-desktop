@@ -13,7 +13,6 @@ import ua.softgroup.matrix.api.model.datamodels.ReportModel;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
 
-import java.io.IOException;
 import java.util.Set;
 
 
@@ -91,7 +90,7 @@ public class ReportLayoutController {
      * Create {@link ReportServerSessionManager}
      */
     private void initializeReport() {
-        report = reportServerSessionManager.sendProjectDataAndGetReportById(currentProjectId);
+        report = reportServerSessionManager.getReportsByProjectId(currentProjectId);
     }
 
     /**

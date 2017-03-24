@@ -37,7 +37,7 @@ public class CommandExecutioner {
      * @throws ClassNotFoundException
      */
     public <T1 extends DataModel, T2 extends DataModel> T2 sendCommandWithResponse
-            (ServerCommands serverCommand, long projectId) throws IOException, ClassNotFoundException {
+            (ServerCommands serverCommand, long projectId) throws IOException, ClassNotFoundException, FailResponseException {
         return this.<T1,T2>sendCommandWithResponse(serverCommand, new RequestModel<T1>(
                 CurrentSessionInfo.getToken(), projectId));
     }
@@ -55,7 +55,7 @@ public class CommandExecutioner {
      * @throws ClassNotFoundException
      */
     public <T1 extends DataModel, T2 extends DataModel> T2 sendCommandWithResponse
-            (ServerCommands serverCommand, long projectId, T1 dataModel) throws IOException, ClassNotFoundException {
+            (ServerCommands serverCommand, long projectId, T1 dataModel) throws IOException, ClassNotFoundException, FailResponseException {
         return this.<T1,T2>sendCommandWithResponse(serverCommand, new RequestModel<T1>(
                 CurrentSessionInfo.getToken(), projectId, dataModel));
     }
@@ -73,7 +73,7 @@ public class CommandExecutioner {
      * @throws ClassNotFoundException
      */
     private <T1 extends DataModel, T2 extends DataModel> T2 sendCommandWithResponse(
-            ServerCommands serverCommand, RequestModel requestModel) throws IOException, ClassNotFoundException {
+            ServerCommands serverCommand, RequestModel requestModel) throws IOException, ClassNotFoundException, FailResponseException {
         openSocketConnection();
         sendCommand(serverCommand, requestModel);
         return this.<T2>getResponse(socket);
@@ -86,7 +86,7 @@ public class CommandExecutioner {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public void sendCommandWithNoResponse(ServerCommands serverCommand) throws IOException, ClassNotFoundException {
+    public void sendCommandWithNoResponse(ServerCommands serverCommand) throws IOException, ClassNotFoundException, FailResponseException {
         sendCommandWithNoResponse(serverCommand, new RequestModel(CurrentSessionInfo.getToken(), -1));
     }
 
@@ -99,7 +99,7 @@ public class CommandExecutioner {
      * @throws ClassNotFoundException
      */
     public void sendCommandWithNoResponse(ServerCommands serverCommand, long projectId)
-            throws IOException, ClassNotFoundException {
+            throws IOException, ClassNotFoundException, FailResponseException {
         sendCommandWithNoResponse(serverCommand, new RequestModel(CurrentSessionInfo.getToken(), projectId));
     }
 
@@ -114,7 +114,7 @@ public class CommandExecutioner {
      * @throws ClassNotFoundException
      */
     public <T extends DataModel> void sendCommandWithNoResponse
-            (ServerCommands serverCommand, T dataModel, long projectId) throws IOException, ClassNotFoundException {
+            (ServerCommands serverCommand, T dataModel, long projectId) throws IOException, ClassNotFoundException, FailResponseException {
         sendCommandWithNoResponse(
                 serverCommand, new RequestModel<T>(CurrentSessionInfo.getToken(), projectId, dataModel));
     }
@@ -130,13 +130,10 @@ public class CommandExecutioner {
      * @throws ClassNotFoundException
      */
     private <T extends DataModel> void sendCommandWithNoResponse(
-            ServerCommands serverCommand, RequestModel<T> requestModel) throws IOException, ClassNotFoundException {
+            ServerCommands serverCommand, RequestModel<T> requestModel) throws IOException, ClassNotFoundException, FailResponseException {
         openSocketConnection();
         sendCommand(serverCommand, requestModel);
         getResponse(socket);
-//        if (SUCCESS != responseModel.getResponseStatus()){
-//            throw new NullPointerException();
-//        }
     }
 
     /**
@@ -163,14 +160,14 @@ public class CommandExecutioner {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    private <T extends DataModel> T getResponse(Socket socket) throws IOException, ClassNotFoundException {
+    private <T extends DataModel> T getResponse(Socket socket) throws IOException, ClassNotFoundException, FailResponseException {
         ResponseModel<T> responseModel = (ResponseModel<T>) objectInputStream.readObject();
         logger.debug("Response: {}", responseModel.toString());
         closeSocketConnection();
         if (responseModel.getResponseStatus() == SUCCESS && responseModel.getContainer().isPresent()) {
             return responseModel.getContainer().get();
         }
-        return null;
+        throw new FailResponseException();
     }
 
     private void openSocketConnection() throws IOException {
@@ -184,5 +181,12 @@ public class CommandExecutioner {
         objectOutputStream.flush();
         socket.close();
         logger.debug("Connection is closed");
+    }
+
+    public class FailResponseException extends Exception {
+        public FailResponseException() { super(); }
+        public FailResponseException(String message) { super(message); }
+        public FailResponseException(String message, Throwable cause) { super(message, cause); }
+        public FailResponseException(Throwable cause) { super(cause); }
     }
 }
