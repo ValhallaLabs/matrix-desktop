@@ -42,7 +42,7 @@ public class TimeTracker extends SpyKitTool {
     private Disposable checkPointObservable;
     private CommandExecutioner commandExecutioner;
 
-    public  TimeTracker(ProjectsLayoutController projectsLayoutController, long projectId) {
+    public TimeTracker(ProjectsLayoutController projectsLayoutController, long projectId) {
         this.projectsLayoutController = projectsLayoutController;
         this.projectId = projectId;
         commandExecutioner = new CommandExecutioner();
@@ -61,7 +61,7 @@ public class TimeTracker extends SpyKitTool {
                 Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
             } catch (CommandExecutioner.FailResponseException e) {
                 logger.error("Access denied", e);
-                //TODO: inform user that something went wrong with server, or possibly someone accessed via user login to. Shut down matrix.
+                Platform.runLater(() -> projectsLayoutController.tellUserAboutAccessDenied());
             }
         }).start();
     }
@@ -185,7 +185,7 @@ public class TimeTracker extends SpyKitTool {
             addCheckpointToSynchronizationModel(checkPointModel);
         } catch (CommandExecutioner.FailResponseException e) {
             logger.error("Access denied", e);
-            //TODO: inform user that something went wrong with server, or possibly someone accessed via user login to. Shut down matrix.
+            Platform.runLater(() -> projectsLayoutController.tellUserAboutAccessDenied());
         }
     }
 
@@ -198,10 +198,11 @@ public class TimeTracker extends SpyKitTool {
     private void checkSynchronization() throws IOException, ClassNotFoundException {
         if(CurrentSessionInfo.getSynchronizationModel() != null) {
             try {
-                commandExecutioner.sendCommandWithNoResponse(SYNCHRONIZE, CurrentSessionInfo.getSynchronizationModel(), projectId);
+                commandExecutioner.sendCommandWithNoResponse(SYNCHRONIZE,
+                        CurrentSessionInfo.getSynchronizationModel(), projectId);
             } catch (CommandExecutioner.FailResponseException e) {
                 logger.error("Access denied", e);
-                //TODO: inform user that something went wrong with server, or possibly someone accessed via user login to. Shut down matrix.
+                Platform.runLater(() -> projectsLayoutController.tellUserAboutAccessDenied());
             }
             CurrentSessionInfo.setSynchronizationModel(null);
         }
@@ -233,7 +234,7 @@ public class TimeTracker extends SpyKitTool {
             Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
         } catch (CommandExecutioner.FailResponseException e) {
             logger.error("Access denied", e);
-            //TODO: inform user that something went wrong with server, or possibly someone accessed via user login to. Shut down matrix.
+            Platform.runLater(() -> projectsLayoutController.tellUserAboutAccessDenied());
         }
     }
 

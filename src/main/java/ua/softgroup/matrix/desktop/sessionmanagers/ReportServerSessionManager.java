@@ -1,11 +1,13 @@
 package ua.softgroup.matrix.desktop.sessionmanagers;
 
 
+import javafx.application.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.api.ServerCommands;
 import ua.softgroup.matrix.api.model.datamodels.ReportModel;
 import ua.softgroup.matrix.api.model.datamodels.ReportsContainerDataModel;
+import ua.softgroup.matrix.desktop.controllerjavafx.Controller;
 import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
 
@@ -19,9 +21,11 @@ import java.util.Set;
 public class ReportServerSessionManager {
     private static final Logger logger = LoggerFactory.getLogger(ReportServerSessionManager.class);
     private CommandExecutioner commandExecutioner;
+    private Controller controller;
 
-    public ReportServerSessionManager() {
+    public ReportServerSessionManager(Controller controller) {
         commandExecutioner = new CommandExecutioner();
+        this.controller = controller;
     }
 
     /**
@@ -38,7 +42,7 @@ public class ReportServerSessionManager {
             logger.error("Cannot save of change report", e);
         } catch (CommandExecutioner.FailResponseException e) {
             logger.error("Access denied", e);
-            //TODO: inform user that something went wrong with server, or possibly someone accessed via user login to. Shut down matrix.
+            Platform.runLater(() -> controller.tellUserAboutAccessDenied());
         }
     }
 
@@ -58,7 +62,7 @@ public class ReportServerSessionManager {
             logger.error("Cannot get reports", e);
         } catch (CommandExecutioner.FailResponseException e) {
             logger.error("Access denied", e);
-            //TODO: inform user that something went wrong with server, or possibly someone accessed via user login to. Shut down matrix.
+            Platform.runLater(() -> controller.tellUserAboutAccessDenied());
         }
         return setReportModel;
     }

@@ -19,7 +19,7 @@ import java.util.Set;
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-public class ReportLayoutController {
+public class ReportLayoutController extends Controller {
 
     @FXML
     public TableView<ReportModel> tableViewReport;
@@ -69,7 +69,7 @@ public class ReportLayoutController {
     @FXML
     private void initialize() {
         currentProjectId = CurrentSessionInfo.getProjectId();
-        reportServerSessionManager = new ReportServerSessionManager();
+        reportServerSessionManager = new ReportServerSessionManager(this);
         getAllReportAndSetToCollection();
 
     }

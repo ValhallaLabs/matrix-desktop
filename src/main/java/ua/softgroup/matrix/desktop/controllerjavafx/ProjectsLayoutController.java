@@ -48,7 +48,7 @@ import java.util.Set;
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-public class ProjectsLayoutController {
+public class ProjectsLayoutController extends Controller {
 
     @FXML
     public TableView<ProjectModel> tvProjectsTable;
@@ -143,12 +143,11 @@ public class ProjectsLayoutController {
      */
     @FXML
     private void initialize() {
-        reportServerSessionManager = new ReportServerSessionManager();
+        reportServerSessionManager = new ReportServerSessionManager(this);
         initProjectInTable();
         getTodayDayAndSetInView();
         countTextAndSetInView();
         addTextLimiter(taWriteReport, LIMITER_TEXT_COUNT);
-
     }
 
     /**
@@ -463,7 +462,6 @@ public class ProjectsLayoutController {
         timeTotalInSeconds += 60;
         labelTodayTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTodayInSeconds));
         labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTotalInSeconds));
-
     }
 
     /**
@@ -484,22 +482,22 @@ public class ProjectsLayoutController {
         tvProjectsTable.setMouseTransparent(false);
     }
 
-    /**
-     * When something go wrong , create alert with message to user
-     * and then click on button close programme
-     */
-    public void tellUserAboutCrash() {
-        Alert mainAlert = new Alert(Alert.AlertType.INFORMATION);
-        mainAlert.setTitle(ALERT_ERROR_TITLE);
-        mainAlert.setHeaderText(ALERT_HEADER_TEXT);
-        mainAlert.setContentText(ALERT_CONTENT_TEXT);
-        mainAlert.initStyle(StageStyle.UTILITY);
-        mainAlert.setOnCloseRequest(event -> Platform.exit());
-        Optional<ButtonType> result = mainAlert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            Platform.exit();
-        }
-    }
+//    /**
+//     * When something go wrong , create alert with message to user
+//     * and then click on button close programme
+//     */
+//    public void tellUserAboutCrash() {
+//        Alert mainAlert = new Alert(Alert.AlertType.INFORMATION);
+//        mainAlert.setTitle(ALERT_ERROR_TITLE);
+//        mainAlert.setHeaderText(ALERT_HEADER_TEXT);
+//        mainAlert.setContentText(ALERT_CONTENT_TEXT);
+//        mainAlert.initStyle(StageStyle.UTILITY);
+//        mainAlert.setOnCloseRequest(event -> Platform.exit());
+//        Optional<ButtonType> result = mainAlert.showAndWait();
+//        if (result.isPresent() && result.get() == ButtonType.OK) {
+//            Platform.exit();
+//        }
+//    }
 
     /**
      * Convert Seconds to Hours and Minutes format
