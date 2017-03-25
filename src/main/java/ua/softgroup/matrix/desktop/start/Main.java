@@ -25,21 +25,6 @@ public class Main extends Application {
     private static final String LOGIN_LAYOUT_TITLE = "SuperVisor";
 
     public static void main(String[] args) {
-        String matrixLogo ="\n" +
-                "            ___  ___        _          _         _____    _____     \n" +
-                "            |  \\/  |       | |        (_)       / __  \\  |  _  |  _ \n" +
-                "            | .  . |  __ _ | |_  _ __  _ __  __ `' / /'  | |/' | (_)\n" +
-                "            | |\\/| | / _` || __|| '__|| |\\ \\/ /   / /    |  /| |    \n" +
-                "            | |  | || (_| || |_ | |   | | >  <  ./ /___ _\\ |_/ /  _ \n" +
-                "            \\_|  |_/ \\__,_| \\__||_|   |_|/_/\\_\\ \\_____/(_)\\___/  (_)\n" +
-                "                                                                    " + "\n" +
-                "      ________     _ _____ _______ _______    _____________ _____  ______\n" +
-                "      |______|     ||_____]|______|_____/ \\  /   |  |______|     ||_____/\n" +
-                "      ______||_____||      |______|    \\_  \\/  __|________||_____||    \\_\n" +
-                "                                                                         " + "\n" +
-                "                            Make Matrix Great Again!\n";
-
-        logger.info(matrixLogo);
         logger.debug("Current time: {}", LocalDateTime.now());
         launch(args);
     }
@@ -65,7 +50,7 @@ public class Main extends Application {
         try {
             JUnique.acquireLock(appId);
         } catch (AlreadyLockedException e) {
-            logger.debug("Application is already running!");
+            logger.warn("Application is already running!");
             System.exit(0);
         }
     }
@@ -90,7 +75,7 @@ public class Main extends Application {
             loginStage.setResizable(false);
             loginStage.show();
         } catch (IOException e) {
-            logger.debug("Error when start Login Window "+e);
+            logger.error("Error when start Login Window ", e);
         }
     }
 }

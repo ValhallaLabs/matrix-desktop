@@ -44,10 +44,10 @@ public class IdleListener extends SpyKitTool {
             createIdleControlFlowable();
             nativeDevicesListener.turnOn();
             status = IS_USED;
-            logger.debug("Native devices listener is turned on");
+            logger.info("IdleListener is turned on");
             return;
         }
-        logger.debug("Native devices listener was turned on already");
+        logger.warn("IdleListener was turned on already");
     }
 
     /**
@@ -133,7 +133,7 @@ public class IdleListener extends SpyKitTool {
     private CountUntilIdlePoint stopIdle(CountUntilIdlePoint point) {
         if (isIdle) {
             stopIdleStopWatch();
-            logger.debug("Idle is stopped! Total idle time of the period:{}", idleTimeSeconds);
+            logger.info("Idle is stopped! Total idle time of the period:{}", idleTimeSeconds);
             isIdle = false;
         }
         return point;
@@ -154,7 +154,7 @@ public class IdleListener extends SpyKitTool {
     private void startIdle(CountUntilIdlePoint point){
         if (START_COUNT_UNTIL_IDLE == point) {
             startIdleStopwatch();
-            logger.debug("Idle is started!");
+            logger.info("Idle is started!");
             isIdle = true;
         }
     }
@@ -184,10 +184,10 @@ public class IdleListener extends SpyKitTool {
             idleControlDisposable.dispose();
             nativeDevicesListener.turnOff();
             status = WAS_USED;
-            logger.debug("Native devices listener is turned off");
+            logger.info("Native devices listener is turned off");
             return;
         }
-        logger.debug("Native devices listener was turned off already");
+        logger.warn("Native devices listener was turned off already");
     }
 
     /**

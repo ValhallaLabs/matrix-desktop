@@ -174,13 +174,14 @@ public class CommandExecutioner {
         socket = SocketProvider.openNewConnection();
         objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
         objectInputStream = new ObjectInputStream(socket.getInputStream());
+        logger.info("Connection is opened");
     }
 
     private void closeSocketConnection() throws IOException, ClassNotFoundException {
         objectOutputStream.writeObject(ServerCommands.CLOSE);
         objectOutputStream.flush();
         socket.close();
-        logger.debug("Connection is closed");
+        logger.info("Connection is closed");
     }
 
     public class FailResponseException extends Exception {

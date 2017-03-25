@@ -36,11 +36,11 @@ public abstract class ActiveWindowListener extends SpyKitTool {
         if (status == NOT_USED) {
             startTitleReader();
             status = IS_USED;
-            logger.debug("ActiveWindowListener is turned on successfully");
+            logger.info("ActiveWindowListener is turned on successfully");
             (countDownLatch = new CountDownLatch(1)).await();
             return;
         }
-        logger.debug("ActiveWindowListener was turned on already");
+        logger.warn("ActiveWindowListener was turned on already");
     }
 
     /**
@@ -49,7 +49,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      */
     private void startTitleReader() {
         addFirstWindowToTimeMap();
-        titleReaderDisposable = Observable.interval(1, TimeUnit.SECONDS)
+        titleReaderDisposable = Observable.interval(4, TimeUnit.SECONDS)
                 .map(number -> getProcessTitle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
@@ -78,7 +78,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      */
     private boolean compareToCurrentTitle(String newTitle) {
         if(currentTitle.equals(newTitle)) {
-            time++;
+            time += 4;
             return false;
         }
         return true;
@@ -120,10 +120,10 @@ public abstract class ActiveWindowListener extends SpyKitTool {
                 titleReaderDisposable.dispose();
             }
             status = WAS_USED;
-            logger.debug("ActiveWindow listener is turned off");
+            logger.info("ActiveWindow listener is turned off");
             return;
         }
-        logger.debug("ActiveWindow listener was turned off already");
+        logger.warn("ActiveWindow listener was turned off already");
     }
 
     /**

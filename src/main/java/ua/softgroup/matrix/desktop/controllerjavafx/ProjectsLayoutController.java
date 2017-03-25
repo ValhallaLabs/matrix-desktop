@@ -260,7 +260,7 @@ public class ProjectsLayoutController {
             labelDeadLineProject.setText(UNLIMITED_DATA);
         }
         initPieChart();
-        logger.debug("Time on UI is up-to-date with server");
+        logger.info("Time on UI is up-to-date with server");
     }
 
     /**
@@ -452,7 +452,6 @@ public class ProjectsLayoutController {
         if (timeTracker != null) {
             timeTracker.turnOff();
         }
-
         buttonConditionAtTimerOff();
     }
 
@@ -543,10 +542,8 @@ public class ProjectsLayoutController {
             reportsStage.setResizable(false);
             reportsStage.show();
         } catch (IOException e) {
-            logger.debug("Error when start Report Window " + e);
-            e.printStackTrace();
+            logger.error("Error when start Report Window ", e);
         }
-
     }
 
     /**
@@ -571,7 +568,7 @@ public class ProjectsLayoutController {
             instructionsStage.setResizable(false);
             instructionsStage.show();
         } catch (IOException e) {
-            logger.debug("Error when start Instructions Window " + e);
+            logger.error("Error when start Instructions Window ", e);
         }
     }
 

@@ -52,12 +52,11 @@ public class TimeTracker extends SpyKitTool {
      */
     @Override
     public void turnOn() {
-        logger.debug("Time tracker attempts to starts");
         new Thread(() -> {
             try {
                 setUpTimeTracker();
             } catch (Exception e) {
-                logger.debug("Time tracker crashes: {}", e);
+                logger.error("Time tracker crashes: {}", e);
                 Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
             }
         }).start();
@@ -76,7 +75,7 @@ public class TimeTracker extends SpyKitTool {
             turnOnSpyKitTools();
             startCheckPointObservable();
             status = IS_USED;
-            logger.debug("Time tracking is started");
+            logger.info("Time tracking is started");
             (countDownLatch = new CountDownLatch(1)).await();
             return;
         }
@@ -86,7 +85,6 @@ public class TimeTracker extends SpyKitTool {
      * Call methods of initializing and turning on all spy kit tools.
      */
     private void turnOnSpyKitTools() {
-        logger.debug("Time tracker attempts to start spy kit's tools");
         screenShooter = new ScreenShooter();
         startActiveWindowListenerThread();
         startIdleListenerThread();
@@ -100,7 +98,7 @@ public class TimeTracker extends SpyKitTool {
             try {
                 turnOnActiveWindowListener();
             } catch (Exception e) {
-                logger.debug("Active windows listener crashed: {}", e);
+                logger.error("Active windows listener crashed: {}", e);
                 Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
             }
         }).start();
@@ -124,7 +122,7 @@ public class TimeTracker extends SpyKitTool {
             try {
                 turnOnIdleListener();
             } catch (Exception e) {
-                logger.debug("Idle listener crashed: {}", e);
+                logger.error("Idle listener crashed: {}", e);
                 Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
             }
         }).start();
@@ -177,10 +175,10 @@ public class TimeTracker extends SpyKitTool {
             TimeModel updatedProjectTime = commandExecutioner.sendCommandWithResponse(CHECK_POINT, projectId, checkPointModel);
             Platform.runLater(() -> projectsLayoutController.synchronizedLocalTimeWorkWithServer(updatedProjectTime));
         } catch (IOException | ClassNotFoundException e) {
-            logger.debug("Couldn't send checkpoint to server. Add checkpoint to synchronized model", e);
+            logger.warn("Couldn't send checkpoint to server", e);
             addCheckpointToSynchronizationModel(checkPointModel);
         } catch (CommandExecutioner.FailResponseException e) {
-            logger.debug("Access denied", e);
+            logger.error("Access denied", e);
             //TODO: inform user that something went wrong with server, or possibly someone accessed via user login to. Shut down matrix.
         }
     }
@@ -196,7 +194,7 @@ public class TimeTracker extends SpyKitTool {
             try {
                 commandExecutioner.sendCommandWithNoResponse(SYNCHRONIZE, CurrentSessionInfo.getSynchronizationModel(), projectId);
             } catch (CommandExecutioner.FailResponseException e) {
-                logger.debug("Access denied", e);
+                logger.error("Access denied", e);
                 //TODO: inform user that something went wrong with server, or possibly someone accessed via user login to. Shut down matrix.
             }
             CurrentSessionInfo.setSynchronizationModel(null);
@@ -213,6 +211,8 @@ public class TimeTracker extends SpyKitTool {
             CurrentSessionInfo.getSynchronizationModel().setCheckPointModels(new HashSet<>());
         }
         CurrentSessionInfo.getSynchronizationModel().getCheckPointModels().add(checkPointModel);
+        logger.info("Checkpoint was added to SynchronizationModel.\n " + "Current checkpoints: {}",
+                CurrentSessionInfo.getSynchronizationModel().getCheckPointModels().toString());
     }
 
     /**
@@ -223,7 +223,7 @@ public class TimeTracker extends SpyKitTool {
         try {
             tryToTurnOffTimeTracker();
         } catch (Exception e) {
-            logger.debug("Time tracker crashes: {}", e);
+            logger.error("Time tracker crashes: {}", e);
             Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
         }
     }
@@ -240,10 +240,10 @@ public class TimeTracker extends SpyKitTool {
             countDownLatch.countDown();
             turnOffSpyKitTools();
             status = WAS_USED;
-            logger.debug("Time tracking is stopped");
+            logger.info("Time tracking is stopped");
             return;
         }
-        logger.debug("Time tracking was stopped already");
+        logger.warn("Time tracking was stopped already");
     }
 
     /**

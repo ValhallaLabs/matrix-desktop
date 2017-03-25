@@ -46,7 +46,7 @@ class NativeDevicesListener extends SpyKitTool {
         if (!GlobalScreen.isNativeHookRegistered()) {
             GlobalScreen.registerNativeHook();
         }
-        logger.debug("Native devices listener is turned on");
+        logger.info("Native devices listener is turned on");
     }
 
     /**
@@ -68,7 +68,7 @@ class NativeDevicesListener extends SpyKitTool {
     public void turnOff() throws NativeHookException {
 //        removeListenersFromGlobalListener();
 //        GlobalScreen.unregisterNativeHook();
-        logger.debug("Native devices listener is turned off");
+        logger.info("Native devices listener is turned off");
     }
 
 //    /**

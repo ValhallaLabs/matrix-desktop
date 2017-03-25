@@ -32,9 +32,9 @@ public class ConfigManager {
             PropertiesConfiguration config = getConfig();
             SocketProvider.setHostName(config.getString("host"));
             SocketProvider.setPortNumber(Integer.parseInt(config.getString("port")));
-            logger.debug("Server IP: {}:{}", SocketProvider.getHostName(), SocketProvider.getPortNumber());
+            logger.info("Server IP: {}:{}", SocketProvider.getHostName(), SocketProvider.getPortNumber());
         } catch (ConfigurationException | IOException e) {
-            logger.debug("Config is not found. Try to set to default.");
+            logger.warn("Config is not found. Will try to set to default.");
             setConfigToDefault();
         }
     }
@@ -60,9 +60,9 @@ public class ConfigManager {
     private static void checkConfigFileExistence() throws IOException {
         try (OutputStream out = new BufferedOutputStream(Files.newOutputStream(path, CREATE_NEW))) {
             setLocalHost();
-            logger.debug("New config file is created.");
+            logger.info("New config file is created.");
         } catch (IOException | ConfigurationException x) {
-            logger.debug("Config file is already exist");
+            logger.warn("Config file is already exist");
         }
     }
 
@@ -72,9 +72,9 @@ public class ConfigManager {
     public static void setConfigToDefault() {
         try (OutputStream out = new BufferedOutputStream(Files.newOutputStream(path, CREATE))) {
             setLocalHost();
-            logger.debug("Config file was set to default");
+            logger.info("Config file was set to default");
         } catch (IOException | ConfigurationException x) {
-            logger.debug("Something went wrong with setting default values");
+            logger.error("Something went wrong with setting default values");
             //TODO:tell user about big crash, and close matrix
             System.exit(0);
         }
@@ -93,7 +93,7 @@ public class ConfigManager {
         try {
             return getConfig().getString("host");
         } catch (IOException | ConfigurationException e) {
-            logger.debug("Something went wrong with config. Host not found", e);
+            logger.error("Something went wrong with config. Host not found", e);
         }
         return "";
     }
@@ -106,7 +106,7 @@ public class ConfigManager {
         try {
             return getConfig().getString("port");
         } catch (IOException | ConfigurationException e) {
-            logger.debug("Something went wrong with config. Port not found", e);
+            logger.error("Something went wrong with config. Port not found", e);
         }
         return "";
     }
@@ -124,9 +124,9 @@ public class ConfigManager {
             config.setProperty("host", host);
             config.setProperty("port", port);
             readConfig();
-            logger.debug("New config was saved");
+            logger.info("New config was saved");
         } catch (IOException | ConfigurationException e) {
-            logger.debug("New config wasn't saved", e);
+            logger.error("New config wasn't saved", e);
         }
     }
 }

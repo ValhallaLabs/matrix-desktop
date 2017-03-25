@@ -22,5 +22,4 @@ class LinuxActiveWindowListener extends ActiveWindowListener {
             return "Unable to get window, something went wrong";
         }
     }
-
 }

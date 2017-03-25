@@ -55,7 +55,7 @@ public class AuthenticationServerSessionManager {
         objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
         objectInputStream = new ObjectInputStream(socket.getInputStream());
         loginLayoutController.unlockLoginWindowAfterConnect();
-        logger.debug("Connection is opened");
+        logger.info("Connection is opened");
         return socket;
     }
 
@@ -80,7 +80,7 @@ public class AuthenticationServerSessionManager {
         objectOutputStream.writeObject(ServerCommands.CLOSE);
         objectOutputStream.flush();
         socket.close();
-        logger.debug("Connection is closed");
+        logger.info("Connection is closed");
     }
 
     /**
@@ -130,9 +130,8 @@ public class AuthenticationServerSessionManager {
     private void finishAuthentication(ResponseModel<InitializeModel> responseModel){
         if(responseModel.getContainer().isPresent()) {
             CurrentSessionInfo.setInitializeModel(responseModel.getContainer().get());
-            logger.debug("Authentication completed");
+            logger.info("Authentication completed");
             socketDisposable.dispose();
-            logger.debug("socketDisposable is disposed: {}", socketDisposable.isDisposed());
             loginLayoutController.closeLoginLayoutAndStartMainLayout();
             return;
         }
@@ -144,7 +143,7 @@ public class AuthenticationServerSessionManager {
      * @param throwable possible exception
      */
     private void handleExceptions(Throwable throwable) {
-        logger.debug("Unable to start client: {}", throwable);
+        logger.error("Unable to start client: {}", throwable);
         Platform.runLater(() -> loginLayoutController.tellUserAboutBadConnection());
     }
 
@@ -162,7 +161,7 @@ public class AuthenticationServerSessionManager {
             }
             authModelEmitter.onNext(authModel);
         } catch (InterruptedException e) {
-            logger.debug("Something went wrong with sending user auth data to server: {}", e);
+            logger.error("Something went wrong with sending user auth data to server: {}", e);
             loginLayoutController.tellUserAboutBadConnection();
         }
     }
@@ -173,7 +172,6 @@ public class AuthenticationServerSessionManager {
     public void closeSession(){
         if(socketDisposable != null && !socketDisposable.isDisposed()) {
             socketDisposable.dispose();
-            logger.debug("socketDisposable is disposed: {}", socketDisposable.isDisposed());
         }
     }
 }

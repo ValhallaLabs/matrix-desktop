@@ -217,7 +217,7 @@ public class LoginLayoutController {
             projectsStage.setTitle(PROJECT_LAYOUT_TITLE);
             projectsStage.show();
         } catch (IOException e) {
-            logger.debug("Error when start Main Layout " + e);
+            logger.error("Error when start Main Layout ", e);
         }
     }
 
@@ -276,7 +276,7 @@ public class LoginLayoutController {
             settingStage.setResizable(false);
             settingStage.show();
         } catch (IOException e) {
-            logger.debug("Error when start Setting Window " + e);
+            logger.error("Error when start Settings Window ", e);
         }
     }
 

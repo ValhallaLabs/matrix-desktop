@@ -35,9 +35,9 @@ public class ReportServerSessionManager {
             commandExecutioner.sendCommandWithNoResponse(ServerCommands.SAVE_REPORT, reportModel,
                     CurrentSessionInfo.getProjectId());
         } catch (IOException | ClassNotFoundException e) {
-            logger.debug("Cannot save of change report", e);
+            logger.error("Cannot save of change report", e);
         } catch (CommandExecutioner.FailResponseException e) {
-            logger.debug("Access denied", e);
+            logger.error("Access denied", e);
             //TODO: inform user that something went wrong with server, or possibly someone accessed via user login to. Shut down matrix.
         }
     }
@@ -55,9 +55,9 @@ public class ReportServerSessionManager {
             setReportModel = ((ReportsContainerDataModel) commandExecutioner
                     .sendCommandWithResponse(ServerCommands.GET_REPORTS, id)).getReportModels();
         } catch (IOException | ClassNotFoundException e) {
-            logger.debug("Cannot get reports", e);
+            logger.error("Cannot get reports", e);
         } catch (CommandExecutioner.FailResponseException e) {
-            logger.debug("Access denied", e);
+            logger.error("Access denied", e);
             //TODO: inform user that something went wrong with server, or possibly someone accessed via user login to. Shut down matrix.
         }
         return setReportModel;
