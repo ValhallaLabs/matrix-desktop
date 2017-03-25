@@ -4,6 +4,7 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import javafx.application.Platform;
+import org.jnativehook.NativeHookException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.api.model.datamodels.CheckPointModel;
@@ -55,9 +56,12 @@ public class TimeTracker extends SpyKitTool {
         new Thread(() -> {
             try {
                 setUpTimeTracker();
-            } catch (Exception e) {
+            } catch (IOException | ClassNotFoundException |InterruptedException e) {
                 logger.error("Time tracker crashes: {}", e);
                 Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
+            } catch (CommandExecutioner.FailResponseException e) {
+                logger.error("Access denied", e);
+                //TODO: inform user that something went wrong with server, or possibly someone accessed via user login to. Shut down matrix.
             }
         }).start();
     }
@@ -67,7 +71,8 @@ public class TimeTracker extends SpyKitTool {
      * starts control point observable and changed on {@link SpyKitToolStatus#IS_USED}
      * @throws Exception
      */
-    private void setUpTimeTracker() throws Exception {
+    private void setUpTimeTracker() throws CommandExecutioner.FailResponseException, IOException,
+            ClassNotFoundException, InterruptedException {
         logger.debug("Time tracker status: {}", status);
         if (status == NOT_USED) {
             TimeModel timeModel = commandExecutioner.sendCommandWithResponse(START_WORK, projectId);
@@ -79,6 +84,7 @@ public class TimeTracker extends SpyKitTool {
             (countDownLatch = new CountDownLatch(1)).await();
             return;
         }
+        logger.warn("Time tracking was already started");
     }
 
     /**
@@ -222,9 +228,12 @@ public class TimeTracker extends SpyKitTool {
     public void turnOff() {
         try {
             tryToTurnOffTimeTracker();
-        } catch (Exception e) {
+        } catch (IOException | ClassNotFoundException | NativeHookException e) {
             logger.error("Time tracker crashes: {}", e);
             Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
+        } catch (CommandExecutioner.FailResponseException e) {
+            logger.error("Access denied", e);
+            //TODO: inform user that something went wrong with server, or possibly someone accessed via user login to. Shut down matrix.
         }
     }
 
@@ -233,7 +242,8 @@ public class TimeTracker extends SpyKitTool {
      * server, then calls method of turning off spykit tools and changes status on {@link SpyKitToolStatus#WAS_USED}
      * @throws Exception
      */
-    private void tryToTurnOffTimeTracker() throws Exception {
+    private void tryToTurnOffTimeTracker() throws CommandExecutioner.FailResponseException,
+            IOException, ClassNotFoundException, NativeHookException {
         if (status == IS_USED) {
             sendCheckPointToServer(getCheckpointModel(0));
             commandExecutioner.sendCommandWithResponse(END_WORK, projectId);
@@ -249,7 +259,7 @@ public class TimeTracker extends SpyKitTool {
     /**
      * Call methods of turning off all spy kit tools.
      */
-    private void turnOffSpyKitTools() throws Exception {
+    private void turnOffSpyKitTools() throws NativeHookException {
         checkPointObservable.dispose();
         screenShooter = null;
         activeWindowListener.turnOff();
