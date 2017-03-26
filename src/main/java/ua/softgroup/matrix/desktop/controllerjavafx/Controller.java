@@ -28,9 +28,9 @@ abstract public class Controller {
         mainAlert.initStyle(StageStyle.UTILITY);
         mainAlert.setOnCloseRequest(event -> Platform.exit());
         Optional<ButtonType> result = mainAlert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
+//        if (result.isPresent() && result.get() == ButtonType.OK) {
             Platform.exit();
-        }
+//        }
     }
 
     /**
@@ -45,9 +45,9 @@ abstract public class Controller {
         mainAlert.initStyle(StageStyle.UTILITY);
         mainAlert.setOnCloseRequest(event -> Platform.exit());
         Optional<ButtonType> result = mainAlert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
+//        if (result.isPresent() && result.get() == ButtonType.OK) {
             Platform.exit();
-        }
+//        }
     }
 
 

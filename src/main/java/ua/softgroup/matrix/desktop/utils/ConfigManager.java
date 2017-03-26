@@ -5,6 +5,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.desktop.start.Main;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -22,12 +23,17 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 public class ConfigManager {
     private static final Logger logger = LoggerFactory.getLogger(ConfigManager.class);
     private static Path path = Paths.get("config.properties");
+    private Main main;
+
+    public ConfigManager(Main main) {
+        this.main = main;
+    }
 
     /**
      * Method reads host and port values from config file and sets it to SocketProvider.
      * In case of an error, sets it to default.
      */
-    public static void readConfig() {
+    public void readConfig() {
         try {
             PropertiesConfiguration config = getConfig();
             SocketProvider.setHostName(config.getString("host"));
@@ -45,7 +51,7 @@ public class ConfigManager {
      * @throws IOException
      * @throws ConfigurationException
      */
-    private static PropertiesConfiguration getConfig() throws IOException, ConfigurationException {
+    private PropertiesConfiguration getConfig() throws IOException, ConfigurationException {
         checkConfigFileExistence();
         PropertiesConfiguration propertiesConfiguration = new PropertiesConfiguration("config.properties");
         propertiesConfiguration.setAutoSave(true);
@@ -57,7 +63,7 @@ public class ConfigManager {
      * Method checks existence of config file. In negative case, it creates new config file with default values.
      * @throws IOException
      */
-    private static void checkConfigFileExistence() throws IOException {
+    private void checkConfigFileExistence() throws IOException {
         try (OutputStream out = new BufferedOutputStream(Files.newOutputStream(path, CREATE_NEW))) {
             setLocalHost();
             logger.info("New config file is created.");
@@ -69,18 +75,17 @@ public class ConfigManager {
     /**
      * Method tries to set config to default values. In case of an exception, it will do nothing.
      */
-    public static void setConfigToDefault() {
+    public void setConfigToDefault() {
         try (OutputStream out = new BufferedOutputStream(Files.newOutputStream(path, CREATE))) {
             setLocalHost();
             logger.info("Config file was set to default");
         } catch (IOException | ConfigurationException x) {
             logger.error("Something went wrong with setting default values");
-            //TODO:tell user about big crash, and close matrix
-            System.exit(0);
+            main.tellUserAboutConfigCrash();
         }
     }
 
-    private static void setLocalHost() throws IOException, ConfigurationException {
+    private void setLocalHost() throws IOException, ConfigurationException {
         getConfig().setProperty("host","192.168.11.84");
         getConfig().setProperty("port","6666");
     }
@@ -89,7 +94,7 @@ public class ConfigManager {
      * Method read and returns current host value from config.
      * @return host's value or empty string in case of exception.
      */
-    public static String getHost(){
+    public String getHost(){
         try {
             return getConfig().getString("host");
         } catch (IOException | ConfigurationException e) {
@@ -102,7 +107,7 @@ public class ConfigManager {
      * Method reads and returns current port value from config.
      * @return port's value or empty string in case of exception.
      */
-    public static String getPort() {
+    public String getPort() {
         try {
             return getConfig().getString("port");
         } catch (IOException | ConfigurationException e) {
@@ -116,7 +121,7 @@ public class ConfigManager {
      * @param host a String object with new host value
      * @param port a String object with new port value
      */
-    public static void saveNewConfig(String host, String port) {
+    public void saveNewConfig(String host, String port) {
         logger.debug("New configs: host = {}; port = {}", host, port);
         try {
             setConfigToDefault();

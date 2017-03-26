@@ -3,11 +3,15 @@ package ua.softgroup.matrix.desktop.start;
 import it.sauronsoftware.junique.AlreadyLockedException;
 import it.sauronsoftware.junique.JUnique;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
@@ -15,7 +19,7 @@ import ua.softgroup.matrix.desktop.utils.ConfigManager;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-
+import java.util.Optional;
 
 
 public class Main extends Application {
@@ -23,6 +27,10 @@ public class Main extends Application {
     private static final String LOGO = "/images/logoIcon.png";
     private static final String LOGIN_LAYOUT = "fxml/loginLayout.fxml";
     private static final String LOGIN_LAYOUT_TITLE = "SuperVisor";
+    private static final String ALERT_ERROR_TITLE = "Supervisor";
+    private static final String ALERT_CONTENT_TEXT = "Something go wrong .Programs will be close";
+    private static final String ALERT_HEADER_TEXT = "Supervisor ERROR";
+
 
     public static void main(String[] args) {
         logger.debug("Current time: {}", LocalDateTime.now());
@@ -37,7 +45,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         checkIfRunning();
-        ConfigManager.readConfig();
+        new ConfigManager(this).readConfig();
         startLoginLayout(primaryStage);
     }
 
@@ -78,4 +86,18 @@ public class Main extends Application {
             logger.error("Error when start Login Window ", e);
         }
     }
+
+    public void tellUserAboutConfigCrash() {
+        Alert mainAlert = new Alert(Alert.AlertType.INFORMATION);
+        mainAlert.setTitle(ALERT_ERROR_TITLE);
+        mainAlert.setHeaderText(ALERT_HEADER_TEXT);
+        mainAlert.setContentText(ALERT_CONTENT_TEXT);
+        mainAlert.initStyle(StageStyle.UTILITY);
+        mainAlert.setOnCloseRequest(event -> Platform.exit());
+        Optional<ButtonType> result = mainAlert.showAndWait();
+//        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Platform.exit();
+//        }
+    }
+
 }
