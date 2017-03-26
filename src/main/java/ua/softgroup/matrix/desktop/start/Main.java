@@ -21,7 +21,10 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-
+/**
+ * @author Andrii Bei <sg.andriy2@gmail.com>
+ * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
+ */
 public class Main extends Application {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
     private static final String LOGO = "/images/logoIcon.png";
@@ -95,9 +98,7 @@ public class Main extends Application {
         mainAlert.initStyle(StageStyle.UTILITY);
         mainAlert.setOnCloseRequest(event -> Platform.exit());
         Optional<ButtonType> result = mainAlert.showAndWait();
-//        if (result.isPresent() && result.get() == ButtonType.OK) {
             Platform.exit();
-//        }
     }
 
 }

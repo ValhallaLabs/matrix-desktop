@@ -103,9 +103,12 @@ public class TimeTracker extends SpyKitTool {
         new Thread(() -> {
             try {
                 turnOnActiveWindowListener();
-            } catch (Exception e) {
-                logger.error("Active windows listener crashed: {}", e);
+            } catch (InterruptedException e) {
+                logger.error("Active windows listener crashed:", e);
                 Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
+            } catch (ActiveWindowListenerFactory.XdotoolException e) {
+                logger.error("Xdotool for Linux is not found:", e);
+                Platform.runLater(() -> projectsLayoutController.tellUserAboutXdotoolNotFound());
             }
         }).start();
     }
@@ -113,7 +116,8 @@ public class TimeTracker extends SpyKitTool {
     /**
      * Initialize and turn on active window listener.
      */
-    private void turnOnActiveWindowListener() throws Exception {
+    private void turnOnActiveWindowListener() throws ActiveWindowListenerFactory.XdotoolException,
+            InterruptedException {
         activeWindowListener = ActiveWindowListenerFactory.getListener();
         if(activeWindowListener != null) {
             activeWindowListener.turnOn();
@@ -127,7 +131,7 @@ public class TimeTracker extends SpyKitTool {
         new Thread(() -> {
             try {
                 turnOnIdleListener();
-            } catch (Exception e) {
+            } catch (NativeHookException e) {
                 logger.error("Idle listener crashed: {}", e);
                 Platform.runLater(() -> projectsLayoutController.tellUserAboutCrash());
             }
@@ -137,7 +141,7 @@ public class TimeTracker extends SpyKitTool {
     /**
      * Initialize and turn on idle listener.
      */
-    private void turnOnIdleListener() throws Exception {
+    private void turnOnIdleListener() throws NativeHookException {
         idleListener = new IdleListener();
         idleListener.turnOn();
     }

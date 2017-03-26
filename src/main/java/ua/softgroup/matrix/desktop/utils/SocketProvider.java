@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 /**
- * Created by Vadim on 10.02.2017.
+ * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public class SocketProvider {
     private static String hostName; //= "192.168.11.84";
