@@ -4,15 +4,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.apache.commons.configuration.ConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.utils.ConfigManager;
 
+import java.io.IOException;
+
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-public class SettingLayoutController {
-
+public class SettingLayoutController extends Controller {
     public static final Logger logger = LoggerFactory.getLogger(SettingLayoutController.class);
     private LoginLayoutController loginLayoutController;
     @FXML
@@ -41,9 +43,17 @@ public class SettingLayoutController {
      * @param actionEvent callback click on button
      */
     public void saveSettings(ActionEvent actionEvent) {
-        ConfigManager.saveNewConfig(labelHost.getText(), labelPort.getText());
-        labelHost.getScene().getWindow().hide();
-        loginLayoutController.initializeAuthenticationManager();
+        try {
+            ConfigManager.saveNewConfig(labelHost.getText(), labelPort.getText());
+            labelHost.getScene().getWindow().hide();
+            loginLayoutController.initializeAuthenticationManager();
+        } catch (ConfigManager.ConfigCrashException e) {
+            logger.error("Config wasn't set to default", e);
+            super.tellUserAboutCrash();
+        } catch (IOException | ConfigurationException e) {
+            //TODO: check this situation if user just try to enter shit configs
+            logger.error("New config wasn't saved", e);
+        }
     }
 
     /**
@@ -59,8 +69,13 @@ public class SettingLayoutController {
      * @param actionEvent callback click on button
      */
     public void resetToDefaultSettings(ActionEvent actionEvent) {
-        ConfigManager.setConfigToDefault();
-        getPortAndHostFromConfigManager();
+        try {
+            ConfigManager.setConfigToDefault();
+            getPortAndHostFromConfigManager();
+        } catch (ConfigManager.ConfigCrashException e) {
+            logger.error("Config wasn't set to default", e);
+            super.tellUserAboutCrash();
+        }
     }
 
     /**

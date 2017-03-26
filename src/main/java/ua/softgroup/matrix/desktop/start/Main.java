@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.desktop.controllerjavafx.Controller;
 import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
 import ua.softgroup.matrix.desktop.utils.ConfigManager;
 
@@ -34,7 +35,6 @@ public class Main extends Application {
     private static final String ALERT_CONTENT_TEXT = "Something go wrong .Programs will be close";
     private static final String ALERT_HEADER_TEXT = "Supervisor ERROR";
 
-
     public static void main(String[] args) {
         logger.debug("Current time: {}", LocalDateTime.now());
         launch(args);
@@ -46,10 +46,15 @@ public class Main extends Application {
      * @throws Exception
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        checkIfRunning();
-        new ConfigManager(this).readConfig();
-        startLoginLayout(primaryStage);
+    public void start(Stage primaryStage) {
+        try {
+            checkIfRunning();
+            ConfigManager.readConfig();
+            startLoginLayout(primaryStage);
+        } catch (ConfigManager.ConfigCrashException e) {
+            logger.error("Config wasn't set to default", e);
+            tellUserAboutConfigCrash();
+        }
     }
 
     /**
@@ -100,5 +105,4 @@ public class Main extends Application {
         Optional<ButtonType> result = mainAlert.showAndWait();
             Platform.exit();
     }
-
 }
