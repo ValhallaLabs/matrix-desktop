@@ -51,7 +51,6 @@ public class SettingLayoutController extends Controller {
             logger.error("Config wasn't set to default", e);
             super.tellUserAboutCrash();
         } catch (IOException | ConfigurationException e) {
-            //TODO: check this situation if user just try to enter shit configs
             logger.error("New config wasn't saved", e);
         }
     }

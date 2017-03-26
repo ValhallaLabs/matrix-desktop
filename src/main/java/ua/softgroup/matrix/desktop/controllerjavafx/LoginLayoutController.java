@@ -28,7 +28,6 @@ import java.util.prefs.Preferences;
  */
 
 public class LoginLayoutController {
-
     private static final Logger logger = LoggerFactory.getLogger(LoginLayoutController.class);
     private static final String EMPTY_FIElD = "Error: Please Fill All Field";
     private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
@@ -249,6 +248,8 @@ public class LoginLayoutController {
      * @param event callback click on menu
      */
     public void openSettings(Event event) {
+        //TODO:fix bug of second settings window, if connection not found while settings window is already open
+        //TODO: figure out what to do if connection wasn't found, and user just close setting window
         openSettingsWindow();
     }
 
