@@ -1,32 +1,36 @@
 package ua.softgroup.matrix.desktop.utils;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public class SocketProvider {
-    private static String hostName; //= "192.168.11.84";
-    private static int portNumber;// = 6666;
+    private static String hostName;
+    private static String portNumber;
 
-    public static Socket openNewConnection() throws IOException {
-        return new Socket(hostName, portNumber);
+    public static Socket openNewConnection() throws IOException, NumberFormatException {
+        Socket socket = new Socket();
+        socket.connect(new InetSocketAddress(hostName, Integer.parseInt(portNumber)), 5000);
+        return socket;
     }
 
-    public static String getHostName() {
+    static String getHostName() {
         return hostName;
     }
 
-    public static void setHostName(String hostName) {
+    static void setHostName(String hostName) {
         SocketProvider.hostName = hostName;
     }
 
-    public static int getPortNumber() {
+    static String getPortNumber() {
         return portNumber;
     }
 
-    public static void setPortNumber(int portNumber) {
+    static void setPortNumber(String portNumber) {
         SocketProvider.portNumber = portNumber;
     }
 }

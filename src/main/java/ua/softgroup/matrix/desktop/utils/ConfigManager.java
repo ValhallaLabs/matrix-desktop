@@ -32,7 +32,7 @@ public class ConfigManager {
         try {
             PropertiesConfiguration config = getConfig();
             SocketProvider.setHostName(config.getString("host"));
-            SocketProvider.setPortNumber(Integer.parseInt(config.getString("port")));
+            SocketProvider.setPortNumber(config.getString("port"));
             logger.info("Server IP: {}:{}", SocketProvider.getHostName(), SocketProvider.getPortNumber());
         } catch (ConfigurationException | IOException e) {
             logger.warn("Config is not found. Will try to set to default.");
