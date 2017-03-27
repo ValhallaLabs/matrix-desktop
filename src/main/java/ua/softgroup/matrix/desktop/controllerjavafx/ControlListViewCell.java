@@ -6,13 +6,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.AnchorPane;
 import ua.softgroup.matrix.desktop.model.ReportControlModel;
+import ua.softgroup.matrix.desktop.model.localModel.RequestControl;
 
 import java.io.IOException;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-public class ControlListViewCell extends ListCell<ReportControlModel> {
+public class ControlListViewCell extends ListCell<RequestControl> {
     @FXML
     public Label labelDate;
     @FXML
@@ -44,7 +45,7 @@ public class ControlListViewCell extends ListCell<ReportControlModel> {
     private FXMLLoader mLoader;
 
     @Override
-    protected void updateItem(ReportControlModel item, boolean empty) {
+    protected void updateItem(RequestControl item, boolean empty) {
         super.updateItem(item, empty);
         if (empty || item == null) {
             setText(null);
@@ -66,20 +67,20 @@ public class ControlListViewCell extends ListCell<ReportControlModel> {
                 labelDate.setText(String.valueOf(item.getDate()));
             }
 
-            labelProject.setText(String.valueOf(item.getWorkDays().iterator().next().getId()));
-            labelStart.setText(item.getWorkDays().iterator().next().getStart());
-            labelEnd.setText(item.getWorkDays().iterator().next().getEnd());
-            labelSupervisorId.setText(String.valueOf(item.getWorkDays().iterator().next().getJailerId()));
-            labelChecked.setText(String.valueOf(item.getWorkDays().iterator().next().isChecked()));
-            labelWorkSeconds.setText(String.valueOf(item.getTotalWorkSeconds()));
-            labelIdleSeconds.setText(String.valueOf(item.getTotalIdleSeconds()));
-            labelIdlePercentage.setText(String.valueOf(item.getTotalIdlePercentage()));
-            labelRate.setText(String.valueOf(item.getWorkDays().iterator().next().getRate()));
-            labelCoefficient.setText(String.valueOf(item.getWorkDays().iterator().next().getCoefficient()));
-            if (item.getWorkDays().iterator().next().getCurrencyId() == 1) {
+            labelProject.setText(String.valueOf(item.getId()));
+            labelStart.setText(item.getStart());
+            labelEnd.setText(item.getEnd());
+            labelSupervisorId.setText(String.valueOf(item.getCheckerId()));
+            labelChecked.setText(String.valueOf(item.isChecked()));
+            labelWorkSeconds.setText(String.valueOf(item.getWorkSeconds()));
+            labelIdleSeconds.setText(String.valueOf(item.getIdleSeconds()));
+            labelIdlePercentage.setText(String.valueOf(item.getIdlePercentage()));
+            labelRate.setText(String.valueOf(item.getRate()));
+            labelCoefficient.setText(String.valueOf(item.getCoefficient()));
+            if (item.getCurrencyId() == 1) {
                 labelCurrency.setText("$");
             } else labelCurrency.setText("₴");
-            labelTextReport.setText(item.getWorkDays().iterator().next().getReportText());
+            labelTextReport.setText(item.getReportText());
 
             setText(null);
             setGraphic(anchorPane);

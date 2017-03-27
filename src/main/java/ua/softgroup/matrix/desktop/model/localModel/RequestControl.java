@@ -1,14 +1,11 @@
-package ua.softgroup.matrix.desktop.model;
-
-import java.util.Set;
+package ua.softgroup.matrix.desktop.model.localModel;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-public class DayJson {
+public class RequestControl {
     private long id;
-    private String entityType = "project"; //TODO use enum
-    private long projectId;
+
     private String date;
     private String start;
     private String end;
@@ -21,7 +18,24 @@ public class DayJson {
     private String reportText = "";
     private int rate;
     private int currencyId;
-    private Set<WorkPeriod> workPeriods;
+
+    public RequestControl(long id, String date, String start, String end, int workSeconds, int idleSeconds, double idlePercentage, boolean checked,
+                          long checkerId, double coefficient, String reportText, int rate, int currencyId) {
+        this.id = id;
+
+        this.date = date;
+        this.start = start;
+        this.end = end;
+        this.workSeconds = workSeconds;
+        this.idleSeconds = idleSeconds;
+        this.idlePercentage = idlePercentage;
+        this.checked = checked;
+        this.checkerId = checkerId;
+        this.coefficient = coefficient;
+        this.reportText = reportText;
+        this.rate = rate;
+        this.currencyId = currencyId;
+    }
 
     public long getId() {
         return id;
@@ -29,22 +43,6 @@ public class DayJson {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getEntityType() {
-        return entityType;
-    }
-
-    public void setEntityType(String entityType) {
-        this.entityType = entityType;
-    }
-
-    public long getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(long projectId) {
-        this.projectId = projectId;
     }
 
     public String getDate() {
@@ -141,13 +139,5 @@ public class DayJson {
 
     public void setCurrencyId(int currencyId) {
         this.currencyId = currencyId;
-    }
-
-    public Set<WorkPeriod> getWorkPeriods() {
-        return workPeriods;
-    }
-
-    public void setWorkPeriods(Set<WorkPeriod> workPeriods) {
-        this.workPeriods = workPeriods;
     }
 }

@@ -18,9 +18,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 import ua.softgroup.matrix.desktop.api.ControlAPI;
+import ua.softgroup.matrix.desktop.model.DayJson;
 import ua.softgroup.matrix.desktop.model.ReportControlModel;
+import ua.softgroup.matrix.desktop.model.localModel.RequestControl;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -29,7 +32,7 @@ import java.util.ResourceBundle;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class ControlLayoutController implements Initializable, retrofit2.Callback<List<ReportControlModel>> {
-    private static final String BASE_URL = "http://127.0.0.1:8094/api/v1/";
+    private static final String BASE_URL = "http://127.0.0.1:8094/api/v2/";
     @FXML
     public ListView listViewReportDetails;
     @FXML
@@ -40,16 +43,17 @@ public class ControlLayoutController implements Initializable, retrofit2.Callbac
     public DatePicker calendarFromDate;
     @FXML
     public DatePicker calendarToDate;
-    private ObservableList<ReportControlModel> controlList = FXCollections.observableArrayList();
+    private ObservableList<RequestControl> controlList = FXCollections.observableArrayList();
+    private List<RequestControl> requestControls=  new ArrayList<>();
 
 
     @SuppressWarnings("unchecked")
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         listViewReportDetails.setItems(controlList);
-        listViewReportDetails.setCellFactory(new Callback<ListView<ReportControlModel>, ListCell<ReportControlModel>>() {
+        listViewReportDetails.setCellFactory(new Callback<ListView<RequestControl>, ListCell<RequestControl>>() {
             @Override
-            public ListCell<ReportControlModel> call(ListView<ReportControlModel> param) {
+            public ListCell<RequestControl> call(ListView<RequestControl> param) {
                 return new ControlListViewCell();
             }
         });
@@ -58,9 +62,20 @@ public class ControlLayoutController implements Initializable, retrofit2.Callbac
     @Override
     public void onResponse(Call<List<ReportControlModel>> call, Response<List<ReportControlModel>> response) {
         System.out.println("here");
+        System.out.println(response.toString());
         List<ReportControlModel> reportControlList = response.body();
         if (reportControlList != null && !reportControlList.isEmpty()) {
-            reportControlList.forEach(controlList::add);
+           for (ReportControlModel reportControlModel: reportControlList){
+               for (DayJson dayJson:reportControlModel.getWorkDays()) {
+                   requestControls.add(new RequestControl(dayJson.getId(),dayJson.getDate(),dayJson.getStart(),dayJson.getEnd(),dayJson.getWorkSeconds(),dayJson.getIdleSeconds(),
+                           dayJson.getIdlePercentage(),dayJson.isChecked(),dayJson.getCheckerId(),dayJson.getCoefficient(),dayJson.getReportText(),dayJson.getRate(),dayJson.getCurrencyId()));
+               }
+           }
+            for (RequestControl requstControl : requestControls) {
+                controlList.add(requstControl);
+
+            }
+
         }
     }
 
