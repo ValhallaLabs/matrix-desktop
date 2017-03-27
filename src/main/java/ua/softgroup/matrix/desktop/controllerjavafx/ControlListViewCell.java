@@ -44,6 +44,7 @@ public class ControlListViewCell extends ListCell<RequestControl> {
     public AnchorPane anchorPane;
     private FXMLLoader mLoader;
 
+
     @Override
     protected void updateItem(RequestControl item, boolean empty) {
         super.updateItem(item, empty);
@@ -51,7 +52,6 @@ public class ControlListViewCell extends ListCell<RequestControl> {
             setText(null);
             setGraphic(null);
         } else {
-
 
             if (mLoader == null) {
                 mLoader = new FXMLLoader(getClass().getResource("/fxml/controlListCell.fxml"));
