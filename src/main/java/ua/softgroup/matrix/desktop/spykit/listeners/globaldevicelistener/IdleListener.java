@@ -7,7 +7,7 @@ import io.reactivex.schedulers.Schedulers;
 import org.jnativehook.NativeHookException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
+import ua.softgroup.matrix.desktop.session.current.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
 import java.util.EventObject;
 import java.util.concurrent.TimeUnit;

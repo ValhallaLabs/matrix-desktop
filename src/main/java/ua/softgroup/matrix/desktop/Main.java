@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.start;
+package ua.softgroup.matrix.desktop;
 
 import it.sauronsoftware.junique.AlreadyLockedException;
 import it.sauronsoftware.junique.JUnique;
@@ -14,8 +14,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.controllerjavafx.Controller;
-import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
+import ua.softgroup.matrix.desktop.view.controllers.LoginLayoutController;
 import ua.softgroup.matrix.desktop.utils.ConfigManager;
 
 import java.io.IOException;

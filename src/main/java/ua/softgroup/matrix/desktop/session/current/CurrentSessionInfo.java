@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.currentsessioninfo;
+package ua.softgroup.matrix.desktop.session.current;
 
 import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.api.model.datamodels.SynchronizationModel;

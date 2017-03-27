@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.sessionmanagers;
+package ua.softgroup.matrix.desktop.session.manager;
 
 
 import javafx.application.Platform;
@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.api.ServerCommands;
 import ua.softgroup.matrix.api.model.datamodels.ReportModel;
 import ua.softgroup.matrix.api.model.datamodels.ReportsContainerDataModel;
-import ua.softgroup.matrix.desktop.controllerjavafx.Controller;
-import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
+import ua.softgroup.matrix.desktop.session.current.CurrentSessionInfo;
+import ua.softgroup.matrix.desktop.view.controllers.Controller;
 import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
 
 import java.io.IOException;

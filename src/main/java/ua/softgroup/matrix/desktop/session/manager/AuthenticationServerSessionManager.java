@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.sessionmanagers;
+package ua.softgroup.matrix.desktop.session.manager;
 
 import io.reactivex.Emitter;
 import io.reactivex.Observable;
@@ -13,8 +13,8 @@ import ua.softgroup.matrix.api.model.datamodels.AuthModel;
 import ua.softgroup.matrix.api.model.datamodels.InitializeModel;
 import ua.softgroup.matrix.api.model.requestmodels.RequestModel;
 import ua.softgroup.matrix.api.model.responsemodels.ResponseModel;
-import ua.softgroup.matrix.desktop.controllerjavafx.LoginLayoutController;
-import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
+import ua.softgroup.matrix.desktop.session.current.CurrentSessionInfo;
+import ua.softgroup.matrix.desktop.view.controllers.LoginLayoutController;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
 
 import java.io.IOException;

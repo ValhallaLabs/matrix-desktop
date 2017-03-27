@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.controllerjavafx;
+package ua.softgroup.matrix.desktop.view.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

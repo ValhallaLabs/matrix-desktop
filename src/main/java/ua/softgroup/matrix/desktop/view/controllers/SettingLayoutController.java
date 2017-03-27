@@ -1,13 +1,11 @@
-package ua.softgroup.matrix.desktop.controllerjavafx;
+package ua.softgroup.matrix.desktop.view.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import org.apache.commons.configuration.ConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationServerSessionManager;
 import ua.softgroup.matrix.desktop.utils.ConfigManager;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.controllerjavafx;
+package ua.softgroup.matrix.desktop.view.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,8 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.api.model.datamodels.ReportModel;
-import ua.softgroup.matrix.desktop.currentsessioninfo.CurrentSessionInfo;
-import ua.softgroup.matrix.desktop.sessionmanagers.ReportServerSessionManager;
+import ua.softgroup.matrix.desktop.session.current.CurrentSessionInfo;
+import ua.softgroup.matrix.desktop.session.manager.ReportServerSessionManager;
 
 import java.util.Set;
 

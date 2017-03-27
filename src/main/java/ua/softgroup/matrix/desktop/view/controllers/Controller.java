@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.controllerjavafx;
+package ua.softgroup.matrix.desktop.view.controllers;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;

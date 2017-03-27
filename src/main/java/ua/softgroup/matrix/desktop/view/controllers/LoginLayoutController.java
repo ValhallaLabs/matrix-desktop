@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.controllerjavafx;
+package ua.softgroup.matrix.desktop.view.controllers;
 
 
 import javafx.event.ActionEvent;
@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.sessionmanagers.AuthenticationServerSessionManager;
+import ua.softgroup.matrix.desktop.session.manager.AuthenticationServerSessionManager;
 
 import java.io.IOException;
 import java.util.Optional;
