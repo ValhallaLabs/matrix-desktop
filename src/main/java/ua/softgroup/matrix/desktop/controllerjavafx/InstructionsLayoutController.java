@@ -16,7 +16,6 @@ import java.util.List;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class InstructionsLayoutController {
-
     @FXML
     public Label labelInstructions;
     @FXML
@@ -36,7 +35,7 @@ public class InstructionsLayoutController {
      *
      * @param event callback click on list item
      */
-    public void chooseCurentInstructuon(Event event) {
+    public void chooseCurrentInstruction(Event event) {
         InstructionsModel selectProject = lvInstructions.getSelectionModel().getSelectedItem();
         labelInstructions.setText(selectProject.getContent());
     }

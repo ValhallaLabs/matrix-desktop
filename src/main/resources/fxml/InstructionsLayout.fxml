@@ -27,7 +27,7 @@
             <items>
                 <AnchorPane minHeight="446.0" minWidth="254.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
-                        <ListView fx:id="lvInstructions" layoutX="56.0" layoutY="105.0" onMouseClicked="#chooseCurentInstructuon" prefHeight="446.0" prefWidth="254.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ListView fx:id="lvInstructions" layoutX="56.0" layoutY="105.0" onMouseClicked="#chooseCurrentInstruction" prefHeight="446.0" prefWidth="254.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane minHeight="446.0" minWidth="596.0" prefHeight="446.0" prefWidth="596.0">

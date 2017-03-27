@@ -27,7 +27,7 @@ import java.util.prefs.Preferences;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 
-public class LoginLayoutController {
+public class LoginLayoutController extends Controller {
     private static final Logger logger = LoggerFactory.getLogger(LoginLayoutController.class);
     private static final String EMPTY_FIElD = "Error: Please Fill All Field";
     private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
@@ -43,13 +43,13 @@ public class LoginLayoutController {
     private static final String PROJECT_LAYOUT_TITLE = "SuperVisor";
     private static final int SETTING_LAYOUT_MIN_WIDTH = 500;
     private static final int SETTING_LAYOUT_MIN_HEIGHT = 250;
-    private Stage stage;
+    private Stage loginStage;
     private AuthenticationServerSessionManager authenticationSessionManager;
     private Preferences preferences;
     private final static String USER_NAME = "userName";
     private final static String USER_PASSWORD = "password";
     private final static String USER_SWITCH_SETTINGS = "false";
-    private  Stage settingStage;
+    private Stage settingStage;
     @FXML
     public TextField loginTextField;
     @FXML
@@ -61,9 +61,9 @@ public class LoginLayoutController {
     @FXML
     public CheckBox cbRememberMe;
     @FXML
-    public VBox vboxLoginWindow;
+    public VBox vBoxLoginWindow;
     @FXML
-    public ProgressIndicator progIndWaitConnection;
+    public ProgressIndicator progressIndWaitConnection;
 
     /**
      * After Load/Parsing fxml call this method
@@ -73,19 +73,23 @@ public class LoginLayoutController {
         preferences = Preferences.userRoot().node(this.getClass().getName());
         getPreferencesAndSetLoginPassword();
         initializeAuthenticationManager();
-        maxInputTextLimiter(loginTextField, 20);
-        maxInputTextLimiter(passwordTextField, 20);
+        setTextLimiterOnField();
         loginTextField.requestFocus();
 
+    }
+
+    private void setTextLimiterOnField() {
+        addTextLimiter(loginTextField, 20);
+        addTextLimiter(passwordTextField, 20);
     }
 
     /**
      * Set possibility click on VBox panel and dismiss ProgressIndicator
      */
     public void unlockLoginWindowAfterConnect(){
-        vboxLoginWindow.setDisable(false);
-        progIndWaitConnection.setVisible(false);
-        progIndWaitConnection.setDisable(true);
+        vBoxLoginWindow.setDisable(false);
+        progressIndWaitConnection.setVisible(false);
+        progressIndWaitConnection.setDisable(true);
         cbRememberMe.setDisable(false);
     }
 
@@ -93,10 +97,13 @@ public class LoginLayoutController {
      * Set impossibility click on VBox panel and show ProgressIndicator
      */
     private void showProgressIndicator(){
-        vboxLoginWindow.setDisable(true);
-        progIndWaitConnection.setVisible(true);
-        progIndWaitConnection.setDisable(false);
+        vBoxLoginWindow.setDisable(true);
+        progressIndWaitConnection.setVisible(true);
+        progressIndWaitConnection.setDisable(false);
         cbRememberMe.setDisable(true);
+    }
+     void stopProgressIndicator(){
+        vBoxLoginWindow.setDisable(true);
     }
 
     /**
@@ -124,7 +131,6 @@ public class LoginLayoutController {
             preferences.put(USER_PASSWORD, "");
             preferences.putBoolean(USER_SWITCH_SETTINGS, false);
         }
-
     }
 
     /**
@@ -146,10 +152,10 @@ public class LoginLayoutController {
     /**
      * Hears when login window close and close current authentication session manager
      *
-     * @param stage for close stage
+     * @param stage for close loginStage
      */
     public void setUpStage(Stage stage) {
-        this.stage = stage;
+        this.loginStage = stage;
         stage.setOnCloseRequest(event -> authenticationSessionManager.closeSession());
     }
 
@@ -187,10 +193,10 @@ public class LoginLayoutController {
     }
 
     /**
-     * Close current stage and prepare for start main window
+     * Close current loginStage and prepare for start main window
      */
     public void closeLoginLayoutAndStartMainLayout() {
-        stage.close();
+        loginStage.close();
         startProjectsControllerLayout();
         saveLoginAndPasswordToPreferencesManager();
     }
@@ -222,20 +228,6 @@ public class LoginLayoutController {
     }
 
     /**
-     * Limit of amount on entry text
-     * @param tf        TextField in what input text
-     * @param maxLength int number of max text amount
-     */
-    private static void maxInputTextLimiter(final TextField tf, final int maxLength) {
-        tf.textProperty().addListener((ov, oldValue, newValue) -> {
-            if (tf.getText().length() > maxLength) {
-                String s = tf.getText().substring(0, maxLength);
-                tf.setText(s);
-            }
-        });
-    }
-
-    /**
      * Check content in field on Empty
      * @param tf TextField in what we input text
      * @return boolean
@@ -249,12 +241,10 @@ public class LoginLayoutController {
      * @param event callback click on menu
      */
     public void openSettings(Event event) {
+        settingStage = new Stage();
         if(!settingStage.isShowing()){
             openSettingsWindow();
         }
-        //TODO:fix bug of second settings window, if connection not found while settings window is already open
-        //TODO: figure out what to do if connection wasn't found, and user just close setting window
-
     }
 
     /**
@@ -262,7 +252,6 @@ public class LoginLayoutController {
      */
     private void openSettingsWindow() {
         try {
-            settingStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
             Image icon = new Image(getClass().getResourceAsStream(LOGO));
             settingStage.getIcons().add(icon);
@@ -276,8 +265,10 @@ public class LoginLayoutController {
             settingStage.setMinWidth(SETTING_LAYOUT_MIN_WIDTH);
             settingStage.setMinHeight(SETTING_LAYOUT_MIN_HEIGHT);
             settingStage.setTitle(SETTING_LAYOUT_TITLE);
-            settingStage.initModality(Modality.WINDOW_MODAL);
-            settingStage.initOwner(btnLogin.getScene().getWindow());
+            if(settingStage.getModality()!=Modality.WINDOW_MODAL){
+                settingStage.initModality(Modality.WINDOW_MODAL);
+                settingStage.initOwner(btnLogin.getScene().getWindow());
+            }
             settingStage.setResizable(false);
             settingStage.show();
         } catch (IOException e) {
@@ -295,4 +286,9 @@ public class LoginLayoutController {
          }
          authenticationSessionManager = new AuthenticationServerSessionManager(this);
     }
+
+    AuthenticationServerSessionManager getAuthenticationSessionManager() {
+        return authenticationSessionManager;
+    }
+
 }

@@ -28,7 +28,7 @@
          <children>
             <StackPane>
                <children>
-                  <VBox fx:id="vboxLoginWindow" disable="true" prefHeight="300.0" prefWidth="320.0">
+                  <VBox fx:id="vBoxLoginWindow" disable="true" prefHeight="300.0" prefWidth="320.0">
                      <children>
                             <Label text="SuperVisor" textFill="#3063a4">
                            <font>
@@ -78,7 +78,7 @@
                         <Insets left="25.0" right="25.0" top="15.0" />
                      </padding>
                   </VBox>
-                  <ProgressIndicator fx:id="progIndWaitConnection" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" />
+                  <ProgressIndicator fx:id="progressIndWaitConnection" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" />
                </children>
             </StackPane>
             <HBox>

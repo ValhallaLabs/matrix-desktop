@@ -2,6 +2,7 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextInputControl;
 import javafx.stage.StageStyle;
 
 
@@ -45,5 +46,32 @@ abstract public class Controller {
         mainAlert.setOnCloseRequest(event -> Platform.exit());
         mainAlert.showAndWait();
         Platform.exit();
+    }
+
+    /**
+     * Convert Seconds to Hours and Minutes format
+     *
+     * @param seconds current time what we want convert
+     * @return String of Hours and Minutes
+     */
+    String convertFromSecondsToHoursAndMinutes(int seconds) {
+        int todayTimeInHours = seconds / 3600;
+        int todayTimeInMinutes = (seconds % 3600) / 60;
+        return String.valueOf(todayTimeInHours + "h " + todayTimeInMinutes + 'm');
+    }
+
+    /**
+     * Limit of amount on entry text
+     *
+     * @param ta        TextInputField in what input text
+     * @param maxLength int number of max text amount
+     */
+      void addTextLimiter(final TextInputControl ta, final int maxLength) {
+        ta.textProperty().addListener((ov, oldValue, newValue) -> {
+            if (ta.getText().length() > maxLength) {
+                String s = ta.getText().substring(0, maxLength);
+                ta.setText(s);
+            }
+        });
     }
 }

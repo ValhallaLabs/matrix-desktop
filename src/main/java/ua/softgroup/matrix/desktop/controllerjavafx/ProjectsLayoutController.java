@@ -3,7 +3,6 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +22,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,14 +40,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.Set;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class ProjectsLayoutController extends Controller {
-
     @FXML
     public TableView<ProjectModel> tvProjectsTable;
     @FXML
@@ -98,7 +94,6 @@ public class ProjectsLayoutController extends Controller {
     public AnchorPane containerForPieChart;
     @FXML
     public Button menuReport;
-    private Stage stage;
     private static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
     private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
@@ -173,7 +168,7 @@ public class ProjectsLayoutController extends Controller {
         if (projectModel != null) {
             setProjectInfoInView();
             new Thread(() -> {
-                setReporTextInTextArea();
+                setReportTextInTextArea();
             }).start();
         }
     }
@@ -215,7 +210,6 @@ public class ProjectsLayoutController extends Controller {
         } else {
             viewConditionAtNullProjectModels();
         }
-
     }
 
     /**
@@ -322,7 +316,7 @@ public class ProjectsLayoutController extends Controller {
                 taWriteReport.setEditable(true);
                 if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
                     projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
-                    setReporTextInTextArea();
+                    setReportTextInTextArea();
                     setProjectInfoInView();
                 }
             }
@@ -344,7 +338,7 @@ public class ProjectsLayoutController extends Controller {
      * <p>
      * //* @param projectModel current project what user choose in table view
      */
-    private void setReporTextInTextArea() {
+    private void setReportTextInTextArea() {
         Set<ReportModel> reportModel = reportServerSessionManager.getReportsByProjectId(projectModel.getId());
         if (reportModel != null && !reportModel.isEmpty()) {
             for (ReportModel model :
@@ -380,21 +374,6 @@ public class ProjectsLayoutController extends Controller {
         ReportModel reportModel = new ReportModel(taWriteReport.getText(), LocalDate.now(), attachFile);
         reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
         viewConditionAtReportAlreadyExist();
-    }
-
-    /**
-     * Limit of amount on entry text
-     *
-     * @param ta        TextField in what input text
-     * @param maxLength int number of max text amount
-     */
-    private static void addTextLimiter(final TextArea ta, final int maxLength) {
-        ta.textProperty().addListener((ov, oldValue, newValue) -> {
-            if (ta.getText().length() > maxLength) {
-                String s = ta.getText().substring(0, maxLength);
-                ta.setText(s);
-            }
-        });
     }
 
     /**
@@ -501,11 +480,7 @@ public class ProjectsLayoutController extends Controller {
      * @param seconds current time what we want convert
      * @return String of Hours and Minutes
      */
-    private String convertFromSecondsToHoursAndMinutes(int seconds) {
-        int todayTimeInHours = seconds / 3600;
-        int todayTimeInMinutes = (seconds % 3600) / 60;
-        return String.valueOf(todayTimeInHours + "h " + todayTimeInMinutes + 'm');
-    }
+
 
     /**
      *  Hears when user click on label
@@ -571,8 +546,8 @@ public class ProjectsLayoutController extends Controller {
      * Hears when user exit from program's  and stop timeTracker if he forget stop him ,and close all programms command
      * @param mainLayout send layout were we start and create project window
      */
-    public void setUpStage(Stage mainLayout) {
-        this.stage=mainLayout;
+     void setUpStage(Stage mainLayout) {
+         Stage stage = mainLayout;
         stage.setOnCloseRequest(event -> {
             if (timeTracker != null) {
                 timeTracker.turnOff();

@@ -20,7 +20,6 @@ import java.util.Set;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class ReportLayoutController extends Controller {
-
     @FXML
     public TableView<ReportModel> tableViewReport;
     @FXML
@@ -47,7 +46,6 @@ public class ReportLayoutController extends Controller {
     public Label labelDeadlineDate;
     @FXML
     public TextArea taEditReport;
-
     private static final String DATE_COLUMN = "date";
     private static final String CHECKED_COLUMN = "checked";
     private static final String DESCRIPTION_COLUMN = "text";
@@ -71,7 +69,6 @@ public class ReportLayoutController extends Controller {
         currentProjectId = CurrentSessionInfo.getProjectId();
         reportServerSessionManager = new ReportServerSessionManager(this);
         getAllReportAndSetToCollection();
-
     }
 
     /**
@@ -79,7 +76,7 @@ public class ReportLayoutController extends Controller {
      */
     private void getAllReportAndSetToCollection() {
         initializeReport();
-        if(report!=null&&!report.isEmpty()){
+        if (report != null && !report.isEmpty()) {
             initReportInTable();
             setProjectInfoInView(currentProjectId);
             setFocusOnTableView();
@@ -102,11 +99,11 @@ public class ReportLayoutController extends Controller {
         tableViewReport.getSelectionModel().select(0);
         tableViewReport.getFocusModel().focus(0);
         ReportModel reportModel = tableViewReport.getSelectionModel().getSelectedItem();
-            countTextAndSetButtonCondition(reportModel);
-            currentReportId = reportModel.getId();
-            if (reportModel.getText() != null) {
-                taEditReport.setText(reportModel.getText());
-            }
+        countTextAndSetButtonCondition(reportModel);
+        currentReportId = reportModel.getId();
+        if (reportModel.getText() != null) {
+            taEditReport.setText(reportModel.getText());
+        }
     }
 
     /**
@@ -116,8 +113,7 @@ public class ReportLayoutController extends Controller {
      */
     private void setProjectInfoInView(Long id) {
         Set<ProjectModel> projectAll = CurrentSessionInfo.getProjectModels();
-        for (ProjectModel model :
-                projectAll) {
+        for (ProjectModel model : projectAll) {
             if (model.getId() == id) {
                 labelResponsible.setText(model.getAuthorName());
                 labelProjectName.setText(model.getTitle());
@@ -149,13 +145,12 @@ public class ReportLayoutController extends Controller {
      */
     @SuppressWarnings("unchecked")
     private void setReportInfoInView() {
-            for (ReportModel model :
-                    report) {
-                model.setCurrency(convertFromSecondsToHoursAndMinutes(model.getWorkTime()) + " x " + model.getRate() + convertFromCurrencyToSymbol(model.getCurrency()));
-                reportData.add(model);
-            }
-            tableViewReport.setItems(reportData);
-            tableViewReport.getSortOrder().setAll(reportTableColumnDate);
+        for (ReportModel model : report) {
+            model.setCurrency(convertFromSecondsToHoursAndMinutes(model.getWorkTime()) + " x " + model.getRate() + convertFromCurrencyToSymbol(model.getCurrency()));
+            reportData.add(model);
+        }
+        tableViewReport.setItems(reportData);
+        tableViewReport.getSortOrder().setAll(reportTableColumnDate);
     }
 
     /**
@@ -169,6 +164,7 @@ public class ReportLayoutController extends Controller {
 
     /**
      * Hears when user click on button and send report also clear data in collections
+     *
      * @param actionEvent callback click on button
      */
     public void createOrChangeReport(ActionEvent actionEvent) {
@@ -176,12 +172,12 @@ public class ReportLayoutController extends Controller {
         reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
         reportData.clear();
         notifyChangeInTableViewDynamic(reportModel);
-
     }
 
     /**
      * Set report what we create ore change in the text area
-      * @param report report what we create or change
+     *
+     * @param report report what we create or change
      */
     private void notifyChangeInTableViewDynamic(ReportModel report) {
         initializeReport();
@@ -201,7 +197,7 @@ public class ReportLayoutController extends Controller {
             currentReportId = selectReport.getId();
             if (selectReport.getText() != null) {
                 taEditReport.setText(selectReport.getText());
-            }else taEditReport.setText("");
+            } else taEditReport.setText("");
         }
     }
 
@@ -222,19 +218,10 @@ public class ReportLayoutController extends Controller {
         });
     }
 
-    /**
-     * Convert Seconds to Hours and Minutes format
-     * @param seconds current time what we want convert
-     * @return String of Hours and Minutes
-     */
-    private String convertFromSecondsToHoursAndMinutes(int seconds) {
-        int todayTimeInHours = seconds / 3600;
-        int todayTimeInMinutes = (seconds % 3600) / 60;
-        return String.valueOf(todayTimeInHours + "h " + todayTimeInMinutes + 'm');
-    }
 
     /**
      * Check what currency we have and return necessary symbol for it
+     *
      * @param currency current currency what we get
      * @return String symbol of currency
      */
