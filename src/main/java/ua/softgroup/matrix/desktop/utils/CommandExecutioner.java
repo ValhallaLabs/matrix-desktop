@@ -1,11 +1,11 @@
 package ua.softgroup.matrix.desktop.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.api.ServerCommands;
 import ua.softgroup.matrix.api.model.datamodels.DataModel;
 import ua.softgroup.matrix.api.model.requestmodels.RequestModel;
 import ua.softgroup.matrix.api.model.responsemodels.ResponseModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.session.current.CurrentSessionInfo;
 
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import static ua.softgroup.matrix.api.model.responsemodels.ResponseStatus.SUCCESS;
+import static ua.softgroup.matrix.api.model.responsemodels.ResponseStatus.FAIL;
 
 
 /**
@@ -76,7 +76,7 @@ public class CommandExecutioner {
             ServerCommands serverCommand, RequestModel requestModel) throws IOException, ClassNotFoundException, FailResponseException {
         openSocketConnection();
         sendCommand(serverCommand, requestModel);
-        return this.<T2>getResponse(socket);
+        return this.<T2>getResponse();
     }
 
     /**
@@ -133,7 +133,7 @@ public class CommandExecutioner {
             ServerCommands serverCommand, RequestModel<T> requestModel) throws IOException, ClassNotFoundException, FailResponseException {
         openSocketConnection();
         sendCommand(serverCommand, requestModel);
-        getResponse(socket);
+        getResponse();
     }
 
     /**
@@ -154,18 +154,17 @@ public class CommandExecutioner {
 
     /**
      * Method for retrieving {@link ResponseModel} from server as an answer to client request.
-     * @param socket current socket connection.
      * @param <T> type of {@link DataModel} that may be contained in the {@link ResponseModel}
      * @return responseModel with
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    private <T extends DataModel> T getResponse(Socket socket) throws IOException, ClassNotFoundException, FailResponseException {
+    private <T extends DataModel> T getResponse() throws IOException, ClassNotFoundException, FailResponseException {
         ResponseModel<T> responseModel = (ResponseModel<T>) objectInputStream.readObject();
         logger.debug("Response: {}", responseModel.toString());
         closeSocketConnection();
-        if (responseModel.getResponseStatus() == SUCCESS && responseModel.getContainer().isPresent()) {
-            return responseModel.getContainer().get();
+        if (responseModel.getResponseStatus() != FAIL) {
+            return responseModel.getContainer().isPresent() ? responseModel.getContainer().get() : null;
         }
         throw new FailResponseException();
     }
