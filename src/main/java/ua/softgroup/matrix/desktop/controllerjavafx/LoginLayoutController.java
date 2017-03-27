@@ -49,6 +49,7 @@ public class LoginLayoutController {
     private final static String USER_NAME = "userName";
     private final static String USER_PASSWORD = "password";
     private final static String USER_SWITCH_SETTINGS = "false";
+    private  Stage settingStage;
     @FXML
     public TextField loginTextField;
     @FXML
@@ -248,9 +249,12 @@ public class LoginLayoutController {
      * @param event callback click on menu
      */
     public void openSettings(Event event) {
+        if(!settingStage.isShowing()){
+            openSettingsWindow();
+        }
         //TODO:fix bug of second settings window, if connection not found while settings window is already open
         //TODO: figure out what to do if connection wasn't found, and user just close setting window
-        openSettingsWindow();
+
     }
 
     /**
@@ -258,7 +262,7 @@ public class LoginLayoutController {
      */
     private void openSettingsWindow() {
         try {
-            Stage settingStage = new Stage();
+            settingStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
             Image icon = new Image(getClass().getResourceAsStream(LOGO));
             settingStage.getIcons().add(icon);

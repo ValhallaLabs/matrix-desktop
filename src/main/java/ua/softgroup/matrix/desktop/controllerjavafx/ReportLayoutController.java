@@ -54,8 +54,8 @@ public class ReportLayoutController extends Controller {
     private static final String WORK_TIME_COLUMN = "currency";
     private static final String COEFFICIENT_COLUMN = "coefficient";
     private static final int MIN_TEXT_FOR_REPORT = 70;
-    private static final String UNKNOWN_DATA="Unknown";
-    private static final String UNLIMITED_DATA="Unlimited";
+    private static final String UNKNOWN_DATA = "Unknown";
+    private static final String UNLIMITED_DATA = "Unlimited";
     private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
     private ReportServerSessionManager reportServerSessionManager;
     private Long currentProjectId;

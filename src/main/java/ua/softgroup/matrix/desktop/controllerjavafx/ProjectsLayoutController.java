@@ -110,9 +110,6 @@ public class ProjectsLayoutController extends Controller {
     private static final String DESCRIPTION_COLUMN = "description";
     private static final int LIMITER_TEXT_COUNT = 999;
     private static final int MIN_TEXT_FOR_REPORT = 70;
-    private static final String ALERT_ERROR_TITLE = "Supervisor";
-    private static final String ALERT_CONTENT_TEXT = "Something go wrong .Programs will be close";
-    private static final String ALERT_HEADER_TEXT = "Supervisor ERROR";
     private static final String REPORT_LAYOUT = "fxml/reportLayout.fxml";
     private static final String REPORT_LAYOUT_TITLE = "Reports Window";
     private static final int REPORT_LAYOUT_MIN_WIDTH = 1200;
