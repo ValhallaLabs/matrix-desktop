@@ -28,7 +28,6 @@ import java.util.prefs.Preferences;
  */
 
 public class LoginLayoutController {
-
     private static final Logger logger = LoggerFactory.getLogger(LoginLayoutController.class);
     private static final String EMPTY_FIElD = "Error: Please Fill All Field";
     private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
