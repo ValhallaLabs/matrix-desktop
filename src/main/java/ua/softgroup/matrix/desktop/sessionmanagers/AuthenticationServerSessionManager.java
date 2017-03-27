@@ -174,4 +174,8 @@ public class AuthenticationServerSessionManager {
             socketDisposable.dispose();
         }
     }
+
+    public boolean isConnectionOpened() {
+        return !socketDisposable.isDisposed();
+    }
 }
