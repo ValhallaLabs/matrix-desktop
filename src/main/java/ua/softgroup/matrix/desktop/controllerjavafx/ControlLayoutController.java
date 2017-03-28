@@ -52,7 +52,6 @@ public class ControlLayoutController implements Initializable {
     @FXML
     public DatePicker calendarToDate;
     private ObservableList<RequestControl> controlList = FXCollections.observableArrayList();
-
     private ObservableList<UserProfile> usersList = FXCollections.observableArrayList();
     private List<RequestControl> requestControls = new ArrayList<>();
     private ControlAPI controlApi;
@@ -96,6 +95,7 @@ public class ControlLayoutController implements Initializable {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     public void show(Event event) {
         requestControls.clear();
         controlList.clear();
@@ -103,9 +103,10 @@ public class ControlLayoutController implements Initializable {
         if(getDataFromControlPanel()!=null){
             for (ReportControlModel reportControlModel : getDataFromControlPanel()) {
                 for (DayJson dayJson : reportControlModel.getWorkDays()) {
-                        requestControls.add(new RequestControl(dayJson.getId(), dayJson.getDate(), dayJson.getStart(), dayJson.getEnd(), dayJson.getWorkSeconds(), dayJson.getIdleSeconds(),
-                                dayJson.getIdlePercentage(), dayJson.isChecked(), dayJson.getCheckerId(), dayJson.getCoefficient(), dayJson.getReportText(), dayJson.getRate(), dayJson.getCurrencyId(),dayJson.getWorkPeriods()));
-
+                        requestControls.add(new RequestControl(reportControlModel.getTotalWorkSeconds(),reportControlModel.getTotalIdleSeconds(),reportControlModel.getTotalIdlePercentage(),
+                                dayJson.getId(), dayJson.getDate(), dayJson.getStart(), dayJson.getEnd(), dayJson.getWorkSeconds(), dayJson.getIdleSeconds(),
+                                dayJson.getIdlePercentage(), dayJson.isChecked(), dayJson.getCheckerId(), dayJson.getCoefficient(), dayJson.getReportText(), dayJson.getRate(),
+                                dayJson.getCurrencyId(),dayJson.getWorkPeriods()));
                 }
             }
         }

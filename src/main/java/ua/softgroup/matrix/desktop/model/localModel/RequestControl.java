@@ -9,6 +9,9 @@ import java.util.Set;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class RequestControl {
+    private int totalWorkSeconds;
+    private int totalIdleSeconds;
+    private double totalIdlePercentage;
     private long projectId;
     private String date;
     private String start;
@@ -24,8 +27,11 @@ public class RequestControl {
     private int currencyId;
     private Set<WorkPeriod> workPeriod;
 
-    public RequestControl(long projectId, String date, String start, String end, int workSeconds, int idleSeconds, double idlePercentage, boolean checked, long checkerId,
-                          double coefficient, String reportText, int rate, int currencyId, Set<WorkPeriod> workPeriod) {
+    public RequestControl(int totalWorkSeconds, int totalIdleSeconds, double totalIdlePercentage, long projectId, String date, String start, String end, int workSeconds, int idleSeconds,
+                          double idlePercentage, boolean checked, long checkerId, double coefficient, String reportText, int rate, int currencyId, Set<WorkPeriod> workPeriod) {
+        this.totalWorkSeconds = totalWorkSeconds;
+        this.totalIdleSeconds = totalIdleSeconds;
+        this.totalIdlePercentage = totalIdlePercentage;
         this.projectId = projectId;
         this.date = date;
         this.start = start;
@@ -50,23 +56,30 @@ public class RequestControl {
         this.workPeriod = workPeriod;
     }
 
-    public RequestControl(long projectId, String date, String start, String end, int workSeconds, int idleSeconds, double idlePercentage, boolean checked,
-                          long checkerId, double coefficient, String reportText, int rate, int currencyId) {
-        this.projectId = projectId;
-
-        this.date = date;
-        this.start = start;
-        this.end = end;
-        this.workSeconds = workSeconds;
-        this.idleSeconds = idleSeconds;
-        this.idlePercentage = idlePercentage;
-        this.checked = checked;
-        this.checkerId = checkerId;
-        this.coefficient = coefficient;
-        this.reportText = reportText;
-        this.rate = rate;
-        this.currencyId = currencyId;
+    public int getTotalWorkSeconds() {
+        return totalWorkSeconds;
     }
+
+    public void setTotalWorkSeconds(int totalWorkSeconds) {
+        this.totalWorkSeconds = totalWorkSeconds;
+    }
+
+    public int getTotalIdleSeconds() {
+        return totalIdleSeconds;
+    }
+
+    public void setTotalIdleSeconds(int totalIdleSeconds) {
+        this.totalIdleSeconds = totalIdleSeconds;
+    }
+
+    public double getTotalIdlePercentage() {
+        return totalIdlePercentage;
+    }
+
+    public void setTotalIdlePercentage(double totalIdlePercentage) {
+        this.totalIdlePercentage = totalIdlePercentage;
+    }
+
 
     public long getProjectId() {
         return projectId;

@@ -1,57 +1,57 @@
 package ua.softgroup.matrix.desktop.controllerjavafx;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.model.ReportControlModel;
-import ua.softgroup.matrix.desktop.model.UserProfile;
 import ua.softgroup.matrix.desktop.model.localModel.RequestControl;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-public class ControlListViewCell extends ListCell<RequestControl> {
+class ControlListViewCell extends ListCell<RequestControl> {
     @FXML
-    public Label labelDate;
+    private Label labelDate;
     @FXML
-    public Label labelProject;
+    private Label labelProject;
     @FXML
-    public Label labelStart;
+    private Label labelStart;
     @FXML
-    public Label labelEnd;
+    private Label labelEnd;
     @FXML
-    public Label labelSupervisorId;
+    private Label labelSupervisorId;
     @FXML
-    public Label labelChecked;
+    private Label labelChecked;
     @FXML
-    public Label labelWorkSeconds;
+    private Label labelWorkSeconds;
     @FXML
-    public Label labelIdleSeconds;
+    private Label labelIdleSeconds;
     @FXML
-    public Label labelIdlePercentage;
+    private Label labelIdlePercentage;
     @FXML
-    public Label labelRate;
+    private Label labelRate;
     @FXML
-    public Label labelCoefficient;
+    private Label labelCoefficient;
     @FXML
-    public Label labelCurrency;
+    private Label labelCurrency;
     @FXML
-    public Label labelTextReport;
+    private Label labelTextReport;
     @FXML
-    public AnchorPane anchorPane;
+    private AnchorPane anchorPane;
+    @FXML
+    private Label labelTotalWorkSecond;
+    @FXML
+    private Label labelTotalIdleSecond;
+    @FXML
+    private Label labelITotalIdlePercentage;
     private FXMLLoader mLoader;
     private static final Logger logger = LoggerFactory.getLogger(ControlListViewCell.class);
+
     @Override
     protected void updateItem(RequestControl item, boolean empty) {
         super.updateItem(item, empty);
@@ -74,7 +74,9 @@ public class ControlListViewCell extends ListCell<RequestControl> {
             if (item.getDate() != null) {
                 labelDate.setText(String.valueOf(item.getDate()));
             }
-
+            labelTotalWorkSecond.setText(String.valueOf(item.getTotalWorkSeconds()));
+            labelTotalIdleSecond.setText(String.valueOf(item.getTotalIdleSeconds()));
+            labelITotalIdlePercentage.setText(String.valueOf(item.getTotalIdlePercentage()));
             labelProject.setText(String.valueOf(item.getProjectId()));
             labelStart.setText(item.getStart());
             labelEnd.setText(item.getEnd());
