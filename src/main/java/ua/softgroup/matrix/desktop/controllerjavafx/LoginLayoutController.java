@@ -75,7 +75,6 @@ public class LoginLayoutController {
         maxInputTextLimiter(loginTextField, 20);
         maxInputTextLimiter(passwordTextField, 20);
         loginTextField.requestFocus();
-
     }
 
     /**

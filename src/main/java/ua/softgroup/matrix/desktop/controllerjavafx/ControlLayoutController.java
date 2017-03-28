@@ -42,7 +42,6 @@ import java.util.Set;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class ControlLayoutController implements Initializable {
-    private static final String BASE_URL = "http://127.0.0.1:8094/api/v2/";
     @FXML
     public ListView listViewReportDetails;
     @FXML
@@ -51,6 +50,9 @@ public class ControlLayoutController implements Initializable {
     public DatePicker calendarFromDate;
     @FXML
     public DatePicker calendarToDate;
+    private static final String BASE_URL = "http://127.0.0.1:8094/api/v2/";
+    private static final String REPORT_TEXT="Report text:";
+    private static final String WORK_PERIOD="Work period:";
     private ObservableList<RequestControl> controlList = FXCollections.observableArrayList();
     private ObservableList<UserProfile> usersList = FXCollections.observableArrayList();
     private List<RequestControl> requestControls = new ArrayList<>();
@@ -112,7 +114,10 @@ public class ControlLayoutController implements Initializable {
         }
         if(requestControls!=null&& !requestControls.isEmpty()){
             for (RequestControl requstControl : requestControls) {
-                requstControl.setReportText(requstControl.getReportText()+"\n"+requstControl.getWorkPeriod());
+                if (requstControl.getReportText()!=null&&!requstControl.getReportText().isEmpty()){
+                    requstControl.setReportText(REPORT_TEXT+"\n"+requstControl.getReportText()+"\n"+"\n"+WORK_PERIOD+"\n"+requstControl.getWorkPeriod());
+                }else  requstControl.setReportText(WORK_PERIOD+"\n"+requstControl.getWorkPeriod());
+
                 controlList.add(requstControl);
             }
         }

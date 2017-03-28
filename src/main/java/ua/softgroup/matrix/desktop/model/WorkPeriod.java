@@ -34,9 +34,7 @@ public class WorkPeriod {
 
     @Override
     public String toString() {
-        return "WorkPeriod{" +
-                "start='" + start + '\'' +
-                ", end='" + end + '\'' +
-                '}';
+        return "\n"+ "start='" + start + '\'' +
+                ", end='" + end;
     }
 }
