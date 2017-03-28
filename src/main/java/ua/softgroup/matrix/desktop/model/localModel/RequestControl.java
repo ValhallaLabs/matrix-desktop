@@ -1,11 +1,15 @@
 package ua.softgroup.matrix.desktop.model.localModel;
 
+import ua.softgroup.matrix.desktop.model.DayJson;
+import ua.softgroup.matrix.desktop.model.WorkPeriod;
+
+import java.util.Set;
+
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class RequestControl {
-    private long id;
-
+    private long projectId;
     private String date;
     private String start;
     private String end;
@@ -18,10 +22,37 @@ public class RequestControl {
     private String reportText = "";
     private int rate;
     private int currencyId;
+    private Set<WorkPeriod> workPeriod;
 
-    public RequestControl(long id, String date, String start, String end, int workSeconds, int idleSeconds, double idlePercentage, boolean checked,
+    public RequestControl(long projectId, String date, String start, String end, int workSeconds, int idleSeconds, double idlePercentage, boolean checked, long checkerId,
+                          double coefficient, String reportText, int rate, int currencyId, Set<WorkPeriod> workPeriod) {
+        this.projectId = projectId;
+        this.date = date;
+        this.start = start;
+        this.end = end;
+        this.workSeconds = workSeconds;
+        this.idleSeconds = idleSeconds;
+        this.idlePercentage = idlePercentage;
+        this.checked = checked;
+        this.checkerId = checkerId;
+        this.coefficient = coefficient;
+        this.reportText = reportText;
+        this.rate = rate;
+        this.currencyId = currencyId;
+        this.workPeriod = workPeriod;
+    }
+
+    public Set<WorkPeriod> getWorkPeriod() {
+        return workPeriod;
+    }
+
+    public void setWorkPeriod(Set<WorkPeriod> workPeriod) {
+        this.workPeriod = workPeriod;
+    }
+
+    public RequestControl(long projectId, String date, String start, String end, int workSeconds, int idleSeconds, double idlePercentage, boolean checked,
                           long checkerId, double coefficient, String reportText, int rate, int currencyId) {
-        this.id = id;
+        this.projectId = projectId;
 
         this.date = date;
         this.start = start;
@@ -37,12 +68,12 @@ public class RequestControl {
         this.currencyId = currencyId;
     }
 
-    public long getId() {
-        return id;
+    public long getProjectId() {
+        return projectId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
     }
 
     public String getDate() {

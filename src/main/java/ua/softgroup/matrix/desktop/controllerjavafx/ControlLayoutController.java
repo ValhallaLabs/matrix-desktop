@@ -26,6 +26,7 @@ import ua.softgroup.matrix.desktop.api.ControlAPI;
 import ua.softgroup.matrix.desktop.model.DayJson;
 import ua.softgroup.matrix.desktop.model.ReportControlModel;
 import ua.softgroup.matrix.desktop.model.UserProfile;
+import ua.softgroup.matrix.desktop.model.WorkPeriod;
 import ua.softgroup.matrix.desktop.model.localModel.RequestControl;
 
 import javax.jws.soap.SOAPBinding;
@@ -51,36 +52,28 @@ public class ControlLayoutController implements Initializable {
     @FXML
     public DatePicker calendarToDate;
     private ObservableList<RequestControl> controlList = FXCollections.observableArrayList();
+
     private ObservableList<UserProfile> usersList = FXCollections.observableArrayList();
     private List<RequestControl> requestControls = new ArrayList<>();
     private ControlAPI controlApi;
     private UserProfile userProfile;
     private static final Logger logger = LoggerFactory.getLogger(ControlLayoutController.class);
+
     @SuppressWarnings("unchecked")
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         createRetrofit();
-        getAllUsers();
-        listViewAllUsers.setItems(usersList);
-
+        initializeAllUsers();
     }
 
-    private void getAllUsers() {
-        Call<List<UserProfile>> responced = controlApi.loadAllUsers();
-        responced.enqueue(new retrofit2.Callback<List<UserProfile>>() {
-            @Override
-            public void onResponse(Call<List<UserProfile>> call, Response<List<UserProfile>> response) {
-                List<UserProfile> users = response.body();
-                for (UserProfile user : users) {
-                    usersList.add(user);
-                    System.out.println(user.getId());
-                }
+    private void initializeAllUsers() {
+        getAllUsers();
+        if (getAllUsers()!=null){
+            for (UserProfile users:getAllUsers()) {
+                usersList.add(users);
             }
-            @Override
-            public void onFailure(Call<List<UserProfile>> call, Throwable t) {
-                logger.debug("Retrofit problems with getAllUsers request"+t);
-            }
-        });
+        }
+        listViewAllUsers.setItems(usersList);
     }
 
     private void createRetrofit() {
@@ -93,56 +86,36 @@ public class ControlLayoutController implements Initializable {
         controlApi = retrofit.create(ControlAPI.class);
     }
 
+    private List<UserProfile> getAllUsers() {
+        Call<List<UserProfile>> responseUserProfile = controlApi.loadAllUsers();
+        try {
+            return responseUserProfile.execute().body();
+        } catch (IOException e) {
+            logger.debug("Error at response All Users" + e);
+        }
+        return null;
+    }
+
     public void show(Event event) {
         requestControls.clear();
         controlList.clear();
-        if ( userProfile!=null&&userProfile.getId()!=null&&calendarFromDate.getValue()!=null&&calendarToDate.getValue()!=null){
-            Call<List<ReportControlModel>> call = controlApi.loadSummaryByUser(userProfile.getId(), calendarFromDate.getValue().toString(), calendarToDate.getValue().toString());
-            call.enqueue(new retrofit2.Callback<List<ReportControlModel>>() {
+        getDataFromControlPanel();
+        if(getDataFromControlPanel()!=null){
+            for (ReportControlModel reportControlModel : getDataFromControlPanel()) {
+                for (DayJson dayJson : reportControlModel.getWorkDays()) {
+                        requestControls.add(new RequestControl(dayJson.getId(), dayJson.getDate(), dayJson.getStart(), dayJson.getEnd(), dayJson.getWorkSeconds(), dayJson.getIdleSeconds(),
+                                dayJson.getIdlePercentage(), dayJson.isChecked(), dayJson.getCheckerId(), dayJson.getCoefficient(), dayJson.getReportText(), dayJson.getRate(), dayJson.getCurrencyId(),dayJson.getWorkPeriods()));
 
-                @Override
-                public void onResponse(Call<List<ReportControlModel>> call, Response<List<ReportControlModel>> response) {
-                    System.out.println("fcu");
-                    List<ReportControlModel> reportControlList = response.body();
-                    if (reportControlList != null && !reportControlList.isEmpty()) {
-                        for (ReportControlModel reportControlModel : reportControlList) {
-                            for (DayJson dayJson : reportControlModel.getWorkDays()) {
-                                requestControls.add(new RequestControl(dayJson.getId(), dayJson.getDate(), dayJson.getStart(), dayJson.getEnd(), dayJson.getWorkSeconds(), dayJson.getIdleSeconds(),
-                                        dayJson.getIdlePercentage(), dayJson.isChecked(), dayJson.getCheckerId(), dayJson.getCoefficient(), dayJson.getReportText(), dayJson.getRate(), dayJson.getCurrencyId()));
-                            }
-                        }
-                    }
                 }
-                @Override
-                public void onFailure(Call<List<ReportControlModel>> call, Throwable t) {
-                    logger.debug("Retrofit problems with loadSummaryByUsers request"+t);
-                }
-            });
+            }
         }
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        fdf();
-    }
-
-
-    public void chooseUser(Event event) {
-
-        if (listViewAllUsers.getSelectionModel().getSelectedItem()!=null){
-            userProfile = listViewAllUsers.getSelectionModel().getSelectedItem();
-        }
-    }
-    
-    public void fdf(){
-        System.out.println("sds");
-
         if(requestControls!=null&& !requestControls.isEmpty()){
             for (RequestControl requstControl : requestControls) {
+                requstControl.setReportText(requstControl.getReportText()+"\n"+requstControl.getWorkPeriod());
                 controlList.add(requstControl);
             }
         }
+
         listViewReportDetails.setItems(controlList);
         listViewReportDetails.setCellFactory(new Callback<ListView<RequestControl>, ListCell<RequestControl>>() {
             @Override
@@ -150,7 +123,24 @@ public class ControlLayoutController implements Initializable {
                 return new ControlListViewCell();
             }
         });
-        System.out.println(requestControls);
-        System.out.println(controlList);
     }
+
+    private List<ReportControlModel> getDataFromControlPanel() {
+        if ( userProfile!=null&&userProfile.getId()!=null&&calendarFromDate.getValue()!=null&&calendarToDate.getValue()!=null){
+            Call<List<ReportControlModel>> call = controlApi.loadSummaryByUser(userProfile.getId(), calendarFromDate.getValue().toString(), calendarToDate.getValue().toString());
+            try {
+                return call.execute().body();
+            } catch (IOException e) {
+                logger.debug("Error at response Report Control Model" + e);
+            }
+        }
+      return null;
+    }
+
+    public void chooseUser(Event event) {
+        if (listViewAllUsers.getSelectionModel().getSelectedItem()!=null){
+            userProfile = listViewAllUsers.getSelectionModel().getSelectedItem();
+        }
+    }
+
 }
