@@ -10,51 +10,69 @@
    <children>
       <SplitPane dividerPositions="0.25" layoutX="289.0" layoutY="231.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="grey-background">
                <children>
-                  <ListView fx:id="listViewAllUsers" layoutX="14.0" layoutY="80.0" onMouseClicked="#chooseUser" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="100.0" />
-                  <Label alignment="CENTER" layoutX="128.0" layoutY="55.0" text="Users" textFill="#3063a4" AnchorPane.bottomAnchor="663.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <ListView fx:id="listViewAllUsers" layoutX="14.0" layoutY="80.0" onMouseClicked="#chooseUser" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="125.0" />
+                  <Label alignment="CENTER" layoutY="14.0" text="LIST OF USERS" textFill="#3063a4" AnchorPane.bottomAnchor="649.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
                      <font>
-                        <Font name="System Bold" size="48.0" />
+                        <Font name="System Bold" size="36.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="grey-background">
                <children>
-                  <ListView fx:id="listViewReportDetails" focusTraversable="false" layoutX="5.0" layoutY="100.0" prefHeight="663.0" prefWidth="875.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="100.0" />
-                  <HBox layoutX="102.0" layoutY="-8.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="663.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox layoutX="5.0" layoutY="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="80.0">
                      <children>
-                        <Label text="Choose work period from">
-                           <padding>
-                              <Insets left="80.0" right="10.0" top="40.0" />
-                           </padding>
-                        </Label>
-                        <DatePicker fx:id="calendarFromDate">
-                           <HBox.margin>
-                              <Insets right="30.0" top="35.0" />
-                           </HBox.margin>
-                        </DatePicker>
-                        <Label text="to">
-                           <HBox.margin>
-                              <Insets top="40.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets right="10.0" />
-                           </padding>
-                        </Label>
-                        <DatePicker fx:id="calendarToDate">
-                           <HBox.margin>
-                              <Insets right="40.0" top="35.0" />
-                           </HBox.margin>
-                        </DatePicker>
-                        <Button mnemonicParsing="false" onMouseClicked="#show" text="Show">098
-                           <HBox.margin>
-                              <Insets top="35.0" />
-                           </HBox.margin>
-                        </Button>
+                        <HBox>
+                           <children>
+                              <Label layoutX="115.0" layoutY="73.0" text="From Date">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="100.0" right="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <DatePicker fx:id="calendarFromDate" layoutX="233.0" layoutY="78.0">
+                                 <HBox.margin>
+                                    <Insets right="20.0" top="5.0" />
+                                 </HBox.margin>
+                              </DatePicker>
+                              <Label layoutX="426.0" layoutY="73.0" text="To Date">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                              <DatePicker fx:id="calendarToDate" layoutX="519.0" layoutY="78.0">
+                                 <HBox.margin>
+                                    <Insets right="10.0" top="5.0" />
+                                 </HBox.margin>
+                              </DatePicker>
+                              <Button layoutX="717.0" layoutY="78.0" mnemonicParsing="false" onMouseClicked="#show" text="Show">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <ListView fx:id="listViewReportDetails" focusTraversable="false" prefHeight="683.0" prefWidth="885.0" />
                      </children>
-                  </HBox>
+                  </VBox>
+                  <Label layoutX="105.0" layoutY="14.0" text="STATISTICS USER BY WORK PERIOD :" textFill="#3063a4" AnchorPane.bottomAnchor="696.0">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
         </items>

@@ -93,7 +93,6 @@ class ControlListViewCell extends ListCell<RequestControl> {
             labelTextReport.setText(item.getReportText());
             setText(null);
             setGraphic(anchorPane);
-
         }
     }
 }

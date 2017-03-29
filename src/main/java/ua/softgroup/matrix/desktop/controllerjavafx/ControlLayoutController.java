@@ -32,11 +32,15 @@ import ua.softgroup.matrix.desktop.model.localModel.RequestControl;
 import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 
 /**
@@ -113,19 +117,23 @@ public class ControlLayoutController implements Initializable {
         if(getDataFromControlPanel()!=null){
             for (ReportControlModel reportControlModel : getDataFromControlPanel()) {
                 for (DayJson dayJson : reportControlModel.getWorkDays()) {
-                        requestControls.add(new RequestControl(reportControlModel.getTotalWorkSeconds()/60,reportControlModel.getTotalIdleSeconds()/60,reportControlModel.getTotalIdlePercentage(),
-                                dayJson.getId(), dayJson.getDate(), dayJson.getStart(), dayJson.getEnd(), dayJson.getWorkSeconds()/60, dayJson.getIdleSeconds()/60,
-                                dayJson.getIdlePercentage(), dayJson.isChecked(), dayJson.getCheckerId(), dayJson.getCoefficient(), dayJson.getReportText(), dayJson.getRate(),
-                                dayJson.getCurrencyId(),dayJson.getWorkPeriods()));
+                        requestControls.add(new RequestControl(reportControlModel.getTotalWorkSeconds()/60,reportControlModel.getTotalIdleSeconds()/60,Math.round(reportControlModel.getTotalIdlePercentage()),
+                                dayJson.getId(), dayJson.getDate(), dayJson.getStart(), dayJson.getEnd(), dayJson.getWorkSeconds()/60, dayJson.getIdleSeconds()/60,Math.round(dayJson.getIdlePercentage())
+                               , dayJson.isChecked(), dayJson.getCheckerId(), dayJson.getCoefficient(), dayJson.getReportText(), dayJson.getRate(),
+                                dayJson.getCurrencyId(), dayJson.getWorkPeriods()));
                 }
             }
         }
         if(requestControls!=null&& !requestControls.isEmpty()){
             for (RequestControl requstControl : requestControls) {
-                if (requstControl.getReportText()!=null&&!requstControl.getReportText().isEmpty()){
-                    requstControl.setReportText(REPORT_TEXT+"\n"+requstControl.getReportText()+"\n"+"\n"+WORK_PERIOD+"\n"+requstControl.getWorkPeriod());
-                }else  requstControl.setReportText(WORK_PERIOD+"\n"+requstControl.getWorkPeriod());
+                TreeSet<WorkPeriod> workPeriod= new TreeSet<>(this::compare);
+                for (WorkPeriod work:requstControl.getWorkPeriod()) {
 
+                    workPeriod.add(work);
+                }
+                if (requstControl.getReportText()!=null&&!requstControl.getReportText().isEmpty()){
+                    requstControl.setReportText(REPORT_TEXT+"\n"+requstControl.getReportText()+"\n"+"\n"+WORK_PERIOD+"\n"+workPeriod);
+                }else  requstControl.setReportText(WORK_PERIOD+"\n"+workPeriod);
                 controlList.add(requstControl);
             }
         }
@@ -157,4 +165,20 @@ public class ControlLayoutController implements Initializable {
         }
     }
 
+
+    public int compare(WorkPeriod o1, WorkPeriod o2) {
+        DateTimeFormatter todayStartTime = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalTime ac;
+        LocalTime lim;
+            System.out.println(o1.getStart());
+            System.out.println(o2.getStart());
+                ac = LocalTime.from(todayStartTime.parse(o1.getStart()));
+                System.out.println(ac);
+                lim=LocalTime.from(todayStartTime.parse(o2.getStart()));
+                System.out.println(lim);
+                if(ac.isAfter(lim)){
+                    return 1;
+                }
+           return -1;
+    }
 }

@@ -4,7 +4,9 @@ import ua.softgroup.matrix.desktop.model.DayJson;
 import ua.softgroup.matrix.desktop.model.WorkPeriod;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
@@ -184,4 +186,6 @@ public class RequestControl implements Serializable {
     public void setCurrencyId(int currencyId) {
         this.currencyId = currencyId;
     }
+
+
 }
