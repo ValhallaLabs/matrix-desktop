@@ -3,12 +3,13 @@ package ua.softgroup.matrix.desktop.model.localModel;
 import ua.softgroup.matrix.desktop.model.DayJson;
 import ua.softgroup.matrix.desktop.model.WorkPeriod;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-public class RequestControl {
+public class RequestControl implements Serializable {
     private int totalWorkSeconds;
     private int totalIdleSeconds;
     private double totalIdlePercentage;
@@ -79,7 +80,6 @@ public class RequestControl {
     public void setTotalIdlePercentage(double totalIdlePercentage) {
         this.totalIdlePercentage = totalIdlePercentage;
     }
-
 
     public long getProjectId() {
         return projectId;

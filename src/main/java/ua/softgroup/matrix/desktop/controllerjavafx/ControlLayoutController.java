@@ -32,6 +32,7 @@ import ua.softgroup.matrix.desktop.model.localModel.RequestControl;
 import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -65,6 +66,13 @@ public class ControlLayoutController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         createRetrofit();
         initializeAllUsers();
+        setValueInDatePicker();
+
+    }
+
+    private void setValueInDatePicker() {
+        calendarFromDate.setValue(LocalDate.now().minusMonths(1));
+        calendarToDate.setValue(LocalDate.now());
     }
 
     private void initializeAllUsers() {
@@ -105,8 +113,8 @@ public class ControlLayoutController implements Initializable {
         if(getDataFromControlPanel()!=null){
             for (ReportControlModel reportControlModel : getDataFromControlPanel()) {
                 for (DayJson dayJson : reportControlModel.getWorkDays()) {
-                        requestControls.add(new RequestControl(reportControlModel.getTotalWorkSeconds(),reportControlModel.getTotalIdleSeconds(),reportControlModel.getTotalIdlePercentage(),
-                                dayJson.getId(), dayJson.getDate(), dayJson.getStart(), dayJson.getEnd(), dayJson.getWorkSeconds(), dayJson.getIdleSeconds(),
+                        requestControls.add(new RequestControl(reportControlModel.getTotalWorkSeconds()/60,reportControlModel.getTotalIdleSeconds()/60,reportControlModel.getTotalIdlePercentage(),
+                                dayJson.getId(), dayJson.getDate(), dayJson.getStart(), dayJson.getEnd(), dayJson.getWorkSeconds()/60, dayJson.getIdleSeconds()/60,
                                 dayJson.getIdlePercentage(), dayJson.isChecked(), dayJson.getCheckerId(), dayJson.getCoefficient(), dayJson.getReportText(), dayJson.getRate(),
                                 dayJson.getCurrencyId(),dayJson.getWorkPeriods()));
                 }

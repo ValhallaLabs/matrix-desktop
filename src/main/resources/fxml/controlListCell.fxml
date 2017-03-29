@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="870.0" stylesheets="@../css/controlListCell.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="20.0" layoutY="20.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <VBox layoutX="20.0" layoutY="20.0" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
             <GridPane layoutX="24.0" layoutY="10.0" prefHeight="160.0" prefWidth="880.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                <children>
@@ -29,7 +29,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="dark-blue-background" GridPane.rowIndex="4">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="200.0" text="Project ID :" textFill="WHITE">
+                        <Label prefHeight="30.0" prefWidth="216.0" text="Project ID :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -44,7 +44,7 @@
                   </Pane>
                   <Pane prefHeight="31.0" prefWidth="677.0" styleClass="grey-background" GridPane.columnIndex="1">
                      <children>
-                        <Label fx:id="labelDate" prefHeight="30.0" prefWidth="250.0" text="21.16.2017">
+                        <Label fx:id="labelDate" prefHeight="30.0" prefWidth="250.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -54,12 +54,12 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets />
+                        <Insets left="4.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <Label fx:id="labelProject" prefHeight="30.0" prefWidth="250.0" text="Valgalla project">
+                        <Label fx:id="labelProject" prefHeight="30.0" prefWidth="250.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -69,12 +69,12 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets />
+                        <Insets left="4.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="dark-blue-background" GridPane.rowIndex="1">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="200.0" text="TotalWorkSeconds :" textFill="WHITE">
+                        <Label prefHeight="30.0" prefWidth="228.0" text="Total Work Minutes :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -86,7 +86,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="dark-blue-background" GridPane.rowIndex="2">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="200.0" text="TotalIdleSeconds :" textFill="WHITE">
+                        <Label prefHeight="30.0" prefWidth="240.0" text="Total Idle Minutes :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -98,7 +98,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="dark-blue-background" GridPane.rowIndex="3">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="200.0" text="TotalIdlePercentage :" textFill="WHITE">
+                        <Label prefHeight="30.0" prefWidth="216.0" text="Total Idle Percentage :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -110,7 +110,7 @@
                   </Pane>
                   <Pane prefHeight="26.0" prefWidth="537.0" styleClass="grey-background" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="labelTotalWorkSecond" prefHeight="30.0" prefWidth="250.0" text="21.16.2017">
+                        <Label fx:id="labelTotalWorkSecond" prefHeight="30.0" prefWidth="250.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -119,10 +119,13 @@
                            </padding>
                         </Label>
                      </children>
+                     <GridPane.margin>
+                        <Insets left="4.0" />
+                     </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="26.0" prefWidth="537.0" styleClass="grey-background" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="labelTotalIdleSecond" prefHeight="30.0" prefWidth="250.0" text="21.16.2017">
+                        <Label fx:id="labelTotalIdleSecond" prefHeight="30.0" prefWidth="250.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -131,10 +134,13 @@
                            </padding>
                         </Label>
                      </children>
+                     <GridPane.margin>
+                        <Insets left="4.0" />
+                     </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="26.0" prefWidth="537.0" styleClass="grey-background" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <Label fx:id="labelITotalIdlePercentage" prefHeight="30.0" prefWidth="250.0" text="21.16.2017">
+                        <Label fx:id="labelITotalIdlePercentage" prefHeight="30.0" prefWidth="250.0" text="Unknown">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -143,11 +149,14 @@
                            </padding>
                         </Label>
                      </children>
+                     <GridPane.margin>
+                        <Insets left="4.0" />
+                     </GridPane.margin>
                   </Pane>
                </children>
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" prefWidth="252.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="573.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.0" minWidth="10.0" prefWidth="202.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="620.0" minWidth="10.0" prefWidth="620.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -157,14 +166,14 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <padding>
-                  <Insets bottom="5.0" left="10.0" />
+                  <Insets left="12.0" />
                </padding>
             </GridPane>
             <GridPane layoutY="126.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                <children>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="200.0" text="START :" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="200.0" text="Start Work :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -174,12 +183,12 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" top="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.rowIndex="1">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="200.0" text="END :" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="200.0" text="End Work :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -189,7 +198,7 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="1">
@@ -204,7 +213,7 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" top="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -219,12 +228,12 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.columnIndex="2">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="164.0" text="SUPERVISOR ID :" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="164.0" text="Supervisor ID :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -234,12 +243,12 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" top="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="140.0" text="CHECKED :" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="140.0" text="Checked :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -249,7 +258,7 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="3">
@@ -264,7 +273,7 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" top="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="3" GridPane.rowIndex="1">
@@ -279,12 +288,12 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.rowIndex="2">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="200.0" text="WORK SECONDS :" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="200.0" text="Work Minutes :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -294,12 +303,12 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.rowIndex="3">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="200.0" text="IDLE SECONDS :" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="200.0" text="Idle Minutes:" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -309,12 +318,12 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.rowIndex="4">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="200.0" text="IDLE PERCENTAGE :" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="200.0" text="Idle Percentage:" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -324,7 +333,7 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -339,7 +348,7 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -354,7 +363,7 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -369,12 +378,12 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="130.0" text="RATE :" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="130.0" text="Rate :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -384,12 +393,12 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="130.0" text="COEFFICIENT :" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="130.0" text="Coefficient :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -399,12 +408,12 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="130.0" text="CURRENCY :" textFill="WHITE">
+                        <Label prefHeight="26.0" prefWidth="130.0" text="Currency :" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -414,7 +423,7 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="3" GridPane.rowIndex="2">
@@ -429,7 +438,7 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="3" GridPane.rowIndex="3">
@@ -444,7 +453,7 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" GridPane.columnIndex="3" GridPane.rowIndex="4">
@@ -459,7 +468,7 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets bottom="2.0" left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Pane>
                </children>
@@ -477,22 +486,14 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <padding>
-                  <Insets bottom="5.0" left="10.0" right="14.0" />
+                  <Insets left="10.0" right="14.0" top="2.0" />
                </padding>
             </GridPane>
-            <Label prefHeight="30.0" prefWidth="200.0" text="DATE :" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
-            </Label>
          </children>
       </VBox>
-      <ScrollPane hbarPolicy="NEVER" layoutX="21.0" layoutY="356.0" prefHeight="120.0" prefViewportHeight="136.0" prefViewportWidth="753.0" prefWidth="823.0" styleClass="grey-background" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="320.0">
+      <ScrollPane hbarPolicy="NEVER" layoutX="21.0" layoutY="356.0" prefHeight="120.0" prefViewportHeight="136.0" prefViewportWidth="753.0" prefWidth="823.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="325.0">
          <content>
-            <Label fx:id="labelTextReport" alignment="TOP_LEFT" prefWidth="830.0" text="Итак, вы трудились много дней (а может и ночей), и вот ваше первое гибридное мобильное приложение готово. Оно достаточно стабильно, большинство критичных багов закрыто. Остались мелкие, но помня о том, что перфекционизм — зло, вы принимаете волевое решение выложить приложение. Итак, вы трудились много дней (а может и ночей), и вот ваше первое гибридное мобильное приложение готово. Оно достаточно стабильно, большинство критичных багов закрыто. Остались мелкие, но помня о том, что перфекционизм — зло, вы принимаете волевое решение выложить приложение.Итак, вы трудились много дней (а может и ночей), и вот ваше первое гибридное мобильное приложение готово. Оно достаточно стабильно, большинство критичных багов закрыто. Остались мелкие, но помня о том, что перфекционизм — зло, вы пр" wrapText="true">
+            <Label fx:id="labelTextReport" alignment="TOP_LEFT" minHeight="115.0" prefWidth="830.0" styleClass="grey-background" text="Итак, вы трудились много дней (а может и ночей), и вот ваше первое гибридное мобильное приложение готово. Оно достаточно стабильно, большинство критичных багов закрыто. Остались мелкие, но помня о том, что перфекционизм — зло, вы принимаете волевое решение выложить приложение. Итак, вы трудились много дней (а может и ночей), и вот ваше первое гибридное мобильное приложение готово. Оно достаточно стабильно, большинство критичных багов закрыто. Остались мелкие, но помня о том, что перфекционизм — зло, вы принимаете волевое решение выложить приложение.Итак, вы трудились много дней (а может и ночей), и вот ваше первое гибридное мобильное приложение готово. Оно достаточно стабильно, большинство критичных багов закрыто. Остались мелкие, но помня о том, что перфекционизм — зло, вы пр" wrapText="true">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
                </padding>
