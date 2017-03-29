@@ -3,9 +3,7 @@ package ua.softgroup.matrix.desktop.controllerjavafx;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -13,13 +11,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 import ua.softgroup.matrix.desktop.api.ControlAPI;
@@ -29,18 +24,12 @@ import ua.softgroup.matrix.desktop.model.UserProfile;
 import ua.softgroup.matrix.desktop.model.WorkPeriod;
 import ua.softgroup.matrix.desktop.model.localModel.RequestControl;
 
-import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 
 /**
@@ -126,11 +115,8 @@ public class ControlLayoutController implements Initializable {
         }
         if(requestControls!=null&& !requestControls.isEmpty()){
             for (RequestControl requstControl : requestControls) {
-                TreeSet<WorkPeriod> workPeriod= new TreeSet<>(this::compare);
-                for (WorkPeriod work:requstControl.getWorkPeriod()) {
-
-                    workPeriod.add(work);
-                }
+                TreeSet<WorkPeriod> workPeriod= new TreeSet<>(this::compareStartTime);
+                workPeriod.addAll(requstControl.getWorkPeriod());
                 if (requstControl.getReportText()!=null&&!requstControl.getReportText().isEmpty()){
                     requstControl.setReportText(REPORT_TEXT+"\n"+requstControl.getReportText()+"\n"+"\n"+WORK_PERIOD+"\n"+workPeriod);
                 }else  requstControl.setReportText(WORK_PERIOD+"\n"+workPeriod);
@@ -166,17 +152,13 @@ public class ControlLayoutController implements Initializable {
     }
 
 
-    public int compare(WorkPeriod o1, WorkPeriod o2) {
+    private int compareStartTime(WorkPeriod o1, WorkPeriod o2) {
         DateTimeFormatter todayStartTime = DateTimeFormatter.ofPattern("HH:mm:ss");
-        LocalTime ac;
-        LocalTime lim;
-            System.out.println(o1.getStart());
-            System.out.println(o2.getStart());
-                ac = LocalTime.from(todayStartTime.parse(o1.getStart()));
-                System.out.println(ac);
-                lim=LocalTime.from(todayStartTime.parse(o2.getStart()));
-                System.out.println(lim);
-                if(ac.isAfter(lim)){
+        LocalTime firstStartDate;
+        LocalTime secondStartDate;
+                firstStartDate = LocalTime.from(todayStartTime.parse(o1.getStart()));
+                secondStartDate=LocalTime.from(todayStartTime.parse(o2.getStart()));
+                if(firstStartDate.isAfter(secondStartDate)){
                     return 1;
                 }
            return -1;
