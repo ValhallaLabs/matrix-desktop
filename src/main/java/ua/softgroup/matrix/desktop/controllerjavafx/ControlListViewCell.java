@@ -55,16 +55,13 @@ class ControlListViewCell extends ListCell<RequestControl> {
     @Override
     protected void updateItem(RequestControl item, boolean empty) {
         super.updateItem(item, empty);
-
         if (empty || item == null) {
             setText(null);
             setGraphic(null);
         } else {
-
             if (mLoader == null) {
                 mLoader = new FXMLLoader(getClass().getResource("/fxml/controlListCell.fxml"));
                 mLoader.setController(this);
-
                 try {
                     mLoader.load();
                 } catch (IOException e) {

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-public interface ControlAPI {
+public interface ControlPanelAPI {
     @GET("summary/users/{userId}")
     Call<List<ReportControlModel>> loadSummaryByUser(@Path("userId") long userId,@Query("fromDate") String fromDate,@Query("toDate") String toDate);
     @GET("summary/users")
