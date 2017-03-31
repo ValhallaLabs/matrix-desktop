@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.api.model.datamodels.ActiveWindowModel;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -119,11 +119,13 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      * @return activeWindowsModel
      */
     public synchronized List<ActiveWindowModel> getActiveWindows(){
-        activeWindows.get(activeWindows.size()-1).setWorkingPeriodSeconds(time);
+        if (activeWindows.size() != 0) {
+            activeWindows.get(activeWindows.size() - 1).setWorkingPeriodSeconds(time);
+        }
         time = 0;
         List<ActiveWindowModel> windowTimeMap = this.activeWindows;
-        activeWindows.add(new ActiveWindowModel(currentTitle, LocalTime.now(), 0));
         this.activeWindows = new ArrayList<>();
+        activeWindows.add(new ActiveWindowModel(currentTitle, LocalTime.now(), 0));
         return windowTimeMap;
     }
 }
