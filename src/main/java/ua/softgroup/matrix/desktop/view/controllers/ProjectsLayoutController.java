@@ -344,7 +344,7 @@ public class ProjectsLayoutController extends Controller {
         if (reportModel != null && !reportModel.isEmpty()) {
             for (ReportModel model :
                     reportModel) {
-                if (model.getDate().equals(LocalDate.now()) && model.getText() != null) {
+                if (model.getDate().equals(LocalDate.now()) && !model.getText().isEmpty()) {
                     taWriteReport.setText(model.getText());
                     viewConditionAtReportAlreadyExist();
                 }
