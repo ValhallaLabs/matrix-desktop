@@ -113,8 +113,8 @@ public class ProjectsLayoutController extends Controller {
     private static final String INSTRUCTIONS_LAYOUT_TITLE = "Instructions Window";
     private static final String PIE_CHART_TITLE = "Idle Time";
     private static final String FILE_CHOOSER_TITLE = "Open Resource File";
-    private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 900;
-    private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 600;
+    private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 1200;
+    private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 765;
     private static final String LOGO = "/images/logoIcon.png";
     private static final String UNKNOWN_DATA = "Unknown";
     private static final String UNLIMITED_DATA = "Unlimited";
