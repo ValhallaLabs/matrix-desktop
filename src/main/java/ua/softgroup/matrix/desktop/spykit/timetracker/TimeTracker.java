@@ -169,7 +169,7 @@ public class TimeTracker extends SpyKitTool {
             screenshot = screenShooter.makeScreenshot();
         }
         return new CheckPointModel(order, screenshot, idleListener.getKeyboardLogs(),
-                idleListener.getMouseFootage(), activeWindowListener.getWindowTimeMap(),
+                idleListener.getMouseFootage(), activeWindowListener.getActiveWindows(),
                 idleListener.getIdleTimeSeconds());
     }
 
