@@ -89,7 +89,9 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      * @param newTitle new title
      */
     private void receiveTitle(String newTitle) {
-        activeWindows.get(activeWindows.size()-1).setWorkingPeriodSeconds(time);
+        if(activeWindows.size()!= 0) {
+            activeWindows.get(activeWindows.size() - 1).setWorkingPeriodSeconds(time);
+        }
         activeWindows.add(new ActiveWindowModel(newTitle, LocalTime.now(), 0));
         time = 0;
         currentTitle = newTitle;
@@ -118,9 +120,9 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      */
     public synchronized List<ActiveWindowModel> getActiveWindows(){
         activeWindows.get(activeWindows.size()-1).setWorkingPeriodSeconds(time);
-        activeWindows.add(new ActiveWindowModel(currentTitle, LocalTime.now(), 0));
         time = 0;
         List<ActiveWindowModel> windowTimeMap = this.activeWindows;
+        activeWindows.add(new ActiveWindowModel(currentTitle, LocalTime.now(), 0));
         this.activeWindows = new ArrayList<>();
         return windowTimeMap;
     }

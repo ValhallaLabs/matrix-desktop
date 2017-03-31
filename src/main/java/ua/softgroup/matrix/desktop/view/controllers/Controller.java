@@ -46,6 +46,7 @@ abstract public class Controller {
         mainAlert.setOnCloseRequest(event -> Platform.exit());
         mainAlert.showAndWait();
         Platform.exit();
+        System.exit(0);
     }
 
     /**
