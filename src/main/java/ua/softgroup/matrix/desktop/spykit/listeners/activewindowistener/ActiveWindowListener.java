@@ -9,6 +9,7 @@ import ua.softgroup.matrix.api.model.datamodels.ActiveWindowModel;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -60,7 +61,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      */
     private void addFirstWindowToTimeMap() {
         currentTitle = getProcessTitle();
-        activeWindows.add(new ActiveWindowModel(currentTitle, LocalDateTime.now(), 0));
+        activeWindows.add(new ActiveWindowModel(currentTitle, LocalTime.now(), 0));
         logger.debug("Adding first title: {}", currentTitle);
     }
 
@@ -89,7 +90,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      */
     private void receiveTitle(String newTitle) {
         activeWindows.get(activeWindows.size()-1).setWorkingPeriodSeconds(time);
-        activeWindows.add(new ActiveWindowModel(newTitle, LocalDateTime.now(), 0));
+        activeWindows.add(new ActiveWindowModel(newTitle, LocalTime.now(), 0));
         time = 0;
         currentTitle = newTitle;
     }
@@ -117,7 +118,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      */
     public synchronized List<ActiveWindowModel> getActiveWindows(){
         activeWindows.get(activeWindows.size()-1).setWorkingPeriodSeconds(time);
-        activeWindows.add(new ActiveWindowModel(currentTitle, LocalDateTime.now(), 0));
+        activeWindows.add(new ActiveWindowModel(currentTitle, LocalTime.now(), 0));
         time = 0;
         List<ActiveWindowModel> windowTimeMap = this.activeWindows;
         this.activeWindows = new ArrayList<>();

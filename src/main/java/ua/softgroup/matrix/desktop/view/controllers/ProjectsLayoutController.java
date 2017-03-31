@@ -37,6 +37,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Locale;
@@ -571,7 +572,7 @@ public class ProjectsLayoutController extends Controller {
      *Set actual arrival tim to project model
      * @param arrivalTime get actual arrival time
      */
-    public void updateArrivalTime(LocalDateTime arrivalTime){
+    public void updateArrivalTime(LocalTime arrivalTime){
         projectModel.getProjectTime().setTodayStartTime(arrivalTime);
         logger.debug("arrival time:", String.valueOf(arrivalTime.format(todayStartTime)));
         setArrivalTime();
