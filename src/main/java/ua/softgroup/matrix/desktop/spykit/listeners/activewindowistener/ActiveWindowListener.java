@@ -128,4 +128,8 @@ public abstract class ActiveWindowListener extends SpyKitTool {
         activeWindows.add(new ActiveWindowModel(currentTitle, LocalTime.now(), 0));
         return windowTimeMap;
     }
+
+    public String getCurrentTitle() {
+        return currentTitle;
+    }
 }
