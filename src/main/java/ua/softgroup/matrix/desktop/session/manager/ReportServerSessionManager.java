@@ -12,6 +12,7 @@ import ua.softgroup.matrix.desktop.view.controllers.Controller;
 import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.Set;
 
 
@@ -40,7 +41,7 @@ public class ReportServerSessionManager {
                     CurrentSessionInfo.getProjectId());
         } catch (IOException | ClassNotFoundException e) {
             logger.error("Cannot save of change report", e);
-        } catch (CommandExecutioner.FailResponseException e) {
+        } catch (CommandExecutioner.FailResponseException | GeneralSecurityException e) {
             logger.error("Access denied", e);
             Platform.runLater(() -> controller.tellUserAboutAccessDenied());
         }
@@ -60,7 +61,7 @@ public class ReportServerSessionManager {
                     .sendCommandWithResponse(ServerCommands.GET_REPORTS, id)).getReportModels();
         } catch (IOException | ClassNotFoundException e) {
             logger.error("Cannot get reports", e);
-        } catch (CommandExecutioner.FailResponseException e) {
+        } catch (CommandExecutioner.FailResponseException | GeneralSecurityException e) {
             logger.error("Access denied", e);
             Platform.runLater(() -> controller.tellUserAboutAccessDenied());
         }
