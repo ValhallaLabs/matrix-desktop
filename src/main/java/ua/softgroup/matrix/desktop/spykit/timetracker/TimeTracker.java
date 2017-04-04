@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.api.model.datamodels.CheckPointModel;
 import ua.softgroup.matrix.api.model.datamodels.SynchronizationModel;
 import ua.softgroup.matrix.api.model.datamodels.TimeModel;
-import ua.softgroup.matrix.desktop.view.controllers.ProjectsLayoutController;
 import ua.softgroup.matrix.desktop.session.current.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitTool;
 import ua.softgroup.matrix.desktop.spykit.interfaces.SpyKitToolStatus;
@@ -19,10 +18,11 @@ import ua.softgroup.matrix.desktop.spykit.listeners.activewindowistener.ActiveWi
 import ua.softgroup.matrix.desktop.spykit.listeners.globaldevicelistener.IdleListener;
 import ua.softgroup.matrix.desktop.spykit.screenshooter.ScreenShooter;
 import ua.softgroup.matrix.desktop.utils.CommandExecutioner;
+import ua.softgroup.matrix.desktop.view.controllers.ProjectsLayoutController;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -221,8 +221,7 @@ public class TimeTracker extends SpyKitTool {
      */
     private void addCheckpointToSynchronizationModel(CheckPointModel checkPointModel) {
         if(CurrentSessionInfo.getSynchronizationModel() == null) {
-            CurrentSessionInfo.setSynchronizationModel(new SynchronizationModel());
-            CurrentSessionInfo.getSynchronizationModel().setCheckPointModels(new HashSet<>());
+            CurrentSessionInfo.setSynchronizationModel(new SynchronizationModel(new LinkedHashSet<>()));
         }
         CurrentSessionInfo.getSynchronizationModel().getCheckPointModels().add(checkPointModel);
         logger.info("Checkpoint was added to SynchronizationModel.\n " + "Current checkpoints: {}",
