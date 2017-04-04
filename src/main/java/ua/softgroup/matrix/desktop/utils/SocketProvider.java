@@ -3,9 +3,6 @@ package ua.softgroup.matrix.desktop.utils;
 import javax.net.ssl.*;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
 import java.security.*;
 
 /**
@@ -40,9 +37,9 @@ public class SocketProvider {
 
     private void setupKeyStores() throws GeneralSecurityException, IOException {
         serverKeyStore = KeyStore.getInstance("JKS");
-        serverKeyStore.load( new FileInputStream("server.public"), "public".toCharArray());
+        serverKeyStore.load( new FileInputStream("src/main/resources/server.public"), "public".toCharArray());
         clientKeyStore = KeyStore.getInstance("JKS");
-        clientKeyStore.load(new FileInputStream("client.private"), passphrase.toCharArray());
+        clientKeyStore.load(new FileInputStream("src/main/resources/client.private"), passphrase.toCharArray());
     }
 
     private void setupSSLContext() throws GeneralSecurityException, IOException {
