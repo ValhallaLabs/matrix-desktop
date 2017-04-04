@@ -17,6 +17,7 @@ import ua.softgroup.matrix.desktop.session.current.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.view.controllers.LoginLayoutController;
 import ua.softgroup.matrix.desktop.utils.SocketProvider;
 
+import javax.net.ssl.SSLSocket;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -52,7 +53,7 @@ public class AuthenticationServerSessionManager {
      * @return a new socket connection
      */
     private Socket openSocketConnection() throws IOException, GeneralSecurityException {
-        Socket socket = SocketProvider.getInstance().openNewConnection();
+        SSLSocket socket = SocketProvider.getInstance().openNewConnection();
         objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
         objectInputStream = new ObjectInputStream(socket.getInputStream());
         loginLayoutController.unlockLoginWindowAfterConnect();
