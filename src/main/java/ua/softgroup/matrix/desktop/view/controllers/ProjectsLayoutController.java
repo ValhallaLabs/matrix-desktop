@@ -36,7 +36,6 @@ import ua.softgroup.matrix.desktop.view.DoughnutChart;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -344,7 +343,7 @@ public class ProjectsLayoutController extends Controller {
         if (reportModel != null && !reportModel.isEmpty()) {
             for (ReportModel model :
                     reportModel) {
-                if (model.getDate().equals(LocalDate.now()) && !model.getText().isEmpty()) {
+                if (model.getDate().equals(LocalDate.now()) && model.getText() != null) {
                     taWriteReport.setText(model.getText());
                     viewConditionAtReportAlreadyExist();
                 }

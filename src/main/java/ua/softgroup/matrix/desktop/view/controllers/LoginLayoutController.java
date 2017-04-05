@@ -102,7 +102,8 @@ public class LoginLayoutController extends Controller {
         progressIndWaitConnection.setDisable(false);
         cbRememberMe.setDisable(true);
     }
-     void stopProgressIndicator(){
+
+    void stopProgressIndicator(){
         vBoxLoginWindow.setDisable(true);
     }
 
@@ -145,6 +146,7 @@ public class LoginLayoutController extends Controller {
         alert.initStyle(StageStyle.UTILITY);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
+            settingStage = new Stage();
             openSettingsWindow();
         }
     }
@@ -253,10 +255,8 @@ public class LoginLayoutController extends Controller {
     private void openSettingsWindow() {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
-            if(com.sun.jna.Platform.isWindows()) {
-                Image icon = new Image(getClass().getResourceAsStream(LOGO));
-                settingStage.getIcons().add(icon);
-            }
+            Image icon = new Image(getClass().getResourceAsStream(LOGO));
+            settingStage.getIcons().add(icon);
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource(SETTING_LAYOUT));
             Pane pane = loader.load();
