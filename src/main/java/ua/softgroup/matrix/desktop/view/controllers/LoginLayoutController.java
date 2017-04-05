@@ -253,8 +253,10 @@ public class LoginLayoutController extends Controller {
     private void openSettingsWindow() {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
-            Image icon = new Image(getClass().getResourceAsStream(LOGO));
-            settingStage.getIcons().add(icon);
+            if(com.sun.jna.Platform.isWindows()) {
+                Image icon = new Image(getClass().getResourceAsStream(LOGO));
+                settingStage.getIcons().add(icon);
+            }
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource(SETTING_LAYOUT));
             Pane pane = loader.load();

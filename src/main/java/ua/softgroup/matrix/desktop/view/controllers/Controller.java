@@ -14,7 +14,9 @@ abstract public class Controller {
     private static final String ALERT_ERROR_TITLE = "Supervisor";
     private static final String ALERT_SOMETHING_WENT_WRONG = "Something went wrong .Programs will be close";
     private static final String ALERT_ACCESS_DENIED = "Someone accessed through your name. Please, re-login";
-    private static final String ALERT_XDOTOOL_NOT_FOUND = "Sorry, but xdotool not found. Please, install it.";
+    private static final String ALERT_XDOTOOL_NOT_FOUND = "Sorry, xdotool not found. Please, install it just in one step:\n" +
+            "apt-get install xdotool\n" +
+            "Read more: http://www.semicomplete.com/projects/xdotool";
     private static final String ALERT_HEADER_TEXT = "Supervisor ERROR";
 
     /**
