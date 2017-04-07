@@ -94,7 +94,7 @@ public class Main extends Application {
         }
     }
 
-    public void tellUserAboutConfigCrash() {
+    private void tellUserAboutConfigCrash() {
         Alert mainAlert = new Alert(Alert.AlertType.INFORMATION);
         mainAlert.setTitle(ALERT_ERROR_TITLE);
         mainAlert.setHeaderText(ALERT_HEADER_TEXT);

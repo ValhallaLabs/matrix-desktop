@@ -35,20 +35,20 @@ public class LoginLayoutController extends Controller {
     private static final String ALERT_TITLE_TEXT = "Supervisor";
     private static final String ALERT_CONTENT_TEXT = "Target ip:port is Unreachable";
     private static final String ALERT_HEADER_TEXT = "NETWORK ERROR";
-    private static final int MAIN_LAYOUT_MIN_WIDTH = 1200;
-    private static final int MAIN_LAYOUT_MIN_HEIGHT = 800;
     private static final String SETTING_LAYOUT = "fxml/settingLayout.fxml";
     private static final String SETTING_LAYOUT_TITLE ="Settings";
     private static final String PROJECT_LAYOUT = "fxml/projectsLayout.fxml";
     private static final String PROJECT_LAYOUT_TITLE = "SuperVisor";
+    private static final String USER_NAME = "userName";
+    private static final String USER_PASSWORD = "password";
+    private static final String USER_SWITCH_SETTINGS = "false";
+    private static final int MAIN_LAYOUT_MIN_WIDTH = 1200;
+    private static final int MAIN_LAYOUT_MIN_HEIGHT = 800;
     private static final int SETTING_LAYOUT_MIN_WIDTH = 500;
     private static final int SETTING_LAYOUT_MIN_HEIGHT = 250;
     private Stage loginStage;
     private AuthenticationServerSessionManager authenticationSessionManager;
     private Preferences preferences;
-    private final static String USER_NAME = "userName";
-    private final static String USER_PASSWORD = "password";
-    private final static String USER_SWITCH_SETTINGS = "false";
     private Stage settingStage;
     @FXML
     public TextField loginTextField;
@@ -78,9 +78,15 @@ public class LoginLayoutController extends Controller {
 
     }
 
-    private void setTextLimiterOnField() {
-        addTextLimiter(loginTextField, 20);
-        addTextLimiter(passwordTextField, 20);
+    /**
+     * Hears when user click on setting menus
+     * @param event callback click on menu
+     */
+    public void openSettings(Event event) {
+        settingStage = new Stage();
+        if(!settingStage.isShowing()){
+            openSettingsWindow();
+        }
     }
 
     /**
@@ -91,47 +97,6 @@ public class LoginLayoutController extends Controller {
         progressIndWaitConnection.setVisible(false);
         progressIndWaitConnection.setDisable(true);
         cbRememberMe.setDisable(false);
-    }
-
-    /**
-     * Set impossibility click on VBox panel and show ProgressIndicator
-     */
-    private void showProgressIndicator(){
-        vBoxLoginWindow.setDisable(true);
-        progressIndWaitConnection.setVisible(true);
-        progressIndWaitConnection.setDisable(false);
-        cbRememberMe.setDisable(true);
-    }
-
-    void stopProgressIndicator(){
-        vBoxLoginWindow.setDisable(true);
-    }
-
-    /**
-     * If preferences saved, set automatically user login and password in special field
-     */
-    private void getPreferencesAndSetLoginPassword() {
-        if (preferences != null) {
-            loginTextField.setText(preferences.get(USER_NAME, ""));
-            passwordTextField.setText(preferences.get(USER_PASSWORD, ""));
-            cbRememberMe.setSelected(preferences.getBoolean(USER_SWITCH_SETTINGS, true));
-        }
-    }
-
-    /**
-     * Check state checkbox, and if he is Selected put user login and password to preferences,
-     * else set empty field
-     */
-    private void saveLoginAndPasswordToPreferencesManager() {
-        if (cbRememberMe.isSelected()) {
-            preferences.put(USER_NAME, loginTextField.getText());
-            preferences.put(USER_PASSWORD, passwordTextField.getText());
-            preferences.putBoolean(USER_SWITCH_SETTINGS, true);
-        } else {
-            preferences.put(USER_NAME, "");
-            preferences.put(USER_PASSWORD, "");
-            preferences.putBoolean(USER_SWITCH_SETTINGS, false);
-        }
     }
 
     /**
@@ -176,16 +141,6 @@ public class LoginLayoutController extends Controller {
     }
 
     /**
-     * Get String field from login and password and set this value in
-     * method  of {@link AuthenticationServerSessionManager }
-     */
-    private void sendAuthDataToNotificationManager() {
-        String login = loginTextField.getText();
-        String password = passwordTextField.getText();
-        authenticationSessionManager.sendUserAuthData(login, password);
-    }
-
-    /**
      * If user input invalid login or password
      * call this method in {@link AuthenticationServerSessionManager}
      * and set information on login window
@@ -201,6 +156,62 @@ public class LoginLayoutController extends Controller {
         loginStage.close();
         startProjectsControllerLayout();
         saveLoginAndPasswordToPreferencesManager();
+    }
+
+    private void setTextLimiterOnField() {
+        addTextLimiter(loginTextField, 20);
+        addTextLimiter(passwordTextField, 20);
+    }
+
+    /**
+     * Set impossibility click on VBox panel and show ProgressIndicator
+     */
+    private void showProgressIndicator(){
+        vBoxLoginWindow.setDisable(true);
+        progressIndWaitConnection.setVisible(true);
+        progressIndWaitConnection.setDisable(false);
+        cbRememberMe.setDisable(true);
+    }
+
+    void stopProgressIndicator(){
+        vBoxLoginWindow.setDisable(true);
+    }
+
+    /**
+     * If preferences saved, set automatically user login and password in special field
+     */
+    private void getPreferencesAndSetLoginPassword() {
+        if (preferences != null) {
+            loginTextField.setText(preferences.get(USER_NAME, ""));
+            passwordTextField.setText(preferences.get(USER_PASSWORD, ""));
+            cbRememberMe.setSelected(preferences.getBoolean(USER_SWITCH_SETTINGS, true));
+        }
+    }
+
+    /**
+     * Check state checkbox, and if he is Selected put user login and password to preferences,
+     * else set empty field
+     */
+    private void saveLoginAndPasswordToPreferencesManager() {
+        if (cbRememberMe.isSelected()) {
+            preferences.put(USER_NAME, loginTextField.getText());
+            preferences.put(USER_PASSWORD, passwordTextField.getText());
+            preferences.putBoolean(USER_SWITCH_SETTINGS, true);
+        } else {
+            preferences.put(USER_NAME, "");
+            preferences.put(USER_PASSWORD, "");
+            preferences.putBoolean(USER_SWITCH_SETTINGS, false);
+        }
+    }
+
+    /**
+     * Get String field from login and password and set this value in
+     * method  of {@link AuthenticationServerSessionManager }
+     */
+    private void sendAuthDataToNotificationManager() {
+        String login = loginTextField.getText();
+        String password = passwordTextField.getText();
+        authenticationSessionManager.sendUserAuthData(login, password);
     }
 
     /**
@@ -236,17 +247,6 @@ public class LoginLayoutController extends Controller {
      */
     private static boolean checkTextFieldOnEmpty(TextField tf) {
         return tf.getText() != null && !tf.getText().isEmpty();
-    }
-
-    /**
-     * Hears when user click on setting menus
-     * @param event callback click on menu
-     */
-    public void openSettings(Event event) {
-        settingStage = new Stage();
-        if(!settingStage.isShowing()){
-            openSettingsWindow();
-        }
     }
 
     /**

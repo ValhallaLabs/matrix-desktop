@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.api.model.datamodels.ReportModel;
 import ua.softgroup.matrix.desktop.session.current.CurrentSessionInfo;
@@ -20,6 +21,21 @@ import java.util.Set;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class ReportLayoutController extends Controller {
+    private static final String DATE_COLUMN = "date";
+    private static final String CHECKED_COLUMN = "checked";
+    private static final String DESCRIPTION_COLUMN = "text";
+    private static final String WORK_TIME_COLUMN = "currency";
+    private static final String COEFFICIENT_COLUMN = "coefficient";
+    private static final String UNKNOWN_DATA = "Unknown";
+    private static final String UNLIMITED_DATA = "Unlimited";
+    private static final int MIN_TEXT_FOR_REPORT = 70;
+    private static final int LIMITER_TEXT_COUNT = 550;
+    private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
+    private ReportServerSessionManager reportServerSessionManager;
+    private ProjectsLayoutController projectsLayoutController;
+    private Long currentProjectId;
+    private Set<ReportModel> report;
+    private Long currentReportId;
     @FXML
     public TableView<ReportModel> tableViewReport;
     @FXML
@@ -46,19 +62,6 @@ public class ReportLayoutController extends Controller {
     public Label labelDeadlineDate;
     @FXML
     public TextArea taEditReport;
-    private static final String DATE_COLUMN = "date";
-    private static final String CHECKED_COLUMN = "checked";
-    private static final String DESCRIPTION_COLUMN = "text";
-    private static final String WORK_TIME_COLUMN = "currency";
-    private static final String COEFFICIENT_COLUMN = "coefficient";
-    private static final int MIN_TEXT_FOR_REPORT = 70;
-    private static final String UNKNOWN_DATA = "Unknown";
-    private static final String UNLIMITED_DATA = "Unlimited";
-    private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
-    private ReportServerSessionManager reportServerSessionManager;
-    private Long currentProjectId;
-    private Set<ReportModel> report;
-    private Long currentReportId;
 
     /**
      * After Load/Parsing fxml call this method
@@ -69,6 +72,61 @@ public class ReportLayoutController extends Controller {
         currentProjectId = CurrentSessionInfo.getProjectId();
         reportServerSessionManager = new ReportServerSessionManager(this);
         getAllReportAndSetToCollection();
+        addTextLimiter(taEditReport,LIMITER_TEXT_COUNT);
+    }
+    /**
+     * Hears when text input in TextArea and if this text count >= {@value MIN_TEXT_FOR_REPORT}
+     * button for change report became active
+     */
+    @FXML
+    private void countTextAndSetButtonCondition(ReportModel reportModel) {
+        taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
+            int size = newValue.length();
+            if (size >= MIN_TEXT_FOR_REPORT && !reportModel.isChecked()) {
+                btnChangeReport.setDisable(false);
+                taEditReport.setEditable(true);
+            } else {
+                btnChangeReport.setDisable(true);
+            }
+        });
+    }
+
+    /**
+     * Hears when user click on button and close stage without any change
+     *
+     * @param actionEvent callback click on button
+     */
+    public void CancelAndCloseReportWindow(ActionEvent actionEvent) {
+        ((Node) actionEvent.getSource()).getScene().getWindow().hide();
+        projectsLayoutController.checkReportAndSetConditionOnTextArea();
+    }
+
+    /**
+     * Hears when user click on button and send report also clear data in collections
+     *
+     * @param actionEvent callback click on button
+     */
+    public void createOrChangeReport(ActionEvent actionEvent) {
+        ReportModel reportModel = new ReportModel(currentReportId, taEditReport.getText());
+        reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
+        reportData.clear();
+        notifyChangeInTableViewDynamic(reportModel);
+    }
+
+    /**
+     * Hears when user click on table view,get chosen report and set Description information in TextArea
+     *
+     * @param event callback click on table view
+     */
+    public void chooseReport(Event event) {
+        if (tableViewReport.getSelectionModel().getSelectedItem() != null && report != null) {
+            ReportModel selectReport = tableViewReport.getSelectionModel().getSelectedItem();
+            countTextAndSetButtonCondition(selectReport);
+            currentReportId = selectReport.getId();
+            if (selectReport.getText() != null) {
+                taEditReport.setText(selectReport.getText());
+            } else taEditReport.setText("");
+        }
     }
 
     /**
@@ -154,27 +212,6 @@ public class ReportLayoutController extends Controller {
     }
 
     /**
-     * Hears when user click on button and close stage without any change
-     *
-     * @param actionEvent callback click on button
-     */
-    public void CancelAndCloseReportWindow(ActionEvent actionEvent) {
-        ((Node) actionEvent.getSource()).getScene().getWindow().hide();
-    }
-
-    /**
-     * Hears when user click on button and send report also clear data in collections
-     *
-     * @param actionEvent callback click on button
-     */
-    public void createOrChangeReport(ActionEvent actionEvent) {
-        ReportModel reportModel = new ReportModel(currentReportId, taEditReport.getText());
-        reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
-        reportData.clear();
-        notifyChangeInTableViewDynamic(reportModel);
-    }
-
-    /**
      * Set report what we create ore change in the text area
      *
      * @param report report what we create or change
@@ -186,40 +223,6 @@ public class ReportLayoutController extends Controller {
     }
 
     /**
-     * Hears when user click on table view,get chosen report and set Description information in TextArea
-     *
-     * @param event callback click on table view
-     */
-    public void chooseReport(Event event) {
-        if (tableViewReport.getSelectionModel().getSelectedItem() != null && report != null) {
-            ReportModel selectReport = tableViewReport.getSelectionModel().getSelectedItem();
-            countTextAndSetButtonCondition(selectReport);
-            currentReportId = selectReport.getId();
-            if (selectReport.getText() != null) {
-                taEditReport.setText(selectReport.getText());
-            } else taEditReport.setText("");
-        }
-    }
-
-    /**
-     * Hears when text input in TextArea and if this text count >= {@value MIN_TEXT_FOR_REPORT}
-     * button for change report became active
-     */
-    @FXML
-    private void countTextAndSetButtonCondition(ReportModel reportModel) {
-        taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
-            int size = newValue.length();
-            if (size >= MIN_TEXT_FOR_REPORT && !reportModel.isChecked()) {
-                btnChangeReport.setDisable(false);
-                taEditReport.setEditable(true);
-            } else {
-                btnChangeReport.setDisable(true);
-            }
-        });
-    }
-
-
-    /**
      * Check what currency we have and return necessary symbol for it
      *
      * @param currency current currency what we get
@@ -229,4 +232,11 @@ public class ReportLayoutController extends Controller {
         return "USD".equals(currency) ? "$" : "₴";
     }
 
+     void getCheckLayout(ProjectsLayoutController projectsLayoutController, Stage reportsStage) {
+       this.projectsLayoutController=projectsLayoutController;
+
+         reportsStage.setOnCloseRequest(event -> {
+           projectsLayoutController.checkReportAndSetConditionOnTextArea();
+         });
+    }
 }

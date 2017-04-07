@@ -32,9 +32,9 @@
                 </AnchorPane>
                 <AnchorPane minHeight="446.0" minWidth="596.0" prefHeight="446.0" prefWidth="596.0">
                     <children>
-                        <ScrollPane hbarPolicy="NEVER" prefHeight="446.0" prefViewportHeight="498.0" prefViewportWidth="583.048828125" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ScrollPane hbarPolicy="NEVER" prefHeight="446.0" prefViewportHeight="498.0" prefViewportWidth="583.048828125" prefWidth="792.0" styleClass="grey-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <content>
-                                <Label fx:id="labelInstructions" alignment="TOP_LEFT" minHeight="618.0" minWidth="788.0" prefWidth="802.0" styleClass="grey-background" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <Label fx:id="labelInstructions" alignment="TOP_LEFT" minHeight="618.0" minWidth="793.0" prefWidth="794.0" styleClass="grey-background" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <font>
                                         <Font size="13.0" />
                                     </font>

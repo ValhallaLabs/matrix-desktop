@@ -46,6 +46,40 @@ import java.util.Set;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class ProjectsLayoutController extends Controller {
+    private static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
+    private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
+    private static DateTimeFormatter todayStartTime = DateTimeFormatter.ofPattern("HH:mm");
+    private static final Logger logger = LoggerFactory.getLogger(ProjectsLayoutController.class);
+    private static final String ID_COLUMN = "id";
+    private static final String AUTHOR_NAME_COLUMN = "authorName";
+    private static final String TITLE_COLUMN = "title";
+    private static final String DESCRIPTION_COLUMN = "description";
+    private static final String REPORT_LAYOUT = "fxml/reportLayout.fxml";
+    private static final String REPORT_LAYOUT_TITLE = "Reports Window";
+    private static final String INSTRUCTIONS_LAYOUT = "fxml/instructionsLayout.fxml";
+    private static final String INSTRUCTIONS_LAYOUT_TITLE = "Instructions Window";
+    private static final String PIE_CHART_TITLE = "Idle Time";
+    private static final String FILE_CHOOSER_TITLE = "Open Resource File";
+    private static final String LOGO = "/images/logoIcon.png";
+    private static final String UNKNOWN_DATA = "Unknown";
+    private static final String UNLIMITED_DATA = "Unlimited";
+    private static final int LIMITER_TEXT_COUNT = 550;
+    private static final int MIN_TEXT_FOR_REPORT = 70;
+    private static final int REPORT_LAYOUT_MIN_WIDTH = 1200;
+    private static final int REPORT_LAYOUT_MIN_HEIGHT = 765;
+    private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 1200;
+    private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 765;
+    private ReportServerSessionManager reportServerSessionManager;
+    private File attachFile;
+    private int timeTodayInSeconds;
+    private int timeTotalInSeconds;
+    private Timeline timeLine;
+    private TimeTracker timeTracker;
+    private DoughnutChart doughnutChart;
+    private Label labelIdle;
+    private double idleTimeInPercent;
+    private ProjectModel projectModel;
     @FXML
     public TableView<ProjectModel> tvProjectsTable;
     @FXML
@@ -94,40 +128,6 @@ public class ProjectsLayoutController extends Controller {
     public AnchorPane containerForPieChart;
     @FXML
     public Button menuReport;
-    private static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
-    private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-    private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
-    private static DateTimeFormatter todayStartTime = DateTimeFormatter.ofPattern("HH:mm");
-    private static final Logger logger = LoggerFactory.getLogger(ProjectsLayoutController.class);
-    private static final String ID_COLUMN = "id";
-    private static final String AUTHOR_NAME_COLUMN = "authorName";
-    private static final String TITLE_COLUMN = "title";
-    private static final String DESCRIPTION_COLUMN = "description";
-    private static final int LIMITER_TEXT_COUNT = 999;
-    private static final int MIN_TEXT_FOR_REPORT = 70;
-    private static final String REPORT_LAYOUT = "fxml/reportLayout.fxml";
-    private static final String REPORT_LAYOUT_TITLE = "Reports Window";
-    private static final int REPORT_LAYOUT_MIN_WIDTH = 1200;
-    private static final int REPORT_LAYOUT_MIN_HEIGHT = 765;
-    private static final String INSTRUCTIONS_LAYOUT = "fxml/instructionsLayout.fxml";
-    private static final String INSTRUCTIONS_LAYOUT_TITLE = "Instructions Window";
-    private static final String PIE_CHART_TITLE = "Idle Time";
-    private static final String FILE_CHOOSER_TITLE = "Open Resource File";
-    private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 1200;
-    private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 765;
-    private static final String LOGO = "/images/logoIcon.png";
-    private static final String UNKNOWN_DATA = "Unknown";
-    private static final String UNLIMITED_DATA = "Unlimited";
-    private ReportServerSessionManager reportServerSessionManager;
-    private File attachFile;
-    private int timeTodayInSeconds;
-    private int timeTotalInSeconds;
-    private Timeline timeLine;
-    private TimeTracker timeTracker;
-    private DoughnutChart doughnutChart;
-    private Label labelIdle;
-    private double idleTimeInPercent;
-    private ProjectModel projectModel;
 
     /**
      * After Load/Parsing fxml call this method
@@ -158,6 +158,176 @@ public class ProjectsLayoutController extends Controller {
     }
 
     /**
+     * Hears when user click on table view select project and set TextArea Editable
+     *
+     * @param event callback click on table view
+     */
+    public void chosenProject(Event event) {
+        MouseEvent mouseEvent = (MouseEvent) event;
+        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+            if (mouseEvent.getClickCount() == 2) {
+                openReportWindowOnTwoMouseClick(event);
+            } else {
+                taWriteReport.setMouseTransparent(false);
+                taWriteReport.setText("");
+                taWriteReport.setEditable(true);
+                if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
+                    projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
+                    checkReportAndSetConditionOnTextArea();
+                    setProjectInfoInView();
+                }
+            }
+        }
+    }
+
+    /**
+     * Hears when user click on button and send information about report to {@link ReportServerSessionManager}
+     *
+     * @param actionEvent callback click on button
+     */
+    public void sendReport(ActionEvent actionEvent) {
+        byte[] attachFile = new byte[0];
+//        if (this.attachFile.exists() && this.attachFile != null) {
+//            attachFile = Files.readAllBytes(this.attachFile.toPath());
+//            System.out.println(Arrays.toString(attachFile));
+//        }
+        System.out.println(Arrays.toString(attachFile));
+        ReportModel reportModel = new ReportModel(taWriteReport.getText(), LocalDate.now(), attachFile);
+        reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
+        viewConditionAtReportAlreadyExist();
+    }
+
+    /**
+     * Hears when user click on button and attach chosen image
+     *
+     * @param actionEvent callback click on button
+     */
+    public void attachFile(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(FILE_CHOOSER_TITLE);
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
+        );
+        attachFile = fileChooser.showOpenDialog(labelCurrentSymbols.getScene().getWindow());
+        if (attachFile != null) {
+            System.out.println("File attach");
+        }
+    }
+
+    /**
+     * Hears when user click on button and create Timeline with KeyFrame duration
+     * and start play timer and timeTracker
+     *
+     * @param actionEvent callback click on button
+     */
+    public void startWork(ActionEvent actionEvent) {
+        timeLine = new Timeline();
+        timeTracker = new TimeTracker(this, CurrentSessionInfo.getProjectId());
+        timeTracker.turnOn();
+        if (timeLine != null) {
+            timeLine.stop();
+        }
+        KeyFrame frame = new KeyFrame(Duration.minutes(1), event -> {
+            calculateTimeAndSetInView();
+        });
+        timeLine.getKeyFrames().add(frame);
+        timeLine.setCycleCount(Timeline.INDEFINITE);
+        timeLine.playFromStart();
+        buttonConditionAtTimerOn();
+    }
+
+    /**
+     * Hears when user click on button and stop timer
+     *
+     * @param actionEvent callback click on button
+     */
+    public void stopWork(ActionEvent actionEvent) {
+        if (timeLine != null) {
+            timeLine.stop();
+        }
+        if (timeTracker != null) {
+            timeTracker.turnOff();
+        }
+        buttonConditionAtTimerOff();
+    }
+
+    /**
+     *  Hears when user click on label
+     * @param actionEvent  callback click on label
+     */
+    public void startReportLayoutWindow(ActionEvent actionEvent) {
+        startReportWindow();
+    }
+
+    /**
+     Tells {@link ProjectsLayoutController} to open instructions window
+     * @param actionEvent callback click on button
+    */
+    public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            Stage instructionsStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(classLoader.getResource(INSTRUCTIONS_LAYOUT));
+            Pane pane = loader.load();
+            Scene scene = new Scene(pane);
+            instructionsStage.setScene(scene);
+            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
+            instructionsStage.getIcons().add(logoIcon);
+            instructionsStage.setMinWidth(INSTRUCTIONS_LAYOUT_MIN_WIDTH);
+            instructionsStage.setMinHeight(INSTRUCTIONS_LAYOUT_MIN_HEIGHT);
+            instructionsStage.initModality(Modality.WINDOW_MODAL);
+            instructionsStage.setTitle(INSTRUCTIONS_LAYOUT_TITLE);
+            instructionsStage.initOwner(labelDayInNumber.getScene().getWindow());
+            instructionsStage.setResizable(false);
+            instructionsStage.show();
+        } catch (IOException e) {
+            logger.error("Error when start Instructions Window ", e);
+        }
+    }
+
+    /**
+     * Set actual time to current project model
+     * @param updatedProjectTime get actual time
+     */
+    public void synchronizedLocalTimeWorkWithServer(TimeModel updatedProjectTime){
+        projectModel.setProjectTime(updatedProjectTime);
+        logger.debug("Project model is updated: {}", updatedProjectTime.toString());
+        setDynamicInfo();
+    }
+
+    /**
+     *Set actual arrival tim to project model
+     * @param arrivalTime get actual arrival time
+     */
+    public void updateArrivalTime(LocalTime arrivalTime){
+        projectModel.getProjectTime().setTodayStartTime(arrivalTime);
+        logger.debug("arrival time:", String.valueOf(arrivalTime.format(todayStartTime)));
+        setArrivalTime();
+    }
+
+    /**
+     * Gets all reports for chosen project and if today user already saved report
+     * displays this information in TextArea
+     * <p>
+     * //* @param projectModel current project what user choose in table view
+     */
+    void checkReportAndSetConditionOnTextArea() {
+        System.out.println("I am here man");
+        Set<ReportModel> reportModel = reportServerSessionManager.getReportsByProjectId(projectModel.getId());
+        if (reportModel != null && !reportModel.isEmpty()) {
+            for (ReportModel model :
+                    reportModel) {
+                if (model.getDate().equals(LocalDate.now()) && !model.getText().isEmpty()) {
+                    taWriteReport.setText(model.getText());
+                    System.out.println("exist");
+                    viewConditionAtReportAlreadyExist();
+                }
+            }
+        }
+    }
+
+    /**
      * At start project window ,focus and select newest item in Table View
      */
     private void setFocusOnTableView() {
@@ -168,7 +338,7 @@ public class ProjectsLayoutController extends Controller {
         if (projectModel != null) {
             setProjectInfoInView();
             new Thread(() -> {
-                setReportTextInTextArea();
+                checkReportAndSetConditionOnTextArea();
             }).start();
         }
     }
@@ -301,29 +471,6 @@ public class ProjectsLayoutController extends Controller {
     }
 
     /**
-     * Hears when user click on table view select project and set TextArea Editable
-     *
-     * @param event callback click on table view
-     */
-    public void chosenProject(Event event) {
-        MouseEvent mouseEvent = (MouseEvent) event;
-        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-            if (mouseEvent.getClickCount() == 2) {
-                openReportWindowOnTwoMouseClick(event);
-            } else {
-                taWriteReport.setMouseTransparent(false);
-                taWriteReport.setText("");
-                taWriteReport.setEditable(true);
-                if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
-                    projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
-                    setReportTextInTextArea();
-                    setProjectInfoInView();
-                }
-            }
-        }
-    }
-
-    /**
      * Hears fast two click on table view and open report window on what project user click
      *
      * @param event callback click on table view
@@ -333,101 +480,11 @@ public class ProjectsLayoutController extends Controller {
     }
 
     /**
-     * Gets all reports for chosen project and if today user already saved report
-     * displays this information in TextArea
-     * <p>
-     * //* @param projectModel current project what user choose in table view
-     */
-    private void setReportTextInTextArea() {
-        Set<ReportModel> reportModel = reportServerSessionManager.getReportsByProjectId(projectModel.getId());
-        if (reportModel != null && !reportModel.isEmpty()) {
-            for (ReportModel model :
-                    reportModel) {
-                if (model.getDate().equals(LocalDate.now()) && model.getText() != null) {
-                    taWriteReport.setText(model.getText());
-                    viewConditionAtReportAlreadyExist();
-                }
-            }
-        }
-    }
-
-    /**
      * Set disable on button and mouseTransparent on text field
      */
     private void viewConditionAtReportAlreadyExist() {
         btnSendReport.setDisable(true);
         taWriteReport.setMouseTransparent(true);
-    }
-
-    /**
-     * Hears when user click on button and send information about report to {@link ReportServerSessionManager}
-     *
-     * @param actionEvent callback click on button
-     */
-    public void sendReport(ActionEvent actionEvent) {
-        byte[] attachFile = new byte[0];
-//        if (this.attachFile.exists() && this.attachFile != null) {
-//            attachFile = Files.readAllBytes(this.attachFile.toPath());
-//            System.out.println(Arrays.toString(attachFile));
-//        }
-        System.out.println(Arrays.toString(attachFile));
-        ReportModel reportModel = new ReportModel(taWriteReport.getText(), LocalDate.now(), attachFile);
-        reportServerSessionManager.saveOrChangeReportOnServer(reportModel);
-        viewConditionAtReportAlreadyExist();
-    }
-
-    /**
-     * Hears when user click on button and attach chosen image
-     *
-     * @param actionEvent callback click on button
-     */
-    public void attachFile(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(FILE_CHOOSER_TITLE);
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
-        );
-        attachFile = fileChooser.showOpenDialog(labelCurrentSymbols.getScene().getWindow());
-        if (attachFile != null) {
-            System.out.println("File attach");
-        }
-    }
-
-    /**
-     * Hears when user click on button and create Timeline with KeyFrame duration
-     * and start play timer and timeTracker
-     *
-     * @param actionEvent callback click on button
-     */
-    public void startWork(ActionEvent actionEvent) {
-        timeLine = new Timeline();
-        timeTracker = new TimeTracker(this, CurrentSessionInfo.getProjectId());
-        timeTracker.turnOn();
-        if (timeLine != null) {
-            timeLine.stop();
-        }
-        KeyFrame frame = new KeyFrame(Duration.minutes(1), event -> {
-            calculateTimeAndSetInView();
-        });
-        timeLine.getKeyFrames().add(frame);
-        timeLine.setCycleCount(Timeline.INDEFINITE);
-        timeLine.playFromStart();
-        buttonConditionAtTimerOn();
-    }
-
-    /**
-     * Hears when user click on button and stop timer
-     *
-     * @param actionEvent callback click on button
-     */
-    public void stopWork(ActionEvent actionEvent) {
-        if (timeLine != null) {
-            timeLine.stop();
-        }
-        if (timeTracker != null) {
-            timeTracker.turnOff();
-        }
-        buttonConditionAtTimerOff();
     }
 
     /**
@@ -458,38 +515,6 @@ public class ProjectsLayoutController extends Controller {
         tvProjectsTable.setMouseTransparent(false);
     }
 
-//    /**
-//     * When something go wrong , create alert with message to user
-//     * and then click on button close programme
-//     */
-//    public void tellUserAboutCrash() {
-//        Alert mainAlert = new Alert(Alert.AlertType.INFORMATION);
-//        mainAlert.setTitle(ALERT_ERROR_TITLE);
-//        mainAlert.setHeaderText(ALERT_HEADER_TEXT);
-//        mainAlert.setContentText(ALERT_CONTENT_TEXT);
-//        mainAlert.initStyle(StageStyle.UTILITY);
-//        mainAlert.setOnCloseRequest(event -> Platform.exit());
-//        Optional<ButtonType> result = mainAlert.showAndWait();
-//        if (result.isPresent() && result.get() == ButtonType.OK) {
-//            Platform.exit();
-//        }
-//    }
-
-    /**
-     * Convert Seconds to Hours and Minutes format
-     * @param seconds current time what we want convert
-     * @return String of Hours and Minutes
-     */
-
-
-    /**
-     *  Hears when user click on label
-     * @param actionEvent  callback click on label
-     */
-    public void startReportLayoutWindow(ActionEvent actionEvent) {
-    startReportWindow();
-    }
-
     /**
      *  Tells {@link ProjectsLayoutController} to open report window
      */
@@ -507,38 +532,14 @@ public class ProjectsLayoutController extends Controller {
             reportsStage.setMinWidth(REPORT_LAYOUT_MIN_WIDTH);
             reportsStage.setMinHeight(REPORT_LAYOUT_MIN_HEIGHT);
             reportsStage.initModality(Modality.WINDOW_MODAL);
+            ReportLayoutController reportLayoutController =loader.getController();
+            reportLayoutController.getCheckLayout(this,reportsStage);
             reportsStage.setTitle(REPORT_LAYOUT_TITLE);
             reportsStage.initOwner(labelDateStartProject.getScene().getWindow());
             reportsStage.setResizable(false);
             reportsStage.show();
         } catch (IOException e) {
             logger.error("Error when start Report Window ", e);
-        }
-    }
-
-    /**
-     *  Tells {@link ProjectsLayoutController} to open instructions window
-     */
-    public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            Stage instructionsStage = new Stage();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(classLoader.getResource(INSTRUCTIONS_LAYOUT));
-            Pane pane = loader.load();
-            Scene scene = new Scene(pane);
-            instructionsStage.setScene(scene);
-            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
-            instructionsStage.getIcons().add(logoIcon);
-            instructionsStage.setMinWidth(INSTRUCTIONS_LAYOUT_MIN_WIDTH);
-            instructionsStage.setMinHeight(INSTRUCTIONS_LAYOUT_MIN_HEIGHT);
-            instructionsStage.initModality(Modality.WINDOW_MODAL);
-            instructionsStage.setTitle(INSTRUCTIONS_LAYOUT_TITLE);
-            instructionsStage.initOwner(labelDayInNumber.getScene().getWindow());
-            instructionsStage.setResizable(false);
-            instructionsStage.show();
-        } catch (IOException e) {
-            logger.error("Error when start Instructions Window ", e);
         }
     }
 
@@ -557,23 +558,4 @@ public class ProjectsLayoutController extends Controller {
         });
     }
 
-    /**
-     * Set actual time to current project model
-     * @param updatedProjectTime get actual time
-     */
-    public void synchronizedLocalTimeWorkWithServer(TimeModel updatedProjectTime){
-        projectModel.setProjectTime(updatedProjectTime);
-        logger.debug("Project model is updated: {}", updatedProjectTime.toString());
-        setDynamicInfo();
-    }
-
-    /**
-     *Set actual arrival tim to project model
-     * @param arrivalTime get actual arrival time
-     */
-    public void updateArrivalTime(LocalTime arrivalTime){
-        projectModel.getProjectTime().setTodayStartTime(arrivalTime);
-        logger.debug("arrival time:", String.valueOf(arrivalTime.format(todayStartTime)));
-        setArrivalTime();
-    }
 }

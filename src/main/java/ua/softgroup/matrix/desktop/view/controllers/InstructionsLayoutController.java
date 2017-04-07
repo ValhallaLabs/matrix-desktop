@@ -31,13 +31,6 @@ public class InstructionsLayoutController {
         setFocusOnListView();
     }
 
-    private void setFocusOnListView() {
-        lvInstructions.requestFocus();
-        lvInstructions.getSelectionModel().select(0);
-        lvInstructions.getFocusModel().focus(0);
-        chooseCurrentInstruction();
-    }
-
     /**
      * Hears when user click on listView select item ,get data from ObservableList and set in label
      *
@@ -47,13 +40,20 @@ public class InstructionsLayoutController {
         chooseCurrentInstruction();
 
     }
+
+    private void setFocusOnListView() {
+        lvInstructions.requestFocus();
+        lvInstructions.getSelectionModel().select(0);
+        lvInstructions.getFocusModel().focus(0);
+        chooseCurrentInstruction();
+    }
+
     private void chooseCurrentInstruction(){
         if (lvInstructions.getSelectionModel().getSelectedItem()!=null){
             InstructionsModel selectProject = lvInstructions.getSelectionModel().getSelectedItem();
             labelInstructions.setText(selectProject.getContent());
         }
     }
-
 
     /**
      * Init {@link InstructionsModel} data into arrayList then set this data in Observable list,

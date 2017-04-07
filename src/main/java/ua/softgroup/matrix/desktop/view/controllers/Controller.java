@@ -39,18 +39,6 @@ abstract public class Controller {
         showUserAnAlert(ALERT_XDOTOOL_NOT_FOUND);
     }
 
-    private void showUserAnAlert(String alertText) {
-        Alert mainAlert = new Alert(Alert.AlertType.INFORMATION);
-        mainAlert.setTitle(ALERT_ERROR_TITLE);
-        mainAlert.setHeaderText(ALERT_HEADER_TEXT);
-        mainAlert.setContentText(alertText);
-        mainAlert.initStyle(StageStyle.UTILITY);
-        mainAlert.setOnCloseRequest(event -> Platform.exit());
-        mainAlert.showAndWait();
-        Platform.exit();
-        System.exit(0);
-    }
-
     /**
      * Convert Seconds to Hours and Minutes format
      *
@@ -76,5 +64,17 @@ abstract public class Controller {
                 ta.setText(s);
             }
         });
+    }
+
+    private void showUserAnAlert(String alertText) {
+        Alert mainAlert = new Alert(Alert.AlertType.INFORMATION);
+        mainAlert.setTitle(ALERT_ERROR_TITLE);
+        mainAlert.setHeaderText(ALERT_HEADER_TEXT);
+        mainAlert.setContentText(alertText);
+        mainAlert.initStyle(StageStyle.UTILITY);
+        mainAlert.setOnCloseRequest(event -> Platform.exit());
+        mainAlert.showAndWait();
+        Platform.exit();
+        System.exit(0);
     }
 }

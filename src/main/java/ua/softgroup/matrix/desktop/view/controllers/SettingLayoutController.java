@@ -30,14 +30,6 @@ public class SettingLayoutController extends Controller {
     }
 
     /**
-     * Set in label and port label data from config manager
-     */
-    private void getPortAndHostFromConfigManager() {
-        labelHost.setText(ConfigManager.getHost());
-        labelPort.setText(ConfigManager.getPort());
-    }
-
-    /**
      * Hears when user click on button and get data from port and host field also hide setting window
      * @param actionEvent callback click on button
      */
@@ -77,6 +69,14 @@ public class SettingLayoutController extends Controller {
             logger.error("Config wasn't set to default", e);
             super.tellUserAboutCrash();
         }
+    }
+
+    /**
+     * Set in label and port label data from config manager
+     */
+    private void getPortAndHostFromConfigManager() {
+        labelHost.setText(ConfigManager.getHost());
+        labelPort.setText(ConfigManager.getPort());
     }
 
     /**

@@ -14,6 +14,13 @@ import javafx.scene.shape.Circle;
 public class DoughnutChart extends PieChart {
     private final Circle innerCircle;
 
+    @Override
+    protected void layoutChartChildren(double top, double left, double contentWidth, double contentHeight) {
+        super.layoutChartChildren(top, left, contentWidth, contentHeight);
+        addInnerCircleIfNotPresent();
+        updateInnerCircleLayout();
+    }
+
     public DoughnutChart(ObservableList<Data> pieData) {
         super(pieData);
         innerCircle = new Circle();
@@ -22,16 +29,7 @@ public class DoughnutChart extends PieChart {
         innerCircle.setStrokeWidth(3);
     }
 
-    @Override
-    protected void layoutChartChildren(double top, double left, double contentWidth, double contentHeight) {
-        super.layoutChartChildren(top, left, contentWidth, contentHeight);
-        addInnerCircleIfNotPresent();
-        updateInnerCircleLayout();
-    }
-
-
     private void addInnerCircleIfNotPresent() {
-
         if (getData().size() > 0) {
             Node pie = getData().get(0).getNode();
             if (pie.getParent() instanceof Pane) {
@@ -66,6 +64,5 @@ public class DoughnutChart extends PieChart {
         innerCircle.setCenterY(minY + (maxY - minY) / 2);
         innerCircle.setRadius((maxX - minX) / 4);
     }
-
 
 }
