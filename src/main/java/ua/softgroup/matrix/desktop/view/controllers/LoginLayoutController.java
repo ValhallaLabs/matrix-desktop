@@ -3,11 +3,15 @@ package ua.softgroup.matrix.desktop.view.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -120,8 +124,14 @@ public class LoginLayoutController extends Controller {
      * Hears when login window close and close current authentication session manager
      *
      * @param stage for close loginStage
+     * @param scene
      */
-    public void setUpStage(Stage stage) {
+    public void setUpStage(Stage stage, Scene scene) {
+        scene.setOnKeyPressed(event -> {
+            if(event.getCode()== KeyCode.ENTER){
+              checkLoginAndStartLayout();
+            }
+        });
         this.loginStage = stage;
         stage.setOnCloseRequest(event -> authenticationSessionManager.closeSession());
     }
@@ -132,7 +142,11 @@ public class LoginLayoutController extends Controller {
      *
      * @param actionEvent callback click on button
      */
-    public void startMainWindow(ActionEvent actionEvent) {
+    public void startLoginWindow(ActionEvent actionEvent) {
+        checkLoginAndStartLayout();
+    }
+
+    private void checkLoginAndStartLayout(){
         if (!checkTextFieldOnEmpty(loginTextField) || !checkTextFieldOnEmpty(passwordTextField)) {
             labelErrorMessage.setText(EMPTY_FIElD);
             return;

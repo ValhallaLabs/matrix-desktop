@@ -82,9 +82,9 @@ public class Main extends Application {
             loginStage.getIcons().add(icon);
             loader.setLocation(classLoader.getResource(LOGIN_LAYOUT));
             Pane loginLayout = loader.load();
-             LoginLayoutController loginLayoutController =loader.getController();
-            loginLayoutController.setUpStage(loginStage);
             Scene scene = new Scene(loginLayout);
+            LoginLayoutController loginLayoutController =loader.getController();
+            loginLayoutController.setUpStage(loginStage,scene);
             loginStage.setScene(scene);
             loginStage.setTitle(LOGIN_LAYOUT_TITLE);
             loginStage.setResizable(false);
