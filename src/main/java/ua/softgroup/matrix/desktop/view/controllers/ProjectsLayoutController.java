@@ -168,9 +168,9 @@ public class ProjectsLayoutController extends Controller {
             if (mouseEvent.getClickCount() == 2) {
                 openReportWindowOnTwoMouseClick(event);
             } else {
-                taWriteReport.setMouseTransparent(false);
+                taWriteReport.setMouseTransparent(true);
                 taWriteReport.setText("");
-                taWriteReport.setEditable(true);
+                taWriteReport.setEditable(false);
                 if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
                     projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
                     checkReportAndSetConditionOnTextArea();
@@ -233,6 +233,8 @@ public class ProjectsLayoutController extends Controller {
         timeLine.getKeyFrames().add(frame);
         timeLine.setCycleCount(Timeline.INDEFINITE);
         timeLine.playFromStart();
+        taWriteReport.setMouseTransparent(false);
+        taWriteReport.setEditable(true);
         buttonConditionAtTimerOn();
     }
 
@@ -252,17 +254,19 @@ public class ProjectsLayoutController extends Controller {
     }
 
     /**
-     *  Hears when user click on label
-     * @param actionEvent  callback click on label
+     * Hears when user click on label
+     *
+     * @param actionEvent callback click on label
      */
     public void startReportLayoutWindow(ActionEvent actionEvent) {
         startReportWindow();
     }
 
     /**
-     Tells {@link ProjectsLayoutController} to open instructions window
+     * Tells {@link ProjectsLayoutController} to open instructions window
+     *
      * @param actionEvent callback click on button
-    */
+     */
     public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
@@ -288,19 +292,21 @@ public class ProjectsLayoutController extends Controller {
 
     /**
      * Set actual time to current project model
+     *
      * @param updatedProjectTime get actual time
      */
-    public void synchronizedLocalTimeWorkWithServer(TimeModel updatedProjectTime){
+    public void synchronizedLocalTimeWorkWithServer(TimeModel updatedProjectTime) {
         projectModel.setProjectTime(updatedProjectTime);
         logger.debug("Project model is updated: {}", updatedProjectTime.toString());
         setDynamicInfo();
     }
 
     /**
-     *Set actual arrival tim to project model
+     * Set actual arrival tim to project model
+     *
      * @param arrivalTime get actual arrival time
      */
-    public void updateArrivalTime(LocalTime arrivalTime){
+    public void updateArrivalTime(LocalTime arrivalTime) {
         projectModel.getProjectTime().setTodayStartTime(arrivalTime);
         logger.debug("arrival time:", String.valueOf(arrivalTime.format(todayStartTime)));
         setArrivalTime();
@@ -313,24 +319,40 @@ public class ProjectsLayoutController extends Controller {
      * //* @param projectModel current project what user choose in table view
      */
     void checkReportAndSetConditionOnTextArea() {
-        System.out.println("I am here man");
         Set<ReportModel> reportModel = reportServerSessionManager.getReportsByProjectId(projectModel.getId());
         if (reportModel != null && !reportModel.isEmpty()) {
             for (ReportModel model :
                     reportModel) {
                 if (model.getDate().equals(LocalDate.now()) && !model.getText().isEmpty()) {
                     taWriteReport.setText(model.getText());
-                    System.out.println("exist");
                     viewConditionAtReportAlreadyExist();
+                } else if (model.getDate() != null && model.getDate().equals(LocalDate.now())) {
+                    taWriteReport.setMouseTransparent(false);
+                    taWriteReport.setEditable(true);
                 }
             }
         }
+    }
+
+    private void setDisableTextAreaAtStart(){
+
+    }
+
+    /**
+     * Set disable on button and mouseTransparent on text field
+     */
+    private void viewConditionAtReportAlreadyExist() {
+        btnSendReport.setDisable(true);
+        taWriteReport.setMouseTransparent(true);
     }
 
     /**
      * At start project window ,focus and select newest item in Table View
      */
     private void setFocusOnTableView() {
+        taWriteReport.setMouseTransparent(true);
+        taWriteReport.setText("");
+        taWriteReport.setEditable(false);
         tvProjectsTable.requestFocus();
         tvProjectsTable.getSelectionModel().select(0);
         tvProjectsTable.getFocusModel().focus(0);
@@ -480,14 +502,6 @@ public class ProjectsLayoutController extends Controller {
     }
 
     /**
-     * Set disable on button and mouseTransparent on text field
-     */
-    private void viewConditionAtReportAlreadyExist() {
-        btnSendReport.setDisable(true);
-        taWriteReport.setMouseTransparent(true);
-    }
-
-    /**
      * Increment timeToday and timeTotal on 60  and set this information in special field with given formatting
      */
     private void calculateTimeAndSetInView() {
@@ -516,9 +530,9 @@ public class ProjectsLayoutController extends Controller {
     }
 
     /**
-     *  Tells {@link ProjectsLayoutController} to open report window
+     * Tells {@link ProjectsLayoutController} to open report window
      */
-    private void startReportWindow(){
+    private void startReportWindow() {
         try {
             Stage reportsStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
@@ -532,8 +546,8 @@ public class ProjectsLayoutController extends Controller {
             reportsStage.setMinWidth(REPORT_LAYOUT_MIN_WIDTH);
             reportsStage.setMinHeight(REPORT_LAYOUT_MIN_HEIGHT);
             reportsStage.initModality(Modality.WINDOW_MODAL);
-            ReportLayoutController reportLayoutController =loader.getController();
-            reportLayoutController.getCheckLayout(this,reportsStage);
+            ReportLayoutController reportLayoutController = loader.getController();
+            reportLayoutController.getCheckLayout(this, reportsStage);
             reportsStage.setTitle(REPORT_LAYOUT_TITLE);
             reportsStage.initOwner(labelDateStartProject.getScene().getWindow());
             reportsStage.setResizable(false);
@@ -545,10 +559,11 @@ public class ProjectsLayoutController extends Controller {
 
     /**
      * Hears when user exit from program's  and stop timeTracker if he forget stop him ,and close all programms command
+     *
      * @param mainLayout send layout were we start and create project window
      */
-     void setUpStage(Stage mainLayout) {
-         Stage stage = mainLayout;
+    void setUpStage(Stage mainLayout) {
+        Stage stage = mainLayout;
         stage.setOnCloseRequest(event -> {
             if (timeTracker != null) {
                 timeTracker.turnOff();
