@@ -231,8 +231,16 @@ public class ProjectsLayoutController extends Controller {
         timeLine.getKeyFrames().add(frame);
         timeLine.setCycleCount(Timeline.INDEFINITE);
         timeLine.playFromStart();
-        checkReportAndSetConditionOnTextArea();
+        setConditionTextViewWhenStartWork();
+        projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
         buttonConditionAtTimerOn();
+    }
+
+    private void setConditionTextViewWhenStartWork() {
+        checkReportAndSetConditionOnTextArea();
+        setProjectInfoInView();
+        checkReportAndSetConditionOnTextArea();
+
     }
 
     /**
