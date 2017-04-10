@@ -1,6 +1,7 @@
 package ua.softgroup.matrix.desktop.view.controllers;
 
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -129,7 +130,7 @@ public class LoginLayoutController extends Controller {
     public void setUpStage(Stage stage, Scene scene) {
         scene.setOnKeyPressed(event -> {
             if(event.getCode()== KeyCode.ENTER){
-              checkLoginAndStartLayout();
+              Platform.runLater(() -> checkLoginAndStartLayout());
             }
         });
         this.loginStage = stage;

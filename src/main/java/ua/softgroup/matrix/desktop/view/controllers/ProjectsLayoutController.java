@@ -281,6 +281,8 @@ public class ProjectsLayoutController extends Controller {
             Pane pane = loader.load();
             Scene scene = new Scene(pane);
             instructionsStage.setScene(scene);
+            InstructionsLayoutController instructionsLayoutController=loader.getController();
+            instructionsLayoutController.getUpStage(scene);
             Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
             instructionsStage.getIcons().add(logoIcon);
             instructionsStage.setMinWidth(INSTRUCTIONS_LAYOUT_MIN_WIDTH);

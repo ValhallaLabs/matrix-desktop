@@ -192,7 +192,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="taEditReport" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="300.0" promptText="Write or read your report and if need change" styleClass="rightancor" wrapText="true">
+                        <TextArea fx:id="taEditReport" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="300.0" promptText="Write or read your report and if need change" styleClass="light-blue-background" wrapText="true">
                            <VBox.margin>
                               <Insets left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>

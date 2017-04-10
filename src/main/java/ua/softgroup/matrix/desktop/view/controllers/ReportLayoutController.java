@@ -234,7 +234,6 @@ public class ReportLayoutController extends Controller {
 
      void getCheckLayout(ProjectsLayoutController projectsLayoutController, Stage reportsStage) {
        this.projectsLayoutController=projectsLayoutController;
-
          reportsStage.setOnCloseRequest(event -> {
            projectsLayoutController.checkReportAndSetConditionOnTextArea();
          });

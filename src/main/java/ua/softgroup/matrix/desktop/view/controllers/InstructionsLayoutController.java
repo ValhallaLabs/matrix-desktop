@@ -4,8 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 import ua.softgroup.matrix.api.model.datamodels.InstructionsModel;
 
 import java.util.ArrayList;
@@ -48,8 +51,8 @@ public class InstructionsLayoutController {
         chooseCurrentInstruction();
     }
 
-    private void chooseCurrentInstruction(){
-        if (lvInstructions.getSelectionModel().getSelectedItem()!=null){
+    private void chooseCurrentInstruction() {
+        if (lvInstructions.getSelectionModel().getSelectedItem() != null) {
             InstructionsModel selectProject = lvInstructions.getSelectionModel().getSelectedItem();
             labelInstructions.setText(selectProject.getContent());
         }
@@ -395,7 +398,7 @@ public class InstructionsLayoutController {
                 "  - полученная сумма может быть уменьшена (опозданием более чем на 10 минут (на данный момент), пустым отчетом, просрочкой дедлайна) / увеличена (коэф. за работу в вечернее / ночное время , коэф. за работу в выходные дни, данные увеличения ставки включаются в индивидуальном порядке)\n" +
                 "\n" +
                 "- в ближайшее время будет добавлена система восстановления рабочего времени (отсутствие интернета и т.п.)"));
-        listInstructionsModel.add(new InstructionsModel("Политика откртия дверей в кабинет","\n" +
+        listInstructionsModel.add(new InstructionsModel("Политика откртия дверей в кабинет", "\n" +
                 "1. Двери всегда закрыты, у всех есть свой ключь\n" +
                 "\n" +
                 "2. Стучать теоретически может только :\n" +
@@ -414,7 +417,7 @@ public class InstructionsLayoutController {
                 "4. итого : Открывать по стуку нельзя. Вообще. Ходят проверки.\n" +
                 "\n" +
                 "П.С. Открывать можно только по кодовому стуку."));
-        listInstructionsModel.add(new InstructionsModel("Политика конфиденциальности","\n" +
+        listInstructionsModel.add(new InstructionsModel("Политика конфиденциальности", "\n" +
                 "Все работы и проекты не обсуждаются с людьми, не имеющими к ним отношения, т.е НЕ сотрудниками\n" +
                 "\n" +
                 "В частности с друзьями и знакомыми.\n" +
@@ -425,7 +428,7 @@ public class InstructionsLayoutController {
                 "Считайте что работаете на военном обьекте, где всё засекречено :)\n" +
                 "\n" +
                 "Рассчитываю на ваше понимание и поддержку, сенкс."));
-        listInstructionsModel.add(new InstructionsModel("Политика конфиденциальности МЕЖДУ СОТРУДНИКАМИ","\n" +
+        listInstructionsModel.add(new InstructionsModel("Политика конфиденциальности МЕЖДУ СОТРУДНИКАМИ", "\n" +
                 "Все работы и проекты (или часть работ или проектов )не обсуждаются с сотрудниками , кроме обсуждения( при надобности) с теми ,  которые явно указаны в задаче в программе по данному отрезку работ\n" +
                 "\n" +
                 "Когда каждый сотрудник знает обо всех проектах - это может навредить всему колллективу.\n" +
@@ -441,8 +444,8 @@ public class InstructionsLayoutController {
                 "Данные шаги сделаны в целях безопастности.\n" +
                 "\n" +
                 "Рассчитываю на ваше понимание и поддержку, сенкс."));
-        listInstructionsModel.add(new InstructionsModel("Испытательный срок для новых сотрудников - 1-1,5 мес","Ноыве сотрудники считаются постоянно принятыми на работу после дополнительного разговора - который проходит через 1-1,5 мес после тестового периода работы"));
-        listInstructionsModel.add(new InstructionsModel("Возможные ПРИЧИНЫ УВОЛЬНЕНИЯ","\n" +
+        listInstructionsModel.add(new InstructionsModel("Испытательный срок для новых сотрудников - 1-1,5 мес", "Ноыве сотрудники считаются постоянно принятыми на работу после дополнительного разговора - который проходит через 1-1,5 мес после тестового периода работы"));
+        listInstructionsModel.add(new InstructionsModel("Возможные ПРИЧИНЫ УВОЛЬНЕНИЯ", "\n" +
                 "В компании могут работать только отвественные и грамотные сотруднки.\n" +
                 "Для оценки качетсва работы используется два параметра :\n" +
                 "\n" +
@@ -473,7 +476,7 @@ public class InstructionsLayoutController {
                 "\n" +
                 "\n" +
                 "Данные правила частично могут не распространятся на особо ценных сотрудников"));
-        listInstructionsModel.add(new InstructionsModel("О мониторинге.Важно.","1.  Необходимым условием работы есть мониторинг всех ваших действий в рабочее время, на компьютере.\n" +
+        listInstructionsModel.add(new InstructionsModel("О мониторинге.Важно.", "1.  Необходимым условием работы есть мониторинг всех ваших действий в рабочее время, на компьютере.\n" +
                 "\n" +
                 "Это условие планировалось ввести изначально, и обусловлено оно обективной необходиомстью контроля.\n" +
                 "У работодателя есть полное моральное право контролировать работу сотрудников в рабочее время\n" +
@@ -502,7 +505,7 @@ public class InstructionsLayoutController {
                 "в задание каждое обязательно вписывать надо количественные величины  :\n" +
                 "\n" +
                 "пример :  Надо писать - Был выполнен поиск райтеров, отослано 20 сообщений , найдено 5 рерайтеров и т.д (а не просто  - был выполнен поиск рерайтеров) не пишется - подача обявлений. Пишется - подано 4 обьявления ,  и т.д"));
-        listInstructionsModel.add(new InstructionsModel("Оффтопик - Научные доказательнства существования БОГА.","Познавательная НАУЧНАЯ  книга про доказательства существования БОГА ,\n" +
+        listInstructionsModel.add(new InstructionsModel("Оффтопик - Научные доказательнства существования БОГА.", "Познавательная НАУЧНАЯ  книга про доказательства существования БОГА ,\n" +
                 "\n" +
                 "1. Файл книги\n" +
                 "\n" +
@@ -522,4 +525,11 @@ public class InstructionsLayoutController {
         lvInstructions.setItems(content);
     }
 
+    public void getUpStage(Scene scene) {
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                scene.getWindow().hide();}
+        }
+        );
+    }
 }
