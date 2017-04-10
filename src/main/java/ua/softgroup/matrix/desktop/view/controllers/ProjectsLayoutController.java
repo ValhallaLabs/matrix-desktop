@@ -168,9 +168,7 @@ public class ProjectsLayoutController extends Controller {
             if (mouseEvent.getClickCount() == 2) {
                 openReportWindowOnTwoMouseClick(event);
             } else {
-                taWriteReport.setMouseTransparent(true);
-                taWriteReport.setText("");
-                taWriteReport.setEditable(false);
+                setDisableTextArea();
                 if (tvProjectsTable.getSelectionModel().getSelectedItem() != null) {
                     projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
                     checkReportAndSetConditionOnTextArea();
@@ -233,8 +231,7 @@ public class ProjectsLayoutController extends Controller {
         timeLine.getKeyFrames().add(frame);
         timeLine.setCycleCount(Timeline.INDEFINITE);
         timeLine.playFromStart();
-        taWriteReport.setMouseTransparent(false);
-        taWriteReport.setEditable(true);
+        checkReportAndSetConditionOnTextArea();
         buttonConditionAtTimerOn();
     }
 
@@ -327,15 +324,21 @@ public class ProjectsLayoutController extends Controller {
                     taWriteReport.setText(model.getText());
                     viewConditionAtReportAlreadyExist();
                 } else if (model.getDate() != null && model.getDate().equals(LocalDate.now())) {
-                    taWriteReport.setMouseTransparent(false);
-                    taWriteReport.setEditable(true);
+                    setAvailableTextArea();
                 }
             }
         }
     }
 
-    private void setDisableTextAreaAtStart(){
+    private void setDisableTextArea() {
+        taWriteReport.setMouseTransparent(true);
+        taWriteReport.setText("");
+        taWriteReport.setEditable(false);
+    }
 
+    private void setAvailableTextArea() {
+        taWriteReport.setMouseTransparent(false);
+        taWriteReport.setEditable(true);
     }
 
     /**
@@ -350,9 +353,7 @@ public class ProjectsLayoutController extends Controller {
      * At start project window ,focus and select newest item in Table View
      */
     private void setFocusOnTableView() {
-        taWriteReport.setMouseTransparent(true);
-        taWriteReport.setText("");
-        taWriteReport.setEditable(false);
+        setDisableTextArea();
         tvProjectsTable.requestFocus();
         tvProjectsTable.getSelectionModel().select(0);
         tvProjectsTable.getFocusModel().focus(0);
