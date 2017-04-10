@@ -14,7 +14,7 @@ apply plugin: 'java'
 apply plugin: 'signing'
 
 group   = 'ua.softgroup'
-version = '0.1-SNAPSHOT'
+version = '0.1.2-RC'
 
 jar {
     manifest {
