@@ -4,7 +4,6 @@ import ua.softgroup.matrix.api.model.datamodels.InitializeModel;
 import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.api.model.datamodels.SynchronizationModel;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -15,10 +14,6 @@ public class CurrentSessionInfo {
     private static InitializeModel initializeModel = new InitializeModel();
     private static SynchronizationModel synchronizationModel = null;
     private static long projectId;
-    private static List<String> bhSet = new ArrayList<String>() {{
-        add("http://yahooeu.ru/uploads/posts/2010-08/1281728982_artistimage_214_1363f54a020beb.jpg");
-        add("https://dou.ua/forums/topic/7612/");
-    }};
 
     public static void setInitializeModel(InitializeModel initializeModel) {
         CurrentSessionInfo.initializeModel = initializeModel;
@@ -61,6 +56,6 @@ public class CurrentSessionInfo {
     }
 
     public static List<String> getBhSet() {
-        return bhSet;
+        return initializeModel.getBhSet();
     }
 }
