@@ -80,6 +80,8 @@ public class ProjectsLayoutController extends Controller {
     private Label labelIdle;
     private double idleTimeInPercent;
     private ProjectModel projectModel;
+    private Stage stage;
+    private String timeToday;
     @FXML
     public TableView<ProjectModel> tvProjectsTable;
     @FXML
@@ -227,6 +229,7 @@ public class ProjectsLayoutController extends Controller {
         }
         KeyFrame frame = new KeyFrame(Duration.minutes(1), event -> {
             calculateTimeAndSetInView();
+            stage.setTitle("Supervisor " + "|"+"Time Today "+ timeToday +  " Idle Time "+idleTimeInPercent+"%");
         });
         timeLine.getKeyFrames().add(frame);
         timeLine.setCycleCount(Timeline.INDEFINITE);
@@ -249,6 +252,7 @@ public class ProjectsLayoutController extends Controller {
      * @param actionEvent callback click on button
      */
     public void stopWork(ActionEvent actionEvent) {
+        stage.setTitle("Supervisor");
         if (timeLine != null) {
             timeLine.stop();
         }
@@ -440,10 +444,12 @@ public class ProjectsLayoutController extends Controller {
      * Get from current project information's about time ,idle time,start and deadline date and set into special view for this fields
      */
     private void setDynamicInfo() {
+
         idleTimeInPercent = projectModel.getProjectTime().getIdlePercent();
         timeTodayInSeconds = projectModel.getProjectTime().getTodayTime();
         timeTotalInSeconds = projectModel.getProjectTime().getTotalTime();
         labelTodayTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTodayInSeconds));
+        timeToday = convertFromSecondsToHoursAndMinutes(timeTodayInSeconds);
         labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTotalInSeconds));
         if ((projectModel.getStartDate() != null && projectModel.getEndDate() != null)) {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
@@ -574,8 +580,9 @@ public class ProjectsLayoutController extends Controller {
      * @param mainLayout send layout were we start and create project window
      */
     void setUpStage(Stage mainLayout) {
-        Stage stage = mainLayout;
-        stage.setOnCloseRequest(event -> {
+         stage=mainLayout;
+        stage.setTitle("Supervisor");
+        mainLayout.setOnCloseRequest(event -> {
             if (timeTracker != null) {
                 timeTracker.turnOff();
                 timeLine.stop();

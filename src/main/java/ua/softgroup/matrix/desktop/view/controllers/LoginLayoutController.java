@@ -248,7 +248,7 @@ public class LoginLayoutController extends Controller {
             projectsStage.setMinWidth(MAIN_LAYOUT_MIN_WIDTH);
             projectsStage.setMinHeight(MAIN_LAYOUT_MIN_HEIGHT);
             projectsStage.setResizable(false);
-            projectsStage.setTitle(PROJECT_LAYOUT_TITLE);
+//            projectsStage.setTitle(PROJECT_LAYOUT_TITLE);
             projectsStage.show();
         } catch (IOException e) {
             logger.error("Error when start Main Layout ", e);
