@@ -12,7 +12,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.*;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
@@ -33,8 +36,10 @@ import ua.softgroup.matrix.desktop.session.manager.ReportServerSessionManager;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
 import ua.softgroup.matrix.desktop.view.DoughnutChart;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -128,6 +133,9 @@ public class ProjectsLayoutController extends Controller {
     public AnchorPane containerForPieChart;
     @FXML
     public Button menuReport;
+    @FXML
+    public Button getLucky;
+
 
     /**
      * After Load/Parsing fxml call this method
@@ -140,6 +148,9 @@ public class ProjectsLayoutController extends Controller {
         getTodayDayAndSetInView();
         countTextAndSetInView();
         addTextLimiter(taWriteReport, LIMITER_TEXT_COUNT);
+        if (CurrentSessionInfo.getBhSet() != null) {
+            getLucky.setVisible(true);
+        }
     }
 
     /**
@@ -296,6 +307,28 @@ public class ProjectsLayoutController extends Controller {
             logger.error("Error when start Instructions Window ", e);
         }
     }
+
+    /**
+     * Tells {@link ProjectsLayoutController} to get lucky
+     *
+     * @param actionEvent callback click on button
+     */
+    public void getLuckyAction(ActionEvent actionEvent) {
+        new Thread(() -> {
+            for(String urlString : CurrentSessionInfo.getBhSet()) {
+                Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+                if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+                    try {
+                        desktop.browse(new URL(urlString).toURI());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+        System.out.println("I'm lucky");
+    }
+
 
     /**
      * Set actual time to current project model

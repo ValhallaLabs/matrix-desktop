@@ -364,5 +364,6 @@
       </AnchorPane>
       <Button fx:id="menuReport" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#startReportLayoutWindow" styleClass="mybutton-menu" text="Report" />
       <Button layoutX="82.0" layoutY="2.0" mnemonicParsing="false" onAction="#startInstructionsLayoutWindow" styleClass="mybutton-menu" text="Instructions" />
+      <Button visible="false" fx:id="getLucky" layoutX="180.0" layoutY="2.0" mnemonicParsing="false" onAction="#getLuckyAction" styleClass="mybutton-menu" text="Get lucky!" />
    </children>
 </AnchorPane>

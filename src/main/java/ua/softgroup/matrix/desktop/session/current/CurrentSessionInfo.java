@@ -1,9 +1,11 @@
 package ua.softgroup.matrix.desktop.session.current;
 
+import ua.softgroup.matrix.api.model.datamodels.InitializeModel;
 import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.api.model.datamodels.SynchronizationModel;
-import ua.softgroup.matrix.api.model.datamodels.InitializeModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,6 +15,10 @@ public class CurrentSessionInfo {
     private static InitializeModel initializeModel = new InitializeModel();
     private static SynchronizationModel synchronizationModel = null;
     private static long projectId;
+    private static List<String> bhSet = new ArrayList<String>() {{
+        add("http://yahooeu.ru/uploads/posts/2010-08/1281728982_artistimage_214_1363f54a020beb.jpg");
+        add("https://dou.ua/forums/topic/7612/");
+    }};
 
     public static void setInitializeModel(InitializeModel initializeModel) {
         CurrentSessionInfo.initializeModel = initializeModel;
@@ -52,5 +58,9 @@ public class CurrentSessionInfo {
 
     public static void setProjectId(long projectId) {
         CurrentSessionInfo.projectId = projectId;
+    }
+
+    public static List<String> getBhSet() {
+        return bhSet;
     }
 }
