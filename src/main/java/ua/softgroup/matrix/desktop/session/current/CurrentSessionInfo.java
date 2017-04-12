@@ -4,7 +4,7 @@ import ua.softgroup.matrix.api.model.datamodels.InitializeModel;
 import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.api.model.datamodels.SynchronizationModel;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -55,7 +55,7 @@ public class CurrentSessionInfo {
         CurrentSessionInfo.projectId = projectId;
     }
 
-    public static List<String> getBhSet() {
-        return initializeModel.getBhSet();
+    public static ArrayList<String> getBhSet() {
+        return (ArrayList<String>) initializeModel.getBhList();
     }
 }

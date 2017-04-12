@@ -136,7 +136,6 @@ public class ProjectsLayoutController extends Controller {
     @FXML
     public Button getLucky;
 
-
     /**
      * After Load/Parsing fxml call this method
      * Create {@link ReportServerSessionManager}
@@ -148,7 +147,9 @@ public class ProjectsLayoutController extends Controller {
         getTodayDayAndSetInView();
         countTextAndSetInView();
         addTextLimiter(taWriteReport, LIMITER_TEXT_COUNT);
+        System.out.println("we are here");
         if (CurrentSessionInfo.getBhSet() != null) {
+            System.out.println("not null");
             getLucky.setVisible(true);
         }
     }
