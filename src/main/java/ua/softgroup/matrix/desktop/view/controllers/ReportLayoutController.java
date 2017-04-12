@@ -37,6 +37,8 @@ public class ReportLayoutController extends Controller {
     private Set<ReportModel> report;
     private Long currentReportId;
     @FXML
+    public Label labelCurrentSymbols;
+    @FXML
     public TableView<ReportModel> tableViewReport;
     @FXML
     public TableColumn<ReportModel, Integer> reportTableColumnDate;
@@ -72,7 +74,16 @@ public class ReportLayoutController extends Controller {
         currentProjectId = CurrentSessionInfo.getProjectId();
         reportServerSessionManager = new ReportServerSessionManager(this);
         getAllReportAndSetToCollection();
+        countTextAndSetInView();
         addTextLimiter(taEditReport,LIMITER_TEXT_COUNT);
+    }
+
+    @FXML
+    private void countTextAndSetInView() {
+       taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
+            int size = newValue.length();
+            labelCurrentSymbols.setText(String.valueOf(size));
+        });
     }
     /**
      * Hears when text input in TextArea and if this text count >= {@value MIN_TEXT_FOR_REPORT}
@@ -158,6 +169,7 @@ public class ReportLayoutController extends Controller {
         tableViewReport.getFocusModel().focus(0);
         ReportModel reportModel = tableViewReport.getSelectionModel().getSelectedItem();
         countTextAndSetButtonCondition(reportModel);
+        countTextAndSetInView();
         currentReportId = reportModel.getId();
         if (reportModel.getText() != null) {
             taEditReport.setText(reportModel.getText());
