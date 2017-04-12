@@ -43,7 +43,6 @@ public class LoginLayoutController extends Controller {
     private static final String SETTING_LAYOUT = "fxml/settingLayout.fxml";
     private static final String SETTING_LAYOUT_TITLE ="Settings";
     private static final String PROJECT_LAYOUT = "fxml/projectsLayout.fxml";
-    private static final String PROJECT_LAYOUT_TITLE = "SuperVisor";
     private static final String USER_NAME = "userName";
     private static final String USER_PASSWORD = "password";
     private static final String USER_SWITCH_SETTINGS = "false";

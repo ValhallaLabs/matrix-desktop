@@ -8,11 +8,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
@@ -23,8 +21,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBoxBuilder;
-import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.util.Duration;
 import org.slf4j.Logger;
@@ -53,8 +49,13 @@ public class ProjectsLayoutController extends Controller {
     private static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
     private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
-    private static DateTimeFormatter todayStartTime = DateTimeFormatter.ofPattern("HH:mm");
+    private static DateTimeFormatter timeFormatToday = DateTimeFormatter.ofPattern("HH:mm");
     private static final Logger logger = LoggerFactory.getLogger(ProjectsLayoutController.class);
+    private static final String PROJECT_LAYOUT_TITLE = "SuperVisor";
+    private static final String PROJECT_LAYOUT_TITLE_TIME_TODAY = "Time Today";
+    private static final String PROJECT_LAYOUT_TITLE_IDLE_TIME = "Project Idle Time";
+    private static final String PROJECT_LAYOUT_TITLE_ACTUAL_TIME = "Actual For";
+    private static final String PROJECT_LAYOUT_ALERT_AT_CLOSE = "Do you really want to close the Matrix ?";
     private static final String ID_COLUMN = "id";
     private static final String AUTHOR_NAME_COLUMN = "authorName";
     private static final String TITLE_COLUMN = "title";
@@ -134,6 +135,7 @@ public class ProjectsLayoutController extends Controller {
     public AnchorPane containerForPieChart;
     @FXML
     public Button menuReport;
+    private String actualTime;
 
     /**
      * After Load/Parsing fxml call this method
@@ -233,7 +235,6 @@ public class ProjectsLayoutController extends Controller {
         }
         KeyFrame frame = new KeyFrame(Duration.minutes(1), event -> {
             calculateTimeAndSetInView();
-            stage.setTitle("Supervisor " + "|"+"Time Today "+ timeToday +  " Idle Time "+idleTimeInPercent+"%");
         });
         timeLine.getKeyFrames().add(frame);
         timeLine.setCycleCount(Timeline.INDEFINITE);
@@ -247,7 +248,6 @@ public class ProjectsLayoutController extends Controller {
         checkReportAndSetConditionOnTextArea();
         setProjectInfoInView();
         checkReportAndSetConditionOnTextArea();
-
     }
 
     /**
@@ -256,7 +256,6 @@ public class ProjectsLayoutController extends Controller {
      * @param actionEvent callback click on button
      */
     public void stopWork(ActionEvent actionEvent) {
-        stage.setTitle("Supervisor");
         if (timeLine != null) {
             timeLine.stop();
         }
@@ -289,7 +288,7 @@ public class ProjectsLayoutController extends Controller {
             Pane pane = loader.load();
             Scene scene = new Scene(pane);
             instructionsStage.setScene(scene);
-            InstructionsLayoutController instructionsLayoutController=loader.getController();
+            InstructionsLayoutController instructionsLayoutController = loader.getController();
             instructionsLayoutController.getUpStage(scene);
             Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
             instructionsStage.getIcons().add(logoIcon);
@@ -314,6 +313,16 @@ public class ProjectsLayoutController extends Controller {
         projectModel.setProjectTime(updatedProjectTime);
         logger.debug("Project model is updated: {}", updatedProjectTime.toString());
         setDynamicInfo();
+        System.out.println(timeLine);
+        if (!btnStart.isDisable()) {
+            stage.setTitle(PROJECT_LAYOUT_TITLE);
+        } else {
+            actualTime = LocalTime.now().format(timeFormatToday);
+            stage.setTitle(PROJECT_LAYOUT_TITLE + " " + " |" + " " +
+                    PROJECT_LAYOUT_TITLE_TIME_TODAY + ": " + timeToday +
+                    "; " + PROJECT_LAYOUT_TITLE_IDLE_TIME + ": " + idleTimeInPercent + "%" +
+                    "; " + PROJECT_LAYOUT_TITLE_ACTUAL_TIME + ": " + actualTime + ";");
+        }
     }
 
     /**
@@ -323,7 +332,7 @@ public class ProjectsLayoutController extends Controller {
      */
     public void updateArrivalTime(LocalTime arrivalTime) {
         projectModel.getProjectTime().setTodayStartTime(arrivalTime);
-        logger.debug("arrival time:", String.valueOf(arrivalTime.format(todayStartTime)));
+        logger.debug("arrival time:", String.valueOf(arrivalTime.format(timeFormatToday)));
         setArrivalTime();
     }
 
@@ -448,7 +457,6 @@ public class ProjectsLayoutController extends Controller {
      * Get from current project information's about time ,idle time,start and deadline date and set into special view for this fields
      */
     private void setDynamicInfo() {
-
         idleTimeInPercent = projectModel.getProjectTime().getIdlePercent();
         timeTodayInSeconds = projectModel.getProjectTime().getTodayTime();
         timeTotalInSeconds = projectModel.getProjectTime().getTotalTime();
@@ -472,7 +480,7 @@ public class ProjectsLayoutController extends Controller {
     private void setArrivalTime() {
         if (projectModel.getProjectTime().getTodayStartTime() != null) {
             labelStartWorkToday.setText(String.valueOf(projectModel
-                    .getProjectTime().getTodayStartTime().format(todayStartTime)));
+                    .getProjectTime().getTodayStartTime().format(timeFormatToday)));
             return;
         }
         labelStartWorkToday.setText("--:--");
@@ -584,8 +592,8 @@ public class ProjectsLayoutController extends Controller {
      * @param mainLayout send layout were we start and create project window
      */
     void setUpStage(Stage mainLayout) {
-        stage=mainLayout;
-        stage.setTitle("Supervisor");
+        stage = mainLayout;
+        stage.setTitle(PROJECT_LAYOUT_TITLE);
         Platform.setImplicitExit(false);
         mainLayout.setOnCloseRequest(event -> {
             event.consume();
@@ -593,19 +601,19 @@ public class ProjectsLayoutController extends Controller {
         });
     }
 
-    private void shutDownApp(Stage stage){
-        Alert alert = new Alert(Alert.AlertType.NONE,"Do you really want to close the Matrix ?",ButtonType.YES,ButtonType.NO);
-        if(alert.showAndWait().orElse(ButtonType.NO)==ButtonType.YES){
+    private void shutDownApp(Stage stage) {
+        Alert alert = new Alert(Alert.AlertType.NONE,PROJECT_LAYOUT_ALERT_AT_CLOSE, ButtonType.YES, ButtonType.NO);
+        if (alert.showAndWait().orElse(ButtonType.NO) == ButtonType.YES) {
             stage.close();
             if (timeTracker != null) {
                 timeTracker.turnOff();
                 timeLine.stop();
             }
             System.exit(0);
-        }else {
-            Image image =new Image(getClass().getResource("/images/crazy.jpg").toExternalForm());
-            ImageView imageView=new ImageView(image);
-            Alert alert2 = new Alert(Alert.AlertType.NONE,"",ButtonType.YES);
+        } else {
+            Image image = new Image(getClass().getResource("/images/crazy.jpg").toExternalForm());
+            ImageView imageView = new ImageView(image);
+            Alert alert2 = new Alert(Alert.AlertType.NONE, "", ButtonType.YES);
             alert2.setGraphic(imageView);
             alert2.showAndWait();
         }
