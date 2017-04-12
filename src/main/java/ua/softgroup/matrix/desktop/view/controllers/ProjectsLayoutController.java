@@ -3,25 +3,29 @@ package ua.softgroup.matrix.desktop.view.controllers;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import javafx.scene.layout.VBoxBuilder;
+import javafx.scene.text.Text;
+import javafx.stage.*;
 import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -580,15 +584,30 @@ public class ProjectsLayoutController extends Controller {
      * @param mainLayout send layout were we start and create project window
      */
     void setUpStage(Stage mainLayout) {
-         stage=mainLayout;
+        stage=mainLayout;
         stage.setTitle("Supervisor");
+        Platform.setImplicitExit(false);
         mainLayout.setOnCloseRequest(event -> {
+            event.consume();
+            shutDownApp(mainLayout);
+        });
+    }
+
+    private void shutDownApp(Stage stage){
+        Alert alert = new Alert(Alert.AlertType.NONE,"Do you really want to close the Matrix ?",ButtonType.YES,ButtonType.NO);
+        if(alert.showAndWait().orElse(ButtonType.NO)==ButtonType.YES){
+            stage.close();
             if (timeTracker != null) {
                 timeTracker.turnOff();
                 timeLine.stop();
             }
             System.exit(0);
-        });
+        }else {
+            Image image =new Image(getClass().getResource("/images/crazy.jpg").toExternalForm());
+            ImageView imageView=new ImageView(image);
+            Alert alert2 = new Alert(Alert.AlertType.NONE,"",ButtonType.YES);
+            alert2.setGraphic(imageView);
+            alert2.showAndWait();
+        }
     }
-
 }
