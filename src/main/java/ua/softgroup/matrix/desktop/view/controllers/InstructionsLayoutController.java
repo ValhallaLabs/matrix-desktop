@@ -1,5 +1,6 @@
 package ua.softgroup.matrix.desktop.view.controllers;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -23,14 +24,18 @@ public class InstructionsLayoutController {
     @FXML
     public ListView<InstructionsModel> lvInstructions;
     private List<InstructionsModel> listInstructionsModel = new ArrayList<>();
+    private ObservableList<InstructionsModel> content = FXCollections.observableArrayList();
 
     /**
      * After Load/Parsing fxml call this method
      */
     @FXML
     public void initialize() {
-        initArray();
-        setFocusOnListView();
+        Platform.runLater(() -> {
+            initArray();
+            setFocusOnListView();
+        });
+
     }
 
     /**
@@ -520,7 +525,10 @@ public class InstructionsLayoutController {
                 "\n" +
                 "\n" +
                 "http://dl.dropbox.com/u/16323004/BOOK.rar"));
-        ObservableList<InstructionsModel> content = FXCollections.observableArrayList(listInstructionsModel);
+
+        for (InstructionsModel model:listInstructionsModel){
+            content.addAll(model);
+        }
         lvInstructions.setItems(content);
     }
 

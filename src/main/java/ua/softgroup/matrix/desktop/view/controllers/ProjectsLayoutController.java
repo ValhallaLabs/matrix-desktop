@@ -276,36 +276,6 @@ public class ProjectsLayoutController extends Controller {
     }
 
     /**
-     * Tells {@link ProjectsLayoutController} to open instructions window
-     *
-     * @param actionEvent callback click on button
-     */
-    public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            Stage instructionsStage = new Stage();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(classLoader.getResource(INSTRUCTIONS_LAYOUT));
-            Pane pane = loader.load();
-            Scene scene = new Scene(pane);
-            instructionsStage.setScene(scene);
-            InstructionsLayoutController instructionsLayoutController = loader.getController();
-            instructionsLayoutController.getUpStage(scene);
-            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
-            instructionsStage.getIcons().add(logoIcon);
-            instructionsStage.setMinWidth(INSTRUCTIONS_LAYOUT_MIN_WIDTH);
-            instructionsStage.setMinHeight(INSTRUCTIONS_LAYOUT_MIN_HEIGHT);
-            instructionsStage.initModality(Modality.WINDOW_MODAL);
-            instructionsStage.setTitle(INSTRUCTIONS_LAYOUT_TITLE);
-            instructionsStage.initOwner(labelDayInNumber.getScene().getWindow());
-            instructionsStage.setResizable(false);
-            instructionsStage.show();
-        } catch (IOException e) {
-            logger.error("Error when start Instructions Window ", e);
-        }
-    }
-
-    /**
      * Set actual time to current project model
      *
      * @param updatedProjectTime get actual time
@@ -581,6 +551,36 @@ public class ProjectsLayoutController extends Controller {
             reportsStage.show();
         } catch (IOException e) {
             logger.error("Error when start Report Window ", e);
+        }
+    }
+
+    /**
+     * Tells {@link ProjectsLayoutController} to open instructions window
+     *
+     * @param actionEvent callback click on button
+     */
+    public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
+        try {
+            Stage instructionsStage = new Stage();
+            ClassLoader classLoader = getClass().getClassLoader();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(classLoader.getResource(INSTRUCTIONS_LAYOUT));
+            AnchorPane pane = loader.load();
+            Scene scene = new Scene(pane);
+            instructionsStage.setScene(scene);
+            InstructionsLayoutController instructionsLayoutController = loader.getController();
+            instructionsLayoutController.getUpStage(scene);
+            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
+            instructionsStage.getIcons().add(logoIcon);
+            instructionsStage.setMinWidth(INSTRUCTIONS_LAYOUT_MIN_WIDTH);
+            instructionsStage.setMinHeight(INSTRUCTIONS_LAYOUT_MIN_HEIGHT);
+            instructionsStage.initModality(Modality.WINDOW_MODAL);
+            instructionsStage.setTitle(INSTRUCTIONS_LAYOUT_TITLE);
+            instructionsStage.initOwner(labelDateStartProject.getScene().getWindow());
+            instructionsStage.setResizable(false);
+            instructionsStage.show();
+        } catch (IOException e) {
+            logger.error("Error when start Instructions Window ", e);
         }
     }
 

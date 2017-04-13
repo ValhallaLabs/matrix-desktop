@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="765.0" prefWidth="1200.0" styleClass="white-background" stylesheets="@../css/instructionsLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.view.controllers.InstructionsLayoutController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="765.0" prefWidth="1200.0" styleClass="white-background" stylesheets="@../css/instructionsLayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.view.controllers.InstructionsLayoutController">
     <children>
         <Pane focusTraversable="true" prefHeight="100.0" prefWidth="200.0" styleClass="blue-background" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="20.0">
             <padding>
@@ -23,30 +26,34 @@
                 </Label>
             </children>
         </Pane>
-        <SplitPane dividerPositions="0.3" layoutX="122.0" layoutY="152.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="130.0">
-            <items>
-                <AnchorPane minHeight="446.0" minWidth="254.0" prefHeight="160.0" prefWidth="100.0">
-                    <children>
-                        <ListView fx:id="lvInstructions" layoutX="56.0" layoutY="105.0" onMouseClicked="#clickOnCurrentInstruction" prefHeight="446.0" prefWidth="254.0" styleClass="grey-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                    </children>
-                </AnchorPane>
-                <AnchorPane minHeight="446.0" minWidth="596.0" prefHeight="446.0" prefWidth="596.0">
-                    <children>
-                        <ScrollPane hbarPolicy="NEVER" prefHeight="446.0" prefViewportHeight="498.0" prefViewportWidth="583.048828125" prefWidth="792.0" styleClass="grey-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <content>
-                                <Label fx:id="labelInstructions" alignment="TOP_LEFT" minHeight="618.0" minWidth="793.0" prefWidth="794.0" styleClass="grey-background" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <font>
-                                        <Font size="13.0" />
-                                    </font>
-                                    <padding>
-                                        <Insets left="15.0" right="17.0" top="15.0" />
-                                    </padding>
-                                </Label>
-                            </content>
-                        </ScrollPane>
-                    </children>
-                </AnchorPane>
-            </items>
-        </SplitPane>
+      <AnchorPane layoutX="20.0" layoutY="130.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="130.0">
+         <children>
+              <SplitPane dividerPositions="0.3" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <items>
+                      <AnchorPane minHeight="611.0" minWidth="343.0" prefHeight="160.0" prefWidth="100.0">
+                          <children>
+                              <ListView fx:id="lvInstructions" layoutX="56.0" layoutY="105.0" onMouseClicked="#clickOnCurrentInstruction" prefHeight="446.0" prefWidth="254.0" styleClass="grey-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </children>
+                      </AnchorPane>
+                      <AnchorPane minHeight="611.0" minWidth="805.0" prefHeight="446.0" prefWidth="596.0">
+                          <children>
+                              <ScrollPane hbarPolicy="NEVER" prefHeight="446.0" prefViewportHeight="498.0" prefViewportWidth="583.048828125" prefWidth="792.0" styleClass="grey-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                  <content>
+                                      <Label fx:id="labelInstructions" alignment="TOP_LEFT" minHeight="618.0" minWidth="793.0" prefWidth="794.0" styleClass="grey-background" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <font>
+                                              <Font size="13.0" />
+                                          </font>
+                                          <padding>
+                                              <Insets left="15.0" right="17.0" top="15.0" />
+                                          </padding>
+                                      </Label>
+                                  </content>
+                              </ScrollPane>
+                          </children>
+                      </AnchorPane>
+                  </items>
+              </SplitPane>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

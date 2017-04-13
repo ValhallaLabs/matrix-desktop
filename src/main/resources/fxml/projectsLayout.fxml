@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="765.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.view.controllers.ProjectsLayoutController">
+<AnchorPane prefHeight="765.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.view.controllers.ProjectsLayoutController">
    <children>
-      <AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+      <AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
          <children>
             <SplitPane dividerPositions="0.715" layoutX="244.0" layoutY="191.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
@@ -20,11 +25,11 @@
                      <children>
                         <TableView fx:id="tvProjectsTable" onMouseClicked="#chosenProject" prefHeight="750.0" prefWidth="876.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
                            <columns>
-                              <TableColumn fx:id="tcIdProject" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" sortType="DESCENDING" text="Id" />
+                              <TableColumn fx:id="tcIdProject" maxWidth="50.0" minWidth="55.0" prefWidth="55.0" sortType="DESCENDING" text="Id" />
                               <TableColumn fx:id="tcStatus" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" text="Status" />
                               <TableColumn fx:id="tcAuthorName" maxWidth="300.0" minWidth="160.0" prefWidth="160.0" text="Author" />
                               <TableColumn fx:id="tcTitle" maxWidth="300.0" minWidth="160.0" prefWidth="160.0" text="Name" />
-                              <TableColumn fx:id="tcDescription" maxWidth="700.0" minWidth="405.0" prefWidth="405.0" text="Description" />
+                              <TableColumn fx:id="tcDescription" maxWidth="700.0" minWidth="400.0" prefWidth="400.0" text="Description" />
                            </columns>
                            <opaqueInsets>
                               <Insets />
@@ -164,7 +169,7 @@
                                     </ImageView>
                                     <Label fx:id="labelTodayTotalTime" minWidth="140.0" prefWidth="140.0" text="0h 0m">
                                        <HBox.margin>
-                                          <Insets left="5.0" right="5.0" top="1.0" />
+                                          <Insets left="5.0" right="5.0" top="2.0" />
                                        </HBox.margin>
                                        <font>
                                           <Font name="System Bold" size="16.0" />
@@ -311,7 +316,7 @@
                               </TextArea>
                               <HBox focusTraversable="true" minHeight="48.0" prefHeight="48.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="btnAttachFile" disable="true" mnemonicParsing="false" onAction="#attachFile" prefHeight="31.0" prefWidth="135.0" styleClass="add-button" text="Attach file">
+                                    <Button fx:id="btnAttachFile" disable="true" mnemonicParsing="false" onAction="#attachFile" prefHeight="31.0" prefWidth="130.0" styleClass="add-button" text="Attach file">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
@@ -322,7 +327,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#sendReport" prefHeight="31.0" prefWidth="135.0" styleClass="send-reports-button" text="Send report">
+                                    <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#sendReport" prefHeight="31.0" prefWidth="130.0" styleClass="send-reports-button" text="Send report">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
