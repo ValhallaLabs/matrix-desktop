@@ -4,8 +4,6 @@ import com.sun.jna.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-
 /**
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
@@ -16,14 +14,14 @@ public class ActiveWindowListenerFactory {
      * Returns window listener for detected platform or null if platform is unknown.
      * @return window listener
      */
-    public static ActiveWindowListener getListener() throws XdotoolException {
+    public static ActiveWindowListener getListener() {
         if (Platform.isWindows()) {
             logger.info("Platform is Windows");
             return new WindowsActiveWindowListener();
         }
         if (Platform.isLinux()) {
             logger.info("Platform is Linux");
-            return getLinuxActiveWindowListener();
+            return new LinuxActiveWindowListener();
         }
         if (Platform.isMac()) {
             logger.info("Platform is Mac");
@@ -31,17 +29,6 @@ public class ActiveWindowListenerFactory {
         }
         logger.info("Platform is not detected");
         return null;
-    }
-
-    private static ActiveWindowListener getLinuxActiveWindowListener() throws XdotoolException {
-        try {
-            Process p = Runtime.getRuntime().exec("xdotool getwindowfocus getwindowname");
-            p.waitFor();
-            p.destroy();
-            return new LinuxActiveWindowListener();
-        } catch (InterruptedException | IOException e) {
-            throw new XdotoolException();
-        }
     }
 
     public static class XdotoolException extends Exception {

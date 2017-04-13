@@ -31,7 +31,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      * Tries to turn on ActiveWindowListener
      */
     @Override
-    public void turnOn() throws InterruptedException {
+    public void turnOn() throws InterruptedException, ActiveWindowListenerFactory.XdotoolException {
         if (status == NOT_USED) {
             startTitleReader();
             status = IS_USED;
@@ -46,20 +46,20 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      * Gets first active window title as prevTittle for correct first comparison.
      * Creates titleReader disposable.
      */
-    private void startTitleReader() {
+    private void startTitleReader() throws ActiveWindowListenerFactory.XdotoolException {
         addFirstWindowToTimeMap();
         titleReaderDisposable = Observable.interval(4, TimeUnit.SECONDS)
                 .map(number -> getProcessTitle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .filter(this::compareToCurrentTitle)
-                .subscribe(this::receiveTitle, Throwable::printStackTrace);
+                .subscribe(this::receiveTitle, throwable -> System.exit(0));
     }
 
     /**
      * Adds first active window to time map
      */
-    private void addFirstWindowToTimeMap() {
+    private void addFirstWindowToTimeMap() throws ActiveWindowListenerFactory.XdotoolException {
         currentTitle = getProcessTitle();
         activeWindows.add(new ActiveWindowModel(currentTitle, LocalTime.now(), 0));
         logger.debug("Adding first title: {}", currentTitle);
@@ -69,7 +69,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
      * Abstract method, which every OS overrides to get title of active window.
      * @return newTitle
      */
-    protected abstract String getProcessTitle();
+    protected abstract String getProcessTitle() throws ActiveWindowListenerFactory.XdotoolException;
 
     /**
      * Compares new title to current title

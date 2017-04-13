@@ -10,16 +10,19 @@ import java.io.InputStreamReader;
 class LinuxActiveWindowListener extends ActiveWindowListener {
 
     @Override
-    protected String getProcessTitle() {
+    protected String getProcessTitle() throws ActiveWindowListenerFactory.XdotoolException {
         try {
-            Process p = Runtime.getRuntime().exec("xdotool getwindowfocus getwindowname");
+            Process p = Runtime.getRuntime().exec("./xdotool getwindowfocus getwindowname");
             BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String title = br.readLine();
             p.waitFor();
             p.destroy();
             return title;
         } catch (InterruptedException | IOException e) {
-            return "Unable to get window, something went wrong";
+//            return "Unable to get window, something went wrong";
+            throw new ActiveWindowListenerFactory.XdotoolException();
         }
     }
+
+
 }
