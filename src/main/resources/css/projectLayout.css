@@ -38,7 +38,7 @@
 }
 
 .table-row-cell:selected .table-cell {
-    -fx-background-color: #3063a4;
+    -fx-background-color: #0f70a4;
     -fx-text-fill: white;
 }
 

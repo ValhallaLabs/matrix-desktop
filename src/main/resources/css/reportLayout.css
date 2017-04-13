@@ -1,44 +1,55 @@
 .light-blue-background {
     -fx-background-color: #9FA8DA;
 }
+
 .grey-background {
     -fx-background-color: #ebebeb;
 }
+
 .text-area .content {
     -fx-background-color: #ebebeb;
 }
+
 .text-area:focused .content {
     -fx-background-color: #ebebeb;
 }
+
 .text-area {
     -fx-text-box-border: transparent;
 }
+
 .split-pane {
     -fx-border-color: transparent;
     -fx-box-border: rgba(255, 255, 255, 0);
     -fx-background-color: transparent;
 }
+
 .split-pane > .split-pane-divider {
     -fx-background-color: transparent;
 }
+
 .table-view .column-header {
     -fx-font-size: 16px;
     -fx-background-color: #3063a4;
     -fx-border-color: white;
     -fx-base: rgb(0, 0, 0);
 }
-.change-report-button{
+
+.change-report-button {
     -fx-background-color: #47d465;
     -fx-cursor: hand;
 }
-.cancel-report-button{
+
+.cancel-report-button {
     -fx-background-color: #C62828;
     -fx-cursor: hand;
 }
-.table-cell:filled {
-    -fx-background-color: #ebebeb;
-}
+
 .table-row-cell:selected .table-cell {
-    -fx-background-color: #3063a4;
+    -fx-background-color: #0f70a4;
     -fx-text-fill: white;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #ebebeb;
 }

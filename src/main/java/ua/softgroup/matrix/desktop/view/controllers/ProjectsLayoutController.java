@@ -56,6 +56,7 @@ public class ProjectsLayoutController extends Controller {
     private static final String PROJECT_LAYOUT_TITLE_IDLE_TIME = "Project Idle Time";
     private static final String PROJECT_LAYOUT_TITLE_ACTUAL_TIME = "Actual For";
     private static final String PROJECT_LAYOUT_ALERT_AT_CLOSE = "Do you really want to close the Matrix ?";
+    private static final String PROJECT_LAYOUT_ALERT_TITLE = "SuperVisor";
     private static final String ID_COLUMN = "id";
     private static final String AUTHOR_NAME_COLUMN = "authorName";
     private static final String TITLE_COLUMN = "title";
@@ -135,7 +136,6 @@ public class ProjectsLayoutController extends Controller {
     public AnchorPane containerForPieChart;
     @FXML
     public Button menuReport;
-    private String actualTime;
 
     /**
      * After Load/Parsing fxml call this method
@@ -143,6 +143,7 @@ public class ProjectsLayoutController extends Controller {
      */
     @FXML
     private void initialize() {
+        tvProjectsTable.setFixedCellSize(24.0);
         reportServerSessionManager = new ReportServerSessionManager(this);
         initProjectInTable();
         getTodayDayAndSetInView();
@@ -313,11 +314,10 @@ public class ProjectsLayoutController extends Controller {
         projectModel.setProjectTime(updatedProjectTime);
         logger.debug("Project model is updated: {}", updatedProjectTime.toString());
         setDynamicInfo();
-        System.out.println(timeLine);
         if (!btnStart.isDisable()) {
             stage.setTitle(PROJECT_LAYOUT_TITLE);
         } else {
-            actualTime = LocalTime.now().format(timeFormatToday);
+            String actualTime = LocalTime.now().format(timeFormatToday);
             stage.setTitle(PROJECT_LAYOUT_TITLE + " " + " |" + " " +
                     PROJECT_LAYOUT_TITLE_TIME_TODAY + ": " + timeToday +
                     "; " + PROJECT_LAYOUT_TITLE_IDLE_TIME + ": " + idleTimeInPercent + "%" +
@@ -603,6 +603,7 @@ public class ProjectsLayoutController extends Controller {
 
     private void shutDownApp(Stage stage) {
         Alert alert = new Alert(Alert.AlertType.NONE,PROJECT_LAYOUT_ALERT_AT_CLOSE, ButtonType.YES, ButtonType.NO);
+        alert.setTitle(PROJECT_LAYOUT_ALERT_TITLE);
         if (alert.showAndWait().orElse(ButtonType.NO) == ButtonType.YES) {
             stage.close();
             if (timeTracker != null) {

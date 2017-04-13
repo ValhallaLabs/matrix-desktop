@@ -311,7 +311,7 @@
                               </TextArea>
                               <HBox focusTraversable="true" minHeight="48.0" prefHeight="48.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="btnAttachFile" mnemonicParsing="false" onAction="#attachFile" prefHeight="31.0" prefWidth="135.0" styleClass="add-button" text="Attach file">
+                                    <Button fx:id="btnAttachFile" disable="true" mnemonicParsing="false" onAction="#attachFile" prefHeight="31.0" prefWidth="135.0" styleClass="add-button" text="Attach file">
                                        <font>
                                           <Font size="11.0" />
                                        </font>

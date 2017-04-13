@@ -204,7 +204,7 @@
                            <children>
                               <Label fx:id="labelCurrentSymbols" text="0" textFill="#3063a4">
                                  <HBox.margin>
-                                    <Insets left="250.0" />
+                                    <Insets left="265.0" />
                                  </HBox.margin>
                                  <font>
                                     <Font name="System Bold" size="13.0" />

@@ -7,6 +7,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
@@ -14,6 +15,7 @@ import ua.softgroup.matrix.api.model.datamodels.ReportModel;
 import ua.softgroup.matrix.desktop.session.current.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.session.manager.ReportServerSessionManager;
 
+import javax.swing.text.*;
 import java.util.Set;
 
 
@@ -71,6 +73,7 @@ public class ReportLayoutController extends Controller {
      */
     @FXML
     private void initialize() {
+        tableViewReport.setFixedCellSize(23.0);
         currentProjectId = CurrentSessionInfo.getProjectId();
         reportServerSessionManager = new ReportServerSessionManager(this);
         getAllReportAndSetToCollection();
