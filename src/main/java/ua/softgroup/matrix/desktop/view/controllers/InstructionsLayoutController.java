@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
 import ua.softgroup.matrix.api.model.datamodels.InstructionsModel;
 
 import java.util.ArrayList;
@@ -525,7 +524,7 @@ public class InstructionsLayoutController {
         lvInstructions.setItems(content);
     }
 
-    public void getUpStage(Scene scene) {
+     void getUpStage(Scene scene) {
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
                 scene.getWindow().hide();}

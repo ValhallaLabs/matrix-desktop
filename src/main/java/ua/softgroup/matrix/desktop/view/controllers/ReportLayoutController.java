@@ -15,7 +15,6 @@ import ua.softgroup.matrix.api.model.datamodels.ReportModel;
 import ua.softgroup.matrix.desktop.session.current.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.session.manager.ReportServerSessionManager;
 
-import javax.swing.text.*;
 import java.util.Set;
 
 
@@ -186,19 +185,17 @@ public class ReportLayoutController extends Controller {
      */
     private void setProjectInfoInView(Long id) {
         Set<ProjectModel> projectAll = CurrentSessionInfo.getProjectModels();
-        for (ProjectModel model : projectAll) {
-            if (model.getId() == id) {
-                labelResponsible.setText(model.getAuthorName());
-                labelProjectName.setText(model.getTitle());
-                if (model.getEndDate() != null && model.getStartDate() != null) {
-                    labelStartDate.setText(model.getStartDate().toString());
-                    labelDeadlineDate.setText(model.getEndDate().toString());
-                } else {
-                    labelStartDate.setText(UNKNOWN_DATA);
-                    labelDeadlineDate.setText(UNLIMITED_DATA);
-                }
+        projectAll.stream().filter(model -> model.getId() == id).forEach(model -> {
+            labelResponsible.setText(model.getAuthorName());
+            labelProjectName.setText(model.getTitle());
+            if (model.getEndDate() != null && model.getStartDate() != null) {
+                labelStartDate.setText(model.getStartDate().toString());
+                labelDeadlineDate.setText(model.getEndDate().toString());
+            } else {
+                labelStartDate.setText(UNKNOWN_DATA);
+                labelDeadlineDate.setText(UNLIMITED_DATA);
             }
-        }
+        });
     }
 
     /**
@@ -249,8 +246,6 @@ public class ReportLayoutController extends Controller {
 
      void getCheckLayout(ProjectsLayoutController projectsLayoutController, Stage reportsStage) {
        this.projectsLayoutController=projectsLayoutController;
-         reportsStage.setOnCloseRequest(event -> {
-           projectsLayoutController.checkReportAndSetConditionOnTextArea();
-         });
+         reportsStage.setOnCloseRequest(event -> projectsLayoutController.checkReportAndSetConditionOnTextArea());
     }
 }

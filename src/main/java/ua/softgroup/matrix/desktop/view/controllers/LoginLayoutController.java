@@ -4,15 +4,12 @@ package ua.softgroup.matrix.desktop.view.controllers;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -54,6 +51,7 @@ public class LoginLayoutController extends Controller {
     private AuthenticationServerSessionManager authenticationSessionManager;
     private Preferences preferences;
     private Stage settingStage;
+    private boolean isActiveProgressInd =false;
     @FXML
     public TextField loginTextField;
     @FXML
@@ -79,7 +77,6 @@ public class LoginLayoutController extends Controller {
         initializeAuthenticationManager();
         setTextLimiterOnField();
         loginTextField.requestFocus();
-
     }
 
     /**
@@ -97,9 +94,11 @@ public class LoginLayoutController extends Controller {
      * Set possibility click on VBox panel and dismiss ProgressIndicator
      */
     public void unlockLoginWindowAfterConnect(){
+        isActiveProgressInd=true;
         vBoxLoginWindow.setDisable(false);
-        progressIndWaitConnection.setVisible(false);
-        progressIndWaitConnection.setDisable(true);
+        if(isActiveProgressInd){
+            progressIndWaitConnection.setVisible(false);
+        }
         cbRememberMe.setDisable(false);
     }
 
@@ -124,12 +123,12 @@ public class LoginLayoutController extends Controller {
      * Hears when login window close and close current authentication session manager
      *
      * @param stage for close loginStage
-     * @param scene
+     * @param scene for check when user press ENTER
      */
     public void setUpStage(Stage stage, Scene scene) {
         scene.setOnKeyPressed(event -> {
             if(event.getCode()== KeyCode.ENTER){
-              Platform.runLater(() -> checkLoginAndStartLayout());
+              Platform.runLater(this::checkLoginAndStartLayout);
             }
         });
         this.loginStage = stage;
@@ -182,8 +181,9 @@ public class LoginLayoutController extends Controller {
      */
     private void showProgressIndicator(){
         vBoxLoginWindow.setDisable(true);
-        progressIndWaitConnection.setVisible(true);
-        progressIndWaitConnection.setDisable(false);
+        if (!isActiveProgressInd){
+            progressIndWaitConnection.setVisible(true);
+        }
         cbRememberMe.setDisable(true);
     }
 
@@ -247,7 +247,6 @@ public class LoginLayoutController extends Controller {
             projectsStage.setMinWidth(MAIN_LAYOUT_MIN_WIDTH);
             projectsStage.setMinHeight(MAIN_LAYOUT_MIN_HEIGHT);
             projectsStage.setResizable(false);
-//            projectsStage.setTitle(PROJECT_LAYOUT_TITLE);
             projectsStage.show();
         } catch (IOException e) {
             logger.error("Error when start Main Layout ", e);

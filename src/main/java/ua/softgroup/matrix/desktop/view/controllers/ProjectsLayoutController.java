@@ -387,9 +387,7 @@ public class ProjectsLayoutController extends Controller {
         projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
         if (projectModel != null) {
             setProjectInfoInView();
-            new Thread(() -> {
-                checkReportAndSetConditionOnTextArea();
-            }).start();
+            new Thread(this::checkReportAndSetConditionOnTextArea).start();
         }
     }
 
