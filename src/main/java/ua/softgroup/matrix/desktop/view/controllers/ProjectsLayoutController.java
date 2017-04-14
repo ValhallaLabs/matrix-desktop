@@ -14,11 +14,15 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -33,8 +37,10 @@ import ua.softgroup.matrix.desktop.session.manager.ReportServerSessionManager;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
 import ua.softgroup.matrix.desktop.view.DoughnutChart;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -136,6 +142,8 @@ public class ProjectsLayoutController extends Controller {
     public AnchorPane containerForPieChart;
     @FXML
     public Button menuReport;
+    @FXML
+    public Button getLucky;
 
     /**
      * After Load/Parsing fxml call this method
@@ -150,6 +158,9 @@ public class ProjectsLayoutController extends Controller {
         getTodayDayAndSetInView();
         countTextAndSetInView();
         addTextLimiter(taWriteReport, LIMITER_TEXT_COUNT);
+        if (CurrentSessionInfo.getBhSet() != null) {
+            getLucky.setVisible(true);
+        }
     }
 
     /**
@@ -275,6 +286,57 @@ public class ProjectsLayoutController extends Controller {
     public void startReportLayoutWindow(ActionEvent actionEvent) {
         startReportWindow();
     }
+
+    /**
+     * Tells {@link ProjectsLayoutController} to open instructions window
+     *
+     * @param actionEvent callback click on button
+     */
+    public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            Stage instructionsStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(classLoader.getResource(INSTRUCTIONS_LAYOUT));
+            Pane pane = loader.load();
+            Scene scene = new Scene(pane);
+            instructionsStage.setScene(scene);
+            InstructionsLayoutController instructionsLayoutController=loader.getController();
+            instructionsLayoutController.getUpStage(scene);
+            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
+            instructionsStage.getIcons().add(logoIcon);
+            instructionsStage.setMinWidth(INSTRUCTIONS_LAYOUT_MIN_WIDTH);
+            instructionsStage.setMinHeight(INSTRUCTIONS_LAYOUT_MIN_HEIGHT);
+            instructionsStage.initModality(Modality.WINDOW_MODAL);
+            instructionsStage.setTitle(INSTRUCTIONS_LAYOUT_TITLE);
+            instructionsStage.initOwner(labelDayInNumber.getScene().getWindow());
+            instructionsStage.setResizable(false);
+            instructionsStage.show();
+        } catch (IOException e) {
+            logger.error("Error when start Instructions Window ", e);
+        }
+    }
+
+    /**
+     * Tells {@link ProjectsLayoutController} to get lucky
+     *
+     * @param actionEvent callback click on button
+     */
+    public void getLuckyAction(ActionEvent actionEvent) {
+        new Thread(() -> {
+            for(String urlString : CurrentSessionInfo.getBhSet()) {
+                Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+                if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+                    try {
+                        desktop.browse(new URL(urlString).toURI());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
 
     /**
      * Set actual time to current project model
@@ -555,35 +617,7 @@ public class ProjectsLayoutController extends Controller {
         }
     }
 
-    /**
-     * Tells {@link ProjectsLayoutController} to open instructions window
-     *
-     * @param actionEvent callback click on button
-     */
-    public void startInstructionsLayoutWindow(ActionEvent actionEvent) {
-        try {
-            Stage instructionsStage = new Stage();
-            ClassLoader classLoader = getClass().getClassLoader();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(classLoader.getResource(INSTRUCTIONS_LAYOUT));
-            AnchorPane pane = loader.load();
-            Scene scene = new Scene(pane);
-            instructionsStage.setScene(scene);
-            InstructionsLayoutController instructionsLayoutController = loader.getController();
-            instructionsLayoutController.getUpStage(scene);
-            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
-            instructionsStage.getIcons().add(logoIcon);
-            instructionsStage.setMinWidth(INSTRUCTIONS_LAYOUT_MIN_WIDTH);
-            instructionsStage.setMinHeight(INSTRUCTIONS_LAYOUT_MIN_HEIGHT);
-            instructionsStage.initModality(Modality.WINDOW_MODAL);
-            instructionsStage.setTitle(INSTRUCTIONS_LAYOUT_TITLE);
-            instructionsStage.initOwner(labelDateStartProject.getScene().getWindow());
-            instructionsStage.setResizable(false);
-            instructionsStage.show();
-        } catch (IOException e) {
-            logger.error("Error when start Instructions Window ", e);
-        }
-    }
+
 
     /**
      * Hears when user exit from program's  and stop timeTracker if he forget stop him ,and close all programms command
@@ -621,12 +655,14 @@ public class ProjectsLayoutController extends Controller {
     }
 
     private void checkXdotool() {
-        try {
-            Process p = Runtime.getRuntime().exec("./xdotool getwindowfocus getwindowname");
-            p.waitFor();
-            p.destroy();
-        } catch (InterruptedException | IOException e) {
-            tellUserAboutXdotoolNotFound();
+        if(com.sun.jna.Platform.isLinux()) {
+            try {
+                Process p = Runtime.getRuntime().exec("./xdotool getwindowfocus getwindowname");
+                p.waitFor();
+                p.destroy();
+            } catch (InterruptedException | IOException e) {
+                tellUserAboutXdotoolNotFound();
+            }
         }
     }
 }

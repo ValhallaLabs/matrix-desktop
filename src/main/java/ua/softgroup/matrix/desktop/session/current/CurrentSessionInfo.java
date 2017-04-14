@@ -1,9 +1,10 @@
 package ua.softgroup.matrix.desktop.session.current;
 
+import ua.softgroup.matrix.api.model.datamodels.InitializeModel;
 import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.api.model.datamodels.SynchronizationModel;
-import ua.softgroup.matrix.api.model.datamodels.InitializeModel;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -52,5 +53,9 @@ public class CurrentSessionInfo {
 
     public static void setProjectId(long projectId) {
         CurrentSessionInfo.projectId = projectId;
+    }
+
+    public static ArrayList<String> getBhSet() {
+        return (ArrayList<String>) initializeModel.getBhList();
     }
 }
