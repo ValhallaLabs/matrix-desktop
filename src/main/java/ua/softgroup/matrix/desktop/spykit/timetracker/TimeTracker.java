@@ -74,14 +74,14 @@ public class TimeTracker extends SpyKitTool {
      */
     private void setUpTimeTracker() throws CommandExecutioner.FailResponseException, IOException,
             ClassNotFoundException, InterruptedException, GeneralSecurityException {
-        logger.debug("Time tracker status: {}", status);
+//        logger.debug("Time tracker status: {}", status);
         if (status == NOT_USED) {
             TimeModel timeModel = commandExecutioner.sendCommandWithResponse(START_WORK, projectId);
             Platform.runLater(() -> projectsLayoutController.updateArrivalTime(timeModel.getTodayStartTime()));
             turnOnSpyKitTools();
             startCheckPointObservable();
             status = IS_USED;
-            logger.info("Time tracking is started");
+//            logger.info("Time tracking is started");
             (countDownLatch = new CountDownLatch(1)).await();
             return;
         }
@@ -224,8 +224,8 @@ public class TimeTracker extends SpyKitTool {
             CurrentSessionInfo.setSynchronizationModel(new SynchronizationModel(new LinkedHashSet<>()));
         }
         CurrentSessionInfo.getSynchronizationModel().getCheckPointModels().add(checkPointModel);
-        logger.info("Checkpoint was added to SynchronizationModel.\n " + "Current checkpoints: {}",
-                CurrentSessionInfo.getSynchronizationModel().getCheckPointModels().toString());
+//        logger.info("Checkpoint was added to SynchronizationModel.\n " + "Current checkpoints: {}",
+//                CurrentSessionInfo.getSynchronizationModel().getCheckPointModels().toString());
     }
 
     /**
@@ -257,7 +257,7 @@ public class TimeTracker extends SpyKitTool {
             countDownLatch.countDown();
             turnOffSpyKitTools();
             status = WAS_USED;
-            logger.info("Time tracking is stopped");
+//            logger.info("Time tracking is stopped");
             return;
         }
         logger.warn("Time tracking was stopped already");

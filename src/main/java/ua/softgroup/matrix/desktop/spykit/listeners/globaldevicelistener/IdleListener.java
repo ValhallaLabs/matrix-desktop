@@ -44,7 +44,7 @@ public class IdleListener extends SpyKitTool {
             createIdleControlFlowable();
             nativeDevicesListener.turnOn();
             status = IS_USED;
-            logger.info("IdleListener is turned on");
+//            logger.info("IdleListener is turned on");
             return;
         }
         logger.warn("IdleListener was turned on already");
@@ -56,7 +56,7 @@ public class IdleListener extends SpyKitTool {
      */
     private void createIdleControlFlowable() {
         idleControlDisposable = Flowable.merge(createStartCountUntilIdleFlowable(), createStopCountUntilIdleFlowable())
-                .doOnNext(s -> logger.debug("Count until down time: {}", s))
+//                .doOnNext(s -> logger.debug("Count until down time: {}", s))
                 .doOnNext(this::stopIdle)
                 .debounce(CurrentSessionInfo.getIdlePeriod(), TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
@@ -133,7 +133,7 @@ public class IdleListener extends SpyKitTool {
     private CountUntilIdlePoint stopIdle(CountUntilIdlePoint point) {
         if (isIdle) {
             stopIdleStopWatch();
-            logger.info("Idle is stopped! Total idle time of the period:{}", idleTimeSeconds);
+//            logger.info("Idle is stopped! Total idle time of the period:{}", idleTimeSeconds);
             isIdle = false;
         }
         return point;
@@ -154,7 +154,7 @@ public class IdleListener extends SpyKitTool {
     private void startIdle(CountUntilIdlePoint point){
         if (START_COUNT_UNTIL_IDLE == point) {
             startIdleStopwatch();
-            logger.info("Idle is started!");
+//            logger.info("Idle is started!");
             isIdle = true;
         }
     }
@@ -184,7 +184,7 @@ public class IdleListener extends SpyKitTool {
             idleControlDisposable.dispose();
             nativeDevicesListener.turnOff();
             status = WAS_USED;
-            logger.info("Native devices listener is turned off");
+//            logger.info("Native devices listener is turned off");
             return;
         }
         logger.warn("Native devices listener was turned off already");

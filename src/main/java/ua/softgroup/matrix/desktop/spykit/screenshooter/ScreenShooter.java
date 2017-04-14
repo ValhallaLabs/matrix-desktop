@@ -24,7 +24,7 @@ public class ScreenShooter {
             baos.flush();
             byte[] imageInByte = baos.toByteArray();
             baos.close();
-            logger.info("Screenshot was created successfully");
+//            logger.info("Screenshot was created successfully");
             return imageInByte;
         } catch (AWTException | IOException | NullPointerException e) {
             logger.warn("Screenshot wasn't created unsuccessfully");

@@ -57,7 +57,7 @@ public class AuthenticationServerSessionManager {
         objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
         objectInputStream = new ObjectInputStream(socket.getInputStream());
         loginLayoutController.unlockLoginWindowAfterConnect();
-        logger.info("Connection is opened");
+//        logger.info("Connection is opened");
         return socket;
     }
 
@@ -82,7 +82,7 @@ public class AuthenticationServerSessionManager {
         objectOutputStream.writeObject(ServerCommands.CLOSE);
         objectOutputStream.flush();
         socket.close();
-        logger.info("Connection is closed");
+//        logger.info("Connection is closed");
     }
 
     /**
@@ -106,7 +106,7 @@ public class AuthenticationServerSessionManager {
         objectOutputStream.writeObject(new RequestModel(CurrentSessionInfo.getToken(), authModel));
         objectOutputStream.flush();
         ResponseModel<InitializeModel> responseModel = (ResponseModel<InitializeModel>) objectInputStream.readObject();
-        logger.debug("Raw response: {}", responseModel.toString());
+//        logger.debug("Raw response: {}", responseModel.toString());
         return responseModel;
     }
 
@@ -132,7 +132,7 @@ public class AuthenticationServerSessionManager {
     private void finishAuthentication(ResponseModel<InitializeModel> responseModel){
         if(responseModel.getContainer().isPresent()) {
             CurrentSessionInfo.setInitializeModel(responseModel.getContainer().get());
-            logger.info("Authentication completed");
+//            logger.info("Authentication completed");
             socketDisposable.dispose();
             loginLayoutController.closeLoginLayoutAndStartMainLayout();
             return;

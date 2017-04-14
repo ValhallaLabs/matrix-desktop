@@ -8,7 +8,7 @@ import java.security.*;
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 public class SocketProvider {
-    private static final String passphrase = "make_matrix_great_again";
+    private static final String PASSPHRASE = "make_matrix_great_again";
 
     private static SocketProvider instance;
 
@@ -40,7 +40,7 @@ public class SocketProvider {
                 "public".toCharArray());
         clientKeyStore = KeyStore.getInstance("JKS");
         clientKeyStore.load(SocketProvider.class.getClassLoader().getResourceAsStream("client.private"),
-                passphrase.toCharArray());
+                PASSPHRASE.toCharArray());
     }
 
     private void setupSSLContext() throws GeneralSecurityException, IOException {
@@ -50,7 +50,7 @@ public class SocketProvider {
 
     private KeyManager[] getKeyManagers() throws GeneralSecurityException, IOException {
         KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
-        kmf.init(clientKeyStore, passphrase.toCharArray());
+        kmf.init(clientKeyStore, PASSPHRASE.toCharArray());
         return kmf.getKeyManagers();
     }
 

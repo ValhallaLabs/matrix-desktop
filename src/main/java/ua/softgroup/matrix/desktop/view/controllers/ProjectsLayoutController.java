@@ -20,7 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -285,7 +284,7 @@ public class ProjectsLayoutController extends Controller {
      */
     public void synchronizedLocalTimeWorkWithServer(TimeModel updatedProjectTime) {
         projectModel.setProjectTime(updatedProjectTime);
-        logger.debug("Project model is updated: {}", updatedProjectTime.toString());
+//        logger.debug("Project model is updated: {}", updatedProjectTime.toString());
         setDynamicInfo();
         if (!btnStart.isDisable()) {
             stage.setTitle(PROJECT_LAYOUT_TITLE);
@@ -305,7 +304,7 @@ public class ProjectsLayoutController extends Controller {
      */
     public void updateArrivalTime(LocalTime arrivalTime) {
         projectModel.getProjectTime().setTodayStartTime(arrivalTime);
-        logger.debug("arrival time:", String.valueOf(arrivalTime.format(timeFormatToday)));
+//        logger.debug("arrival time:", String.valueOf(arrivalTime.format(timeFormatToday)));
         setArrivalTime();
     }
 
@@ -442,7 +441,7 @@ public class ProjectsLayoutController extends Controller {
             labelDeadLineProject.setText(UNLIMITED_DATA);
         }
         initPieChart();
-        logger.info("Time on UI is up-to-date with server");
+//        logger.info("Time on UI is up-to-date with server");
     }
 
     /**

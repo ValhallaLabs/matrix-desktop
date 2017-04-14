@@ -35,7 +35,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
         if (status == NOT_USED) {
             startTitleReader();
             status = IS_USED;
-            logger.info("ActiveWindowListener is turned on successfully");
+//            logger.info("ActiveWindowListener is turned on successfully");
             (countDownLatch = new CountDownLatch(1)).await();
             return;
         }
@@ -62,7 +62,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
     private void addFirstWindowToTimeMap() throws ActiveWindowListenerFactory.XdotoolException {
         currentTitle = getProcessTitle();
         activeWindows.add(new ActiveWindowModel(currentTitle, LocalTime.now(), 0));
-        logger.debug("Adding first title: {}", currentTitle);
+//        logger.debug("Adding first title: {}", currentTitle);
     }
 
     /**
@@ -108,7 +108,7 @@ public abstract class ActiveWindowListener extends SpyKitTool {
                 titleReaderDisposable.dispose();
             }
             status = WAS_USED;
-            logger.info("ActiveWindow listener is turned off");
+//            logger.info("ActiveWindow listener is turned off");
             return;
         }
         logger.warn("ActiveWindow listener was turned off already");

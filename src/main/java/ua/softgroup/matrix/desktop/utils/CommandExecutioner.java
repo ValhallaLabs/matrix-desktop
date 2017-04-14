@@ -12,7 +12,6 @@ import javax.net.ssl.SSLSocket;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.security.GeneralSecurityException;
 
 import static ua.softgroup.matrix.api.model.responsemodels.ResponseStatus.FAIL;
@@ -26,7 +25,6 @@ public class CommandExecutioner {
     private SSLSocket socket;
     private ObjectOutputStream objectOutputStream;
     private ObjectInputStream objectInputStream;
-
 
     /**
      * Method for sending commands to server for a specific project without an attachment with returning response.
@@ -155,7 +153,7 @@ public class CommandExecutioner {
      */
     private <T extends DataModel> void sendCommand(ServerCommands serverCommand, RequestModel<T> requestModel)
             throws IOException {
-        logger.debug("Server command: {}. Request model: {}", serverCommand, requestModel.toString());
+//        logger.debug("Server command: {}. Request model: {}", serverCommand, requestModel.toString());
         objectOutputStream.writeObject(serverCommand);
         objectOutputStream.writeObject(requestModel);
         objectOutputStream.flush();
@@ -170,7 +168,7 @@ public class CommandExecutioner {
      */
     private <T extends DataModel> T getResponse() throws IOException, ClassNotFoundException, FailResponseException {
         ResponseModel<T> responseModel = (ResponseModel<T>) objectInputStream.readObject();
-        logger.debug("Response: {}", responseModel.toString());
+//        logger.debug("Response: {}", responseModel.toString());
         closeSocketConnection();
         if (responseModel.getResponseStatus() != FAIL) {
             return responseModel.getContainer().isPresent() ? responseModel.getContainer().get() : null;
@@ -182,14 +180,14 @@ public class CommandExecutioner {
         socket = SocketProvider.getInstance().openNewConnection();
         objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
         objectInputStream = new ObjectInputStream(socket.getInputStream());
-        logger.info("Connection is opened");
+//        logger.info("Connection is opened");
     }
 
     private void closeSocketConnection() throws IOException, ClassNotFoundException {
         objectOutputStream.writeObject(ServerCommands.CLOSE);
         objectOutputStream.flush();
         socket.close();
-        logger.info("Connection is closed");
+//        logger.info("Connection is closed");
     }
 
     public class FailResponseException extends Exception {

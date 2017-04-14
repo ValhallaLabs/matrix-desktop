@@ -22,7 +22,8 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 public class ConfigManager {
     private static final Logger logger = LoggerFactory.getLogger(ConfigManager.class);
     private static Path path = Paths.get("config.properties");
-
+    private static final String HOST = "192.168.11.84";
+    private static final String PORT = "6666";
     /**
      * Method reads host and port values from config file and sets it to SocketProvider.
      * In case of an error, sets it to default.
@@ -60,9 +61,9 @@ public class ConfigManager {
     private static void checkConfigFileExistence() throws IOException {
         try (OutputStream out = new BufferedOutputStream(Files.newOutputStream(path, CREATE_NEW))) {
             setLocalHost();
-            logger.info("New config file is created.");
+//            logger.info("New config file is created.");
         } catch (IOException | ConfigurationException x) {
-            logger.warn("Config file is already exist");
+//            logger.warn("Config file is already exist");
         }
     }
 
@@ -72,7 +73,7 @@ public class ConfigManager {
     public static void setConfigToDefault() throws ConfigCrashException {
         try (OutputStream out = new BufferedOutputStream(Files.newOutputStream(path, CREATE))) {
             setLocalHost();
-            logger.info("Config file was set to default");
+//            logger.info("Config file was set to default");
         } catch (IOException | ConfigurationException x) {
             logger.error("Something went wrong with setting default values");
             throw new ConfigCrashException();
@@ -80,8 +81,8 @@ public class ConfigManager {
     }
 
     private static void setLocalHost() throws IOException, ConfigurationException {
-        getConfig().setProperty("host","192.168.11.84");
-        getConfig().setProperty("port","6666");
+        getConfig().setProperty("host",HOST);
+        getConfig().setProperty("port",PORT);
     }
 
     /**
@@ -117,13 +118,13 @@ public class ConfigManager {
      */
     public static void saveNewConfig(String host, String port) throws ConfigCrashException, IOException,
             ConfigurationException {
-        logger.debug("New configs: host = {}; port = {}", host, port);
+//        logger.debug("New configs: host = {}; port = {}", host, port);
         setConfigToDefault();
         PropertiesConfiguration config = getConfig();
         config.setProperty("host", host);
         config.setProperty("port", port);
         readConfig();
-        logger.info("New config was saved");
+//        logger.info("New config was saved");
     }
 
     public static class ConfigCrashException extends Exception {
