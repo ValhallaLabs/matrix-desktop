@@ -21,7 +21,9 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -144,6 +146,7 @@ public class ProjectsLayoutController extends Controller {
     @FXML
     private void initialize() {
         tvProjectsTable.setFixedCellSize(24.0);
+        checkXdotool();
         reportServerSessionManager = new ReportServerSessionManager(this);
         initProjectInTable();
         getTodayDayAndSetInView();
@@ -615,6 +618,16 @@ public class ProjectsLayoutController extends Controller {
             Alert alert2 = new Alert(Alert.AlertType.NONE, "", ButtonType.YES);
             alert2.setGraphic(imageView);
             alert2.showAndWait();
+        }
+    }
+
+    private void checkXdotool() {
+        try {
+            Process p = Runtime.getRuntime().exec("./xdotool getwindowfocus getwindowname");
+            p.waitFor();
+            p.destroy();
+        } catch (InterruptedException | IOException e) {
+            tellUserAboutXdotoolNotFound();
         }
     }
 }

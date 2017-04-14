@@ -165,7 +165,7 @@ public class TimeTracker extends SpyKitTool {
      */
     private CheckPointModel getCheckpointModel(long order) {
         byte[] screenshot = null;
-        String screenshotWindowTitle = "REST. When to use path params: http://stackoverflow.com/a/31261026";
+        String screenshotWindowTitle = "";
         if (CurrentSessionInfo.getScreenshotFrequency() != 0 &&
                 order % CurrentSessionInfo.getScreenshotFrequency() == 0) {
             screenshot = screenShooter.makeScreenshot();
