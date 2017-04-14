@@ -16,7 +16,6 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -611,13 +610,14 @@ public class ProjectsLayoutController extends Controller {
                 timeLine.stop();
             }
             System.exit(0);
-        } else {
-            Image image = new Image(getClass().getResource("/images/crazy.jpg").toExternalForm());
-            ImageView imageView = new ImageView(image);
-            Alert alert2 = new Alert(Alert.AlertType.NONE, "", ButtonType.YES);
-            alert2.setGraphic(imageView);
-            alert2.showAndWait();
         }
+//        else {
+//            Image image = new Image(getClass().getResource("/images/crazy.jpg").toExternalForm());
+//            ImageView imageView = new ImageView(image);
+//            Alert alert2 = new Alert(Alert.AlertType.NONE, "", ButtonType.YES);
+//            alert2.setGraphic(imageView);
+//            alert2.showAndWait();
+//        }
     }
 
     private void checkXdotool() {
