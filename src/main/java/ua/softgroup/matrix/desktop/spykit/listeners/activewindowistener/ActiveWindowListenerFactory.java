@@ -16,15 +16,15 @@ public class ActiveWindowListenerFactory {
      */
     public static ActiveWindowListener getListener() {
         if (Platform.isWindows()) {
-            logger.info("Platform is Windows");
+//            logger.info("Platform is Windows");
             return new WindowsActiveWindowListener();
         }
         if (Platform.isLinux()) {
-            logger.info("Platform is Linux");
+//            logger.info("Platform is Linux");
             return new LinuxActiveWindowListener();
         }
         if (Platform.isMac()) {
-            logger.info("Platform is Mac");
+//            logger.info("Platform is Mac");
             return new MacOsActiveWindowListener();
         }
         logger.info("Platform is not detected");
