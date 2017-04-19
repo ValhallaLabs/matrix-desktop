@@ -81,25 +81,30 @@
                   <ProgressIndicator fx:id="progressIndWaitConnection" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" />
                </children>
             </StackPane>
-            <HBox>
+            <HBox prefHeight="24.0">
                <children>
-                  <CheckBox fx:id="cbRememberMe" disable="true" mnemonicParsing="false" text="Remember me">
+                  <CheckBox fx:id="cbRememberMe" disable="true" maxHeight="20.0" maxWidth="20.0" mnemonicParsing="false" prefHeight="24.0">
                      <VBox.margin>
                         <Insets left="4.0" />
                      </VBox.margin>
                      <HBox.margin>
-                        <Insets left="5.0" right="60.0" />
+                        <Insets left="5.0" />
                      </HBox.margin>
                      <font>
-                        <Font name="DejaVu Sans" size="13.0" />
+                        <Font size="16.0" />
                      </font>
                   </CheckBox>
-                  <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                  <Label text="Remember Me">
+                     <HBox.margin>
+                        <Insets right="60.0" top="4.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/settings.png" />
+                        <Image url="@../images/settingsIcon.png" />
                      </image>
                      <HBox.margin>
-                        <Insets right="4.0" />
+                        <Insets right="6.0" top="3.0" />
                      </HBox.margin>
                   </ImageView>
                   <Label fx:id="labelSettings" onMouseClicked="#openSettings" text="Settings">
@@ -109,9 +114,9 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                     <font>
-                        <Font name="DejaVu Sans" size="13.0" />
-                     </font>
+                     <HBox.margin>
+                        <Insets top="3.0" />
+                     </HBox.margin>
                   </Label>
                </children>
                <padding>

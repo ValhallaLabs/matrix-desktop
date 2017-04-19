@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -15,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="765.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.view.controllers.ProjectsLayoutController">
+<AnchorPane prefHeight="765.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.view.controllers.ProjectsLayoutController">
    <children>
       <AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
          <children>
@@ -43,12 +50,12 @@
                            <children>
                               <HBox minHeight="30.0" prefHeight="30.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/calendarIcon.png" />
+                                          <Image url="@../images/calendarDayIcon.png" />
                                        </image>
                                        <HBox.margin>
-                                          <Insets bottom="10.0" left="7.0" right="3.0" top="12.0" />
+                                          <Insets bottom="10.0" left="7.0" right="6.0" top="12.0" />
                                        </HBox.margin>
                                     </ImageView>
                                     <Label fx:id="labelDayInWord" textFill="#3063a4">
@@ -92,10 +99,10 @@
                                  <children>
                                     <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/computerIcon.gif" />
+                                          <Image url="@../images/monitorIcon.png" />
                                        </image>
                                        <HBox.margin>
-                                          <Insets bottom="5.0" left="17.0" right="5.0" top="5.0" />
+                                          <Insets bottom="5.0" left="17.0" right="7.0" top="5.0" />
                                        </HBox.margin>
                                     </ImageView>
                                     <Label fx:id="labelNameProject" prefHeight="25.0" prefWidth="300.0" styleClass="font-on-label" textFill="#3063a4">
@@ -145,7 +152,7 @@
                                  <children>
                                     <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/timeStartIcon.png" />
+                                          <Image url="@../images/playButtonIcon.png" />
                                        </image>
                                        <HBox.margin>
                                           <Insets left="10.0" top="5.0" />
@@ -159,9 +166,9 @@
                                           <Font name="System Bold" size="16.0" />
                                        </font>
                                     </Label>
-                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/timeWorkIcon.png" />
+                                          <Image url="@../images/aroundClockIcon.png" />
                                        </image>
                                        <HBox.margin>
                                           <Insets left="5.0" top="5.0" />
@@ -169,7 +176,7 @@
                                     </ImageView>
                                     <Label fx:id="labelTodayTotalTime" minWidth="140.0" prefWidth="140.0" text="0h 0m">
                                        <HBox.margin>
-                                          <Insets left="5.0" right="5.0" top="2.0" />
+                                          <Insets left="6.0" right="5.0" top="2.0" />
                                        </HBox.margin>
                                        <font>
                                           <Font name="System Bold" size="16.0" />
@@ -196,20 +203,20 @@
                                                 </Label>
                                                 <HBox prefHeight="38.0" prefWidth="200.0">
                                                    <children>
-                                                      <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../images/timeWorkIcon.png" />
+                                                            <Image url="@../images/aroundClockIcon.png" />
                                                          </image>
                                                          <HBox.margin>
-                                                            <Insets left="9.0" right="2.0" top="5.0" />
+                                                            <Insets left="9.0" top="5.0" />
                                                          </HBox.margin>
                                                       </ImageView>
-                                                      <Label fx:id="labelTotalTime" prefWidth="140.0" text="0h 0m" textAlignment="CENTER">
+                                                      <Label fx:id="labelTotalTime" prefHeight="25.0" prefWidth="104.0" text="0h 0m" textAlignment="CENTER">
                                                          <font>
                                                             <Font name="System Bold" size="16.0" />
                                                          </font>
                                                          <HBox.margin>
-                                                            <Insets left="2.0" right="3.0" top="2.0" />
+                                                            <Insets left="6.0" right="3.0" top="2.0" />
                                                          </HBox.margin>
                                                       </Label>
                                                    </children>
@@ -227,12 +234,12 @@
                                                 </Label>
                                                 <HBox prefHeight="38.0" prefWidth="200.0">
                                                    <children>
-                                                      <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../images/calendarIcon.png" />
+                                                            <Image url="@../images/calendarDayIcon.png" />
                                                          </image>
                                                          <HBox.margin>
-                                                            <Insets left="14.0" right="2.0" top="4.0" />
+                                                            <Insets left="14.0" top="4.0" />
                                                          </HBox.margin>
                                                       </ImageView>
                                                       <Label fx:id="labelDateStartProject" prefWidth="140.0" textAlignment="CENTER">
@@ -240,7 +247,7 @@
                                                             <Font name="System Bold" size="16.0" />
                                                          </font>
                                                          <HBox.margin>
-                                                            <Insets right="3.0" top="1.0" />
+                                                            <Insets left="6.0" right="3.0" top="1.0" />
                                                          </HBox.margin>
                                                       </Label>
                                                    </children>
@@ -255,12 +262,12 @@
                                                 </Label>
                                                 <HBox prefHeight="38.0" prefWidth="200.0">
                                                    <children>
-                                                      <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../images/calendarIcon.png" />
+                                                            <Image url="@../images/calendarDayIcon.png" />
                                                          </image>
                                                          <HBox.margin>
-                                                            <Insets left="14.0" right="2.0" top="5.0" />
+                                                            <Insets left="14.0" top="5.0" />
                                                          </HBox.margin>
                                                       </ImageView>
                                                       <Label fx:id="labelDeadLineProject" prefWidth="150.0" textAlignment="CENTER">
@@ -268,7 +275,7 @@
                                                             <Font name="System Bold" size="16.0" />
                                                          </font>
                                                          <HBox.margin>
-                                                            <Insets right="3.0" top="2.0" />
+                                                            <Insets left="6.0" right="3.0" top="2.0" />
                                                          </HBox.margin>
                                                       </Label>
                                                    </children>
@@ -369,6 +376,6 @@
       </AnchorPane>
       <Button fx:id="menuReport" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#startReportLayoutWindow" styleClass="mybutton-menu" text="Report" />
       <Button layoutX="82.0" layoutY="2.0" mnemonicParsing="false" onAction="#startInstructionsLayoutWindow" styleClass="mybutton-menu" text="Instructions" />
-      <Button visible="false" fx:id="getLucky" layoutX="180.0" layoutY="2.0" mnemonicParsing="false" onAction="#getLuckyAction" styleClass="mybutton-menu" text="Get lucky!" />
+      <Button fx:id="getLucky" layoutX="180.0" layoutY="2.0" mnemonicParsing="false" onAction="#getLuckyAction" styleClass="mybutton-menu" text="Get lucky!" visible="false" />
    </children>
 </AnchorPane>
