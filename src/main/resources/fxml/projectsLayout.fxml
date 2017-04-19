@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -22,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="765.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.view.controllers.ProjectsLayoutController">
+<AnchorPane prefHeight="765.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.view.controllers.ProjectsLayoutController">
    <children>
       <AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
          <children>
@@ -216,7 +209,7 @@
                                                             <Font name="System Bold" size="16.0" />
                                                          </font>
                                                          <HBox.margin>
-                                                            <Insets left="6.0" right="3.0" top="2.0" />
+                                                            <Insets left="6.0" right="3.0" top="1.0" />
                                                          </HBox.margin>
                                                       </Label>
                                                    </children>
@@ -247,7 +240,7 @@
                                                             <Font name="System Bold" size="16.0" />
                                                          </font>
                                                          <HBox.margin>
-                                                            <Insets left="6.0" right="3.0" top="1.0" />
+                                                            <Insets left="6.0" right="3.0" top="2.0" />
                                                          </HBox.margin>
                                                       </Label>
                                                    </children>

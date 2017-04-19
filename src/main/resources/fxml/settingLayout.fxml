@@ -77,6 +77,9 @@
                            <font>
                               <Font name="DejaVu Sans Bold" size="12.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <Button fx:id="btnResetToDefault" mnemonicParsing="false" onAction="#resetToDefaultSettings" prefHeight="45.0" prefWidth="130.0" styleClass="reset-button" text="Reset to Default">
                            <font>
