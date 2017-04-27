@@ -77,16 +77,17 @@ public class ReportLayoutController extends Controller {
         reportServerSessionManager = new ReportServerSessionManager(this);
         getAllReportAndSetToCollection();
         countTextAndSetInView();
-        addTextLimiter(taEditReport,LIMITER_TEXT_COUNT);
+        addTextLimiter(taEditReport, LIMITER_TEXT_COUNT);
     }
 
     @FXML
     private void countTextAndSetInView() {
-       taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
+        taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
             int size = newValue.length();
             labelCurrentSymbols.setText(String.valueOf(size));
         });
     }
+
     /**
      * Hears when text input in TextArea and if this text count >= {@value MIN_TEXT_FOR_REPORT}
      * button for change report became active
@@ -95,14 +96,24 @@ public class ReportLayoutController extends Controller {
     private void countTextAndSetButtonCondition(ReportModel reportModel) {
         taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
             int size = newValue.length();
-            if (size >= MIN_TEXT_FOR_REPORT && !reportModel.isChecked()) {
-                btnChangeReport.setDisable(false);
-                taEditReport.setEditable(true);
-            } else {
+            checkOnSizeAndChecked(size,reportModel);
+        });
+
+    }
+
+    private void checkOnSizeAndChecked(int size, ReportModel reportModel) {
+        if (size>=MIN_TEXT_FOR_REPORT){
+            btnChangeReport.setDisable(false);
+            if (reportModel.isChecked()){
                 btnChangeReport.setDisable(true);
             }
-        });
+        } else{
+            if(!reportModel.isChecked()){
+                btnChangeReport.setDisable(true);
+            }
+        }
     }
+
 
     /**
      * Hears when user click on button and close stage without any change
@@ -136,9 +147,20 @@ public class ReportLayoutController extends Controller {
             ReportModel selectReport = tableViewReport.getSelectionModel().getSelectedItem();
             countTextAndSetButtonCondition(selectReport);
             currentReportId = selectReport.getId();
+            checkOnVerified(selectReport);
             if (selectReport.getText() != null) {
                 taEditReport.setText(selectReport.getText());
             } else taEditReport.setText("");
+        }
+    }
+
+    private void checkOnVerified(ReportModel selectReport) {
+        if (selectReport.isChecked()){
+            btnChangeReport.setDisable(true);
+            taEditReport.setEditable(false);
+        } else {
+            btnChangeReport.setDisable(false);
+            taEditReport.setEditable(true);
         }
     }
 
@@ -170,9 +192,9 @@ public class ReportLayoutController extends Controller {
         tableViewReport.getSelectionModel().select(0);
         tableViewReport.getFocusModel().focus(0);
         ReportModel reportModel = tableViewReport.getSelectionModel().getSelectedItem();
-        countTextAndSetButtonCondition(reportModel);
         countTextAndSetInView();
         currentReportId = reportModel.getId();
+        checkOnVerified(reportModel);
         if (reportModel.getText() != null) {
             taEditReport.setText(reportModel.getText());
         }
@@ -244,8 +266,8 @@ public class ReportLayoutController extends Controller {
         return "USD".equals(currency) ? "$" : "₴";
     }
 
-     void getCheckLayout(ProjectsLayoutController projectsLayoutController, Stage reportsStage) {
-       this.projectsLayoutController=projectsLayoutController;
-         reportsStage.setOnCloseRequest(event -> projectsLayoutController.checkReportAndSetConditionOnTextArea());
+    void getCheckLayout(ProjectsLayoutController projectsLayoutController, Stage reportsStage) {
+        this.projectsLayoutController = projectsLayoutController;
+        reportsStage.setOnCloseRequest(event -> projectsLayoutController.checkReportAndSetConditionOnTextArea());
     }
 }
