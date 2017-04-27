@@ -23,6 +23,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -44,6 +45,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Set;
@@ -52,10 +54,6 @@ import java.util.Set;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 public class ProjectsLayoutController extends Controller {
-    private static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
-    private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-    private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
-    private static DateTimeFormatter timeFormatToday = DateTimeFormatter.ofPattern("HH:mm");
     private static final Logger logger = LoggerFactory.getLogger(ProjectsLayoutController.class);
     private static final String PROJECT_LAYOUT_TITLE = "SuperVisor";
     private static final String PROJECT_LAYOUT_TITLE_TIME_TODAY = "Time Today";
@@ -71,17 +69,27 @@ public class ProjectsLayoutController extends Controller {
     private static final String REPORT_LAYOUT_TITLE = "Reports Window";
     private static final String INSTRUCTIONS_LAYOUT = "fxml/instructionsLayout.fxml";
     private static final String INSTRUCTIONS_LAYOUT_TITLE = "Instructions Window";
-    private static final String PIE_CHART_TITLE = "Idle Time";
+    private static final String PIE_CHART_IDLE_TITLE = "Idle Time";
+    private static final String PIE_CHART_CLINE_TITLE = "Clean Time";
     private static final String FILE_CHOOSER_TITLE = "Open Resource File";
     private static final String LOGO = "/images/logoIcon.png";
     private static final String UNKNOWN_DATA = "Unknown";
     private static final String UNLIMITED_DATA = "Unlimited";
+    private static final String SET_EMPTY_FIELD = "";
     private static final int LIMITER_TEXT_COUNT = 550;
     private static final int MIN_TEXT_FOR_REPORT = 70;
     private static final int REPORT_LAYOUT_MIN_WIDTH = 1200;
     private static final int REPORT_LAYOUT_MIN_HEIGHT = 765;
     private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 1200;
     private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 765;
+    private static final String COLOR_DEADLINE_CLOSELY = "#d74747";
+    private static final String COLOR_DEADLINE_FAR = "#000000";
+    private static final int DEADLINE_NUMBER_ALARM = 2;
+    private static final String EMPTY_TIMER = "--:--";
+    private static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
+    private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
+    private static DateTimeFormatter timeFormatToday = DateTimeFormatter.ofPattern("HH:mm");
     private ReportServerSessionManager reportServerSessionManager;
     private File attachFile;
     private int timeTodayInSeconds;
@@ -176,6 +184,15 @@ public class ProjectsLayoutController extends Controller {
                 btnSendReport.setDisable(false);
             } else btnSendReport.setDisable(true);
         });
+    }
+
+    private void upComingDeadline(LocalDate endDate) {
+        if (endDate != null) {
+            long between = ChronoUnit.DAYS.between(LocalDate.now(), endDate);
+            if (between <= DEADLINE_NUMBER_ALARM) {
+                labelDeadLineProject.setTextFill(Color.web(COLOR_DEADLINE_CLOSELY));
+            } else labelDeadLineProject.setTextFill(Color.web(COLOR_DEADLINE_FAR));
+        } else labelDeadLineProject.setTextFill(Color.web(COLOR_DEADLINE_FAR));
     }
 
     /**
@@ -301,7 +318,7 @@ public class ProjectsLayoutController extends Controller {
             Pane pane = loader.load();
             Scene scene = new Scene(pane);
             instructionsStage.setScene(scene);
-            InstructionsLayoutController instructionsLayoutController=loader.getController();
+            InstructionsLayoutController instructionsLayoutController = loader.getController();
             instructionsLayoutController.getUpStage(scene);
             Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
             instructionsStage.getIcons().add(logoIcon);
@@ -324,7 +341,7 @@ public class ProjectsLayoutController extends Controller {
      */
     public void getLuckyAction(ActionEvent actionEvent) {
         new Thread(() -> {
-            for(String urlString : CurrentSessionInfo.getBhSet()) {
+            for (String urlString : CurrentSessionInfo.getBhSet()) {
                 Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
                 if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
                     try {
@@ -345,7 +362,6 @@ public class ProjectsLayoutController extends Controller {
      */
     public void synchronizedLocalTimeWorkWithServer(TimeModel updatedProjectTime) {
         projectModel.setProjectTime(updatedProjectTime);
-//        logger.debug("Project model is updated: {}", updatedProjectTime.toString());
         setDynamicInfo();
         if (!btnStart.isDisable()) {
             stage.setTitle(PROJECT_LAYOUT_TITLE);
@@ -392,7 +408,7 @@ public class ProjectsLayoutController extends Controller {
 
     private void setDisableTextArea() {
         taWriteReport.setMouseTransparent(true);
-        taWriteReport.setText("");
+        taWriteReport.setText(SET_EMPTY_FIELD);
         taWriteReport.setEditable(false);
     }
 
@@ -494,15 +510,16 @@ public class ProjectsLayoutController extends Controller {
         labelTodayTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTodayInSeconds));
         timeToday = convertFromSecondsToHoursAndMinutes(timeTodayInSeconds);
         labelTotalTime.setText(convertFromSecondsToHoursAndMinutes(timeTotalInSeconds));
-        if ((projectModel.getStartDate() != null && projectModel.getEndDate() != null)) {
+        if ((projectModel.getStartDate() != null)) {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
-            labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
         } else {
             labelDateStartProject.setText(UNKNOWN_DATA);
-            labelDeadLineProject.setText(UNLIMITED_DATA);
         }
+        if (projectModel.getEndDate() != null) {
+            labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
+        } else labelDeadLineProject.setText(UNLIMITED_DATA);
+        upComingDeadline(projectModel.getEndDate());
         initPieChart();
-//        logger.info("Time on UI is up-to-date with server");
     }
 
     /**
@@ -514,7 +531,7 @@ public class ProjectsLayoutController extends Controller {
                     .getProjectTime().getTodayStartTime().format(timeFormatToday)));
             return;
         }
-        labelStartWorkToday.setText("--:--");
+        labelStartWorkToday.setText(EMPTY_TIMER);
     }
 
     /**
@@ -524,8 +541,8 @@ public class ProjectsLayoutController extends Controller {
     private void initPieChart() {
         double idleTime = Math.round(idleTimeInPercent);
         double cleanTime = 100 - idleTime;
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Clean Time", idleTime),
-                new PieChart.Data(PIE_CHART_TITLE, cleanTime));
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data(PIE_CHART_CLINE_TITLE, idleTime),
+                new PieChart.Data(PIE_CHART_IDLE_TITLE, cleanTime));
         doughnutChart = new DoughnutChart(pieChartData);
         createLabelForDisplayIdleTime();
         createPieChart();
@@ -547,7 +564,7 @@ public class ProjectsLayoutController extends Controller {
     private void createPieChart() {
         doughnutChart.setMaxWidth(180);
         doughnutChart.setMaxHeight(180);
-        doughnutChart.setTitle(PIE_CHART_TITLE);
+        doughnutChart.setTitle(PIE_CHART_IDLE_TITLE);
         doughnutChart.setLabelsVisible(false);
         doughnutChart.setPadding(new Insets(10, 50, 15, 13));
     }
@@ -618,7 +635,6 @@ public class ProjectsLayoutController extends Controller {
     }
 
 
-
     /**
      * Hears when user exit from program's  and stop timeTracker if he forget stop him ,and close all programms command
      *
@@ -635,7 +651,7 @@ public class ProjectsLayoutController extends Controller {
     }
 
     private void shutDownApp(Stage stage) {
-        Alert alert = new Alert(Alert.AlertType.NONE,PROJECT_LAYOUT_ALERT_AT_CLOSE, ButtonType.YES, ButtonType.NO);
+        Alert alert = new Alert(Alert.AlertType.NONE, PROJECT_LAYOUT_ALERT_AT_CLOSE, ButtonType.YES, ButtonType.NO);
         alert.setTitle(PROJECT_LAYOUT_ALERT_TITLE);
         if (alert.showAndWait().orElse(ButtonType.NO) == ButtonType.YES) {
             stage.close();
@@ -645,17 +661,11 @@ public class ProjectsLayoutController extends Controller {
             }
             System.exit(0);
         }
-//        else {
-//            Image image = new Image(getClass().getResource("/images/crazy.jpg").toExternalForm());
-//            ImageView imageView = new ImageView(image);
-//            Alert alert2 = new Alert(Alert.AlertType.NONE, "", ButtonType.YES);
-//            alert2.setGraphic(imageView);
-//            alert2.showAndWait();
-//        }
+
     }
 
     private void checkXdotool() {
-        if(com.sun.jna.Platform.isLinux()) {
+        if (com.sun.jna.Platform.isLinux()) {
             try {
                 Process p = Runtime.getRuntime().exec("./xdotool getwindowfocus getwindowname");
                 p.waitFor();
