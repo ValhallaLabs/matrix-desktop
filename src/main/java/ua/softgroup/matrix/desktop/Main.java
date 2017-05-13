@@ -7,7 +7,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -16,10 +15,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.view.controllers.LoginLayoutController;
 import ua.softgroup.matrix.desktop.utils.ConfigManager;
+import ua.softgroup.matrix.desktop.view.UTF8Control;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
@@ -29,10 +30,10 @@ public class Main extends Application {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
     private static final String LOGO = "/images/logoIcon.png";
     private static final String LOGIN_LAYOUT = "fxml/loginLayout.fxml";
-    private static final String LOGIN_LAYOUT_TITLE = "SuperVisor";
-    private static final String ALERT_ERROR_TITLE = "Supervisor";
+    private static final String LOGIN_LAYOUT_TITLE = "SG Tracker";
+    private static final String ALERT_ERROR_TITLE = "SG Tracker";
     private static final String ALERT_CONTENT_TEXT = "Something go wrong .Programs will be close";
-    private static final String ALERT_HEADER_TEXT = "Supervisor ERROR";
+    private static final String ALERT_HEADER_TEXT = "SG Tracker ERROR";
 
     public static void main(String[] args) {
         logger.debug("Current time: {}", LocalDateTime.now());
@@ -78,6 +79,8 @@ public class Main extends Application {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
+            ResourceBundle bundle = new UTF8Control().newBundle(new Locale("uk"),classLoader);
+            loader.setResources(bundle);
             Image icon = new Image(getClass().getResourceAsStream(LOGO));
             loginStage.getIcons().add(icon);
             loader.setLocation(classLoader.getResource(LOGIN_LAYOUT));
@@ -101,7 +104,6 @@ public class Main extends Application {
         mainAlert.setContentText(ALERT_CONTENT_TEXT);
         mainAlert.initStyle(StageStyle.UTILITY);
         mainAlert.setOnCloseRequest(event -> Platform.exit());
-        Optional<ButtonType> result = mainAlert.showAndWait();
             Platform.exit();
     }
 }

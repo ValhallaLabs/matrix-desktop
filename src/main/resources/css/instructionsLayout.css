@@ -3,16 +3,21 @@
     -fx-box-border: rgba(255, 255, 255, 0);
     -fx-background-color: transparent;
 }
+
 .split-pane > .split-pane-divider {
     -fx-background-color: transparent
 }
-.grey-background{
+
+.grey-background {
     -fx-background-color: #ebebeb;
     -fx-text-fill: black;
-}.blue-background{
+}
+
+.blue-background {
     -fx-background-color: #3063a4;
     -fx-text-fill: black;
 }
- .white-background{
-     -fx-background-color: #ffffff;
- }
+
+.white-background {
+    -fx-background-color: #ffffff;
+}

@@ -4,6 +4,10 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputControl;
 import javafx.stage.StageStyle;
+import ua.softgroup.matrix.desktop.view.UTF8Control;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 /**
@@ -11,13 +15,17 @@ import javafx.stage.StageStyle;
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 abstract public class Controller {
-    private static final String ALERT_ERROR_TITLE = "Supervisor";
+    private static final String ALERT_ERROR_TITLE = "SG Tracker";
     private static final String ALERT_SOMETHING_WENT_WRONG = "Something went wrong .Programs will be close";
-    private static final String ALERT_ACCESS_DENIED = "Someone accessed through your name.\n"+ "Please, re-login";
+    private static final String ALERT_ACCESS_DENIED = "Someone accessed through your name.\n" + "Please, re-login";
     private static final String ALERT_XDOTOOL_NOT_FOUND = "Sorry, xdotool not found. Please, install it just in one step:\n" +
             "apt-get install xdotool\n" +
             "Read more: http://www.semicomplete.com/projects/xdotool";
     private static final String ALERT_HEADER_TEXT = "Supervisor ERROR";
+    private static final String HOURS_SYMBOL = "h ";
+    private static final char MINUTES_SYMBOL = 'm';
+    private static final int SECONDS_IN_HOURS = 3600;
+    private static final int MINUTES_IN_HOURS = 60;
 
     /**
      * When something go wrong , create alert with message to user
@@ -46,9 +54,9 @@ abstract public class Controller {
      * @return String of Hours and Minutes
      */
     String convertFromSecondsToHoursAndMinutes(int seconds) {
-        int todayTimeInHours = seconds / 3600;
-        int todayTimeInMinutes = (seconds % 3600) / 60;
-        return String.valueOf(todayTimeInHours + "h " + todayTimeInMinutes + 'm');
+        int todayTimeInHours = seconds / SECONDS_IN_HOURS;
+        int todayTimeInMinutes = (seconds % SECONDS_IN_HOURS) / MINUTES_IN_HOURS;
+        return String.valueOf(todayTimeInHours + HOURS_SYMBOL + todayTimeInMinutes + MINUTES_SYMBOL);
     }
 
     /**
@@ -57,13 +65,18 @@ abstract public class Controller {
      * @param ta        TextInputField in what input text
      * @param maxLength int number of max text amount
      */
-      void addTextLimiter(final TextInputControl ta, final int maxLength) {
+    void addTextLimiter(final TextInputControl ta, final int maxLength) {
         ta.textProperty().addListener((ov, oldValue, newValue) -> {
             if (ta.getText().length() > maxLength) {
                 String s = ta.getText().substring(0, maxLength);
                 ta.setText(s);
             }
         });
+    }
+
+    ResourceBundle setResourceBundle(ClassLoader classLoader){
+        ResourceBundle bundle = new UTF8Control().newBundle(new Locale("uk"),classLoader);
+        return  bundle;
     }
 
     private void showUserAnAlert(String alertText) {

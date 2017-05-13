@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -21,7 +22,10 @@ import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.session.manager.AuthenticationServerSessionManager;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
 
@@ -29,29 +33,33 @@ import java.util.prefs.Preferences;
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 
-public class LoginLayoutController extends Controller {
+public class LoginLayoutController extends Controller  {
     private static final Logger logger = LoggerFactory.getLogger(LoginLayoutController.class);
     private static final String EMPTY_FIElD = "Error: Please Fill All Field";
     private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
     private static final String LOGO = "/images/logoIcon.png";
-    private static final String ALERT_TITLE_TEXT = "Supervisor";
+    private static final String ALERT_TITLE_TEXT = "SG Tracker";
     private static final String ALERT_CONTENT_TEXT = "Target ip:port is Unreachable";
     private static final String ALERT_HEADER_TEXT = "NETWORK ERROR";
     private static final String SETTING_LAYOUT = "fxml/settingLayout.fxml";
-    private static final String SETTING_LAYOUT_TITLE ="Settings";
+    private static final String SETTING_LAYOUT_TITLE = "Settings";
     private static final String PROJECT_LAYOUT = "fxml/projectsLayout.fxml";
     private static final String USER_NAME = "userName";
     private static final String USER_PASSWORD = "password";
     private static final String USER_SWITCH_SETTINGS = "false";
+    private static final String DEFAULT_TEXT_LOGIN_FIELD = "";
+    private static final String DEFAULT_TEXT_PASSWORD_FIELD = "";
     private static final int MAIN_LAYOUT_MIN_WIDTH = 1200;
     private static final int MAIN_LAYOUT_MIN_HEIGHT = 800;
     private static final int SETTING_LAYOUT_MIN_WIDTH = 500;
     private static final int SETTING_LAYOUT_MIN_HEIGHT = 250;
+    private static final int COUNTER_TEXT_LIMITER_LOGIN = 20;
+    private static final int COUNTER_TEXT_LIMITER_PASSWORD = 20;
     private Stage loginStage;
     private AuthenticationServerSessionManager authenticationSessionManager;
     private Preferences preferences;
     private Stage settingStage;
-    private boolean isActiveProgressInd =false;
+    private boolean isActiveProgressInd = false;
     @FXML
     public TextField loginTextField;
     @FXML
@@ -81,11 +89,12 @@ public class LoginLayoutController extends Controller {
 
     /**
      * Hears when user click on setting menus
+     *
      * @param event callback click on menu
      */
     public void openSettings(Event event) {
         settingStage = new Stage();
-        if(!settingStage.isShowing()){
+        if (!settingStage.isShowing()) {
             openSettingsWindow();
         }
     }
@@ -93,10 +102,10 @@ public class LoginLayoutController extends Controller {
     /**
      * Set possibility click on VBox panel and dismiss ProgressIndicator
      */
-    public void unlockLoginWindowAfterConnect(){
-        isActiveProgressInd=true;
+    public void unlockLoginWindowAfterConnect() {
+        isActiveProgressInd = true;
         vBoxLoginWindow.setDisable(false);
-        if(isActiveProgressInd){
+        if (isActiveProgressInd) {
             progressIndWaitConnection.setVisible(false);
         }
         cbRememberMe.setDisable(false);
@@ -127,8 +136,8 @@ public class LoginLayoutController extends Controller {
      */
     public void setUpStage(Stage stage, Scene scene) {
         scene.setOnKeyPressed(event -> {
-            if(event.getCode()== KeyCode.ENTER){
-              Platform.runLater(this::checkLoginAndStartLayout);
+            if (event.getCode() == KeyCode.ENTER) {
+                Platform.runLater(this::checkLoginAndStartLayout);
             }
         });
         this.loginStage = stage;
@@ -143,14 +152,6 @@ public class LoginLayoutController extends Controller {
      */
     public void startLoginWindow(ActionEvent actionEvent) {
         checkLoginAndStartLayout();
-    }
-
-    private void checkLoginAndStartLayout(){
-        if (!checkTextFieldOnEmpty(loginTextField) || !checkTextFieldOnEmpty(passwordTextField)) {
-            labelErrorMessage.setText(EMPTY_FIElD);
-            return;
-        }
-        sendAuthDataToNotificationManager();
     }
 
     /**
@@ -171,24 +172,47 @@ public class LoginLayoutController extends Controller {
         saveLoginAndPasswordToPreferencesManager();
     }
 
+    void stopProgressIndicator() {
+        vBoxLoginWindow.setDisable(true);
+    }
+
+    /**
+     * Create {@link AuthenticationServerSessionManager}
+     */
+    void initializeAuthenticationManager() {
+        showProgressIndicator();
+        if (authenticationSessionManager != null) {
+            authenticationSessionManager.closeSession();
+        }
+        authenticationSessionManager = new AuthenticationServerSessionManager(this);
+    }
+
+    AuthenticationServerSessionManager getAuthenticationSessionManager() {
+        return authenticationSessionManager;
+    }
+
+    private void checkLoginAndStartLayout() {
+        if (!checkTextFieldOnEmpty(loginTextField) || !checkTextFieldOnEmpty(passwordTextField)) {
+            labelErrorMessage.setText(EMPTY_FIElD);
+            return;
+        }
+        sendAuthDataToNotificationManager();
+    }
+
     private void setTextLimiterOnField() {
-        addTextLimiter(loginTextField, 20);
-        addTextLimiter(passwordTextField, 20);
+        addTextLimiter(loginTextField, COUNTER_TEXT_LIMITER_LOGIN);
+        addTextLimiter(passwordTextField, COUNTER_TEXT_LIMITER_PASSWORD);
     }
 
     /**
      * Set impossibility click on VBox panel and show ProgressIndicator
      */
-    private void showProgressIndicator(){
+    private void showProgressIndicator() {
         vBoxLoginWindow.setDisable(true);
-        if (!isActiveProgressInd){
+        if (!isActiveProgressInd) {
             progressIndWaitConnection.setVisible(true);
         }
         cbRememberMe.setDisable(true);
-    }
-
-    void stopProgressIndicator(){
-        vBoxLoginWindow.setDisable(true);
     }
 
     /**
@@ -196,8 +220,8 @@ public class LoginLayoutController extends Controller {
      */
     private void getPreferencesAndSetLoginPassword() {
         if (preferences != null) {
-            loginTextField.setText(preferences.get(USER_NAME, ""));
-            passwordTextField.setText(preferences.get(USER_PASSWORD, ""));
+            loginTextField.setText(preferences.get(USER_NAME, DEFAULT_TEXT_LOGIN_FIELD));
+            passwordTextField.setText(preferences.get(USER_PASSWORD, DEFAULT_TEXT_PASSWORD_FIELD));
             cbRememberMe.setSelected(preferences.getBoolean(USER_SWITCH_SETTINGS, true));
         }
     }
@@ -242,19 +266,20 @@ public class LoginLayoutController extends Controller {
             AnchorPane projectsLayout = loader.load();
             Scene scene = new Scene(projectsLayout);
             projectsStage.setScene(scene);
-            ProjectsLayoutController projectsLayoutController=loader.getController();
+            ProjectsLayoutController projectsLayoutController = loader.getController();
             projectsLayoutController.setUpStage(projectsStage);
             projectsStage.setMinWidth(MAIN_LAYOUT_MIN_WIDTH);
             projectsStage.setMinHeight(MAIN_LAYOUT_MIN_HEIGHT);
             projectsStage.setResizable(false);
             projectsStage.show();
         } catch (IOException e) {
-            logger.error("Error when start Main Layout ", e);
+            logger.error("Error when start Main Layout", e);
         }
     }
 
     /**
      * Check content in field on Empty
+     *
      * @param tf TextField in what we input text
      * @return boolean
      */
@@ -271,6 +296,7 @@ public class LoginLayoutController extends Controller {
             Image icon = new Image(getClass().getResourceAsStream(LOGO));
             settingStage.getIcons().add(icon);
             FXMLLoader loader = new FXMLLoader();
+            loader.setResources(setResourceBundle(classLoader));
             loader.setLocation(classLoader.getResource(SETTING_LAYOUT));
             Pane pane = loader.load();
             SettingLayoutController settingLayoutController = loader.getController();
@@ -280,30 +306,14 @@ public class LoginLayoutController extends Controller {
             settingStage.setMinWidth(SETTING_LAYOUT_MIN_WIDTH);
             settingStage.setMinHeight(SETTING_LAYOUT_MIN_HEIGHT);
             settingStage.setTitle(SETTING_LAYOUT_TITLE);
-            if(settingStage.getModality()!=Modality.WINDOW_MODAL){
+            if (settingStage.getModality() != Modality.WINDOW_MODAL) {
                 settingStage.initModality(Modality.WINDOW_MODAL);
                 settingStage.initOwner(btnLogin.getScene().getWindow());
             }
             settingStage.setResizable(false);
             settingStage.show();
         } catch (IOException e) {
-            logger.error("Error when start Settings Window ", e);
+            logger.error("Error when start Settings Window", e);
         }
     }
-
-    /**
-     * Create {@link AuthenticationServerSessionManager}
-     */
-     void initializeAuthenticationManager() {
-         showProgressIndicator();
-         if (authenticationSessionManager != null) {
-            authenticationSessionManager.closeSession();
-         }
-         authenticationSessionManager = new AuthenticationServerSessionManager(this);
-    }
-
-    AuthenticationServerSessionManager getAuthenticationSessionManager() {
-        return authenticationSessionManager;
-    }
-
 }

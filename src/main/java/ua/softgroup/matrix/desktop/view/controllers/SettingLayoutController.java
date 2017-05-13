@@ -1,14 +1,21 @@
 package ua.softgroup.matrix.desktop.view.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import org.apache.commons.configuration.ConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.desktop.utils.ConfigManager;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
@@ -16,6 +23,8 @@ import java.io.IOException;
 public class SettingLayoutController extends Controller {
     public static final Logger logger = LoggerFactory.getLogger(SettingLayoutController.class);
     private LoginLayoutController loginLayoutController;
+    @FXML
+    public ChoiceBox choiceBox;
     @FXML
     public TextField labelHost;
     @FXML
@@ -31,6 +40,7 @@ public class SettingLayoutController extends Controller {
 
     /**
      * Hears when user click on button and get data from port and host field also hide setting window
+     *
      * @param actionEvent callback click on button
      */
     public void saveSettings(ActionEvent actionEvent) {
@@ -48,17 +58,19 @@ public class SettingLayoutController extends Controller {
 
     /**
      * Hears when user click on button and hide setting window
+     *
      * @param actionEvent callback click on button
      */
     public void cancelSettings(ActionEvent actionEvent) {
-        if (!loginLayoutController.getAuthenticationSessionManager().isConnectionOpened()){
+        if (!loginLayoutController.getAuthenticationSessionManager().isConnectionOpened()) {
             loginLayoutController.stopProgressIndicator();
         }
         labelHost.getScene().getWindow().hide();
     }
 
     /**
-     *Hears when user click on button and call default setting of host and port
+     * Hears when user click on button and call default setting of host and port
+     *
      * @param actionEvent callback click on button
      */
     public void resetToDefaultSettings(ActionEvent actionEvent) {
@@ -72,18 +84,19 @@ public class SettingLayoutController extends Controller {
     }
 
     /**
+     * Set {@link LoginLayoutController}
+     *
+     * @param loginLayoutController modality window of setting window get from login window
+     */
+    void setLoginLayoutController(LoginLayoutController loginLayoutController) {
+        this.loginLayoutController = loginLayoutController;
+    }
+
+    /**
      * Set in label and port label data from config manager
      */
     private void getPortAndHostFromConfigManager() {
         labelHost.setText(ConfigManager.getHost());
         labelPort.setText(ConfigManager.getPort());
-    }
-
-    /**
-     * Set {@link LoginLayoutController}
-     * @param loginLayoutController modality window of setting window get from login window
-     */
-     void setLoginLayoutController(LoginLayoutController loginLayoutController) {
-        this.loginLayoutController = loginLayoutController;
     }
 }

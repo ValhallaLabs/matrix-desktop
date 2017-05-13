@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.TableView;
@@ -15,13 +16,15 @@ import ua.softgroup.matrix.api.model.datamodels.ReportModel;
 import ua.softgroup.matrix.desktop.session.current.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.session.manager.ReportServerSessionManager;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-public class ReportLayoutController extends Controller {
+public class ReportLayoutController extends Controller{
     private static final String DATE_COLUMN = "date";
     private static final String CHECKED_COLUMN = "checked";
     private static final String DESCRIPTION_COLUMN = "text";
@@ -71,7 +74,7 @@ public class ReportLayoutController extends Controller {
      * Create {@link ReportLayoutController} and if project has reports set this data in Set of ReportModel
      */
     @FXML
-    private void initialize() {
+    public void initialize() {
         tableViewReport.setFixedCellSize(23.0);
         currentProjectId = CurrentSessionInfo.getProjectId();
         reportServerSessionManager = new ReportServerSessionManager(this);
@@ -100,20 +103,6 @@ public class ReportLayoutController extends Controller {
         });
 
     }
-
-    private void checkOnSizeAndChecked(int size, ReportModel reportModel) {
-        if (size>=MIN_TEXT_FOR_REPORT){
-            btnChangeReport.setDisable(false);
-            if (reportModel.isChecked()){
-                btnChangeReport.setDisable(true);
-            }
-        } else{
-            if(!reportModel.isChecked()){
-                btnChangeReport.setDisable(true);
-            }
-        }
-    }
-
 
     /**
      * Hears when user click on button and close stage without any change
@@ -151,6 +140,24 @@ public class ReportLayoutController extends Controller {
             if (selectReport.getText() != null) {
                 taEditReport.setText(selectReport.getText());
             } else taEditReport.setText("");
+        }
+    }
+
+    void getCheckLayout(ProjectsLayoutController projectsLayoutController, Stage reportsStage) {
+        this.projectsLayoutController = projectsLayoutController;
+        reportsStage.setOnCloseRequest(event -> projectsLayoutController.checkReportAndSetConditionOnTextArea());
+    }
+
+    private void checkOnSizeAndChecked(int size, ReportModel reportModel) {
+        if (size>=MIN_TEXT_FOR_REPORT){
+            btnChangeReport.setDisable(false);
+            if (reportModel.isChecked()){
+                btnChangeReport.setDisable(true);
+            }
+        } else{
+            if(!reportModel.isChecked()){
+                btnChangeReport.setDisable(true);
+            }
         }
     }
 
@@ -266,8 +273,4 @@ public class ReportLayoutController extends Controller {
         return "USD".equals(currency) ? "$" : "₴";
     }
 
-    void getCheckLayout(ProjectsLayoutController projectsLayoutController, Stage reportsStage) {
-        this.projectsLayoutController = projectsLayoutController;
-        reportsStage.setOnCloseRequest(event -> projectsLayoutController.checkReportAndSetConditionOnTextArea());
-    }
 }

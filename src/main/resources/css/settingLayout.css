@@ -1,16 +1,19 @@
-.save-button{
+.save-button {
     -fx-background-color: #3063a4;
-    -fx-background-color:  #47d465;
+    -fx-background-color: #47d465;
     -fx-text-fill: #ffffff;
 }
-.cancel-button{
+
+.cancel-button {
     -fx-background-color: #d74747;
     -fx-text-fill: #ffffff;
 }
-.reset-button{
+
+.reset-button {
     -fx-background-color: #3063a4;
     -fx-text-fill: #ffffff;
 }
+
 .pane-whitegrei {
     -fx-background-color: #ebebeb;
 }

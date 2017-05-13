@@ -2,15 +2,19 @@
     -fx-background-color: #3063a4;
     -fx-text-fill: #ffffff;
 }
-.button:hover{
+
+.button:hover {
     -fx-background-color: #3b82d6;
 }
-.text-area{
-    -fx-background-color:#ECF0F1 ;
+
+.text-area {
+    -fx-background-color: #ECF0F1;
 }
-.base-font{
+
+.base-font {
     -fx-background-color: white;
 }
+
 .undecorator-background {
     -fx-background-radius: 6;
 
@@ -26,20 +30,21 @@
 
     -fx-effect: dropshadow(three-pass-box, rgba(100, 100, 100, 1), 24, 0.5, 0, 0);
 }
-.check-box>.box {
+
+.check-box > .box {
     -fx-background-insets: 0;
     -fx-background-radius: 0;
     -fx-background-color: transparent;
 }
 
-.check-box>.box>.mark {
+.check-box > .box > .mark {
     -fx-background-image: url("/images/unMarkedIcon.png");
     -fx-background-position: center;
     -fx-background-repeat: stretch;
     -fx-shape: none;
 }
 
-.check-box:selected>.box>.mark{
+.check-box:selected > .box > .mark {
     -fx-background-color: transparent;
     -fx-background-image: url("/images/markedIcon.png");
 }

@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
@@ -48,6 +49,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 /**
@@ -55,12 +57,12 @@ import java.util.Set;
  */
 public class ProjectsLayoutController extends Controller {
     private static final Logger logger = LoggerFactory.getLogger(ProjectsLayoutController.class);
-    private static final String PROJECT_LAYOUT_TITLE = "SuperVisor";
+    private static final String PROJECT_LAYOUT_TITLE = "SG Tracker";
     private static final String PROJECT_LAYOUT_TITLE_TIME_TODAY = "Time Today";
     private static final String PROJECT_LAYOUT_TITLE_IDLE_TIME = "Project Idle Time";
     private static final String PROJECT_LAYOUT_TITLE_ACTUAL_TIME = "Actual For";
     private static final String PROJECT_LAYOUT_ALERT_AT_CLOSE = "Do you really want to close the Matrix ?";
-    private static final String PROJECT_LAYOUT_ALERT_TITLE = "SuperVisor";
+    private static final String PROJECT_LAYOUT_ALERT_TITLE = "SG Tracker";
     private static final String ID_COLUMN = "id";
     private static final String AUTHOR_NAME_COLUMN = "authorName";
     private static final String TITLE_COLUMN = "title";
@@ -76,16 +78,16 @@ public class ProjectsLayoutController extends Controller {
     private static final String UNKNOWN_DATA = "Unknown";
     private static final String UNLIMITED_DATA = "Unlimited";
     private static final String SET_EMPTY_FIELD = "";
+    private static final String EMPTY_TIMER = "--:--";
+    private static final String COLOR_DEADLINE_CLOSELY = "#d74747";
+    private static final String COLOR_DEADLINE_FAR = "#000000";
     private static final int LIMITER_TEXT_COUNT = 550;
     private static final int MIN_TEXT_FOR_REPORT = 70;
     private static final int REPORT_LAYOUT_MIN_WIDTH = 1200;
     private static final int REPORT_LAYOUT_MIN_HEIGHT = 765;
     private static final int INSTRUCTIONS_LAYOUT_MIN_WIDTH = 1200;
     private static final int INSTRUCTIONS_LAYOUT_MIN_HEIGHT = 765;
-    private static final String COLOR_DEADLINE_CLOSELY = "#d74747";
-    private static final String COLOR_DEADLINE_FAR = "#000000";
     private static final int DEADLINE_NUMBER_ALARM = 2;
-    private static final String EMPTY_TIMER = "--:--";
     private static ObservableList<ProjectModel> projectsData = FXCollections.observableArrayList();
     private static DateTimeFormatter dateFormatNumber = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static DateTimeFormatter dateFormatText = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
@@ -158,7 +160,7 @@ public class ProjectsLayoutController extends Controller {
      * Create {@link ReportServerSessionManager}
      */
     @FXML
-    private void initialize() {
+    public void initialize() {
         tvProjectsTable.setFixedCellSize(24.0);
         checkXdotool();
         reportServerSessionManager = new ReportServerSessionManager(this);
@@ -184,15 +186,6 @@ public class ProjectsLayoutController extends Controller {
                 btnSendReport.setDisable(false);
             } else btnSendReport.setDisable(true);
         });
-    }
-
-    private void upComingDeadline(LocalDate endDate) {
-        if (endDate != null) {
-            long between = ChronoUnit.DAYS.between(LocalDate.now(), endDate);
-            if (between <= DEADLINE_NUMBER_ALARM) {
-                labelDeadLineProject.setTextFill(Color.web(COLOR_DEADLINE_CLOSELY));
-            } else labelDeadLineProject.setTextFill(Color.web(COLOR_DEADLINE_FAR));
-        } else labelDeadLineProject.setTextFill(Color.web(COLOR_DEADLINE_FAR));
     }
 
     /**
@@ -272,12 +265,6 @@ public class ProjectsLayoutController extends Controller {
         setConditionTextViewWhenStartWork();
         projectModel = tvProjectsTable.getSelectionModel().getSelectedItem();
         buttonConditionAtTimerOn();
-    }
-
-    private void setConditionTextViewWhenStartWork() {
-        checkReportAndSetConditionOnTextArea();
-        setProjectInfoInView();
-        checkReportAndSetConditionOnTextArea();
     }
 
     /**
@@ -404,6 +391,36 @@ public class ProjectsLayoutController extends Controller {
                 }
             }
         }
+    }
+
+    /**
+     * Hears when user exit from program's  and stop timeTracker if he forget stop him ,and close all programms command
+     *
+     * @param mainLayout send layout were we start and create project window
+     */
+    void setUpStage(Stage mainLayout) {
+        stage = mainLayout;
+        stage.setTitle(PROJECT_LAYOUT_TITLE);
+        Platform.setImplicitExit(false);
+        mainLayout.setOnCloseRequest(event -> {
+            event.consume();
+            shutDownApp(mainLayout);
+        });
+    }
+
+    private void upComingDeadline(LocalDate endDate) {
+        if (endDate != null) {
+            long between = ChronoUnit.DAYS.between(LocalDate.now(), endDate);
+            if (between <= DEADLINE_NUMBER_ALARM) {
+                labelDeadLineProject.setTextFill(Color.web(COLOR_DEADLINE_CLOSELY));
+            } else labelDeadLineProject.setTextFill(Color.web(COLOR_DEADLINE_FAR));
+        } else labelDeadLineProject.setTextFill(Color.web(COLOR_DEADLINE_FAR));
+    }
+
+    private void setConditionTextViewWhenStartWork() {
+        checkReportAndSetConditionOnTextArea();
+        setProjectInfoInView();
+        checkReportAndSetConditionOnTextArea();
     }
 
     private void setDisableTextArea() {
@@ -634,22 +651,6 @@ public class ProjectsLayoutController extends Controller {
         }
     }
 
-
-    /**
-     * Hears when user exit from program's  and stop timeTracker if he forget stop him ,and close all programms command
-     *
-     * @param mainLayout send layout were we start and create project window
-     */
-    void setUpStage(Stage mainLayout) {
-        stage = mainLayout;
-        stage.setTitle(PROJECT_LAYOUT_TITLE);
-        Platform.setImplicitExit(false);
-        mainLayout.setOnCloseRequest(event -> {
-            event.consume();
-            shutDownApp(mainLayout);
-        });
-    }
-
     private void shutDownApp(Stage stage) {
         Alert alert = new Alert(Alert.AlertType.NONE, PROJECT_LAYOUT_ALERT_AT_CLOSE, ButtonType.YES, ButtonType.NO);
         alert.setTitle(PROJECT_LAYOUT_ALERT_TITLE);
@@ -661,7 +662,6 @@ public class ProjectsLayoutController extends Controller {
             }
             System.exit(0);
         }
-
     }
 
     private void checkXdotool() {
