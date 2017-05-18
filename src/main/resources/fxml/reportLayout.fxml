@@ -1,26 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" stylesheets="@../css/reportLayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.view.controllers.ReportLayoutController">
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" stylesheets="@../css/reportLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.view.controllers.ReportLayoutController">
    <children>
       <VBox focusTraversable="true" prefHeight="100.0" prefWidth="100.0" styleClass="grey-background" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0">
          <children>
-            <Label text="LIST OF REPORTS" textFill="#3063a4">
+            <Label text="%key.ListOfReports" textFill="#3063a4">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
@@ -57,7 +45,7 @@
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                            </GridPane.margin>
                            <children>
-                              <Label prefHeight="26.0" prefWidth="200.0" text="NAME :" textFill="WHITE">
+                              <Label prefHeight="26.0" prefWidth="200.0" text="%key.NAME" textFill="WHITE">
                                  <padding>
                                     <Insets left="5.0" />
                                  </padding>
@@ -72,7 +60,7 @@
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                            </GridPane.margin>
                            <children>
-                              <Label prefHeight="26.0" prefWidth="200.0" text="RESPONSIBLE :" textFill="WHITE">
+                              <Label prefHeight="26.0" prefWidth="200.0" text="%key.RESPONSIBLE" textFill="WHITE">
                                  <padding>
                                     <Insets left="5.0" />
                                  </padding>
@@ -114,7 +102,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.columnIndex="2">
                            <children>
-                              <Label prefHeight="26.0" prefWidth="130.0" text="START :" textFill="WHITE">
+                              <Label prefHeight="26.0" prefWidth="130.0" text="%key.START" textFill="WHITE">
                                  <padding>
                                     <Insets left="5.0" />
                                  </padding>
@@ -129,7 +117,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="light-blue-background" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <children>
-                              <Label prefHeight="26.0" prefWidth="140.0" text="DEADLINE :" textFill="WHITE">
+                              <Label prefHeight="26.0" prefWidth="140.0" text="%key.DEADLINE" textFill="WHITE">
                                  <padding>
                                     <Insets left="5.0" />
                                  </padding>
@@ -176,11 +164,11 @@
                   </GridPane>
                   <TableView fx:id="tableViewReport" layoutX="15.0" layoutY="115.0" onMouseClicked="#chooseReport" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="105.0">
                     <columns>
-                      <TableColumn fx:id="reportTableColumnDate" minWidth="100.0" prefWidth="111.0" sortType="DESCENDING" text="Date" />
-                        <TableColumn fx:id="reportTableColumnVerified" minWidth="100.0" prefWidth="111.0" text="Verified" />
-                      <TableColumn fx:id="reportTableColumnTime" minWidth="100.0" prefWidth="111.0" text=" Time/Rate" />
-                        <TableColumn fx:id="reportTableCoefficient" minWidth="70.0" prefWidth="70.0" text="Coef" />
-                        <TableColumn fx:id="reportTableColumnReport" minWidth="364.0" prefWidth="364.0" text="Text" />
+                      <TableColumn fx:id="reportTableColumnDate" minWidth="100.0" prefWidth="111.0" sortType="DESCENDING" text="%key.Date" />
+                        <TableColumn fx:id="reportTableColumnVerified" minWidth="100.0" prefWidth="111.0" text="%key.Verified" />
+                        <TableColumn fx:id="reportTableColumnTime" minWidth="100.0" prefWidth="111.0" text="%key.TimeRate" />
+                        <TableColumn fx:id="reportTableCoefficient" minWidth="70.0" prefWidth="70.0" text="%key.Coef" />
+                        <TableColumn fx:id="reportTableColumnReport" minWidth="364.0" prefWidth="364.0" text="%key.Text" />
                     </columns>
                   </TableView>
                </children>
@@ -192,7 +180,7 @@
                <children>
                   <VBox focusTraversable="true" prefHeight="200.0" prefWidth="200.0" styleClass="grey-background" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="25.0" prefWidth="283.0" text="REPORT TEXT:" textFill="#3063a4">
+                        <Label alignment="CENTER" prefHeight="25.0" prefWidth="283.0" text="%key.REPORTTEXT" textFill="#3063a4">
                            <VBox.margin>
                               <Insets left="10.0" top="65.0" />
                            </VBox.margin>
@@ -200,7 +188,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="taEditReport" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="300.0" promptText="Write or read your report and if need change" styleClass="light-blue-background" wrapText="true">
+                        <TextArea fx:id="taEditReport" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="300.0" promptText="%key.ReportPromptText" styleClass="light-blue-background" wrapText="true">
                            <VBox.margin>
                               <Insets left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
@@ -228,7 +216,7 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <Button fx:id="btnChangeReport" defaultButton="true" mnemonicParsing="false" onAction="#createOrChangeReport" prefHeight="40.0" prefWidth="300.0" styleClass="change-report-button" text="Сhange Report" textFill="WHITE">
+                        <Button fx:id="btnChangeReport" defaultButton="true" mnemonicParsing="false" onAction="#createOrChangeReport" prefHeight="40.0" prefWidth="300.0" styleClass="change-report-button" text="%key.ChangeReport" textFill="WHITE">
                            <VBox.margin>
                               <Insets left="10.0" right="10.0" top="30.0" />
                            </VBox.margin>
@@ -236,7 +224,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnCancelReport" cancelButton="true" mnemonicParsing="false" onAction="#CancelAndCloseReportWindow" prefHeight="40.0" prefWidth="300.0" styleClass="cancel-report-button" text="Cancel" textFill="WHITE">
+                        <Button fx:id="btnCancelReport" cancelButton="true" mnemonicParsing="false" onAction="#CancelAndCloseReportWindow" prefHeight="40.0" prefWidth="300.0" styleClass="cancel-report-button" text="%key.Cancel" textFill="WHITE">
                            <VBox.margin>
                               <Insets left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>

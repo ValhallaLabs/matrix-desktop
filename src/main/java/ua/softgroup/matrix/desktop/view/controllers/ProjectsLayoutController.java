@@ -10,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
@@ -38,6 +37,7 @@ import ua.softgroup.matrix.desktop.session.current.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.session.manager.ReportServerSessionManager;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
 import ua.softgroup.matrix.desktop.view.DoughnutChart;
+import ua.softgroup.matrix.desktop.view.UTF8Control;
 
 import java.awt.*;
 import java.io.File;
@@ -302,6 +302,8 @@ public class ProjectsLayoutController extends Controller {
             Stage instructionsStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource(INSTRUCTIONS_LAYOUT));
+            ResourceBundle bundle = new UTF8Control().newBundle(new Locale("uk"),classLoader);
+            loader.setResources(bundle);
             Pane pane = loader.load();
             Scene scene = new Scene(pane);
             instructionsStage.setScene(scene);
@@ -632,6 +634,8 @@ public class ProjectsLayoutController extends Controller {
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(classLoader.getResource(REPORT_LAYOUT));
+            ResourceBundle bundle = new UTF8Control().newBundle(new Locale("uk"),classLoader);
+            loader.setResources(bundle);
             AnchorPane anchorPane = loader.load();
             Scene scene = new Scene(anchorPane);
             reportsStage.setScene(scene);

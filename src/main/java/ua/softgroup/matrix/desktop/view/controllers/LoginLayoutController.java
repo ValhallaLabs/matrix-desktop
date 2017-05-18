@@ -1,12 +1,13 @@
 package ua.softgroup.matrix.desktop.view.controllers;
 
 
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -20,9 +21,9 @@ import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.session.manager.AuthenticationServerSessionManager;
+import ua.softgroup.matrix.desktop.view.UTF8Control;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -61,6 +62,8 @@ public class LoginLayoutController extends Controller  {
     private Stage settingStage;
     private boolean isActiveProgressInd = false;
     @FXML
+    public Label labelRememberMe;
+    @FXML
     public TextField loginTextField;
     @FXML
     public PasswordField passwordTextField;
@@ -85,6 +88,9 @@ public class LoginLayoutController extends Controller  {
         initializeAuthenticationManager();
         setTextLimiterOnField();
         loginTextField.requestFocus();
+        if (com.sun.jna.Platform.isWindows()) {
+            labelRememberMe.setPadding(new Insets(0,40,0,0));
+        }
     }
 
     /**
@@ -262,6 +268,8 @@ public class LoginLayoutController extends Controller  {
             projectsStage.getIcons().add(icon);
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
+            ResourceBundle bundle = new UTF8Control().newBundle(new Locale("uk"),classLoader);
+            loader.setResources(bundle);
             loader.setLocation(classLoader.getResource(PROJECT_LAYOUT));
             AnchorPane projectsLayout = loader.load();
             Scene scene = new Scene(projectsLayout);
@@ -273,7 +281,7 @@ public class LoginLayoutController extends Controller  {
             projectsStage.setResizable(false);
             projectsStage.show();
         } catch (IOException e) {
-            logger.error("Error when start Main Layout", e);
+            logger.error("Error when start Projects Layout", e);
         }
     }
 

@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="765.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.view.controllers.ProjectsLayoutController">
+<AnchorPane prefHeight="765.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.view.controllers.ProjectsLayoutController">
    <children>
       <AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1200.0" stylesheets="@../css/projectLayout.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
          <children>
@@ -25,11 +19,11 @@
                      <children>
                         <TableView fx:id="tvProjectsTable" onMouseClicked="#chosenProject" prefHeight="750.0" prefWidth="876.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
                            <columns>
-                              <TableColumn fx:id="tcIdProject" maxWidth="50.0" minWidth="55.0" prefWidth="55.0" sortType="DESCENDING" text="Id" />
-                              <TableColumn fx:id="tcStatus" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" text="Status" />
-                              <TableColumn fx:id="tcAuthorName" maxWidth="300.0" minWidth="160.0" prefWidth="160.0" text="Author" />
-                              <TableColumn fx:id="tcTitle" maxWidth="300.0" minWidth="160.0" prefWidth="160.0" text="Name" />
-                              <TableColumn fx:id="tcDescription" maxWidth="700.0" minWidth="400.0" prefWidth="400.0" text="Description" />
+                              <TableColumn fx:id="tcIdProject" maxWidth="50.0" minWidth="55.0" prefWidth="55.0" sortType="DESCENDING" text="%key.Id" />
+                              <TableColumn fx:id="tcStatus" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" text="%key.Status" />
+                              <TableColumn fx:id="tcAuthorName" maxWidth="300.0" minWidth="160.0" prefWidth="160.0" text="%key.Author" />
+                              <TableColumn fx:id="tcTitle" maxWidth="300.0" minWidth="160.0" prefWidth="160.0" text="%key.Name" />
+                              <TableColumn fx:id="tcDescription" maxWidth="700.0" minWidth="400.0" prefWidth="400.0" text="%key.Description" />
                            </columns>
                            <opaqueInsets>
                               <Insets />
@@ -108,7 +102,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <Label minHeight="20.0" prefHeight="20.0" prefWidth="360.0" text="Project Description" textFill="#c9c9c9">
+                              <Label minHeight="20.0" prefHeight="20.0" prefWidth="360.0" text="%key.ProjectDescription" textFill="#c9c9c9">
                                  <VBox.margin>
                                     <Insets bottom="3.0" left="17.0" right="10.0" top="5.0" />
                                  </VBox.margin>
@@ -126,7 +120,7 @@
                               </Label>
                               <HBox minHeight="20.0" prefHeight="20.0" prefWidth="200.0">
                                  <children>
-                                    <Label prefWidth="170.0" text="Arrival time" textFill="#c9c9c9">
+                                    <Label prefWidth="170.0" text="%key.ArrivalTime" textFill="#c9c9c9">
                                        <HBox.margin>
                                           <Insets left="17.0" />
                                        </HBox.margin>
@@ -134,7 +128,7 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Label prefWidth="170.0" text="Time Spent Today" textFill="#c9c9c9">
+                                    <Label prefWidth="170.0" text="%key.TimeSpentToday" textFill="#c9c9c9">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -186,7 +180,7 @@
                                        <children>
                                           <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <Label prefWidth="145.0" text="Total Time" textFill="#c9c9c9">
+                                                <Label prefWidth="145.0" text="%key.TotalTime" textFill="#c9c9c9">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
@@ -217,7 +211,7 @@
                                                       <Insets left="5.0" />
                                                    </VBox.margin>
                                                 </HBox>
-                                                <Label prefWidth="162.0" text="Startred" textFill="#c9c9c9">
+                                                <Label prefWidth="162.0" text="%key.Startred" textFill="#c9c9c9">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
@@ -245,7 +239,7 @@
                                                       </Label>
                                                    </children>
                                                 </HBox>
-                                                <Label prefWidth="162.0" text="Deadline" textFill="#c9c9c9">
+                                                <Label prefWidth="162.0" text="%key.Deadline" textFill="#c9c9c9">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
@@ -285,7 +279,7 @@
                               </SplitPane>
                               <HBox focusTraversable="true" minHeight="60.0" prefHeight="60.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="btnStart" mnemonicParsing="false" onAction="#startWork" prefHeight="48.0" prefWidth="160.0" styleClass="green-button" text="Start">
+                                    <Button fx:id="btnStart" mnemonicParsing="false" onAction="#startWork" prefHeight="48.0" prefWidth="160.0" styleClass="green-button" text="%key.Start">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
@@ -296,7 +290,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <Button fx:id="btnStop" disable="true" mnemonicParsing="false" onAction="#stopWork" prefHeight="48.0" prefWidth="160.0" styleClass="red-button" text="Stop">
+                                    <Button fx:id="btnStop" disable="true" mnemonicParsing="false" onAction="#stopWork" prefHeight="48.0" prefWidth="160.0" styleClass="red-button" text="%key.Stop">
                                        <HBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </HBox.margin>
@@ -309,14 +303,14 @@
                                     <Insets />
                                  </VBox.margin>
                               </HBox>
-                              <TextArea fx:id="taWriteReport" focusTraversable="false" minHeight="200.0" onInputMethodTextChanged="#countTextAndSetInView" prefHeight="200.0" prefWidth="316.0" promptText="Write a report .." styleClass="font-on-label" wrapText="true">
+                              <TextArea fx:id="taWriteReport" focusTraversable="false" minHeight="200.0" onInputMethodTextChanged="#countTextAndSetInView" prefHeight="200.0" prefWidth="316.0" promptText="%key.WriteReport" styleClass="font-on-label" wrapText="true">
                                  <VBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </VBox.margin>
                               </TextArea>
                               <HBox focusTraversable="true" minHeight="48.0" prefHeight="48.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="btnAttachFile" disable="true" mnemonicParsing="false" onAction="#attachFile" prefHeight="31.0" prefWidth="130.0" styleClass="add-button" text="Attach file">
+                                    <Button fx:id="btnAttachFile" disable="true" mnemonicParsing="false" onAction="#attachFile" prefHeight="31.0" prefWidth="130.0" styleClass="add-button" text="%key.AttachFile">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
@@ -327,7 +321,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#sendReport" prefHeight="31.0" prefWidth="130.0" styleClass="send-reports-button" text="Send report">
+                                    <Button fx:id="btnSendReport" disable="true" mnemonicParsing="false" onAction="#sendReport" prefHeight="31.0" prefWidth="130.0" styleClass="send-reports-button" text="%key.SendReport">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
