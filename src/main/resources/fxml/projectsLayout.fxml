@@ -80,7 +80,7 @@
                                     <Insets left="10.0" top="10.0" />
                                  </VBox.margin>
                               </HBox>
-                              <Label minHeight="20.0" prefHeight="20.0" prefWidth="350.0" text="Project name" textFill="#c9c9c9">
+                              <Label minHeight="20.0" prefHeight="20.0" prefWidth="350.0" text="%key.ProjectName" textFill="#c9c9c9">
                                  <VBox.margin>
                                     <Insets bottom="5.0" left="17.0" right="10.0" top="5.0" />
                                  </VBox.margin>
@@ -367,8 +367,8 @@
             </SplitPane>
          </children>
       </AnchorPane>
-      <Button fx:id="menuReport" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#startReportLayoutWindow" styleClass="mybutton-menu" text="Report" />
-      <Button layoutX="82.0" layoutY="2.0" mnemonicParsing="false" onAction="#startInstructionsLayoutWindow" styleClass="mybutton-menu" text="Instructions" />
+      <Button fx:id="menuReport" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#startReportLayoutWindow" styleClass="mybutton-menu" text="%key.Report" />
+      <Button layoutX="82.0" layoutY="2.0" mnemonicParsing="false" onAction="#startInstructionsLayoutWindow" styleClass="mybutton-menu" text="%key.Instructions" />
       <Button fx:id="getLucky" layoutX="180.0" layoutY="2.0" mnemonicParsing="false" onAction="#getLuckyAction" styleClass="mybutton-menu" text="Get lucky!" visible="false" />
    </children>
 </AnchorPane>

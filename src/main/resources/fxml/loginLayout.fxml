@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -23,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="320.0" styleClass="base-font" stylesheets="@../css/loginLayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.view.controllers.LoginLayoutController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="320.0" styleClass="base-font" stylesheets="@../css/loginLayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.softgroup.matrix.desktop.view.controllers.LoginLayoutController">
 
     <children>
       <VBox prefHeight="280.0">
@@ -41,7 +34,7 @@
                               <Insets bottom="10.0" left="68.0" top="10.0" />
                            </VBox.margin>
                         </Label>
-                            <TextField fx:id="loginTextField" alignment="CENTER" prefHeight="45.0" prefWidth="270.0" promptText="%key.loginPromptText" styleClass="text-area">
+                            <TextField fx:id="loginTextField" alignment="CENTER" maxWidth="-Infinity" prefHeight="45.0" prefWidth="270.0" promptText="%key.loginPromptText" styleClass="text-area">
                            <VBox.margin>
                               <Insets bottom="5.0" top="8.0" />
                            </VBox.margin>
@@ -49,7 +42,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </TextField>
-                            <PasswordField fx:id="passwordTextField" alignment="CENTER" prefHeight="45.0" prefWidth="270.0" promptText="%key.passwordPromptText" styleClass="text-area">
+                            <PasswordField fx:id="passwordTextField" alignment="CENTER" maxWidth="-Infinity" prefHeight="45.0" prefWidth="270.0" promptText="%key.passwordPromptText" styleClass="text-area">
                            <VBox.margin>
                               <Insets bottom="5.0" top="5.0" />
                            </VBox.margin>
@@ -101,7 +94,7 @@
                   </CheckBox>
                   <Label text="%key.rememberMe">
                      <HBox.margin>
-                        <Insets right="60.0" top="4.0" />
+                        <Insets right="10.0" top="4.0" />
                      </HBox.margin>
                   </Label>
                   <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
