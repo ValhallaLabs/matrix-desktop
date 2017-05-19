@@ -4,18 +4,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import org.apache.commons.configuration.ConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
 import ua.softgroup.matrix.desktop.utils.ConfigManager;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+
+import static ua.softgroup.matrix.desktop.Main.preferences;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
@@ -24,11 +22,12 @@ public class SettingLayoutController extends Controller {
     public static final Logger logger = LoggerFactory.getLogger(SettingLayoutController.class);
     private LoginLayoutController loginLayoutController;
     @FXML
-    public ChoiceBox choiceBox;
-    @FXML
     public TextField labelHost;
     @FXML
     public TextField labelPort;
+    @FXML
+    public ChoiceBox choiceBoxLanguage;
+    public static String globalLanguage;
 
     /**
      * After Load/Parsing fxml call this method
@@ -36,6 +35,26 @@ public class SettingLayoutController extends Controller {
     @FXML
     public void initialize() {
         getPortAndHostFromConfigManager();
+        getPreferencesLanguage();
+        setLanguage();
+    }
+
+    public void getPreferencesLanguage() {
+        if (preferences.get("language", "").equals("1")) {
+            globalLanguage = "uk";
+        } else globalLanguage = "en";
+    }
+
+    private void setLanguage() {
+        ObservableList<String> language = FXCollections.observableArrayList("English", "Ukraine");
+        choiceBoxLanguage.setItems(language);
+        int defaultValue;
+        if (globalLanguage == "en") {
+            defaultValue = 0;
+        } else defaultValue = 1;
+        choiceBoxLanguage.setValue(language.get(defaultValue));
+        choiceBoxLanguage.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> preferences.put("language", newValue.toString()));
+        System.out.println(preferences.get("language", ""));
     }
 
     /**

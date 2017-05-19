@@ -17,3 +17,10 @@
 .pane-whitegrei {
     -fx-background-color: #ebebeb;
 }
+.choice-box .context-menu { -fx-background-color: white; }
+.choice-box .menu-item:focused { -fx-background-color: #8592a4; }
+.choice-box .menu-item > .label { -fx-text-fill: black; }
+.choice-box {
+    -fx-background-color: white;
+    -fx-mark-color: orange; // arrow color
+}

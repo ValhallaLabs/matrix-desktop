@@ -1,4 +1,4 @@
-package ua.softgroup.matrix.desktop.view;
+package ua.softgroup.matrix.desktop.utils.translate;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,12 +12,12 @@ import java.util.ResourceBundle;
  */
 public class UTF8Control extends ResourceBundle.Control {
 
-    public ResourceBundle newBundle( Locale locale, ClassLoader loader)
-    {
+    public ResourceBundle newBundle(Locale locale, ClassLoader loader) {
         String bundleName = toBundleName("Locale", locale);
         String resourceName = toResourceName(bundleName, "properties");
         ResourceBundle bundle = null;
-        InputStream stream = loader.getResourceAsStream(resourceName);;
+        InputStream stream = loader.getResourceAsStream(resourceName);
+        ;
         if (stream != null) {
             try {
                 try {

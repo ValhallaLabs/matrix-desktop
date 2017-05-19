@@ -13,14 +13,18 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.softgroup.matrix.desktop.view.controllers.LoginLayoutController;
 import ua.softgroup.matrix.desktop.utils.ConfigManager;
-import ua.softgroup.matrix.desktop.view.UTF8Control;
+import ua.softgroup.matrix.desktop.utils.translate.UTF8Control;
+import ua.softgroup.matrix.desktop.view.controllers.LoginLayoutController;
+import ua.softgroup.matrix.desktop.view.controllers.SettingLayoutController;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
+
+import static ua.softgroup.matrix.desktop.view.controllers.SettingLayoutController.globalLanguage;
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
@@ -31,9 +35,10 @@ public class Main extends Application {
     private static final String LOGO = "/images/logoIcon.png";
     private static final String LOGIN_LAYOUT = "fxml/loginLayout.fxml";
     private static final String LOGIN_LAYOUT_TITLE = "SG Tracker";
-    private static final String ALERT_ERROR_TITLE = "SG Tracker";
     private static final String ALERT_CONTENT_TEXT = "Something go wrong .Programs will be close";
     private static final String ALERT_HEADER_TEXT = "SG Tracker ERROR";
+    public static ResourceBundle resourceBundle;
+    public static Preferences preferences;
 
     public static void main(String[] args) {
         logger.debug("Current time: {}", LocalDateTime.now());
@@ -48,8 +53,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+            preferences = Preferences.userRoot().node(this.getClass().getName());
             checkIfRunning();
             ConfigManager.readConfig();
+            SettingLayoutController settingLayoutController = new SettingLayoutController();
+            settingLayoutController.getPreferencesLanguage();
             startLoginLayout(primaryStage);
         } catch (ConfigManager.ConfigCrashException e) {
             logger.error("Config wasn't set to default", e);
@@ -79,8 +87,8 @@ public class Main extends Application {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
-            ResourceBundle bundle = new UTF8Control().newBundle(new Locale("uk"),classLoader);
-            loader.setResources(bundle);
+            resourceBundle = new UTF8Control().newBundle(new Locale(globalLanguage),classLoader);
+            loader.setResources(resourceBundle);
             Image icon = new Image(getClass().getResourceAsStream(LOGO));
             loginStage.getIcons().add(icon);
             loader.setLocation(classLoader.getResource(LOGIN_LAYOUT));
@@ -99,7 +107,7 @@ public class Main extends Application {
 
     private void tellUserAboutConfigCrash() {
         Alert mainAlert = new Alert(Alert.AlertType.INFORMATION);
-        mainAlert.setTitle(ALERT_ERROR_TITLE);
+        mainAlert.setTitle(LOGIN_LAYOUT_TITLE);
         mainAlert.setHeaderText(ALERT_HEADER_TEXT);
         mainAlert.setContentText(ALERT_CONTENT_TEXT);
         mainAlert.initStyle(StageStyle.UTILITY);

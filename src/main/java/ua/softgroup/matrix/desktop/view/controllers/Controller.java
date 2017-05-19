@@ -4,10 +4,8 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputControl;
 import javafx.stage.StageStyle;
-import ua.softgroup.matrix.desktop.view.UTF8Control;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
+import static ua.softgroup.matrix.desktop.Main.resourceBundle;
 
 
 /**
@@ -15,24 +13,22 @@ import java.util.ResourceBundle;
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 abstract public class Controller {
-    private static final String ALERT_ERROR_TITLE = "SG Tracker";
-    private static final String ALERT_SOMETHING_WENT_WRONG = "Something went wrong .Programs will be close";
-    private static final String ALERT_ACCESS_DENIED = "Someone accessed through your name.\n" + "Please, re-login";
     private static final String ALERT_XDOTOOL_NOT_FOUND = "Sorry, xdotool not found. Please, install it just in one step:\n" +
             "apt-get install xdotool\n" +
             "Read more: http://www.semicomplete.com/projects/xdotool";
-    private static final String ALERT_HEADER_TEXT = "Supervisor ERROR";
     private static final String HOURS_SYMBOL = "h ";
     private static final char MINUTES_SYMBOL = 'm';
     private static final int SECONDS_IN_HOURS = 3600;
     private static final int MINUTES_IN_HOURS = 60;
+    static final String APP_TITLE = "SG Tracker";
 
     /**
      * When something go wrong , create alert with message to user
      * and then click on button close programme
      */
     public void tellUserAboutCrash() {
-        showUserAnAlert(ALERT_SOMETHING_WENT_WRONG);
+        showUserAnAlert(resourceBundle.getString("key.AlertSomethingWrong"));
+//        Something went wrong .Programs will be close
     }
 
     /**
@@ -40,8 +36,9 @@ abstract public class Controller {
      * and then click on button close programme
      */
     public void tellUserAboutAccessDenied() {
-        showUserAnAlert(ALERT_ACCESS_DENIED);
+        showUserAnAlert(resourceBundle.getString("key.AlertAccessDenied"));
     }
+
 
     public void tellUserAboutXdotoolNotFound() {
         showUserAnAlert(ALERT_XDOTOOL_NOT_FOUND);
@@ -74,15 +71,10 @@ abstract public class Controller {
         });
     }
 
-    ResourceBundle setResourceBundle(ClassLoader classLoader){
-        ResourceBundle bundle = new UTF8Control().newBundle(new Locale("uk"),classLoader);
-        return  bundle;
-    }
-
     private void showUserAnAlert(String alertText) {
         Alert mainAlert = new Alert(Alert.AlertType.INFORMATION);
-        mainAlert.setTitle(ALERT_ERROR_TITLE);
-        mainAlert.setHeaderText(ALERT_HEADER_TEXT);
+        mainAlert.setTitle(APP_TITLE);
+        mainAlert.setHeaderText(resourceBundle.getString("key.TrackerError"));
         mainAlert.setContentText(alertText);
         mainAlert.initStyle(StageStyle.UTILITY);
         mainAlert.setOnCloseRequest(event -> Platform.exit());

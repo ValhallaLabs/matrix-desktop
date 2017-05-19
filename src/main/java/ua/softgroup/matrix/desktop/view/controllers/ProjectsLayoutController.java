@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
@@ -37,7 +38,6 @@ import ua.softgroup.matrix.desktop.session.current.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.session.manager.ReportServerSessionManager;
 import ua.softgroup.matrix.desktop.spykit.timetracker.TimeTracker;
 import ua.softgroup.matrix.desktop.view.DoughnutChart;
-import ua.softgroup.matrix.desktop.view.UTF8Control;
 
 import java.awt.*;
 import java.io.File;
@@ -52,31 +52,23 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import static ua.softgroup.matrix.desktop.Main.resourceBundle;
+
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-public class ProjectsLayoutController extends Controller {
+public class ProjectsLayoutController extends Controller implements Initializable {
     private static final Logger logger = LoggerFactory.getLogger(ProjectsLayoutController.class);
-    private static final String PROJECT_LAYOUT_TITLE = "SG Tracker";
     private static final String PROJECT_LAYOUT_TITLE_TIME_TODAY = "Time Today";
     private static final String PROJECT_LAYOUT_TITLE_IDLE_TIME = "Project Idle Time";
     private static final String PROJECT_LAYOUT_TITLE_ACTUAL_TIME = "Actual For";
-    private static final String PROJECT_LAYOUT_ALERT_AT_CLOSE = "Do you really want to close the Matrix ?";
-    private static final String PROJECT_LAYOUT_ALERT_TITLE = "SG Tracker";
     private static final String ID_COLUMN = "id";
     private static final String AUTHOR_NAME_COLUMN = "authorName";
     private static final String TITLE_COLUMN = "title";
     private static final String DESCRIPTION_COLUMN = "description";
-    private static final String REPORT_LAYOUT = "fxml/reportLayout.fxml";
-    private static final String REPORT_LAYOUT_TITLE = "Reports Window";
-    private static final String INSTRUCTIONS_LAYOUT = "fxml/instructionsLayout.fxml";
-    private static final String INSTRUCTIONS_LAYOUT_TITLE = "Instructions Window";
-    private static final String PIE_CHART_IDLE_TITLE = "Idle Time";
-    private static final String PIE_CHART_CLINE_TITLE = "Clean Time";
-    private static final String FILE_CHOOSER_TITLE = "Open Resource File";
-    private static final String LOGO = "/images/logoIcon.png";
-    private static final String UNKNOWN_DATA = "Unknown";
-    private static final String UNLIMITED_DATA = "Unlimited";
+    private static final String REPORT_LAYOUT_FXML_PATH = "fxml/reportLayout.fxml";
+    private static final String INSTRUCTIONS_LAYOUT_FXML_PATH = "fxml/instructionsLayout.fxml";
+    private static final String LOGO_IMAGE_PATH = "/images/logoIcon.png";
     private static final String SET_EMPTY_FIELD = "";
     private static final String EMPTY_TIMER = "--:--";
     private static final String COLOR_DEADLINE_CLOSELY = "#d74747";
@@ -155,12 +147,8 @@ public class ProjectsLayoutController extends Controller {
     @FXML
     public Button getLucky;
 
-    /**
-     * After Load/Parsing fxml call this method
-     * Create {@link ReportServerSessionManager}
-     */
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         tvProjectsTable.setFixedCellSize(24.0);
         checkXdotool();
         reportServerSessionManager = new ReportServerSessionManager(this);
@@ -233,7 +221,7 @@ public class ProjectsLayoutController extends Controller {
      */
     public void attachFile(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(FILE_CHOOSER_TITLE);
+        fileChooser.setTitle(resourceBundle.getString("key.OpenResourceFile"));
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
         );
@@ -301,20 +289,19 @@ public class ProjectsLayoutController extends Controller {
             ClassLoader classLoader = getClass().getClassLoader();
             Stage instructionsStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(classLoader.getResource(INSTRUCTIONS_LAYOUT));
-            ResourceBundle bundle = new UTF8Control().newBundle(new Locale("uk"),classLoader);
-            loader.setResources(bundle);
+            loader.setLocation(classLoader.getResource(INSTRUCTIONS_LAYOUT_FXML_PATH));
+            loader.setResources(resourceBundle);
             Pane pane = loader.load();
             Scene scene = new Scene(pane);
             instructionsStage.setScene(scene);
             InstructionsLayoutController instructionsLayoutController = loader.getController();
             instructionsLayoutController.getUpStage(scene);
-            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
+            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO_IMAGE_PATH));
             instructionsStage.getIcons().add(logoIcon);
             instructionsStage.setMinWidth(INSTRUCTIONS_LAYOUT_MIN_WIDTH);
             instructionsStage.setMinHeight(INSTRUCTIONS_LAYOUT_MIN_HEIGHT);
             instructionsStage.initModality(Modality.WINDOW_MODAL);
-            instructionsStage.setTitle(INSTRUCTIONS_LAYOUT_TITLE);
+            instructionsStage.setTitle(resourceBundle.getString("key.InstructionsWindow"));
             instructionsStage.initOwner(labelDayInNumber.getScene().getWindow());
             instructionsStage.setResizable(false);
             instructionsStage.show();
@@ -353,10 +340,10 @@ public class ProjectsLayoutController extends Controller {
         projectModel.setProjectTime(updatedProjectTime);
         setDynamicInfo();
         if (!btnStart.isDisable()) {
-            stage.setTitle(PROJECT_LAYOUT_TITLE);
+            stage.setTitle(APP_TITLE);
         } else {
             String actualTime = LocalTime.now().format(timeFormatToday);
-            stage.setTitle(PROJECT_LAYOUT_TITLE + " " + " |" + " " +
+            stage.setTitle(APP_TITLE + " " + " |" + " " +
                     PROJECT_LAYOUT_TITLE_TIME_TODAY + ": " + timeToday +
                     "; " + PROJECT_LAYOUT_TITLE_IDLE_TIME + ": " + idleTimeInPercent + "%" +
                     "; " + PROJECT_LAYOUT_TITLE_ACTUAL_TIME + ": " + actualTime + ";");
@@ -397,12 +384,11 @@ public class ProjectsLayoutController extends Controller {
 
     /**
      * Hears when user exit from program's  and stop timeTracker if he forget stop him ,and close all programms command
-     *
-     * @param mainLayout send layout were we start and create project window
+     *  @param mainLayout send layout were we start and create project window
      */
     void setUpStage(Stage mainLayout) {
         stage = mainLayout;
-        stage.setTitle(PROJECT_LAYOUT_TITLE);
+        stage.setTitle(APP_TITLE);
         Platform.setImplicitExit(false);
         mainLayout.setOnCloseRequest(event -> {
             event.consume();
@@ -532,11 +518,11 @@ public class ProjectsLayoutController extends Controller {
         if ((projectModel.getStartDate() != null)) {
             labelDateStartProject.setText(projectModel.getStartDate().format(dateFormatNumber));
         } else {
-            labelDateStartProject.setText(UNKNOWN_DATA);
+            labelDateStartProject.setText((resourceBundle.getString("key.Unknown")));
         }
         if (projectModel.getEndDate() != null) {
             labelDeadLineProject.setText(projectModel.getEndDate().format(dateFormatNumber));
-        } else labelDeadLineProject.setText(UNLIMITED_DATA);
+        } else labelDeadLineProject.setText(resourceBundle.getString("key.Unlimited"));
         upComingDeadline(projectModel.getEndDate());
         initPieChart();
     }
@@ -560,8 +546,8 @@ public class ProjectsLayoutController extends Controller {
     private void initPieChart() {
         double idleTime = Math.round(idleTimeInPercent);
         double cleanTime = 100 - idleTime;
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data(PIE_CHART_CLINE_TITLE, idleTime),
-                new PieChart.Data(PIE_CHART_IDLE_TITLE, cleanTime));
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data(resourceBundle.getString("key.CleanTime"), idleTime),
+                new PieChart.Data(resourceBundle.getString("key.IdleTime"), cleanTime));
         doughnutChart = new DoughnutChart(pieChartData);
         createLabelForDisplayIdleTime();
         createPieChart();
@@ -583,7 +569,7 @@ public class ProjectsLayoutController extends Controller {
     private void createPieChart() {
         doughnutChart.setMaxWidth(180);
         doughnutChart.setMaxHeight(180);
-        doughnutChart.setTitle(PIE_CHART_IDLE_TITLE);
+        doughnutChart.setTitle(resourceBundle.getString("key.IdleTime"));
         doughnutChart.setLabelsVisible(false);
         doughnutChart.setPadding(new Insets(10, 50, 15, 13));
     }
@@ -633,20 +619,19 @@ public class ProjectsLayoutController extends Controller {
             Stage reportsStage = new Stage();
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(classLoader.getResource(REPORT_LAYOUT));
-            ResourceBundle bundle = new UTF8Control().newBundle(new Locale("uk"),classLoader);
-            loader.setResources(bundle);
+            loader.setLocation(classLoader.getResource(REPORT_LAYOUT_FXML_PATH));
+            loader.setResources(resourceBundle);
             AnchorPane anchorPane = loader.load();
             Scene scene = new Scene(anchorPane);
             reportsStage.setScene(scene);
-            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO));
+            Image logoIcon = new Image(getClass().getResourceAsStream(LOGO_IMAGE_PATH));
             reportsStage.getIcons().add(logoIcon);
             reportsStage.setMinWidth(REPORT_LAYOUT_MIN_WIDTH);
             reportsStage.setMinHeight(REPORT_LAYOUT_MIN_HEIGHT);
             reportsStage.initModality(Modality.WINDOW_MODAL);
             ReportLayoutController reportLayoutController = loader.getController();
             reportLayoutController.getCheckLayout(this, reportsStage);
-            reportsStage.setTitle(REPORT_LAYOUT_TITLE);
+            reportsStage.setTitle(resourceBundle.getString("key.ReportsWindow"));
             reportsStage.initOwner(labelDateStartProject.getScene().getWindow());
             reportsStage.setResizable(false);
             reportsStage.show();
@@ -656,8 +641,8 @@ public class ProjectsLayoutController extends Controller {
     }
 
     private void shutDownApp(Stage stage) {
-        Alert alert = new Alert(Alert.AlertType.NONE, PROJECT_LAYOUT_ALERT_AT_CLOSE, ButtonType.YES, ButtonType.NO);
-        alert.setTitle(PROJECT_LAYOUT_ALERT_TITLE);
+        Alert alert = new Alert(Alert.AlertType.NONE,resourceBundle.getString("key.QuitDialog"), ButtonType.YES, ButtonType.NO);
+        alert.setTitle(APP_TITLE);
         if (alert.showAndWait().orElse(ButtonType.NO) == ButtonType.YES) {
             stage.close();
             if (timeTracker != null) {

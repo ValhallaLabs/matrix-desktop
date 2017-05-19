@@ -5,10 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import ua.softgroup.matrix.api.model.datamodels.ProjectModel;
@@ -16,22 +14,20 @@ import ua.softgroup.matrix.api.model.datamodels.ReportModel;
 import ua.softgroup.matrix.desktop.session.current.CurrentSessionInfo;
 import ua.softgroup.matrix.desktop.session.manager.ReportServerSessionManager;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.Set;
+
+import static ua.softgroup.matrix.desktop.Main.resourceBundle;
 
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
-public class ReportLayoutController extends Controller{
+public class ReportLayoutController extends Controller {
     private static final String DATE_COLUMN = "date";
     private static final String CHECKED_COLUMN = "checked";
     private static final String DESCRIPTION_COLUMN = "text";
     private static final String WORK_TIME_COLUMN = "currency";
     private static final String COEFFICIENT_COLUMN = "coefficient";
-    private static final String UNKNOWN_DATA = "Unknown";
-    private static final String UNLIMITED_DATA = "Unlimited";
     private static final int MIN_TEXT_FOR_REPORT = 70;
     private static final int LIMITER_TEXT_COUNT = 550;
     private ObservableList<ReportModel> reportData = FXCollections.observableArrayList();
@@ -99,7 +95,7 @@ public class ReportLayoutController extends Controller{
     private void countTextAndSetButtonCondition(ReportModel reportModel) {
         taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
             int size = newValue.length();
-            checkOnSizeAndChecked(size,reportModel);
+            checkOnSizeAndChecked(size, reportModel);
         });
 
     }
@@ -149,20 +145,20 @@ public class ReportLayoutController extends Controller{
     }
 
     private void checkOnSizeAndChecked(int size, ReportModel reportModel) {
-        if (size>=MIN_TEXT_FOR_REPORT){
+        if (size >= MIN_TEXT_FOR_REPORT) {
             btnChangeReport.setDisable(false);
-            if (reportModel.isChecked()){
+            if (reportModel.isChecked()) {
                 btnChangeReport.setDisable(true);
             }
-        } else{
-            if(!reportModel.isChecked()){
+        } else {
+            if (!reportModel.isChecked()) {
                 btnChangeReport.setDisable(true);
             }
         }
     }
 
     private void checkOnVerified(ReportModel selectReport) {
-        if (selectReport.isChecked()){
+        if (selectReport.isChecked()) {
             btnChangeReport.setDisable(true);
             taEditReport.setEditable(false);
         } else {
@@ -221,8 +217,8 @@ public class ReportLayoutController extends Controller{
                 labelStartDate.setText(model.getStartDate().toString());
                 labelDeadlineDate.setText(model.getEndDate().toString());
             } else {
-                labelStartDate.setText(UNKNOWN_DATA);
-                labelDeadlineDate.setText(UNLIMITED_DATA);
+                labelStartDate.setText(resourceBundle.getString("key.Unknown"));
+                labelDeadlineDate.setText(resourceBundle.getString("key.Unlimited"));
             }
         });
     }

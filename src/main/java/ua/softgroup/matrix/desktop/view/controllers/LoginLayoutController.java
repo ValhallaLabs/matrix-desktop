@@ -1,12 +1,12 @@
 package ua.softgroup.matrix.desktop.view.controllers;
 
 
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -21,35 +21,33 @@ import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.session.manager.AuthenticationServerSessionManager;
-import ua.softgroup.matrix.desktop.view.UTF8Control;
 
 import java.io.IOException;
-import java.util.Locale;
+import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.prefs.Preferences;
+
+import static ua.softgroup.matrix.desktop.Main.preferences;
+import static ua.softgroup.matrix.desktop.Main.resourceBundle;
+import static ua.softgroup.matrix.desktop.view.controllers.SettingLayoutController.globalLanguage;
 
 
 /**
  * @author Andrii Bei <sg.andriy2@gmail.com>
  */
 
-public class LoginLayoutController extends Controller  {
+public class LoginLayoutController extends Controller implements Initializable {
     private static final Logger logger = LoggerFactory.getLogger(LoginLayoutController.class);
     private static final String EMPTY_FIElD = "Error: Please Fill All Field";
     private static final String INVALID_LOGIN_PASSWORD = "Error: Wrong Login or Password";
     private static final String LOGO = "/images/logoIcon.png";
-    private static final String ALERT_TITLE_TEXT = "SG Tracker";
     private static final String ALERT_CONTENT_TEXT = "Target ip:port is Unreachable";
-    private static final String ALERT_HEADER_TEXT = "NETWORK ERROR";
-    private static final String SETTING_LAYOUT = "fxml/settingLayout.fxml";
-    private static final String SETTING_LAYOUT_TITLE = "Settings";
+    private static final String SETTING_LAYOUT_FXML_PATH = "fxml/settingLayout.fxml";
     private static final String PROJECT_LAYOUT = "fxml/projectsLayout.fxml";
-    private static final String USER_NAME = "userName";
-    private static final String USER_PASSWORD = "password";
-    private static final String USER_SWITCH_SETTINGS = "false";
-    private static final String DEFAULT_TEXT_LOGIN_FIELD = "";
-    private static final String DEFAULT_TEXT_PASSWORD_FIELD = "";
+    private static final String PREFS_USER_NAME = "userName";
+    private static final String PREFS_USER_PASSWORD = "password";
+    private static final String PREFS_USER_SWITCH_SETTINGS = "false";
+    private static final String DEFAULT_TEXT_FIELD = "";
     private static final int MAIN_LAYOUT_MIN_WIDTH = 1200;
     private static final int MAIN_LAYOUT_MIN_HEIGHT = 800;
     private static final int SETTING_LAYOUT_MIN_WIDTH = 500;
@@ -58,7 +56,6 @@ public class LoginLayoutController extends Controller  {
     private static final int COUNTER_TEXT_LIMITER_PASSWORD = 20;
     private Stage loginStage;
     private AuthenticationServerSessionManager authenticationSessionManager;
-    private Preferences preferences;
     private Stage settingStage;
     private boolean isActiveProgressInd = false;
     @FXML
@@ -78,18 +75,16 @@ public class LoginLayoutController extends Controller  {
     @FXML
     public ProgressIndicator progressIndWaitConnection;
 
-    /**
-     * After Load/Parsing fxml call this method
-     */
-    @FXML
-    public void initialize() {
-        preferences = Preferences.userRoot().node(this.getClass().getName());
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         getPreferencesAndSetLoginPassword();
         initializeAuthenticationManager();
         setTextLimiterOnField();
         loginTextField.requestFocus();
         if (com.sun.jna.Platform.isWindows()) {
-            labelRememberMe.setPadding(new Insets(0,40,0,0));
+            if (globalLanguage == "en") {
+                labelRememberMe.setPadding(new Insets(0, 70, 0, 0));
+            } else labelRememberMe.setPadding(new Insets(0, 40, 0, 0));
         }
     }
 
@@ -123,8 +118,8 @@ public class LoginLayoutController extends Controller  {
      */
     public void tellUserAboutBadConnection() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(ALERT_TITLE_TEXT);
-        alert.setHeaderText(ALERT_HEADER_TEXT);
+        alert.setTitle(APP_TITLE);
+        alert.setHeaderText(resourceBundle.getString("key.NetworkError"));
         alert.setContentText(ALERT_CONTENT_TEXT);
         alert.initStyle(StageStyle.UTILITY);
         Optional<ButtonType> result = alert.showAndWait();
@@ -133,6 +128,7 @@ public class LoginLayoutController extends Controller  {
             openSettingsWindow();
         }
     }
+//"NETWORK ERROR"
 
     /**
      * Hears when login window close and close current authentication session manager
@@ -226,9 +222,9 @@ public class LoginLayoutController extends Controller  {
      */
     private void getPreferencesAndSetLoginPassword() {
         if (preferences != null) {
-            loginTextField.setText(preferences.get(USER_NAME, DEFAULT_TEXT_LOGIN_FIELD));
-            passwordTextField.setText(preferences.get(USER_PASSWORD, DEFAULT_TEXT_PASSWORD_FIELD));
-            cbRememberMe.setSelected(preferences.getBoolean(USER_SWITCH_SETTINGS, true));
+            loginTextField.setText(preferences.get(PREFS_USER_NAME, DEFAULT_TEXT_FIELD));
+            passwordTextField.setText(preferences.get(PREFS_USER_PASSWORD, DEFAULT_TEXT_FIELD));
+            cbRememberMe.setSelected(preferences.getBoolean(PREFS_USER_SWITCH_SETTINGS, true));
         }
     }
 
@@ -238,13 +234,13 @@ public class LoginLayoutController extends Controller  {
      */
     private void saveLoginAndPasswordToPreferencesManager() {
         if (cbRememberMe.isSelected()) {
-            preferences.put(USER_NAME, loginTextField.getText());
-            preferences.put(USER_PASSWORD, passwordTextField.getText());
-            preferences.putBoolean(USER_SWITCH_SETTINGS, true);
+            preferences.put(PREFS_USER_NAME, loginTextField.getText());
+            preferences.put(PREFS_USER_PASSWORD, passwordTextField.getText());
+            preferences.putBoolean(PREFS_USER_SWITCH_SETTINGS, true);
         } else {
-            preferences.put(USER_NAME, "");
-            preferences.put(USER_PASSWORD, "");
-            preferences.putBoolean(USER_SWITCH_SETTINGS, false);
+            preferences.put(PREFS_USER_NAME, "");
+            preferences.put(PREFS_USER_PASSWORD, "");
+            preferences.putBoolean(PREFS_USER_SWITCH_SETTINGS, false);
         }
     }
 
@@ -268,8 +264,7 @@ public class LoginLayoutController extends Controller  {
             projectsStage.getIcons().add(icon);
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
-            ResourceBundle bundle = new UTF8Control().newBundle(new Locale("uk"),classLoader);
-            loader.setResources(bundle);
+            loader.setResources(resourceBundle);
             loader.setLocation(classLoader.getResource(PROJECT_LAYOUT));
             AnchorPane projectsLayout = loader.load();
             Scene scene = new Scene(projectsLayout);
@@ -304,8 +299,8 @@ public class LoginLayoutController extends Controller  {
             Image icon = new Image(getClass().getResourceAsStream(LOGO));
             settingStage.getIcons().add(icon);
             FXMLLoader loader = new FXMLLoader();
-            loader.setResources(setResourceBundle(classLoader));
-            loader.setLocation(classLoader.getResource(SETTING_LAYOUT));
+            loader.setResources(resourceBundle);
+            loader.setLocation(classLoader.getResource(SETTING_LAYOUT_FXML_PATH));
             Pane pane = loader.load();
             SettingLayoutController settingLayoutController = loader.getController();
             settingLayoutController.setLoginLayoutController(this);
@@ -313,7 +308,7 @@ public class LoginLayoutController extends Controller  {
             settingStage.setScene(scene);
             settingStage.setMinWidth(SETTING_LAYOUT_MIN_WIDTH);
             settingStage.setMinHeight(SETTING_LAYOUT_MIN_HEIGHT);
-            settingStage.setTitle(SETTING_LAYOUT_TITLE);
+            settingStage.setTitle(resourceBundle.getString("key.Settings"));
             if (settingStage.getModality() != Modality.WINDOW_MODAL) {
                 settingStage.initModality(Modality.WINDOW_MODAL);
                 settingStage.initOwner(btnLogin.getScene().getWindow());
@@ -324,4 +319,5 @@ public class LoginLayoutController extends Controller  {
             logger.error("Error when start Settings Window", e);
         }
     }
+
 }
