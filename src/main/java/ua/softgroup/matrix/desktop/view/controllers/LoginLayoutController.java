@@ -88,11 +88,13 @@ public class LoginLayoutController extends Controller implements Initializable {
             }else if (com.sun.jna.Platform.isLinux()){
                 labelRememberMe.setPadding(new Insets(0, 45, 0, 0));
             }
-        } else if (Objects.equals(globalLanguage,"uk")||Objects.equals(globalLanguage,"ru")){
+        } else if (Objects.equals(globalLanguage,"uk")){
             if (com.sun.jna.Platform.isLinux()){
                 labelRememberMe.setPadding(new Insets(0, 5, 0, 0));
             }else  labelRememberMe.setPadding(new Insets(0, 40, 0, 0));
-        }
+        }else if(Objects.equals(globalLanguage,"ru")) if (com.sun.jna.Platform.isLinux()){
+            labelRememberMe.setPadding(new Insets(0, 25, 0, 0));}
+            else labelRememberMe.setPadding(new Insets(0, 40, 0, 0));
     }
 
     /**
