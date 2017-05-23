@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import ua.softgroup.matrix.desktop.utils.ConfigManager;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static ua.softgroup.matrix.desktop.Main.preferences;
 
@@ -42,19 +43,22 @@ public class SettingLayoutController extends Controller {
     public void getPreferencesLanguage() {
         if (preferences.get("language", "").equals("1")) {
             globalLanguage = "uk";
-        } else globalLanguage = "en";
+        } else if(preferences.get("language","").equals("0")) {
+            globalLanguage = "en";
+        }else globalLanguage="ru";
     }
 
     private void setLanguage() {
-        ObservableList<String> language = FXCollections.observableArrayList("English", "Ukraine");
+        ObservableList<String> language = FXCollections.observableArrayList("English", "Ukraine","Russian");
         choiceBoxLanguage.setItems(language);
         int defaultValue;
-        if (globalLanguage == "en") {
+        if (Objects.equals(globalLanguage, "en")) {
             defaultValue = 0;
-        } else defaultValue = 1;
+        } else if(Objects.equals(globalLanguage,"uk")) {
+            defaultValue = 1;
+        }else defaultValue=2;
         choiceBoxLanguage.setValue(language.get(defaultValue));
         choiceBoxLanguage.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> preferences.put("language", newValue.toString()));
-        System.out.println(preferences.get("language", ""));
     }
 
     /**

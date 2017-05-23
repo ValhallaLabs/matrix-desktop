@@ -475,7 +475,7 @@ public class ProjectsLayoutController extends Controller implements Initializabl
     private void setProjectInTable() {
         Set<ProjectModel> projectModelSet = CurrentSessionInfo.getProjectModels();
         if (projectModelSet != null && !projectModelSet.isEmpty()) {
-            projectModelSet.forEach(projectsData::add);
+            projectsData.addAll(projectModelSet);
             tvProjectsTable.setItems(projectsData);
             tvProjectsTable.getSortOrder().setAll(tcIdProject);
             setFocusOnTableView();

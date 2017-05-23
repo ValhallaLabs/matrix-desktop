@@ -89,5 +89,4 @@ public class InstructionsLayoutController {
         lvInstructions.setItems(content);
     }
 
-
 }

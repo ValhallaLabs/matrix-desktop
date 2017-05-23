@@ -24,6 +24,7 @@ import ua.softgroup.matrix.desktop.session.manager.AuthenticationServerSessionMa
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -81,10 +82,16 @@ public class LoginLayoutController extends Controller implements Initializable {
         initializeAuthenticationManager();
         setTextLimiterOnField();
         loginTextField.requestFocus();
-        if (com.sun.jna.Platform.isWindows()) {
-            if (globalLanguage == "en") {
+        if (Objects.equals(globalLanguage, "en")) {
+            if (com.sun.jna.Platform.isWindows()) {
                 labelRememberMe.setPadding(new Insets(0, 70, 0, 0));
-            } else labelRememberMe.setPadding(new Insets(0, 40, 0, 0));
+            }else if (com.sun.jna.Platform.isLinux()){
+                labelRememberMe.setPadding(new Insets(0, 45, 0, 0));
+            }
+        } else if (Objects.equals(globalLanguage,"uk")||Objects.equals(globalLanguage,"ru")){
+            if (com.sun.jna.Platform.isLinux()){
+                labelRememberMe.setPadding(new Insets(0, 5, 0, 0));
+            }else  labelRememberMe.setPadding(new Insets(0, 40, 0, 0));
         }
     }
 
@@ -128,7 +135,6 @@ public class LoginLayoutController extends Controller implements Initializable {
             openSettingsWindow();
         }
     }
-//"NETWORK ERROR"
 
     /**
      * Hears when login window close and close current authentication session manager

@@ -13,9 +13,6 @@ import static ua.softgroup.matrix.desktop.Main.resourceBundle;
  * @author Vadim Boitsov <sg.vadimbojcov@gmail.com>
  */
 abstract public class Controller {
-    private static final String ALERT_XDOTOOL_NOT_FOUND = "Sorry, xdotool not found. Please, install it just in one step:\n" +
-            "apt-get install xdotool\n" +
-            "Read more: http://www.semicomplete.com/projects/xdotool";
     private static final String HOURS_SYMBOL = "h ";
     private static final char MINUTES_SYMBOL = 'm';
     private static final int SECONDS_IN_HOURS = 3600;
@@ -39,9 +36,8 @@ abstract public class Controller {
         showUserAnAlert(resourceBundle.getString("key.AlertAccessDenied"));
     }
 
-
     public void tellUserAboutXdotoolNotFound() {
-        showUserAnAlert(ALERT_XDOTOOL_NOT_FOUND);
+        showUserAnAlert(resourceBundle.getString("key.AlertXDoTool"));
     }
 
     /**
