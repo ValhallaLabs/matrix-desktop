@@ -49,7 +49,8 @@ public class InstructionsLayoutController {
     void getUpStage(Scene scene) {
         scene.setOnKeyPressed(event -> {
                     if (event.getCode() == KeyCode.ESCAPE) {
-                        scene.getWindow().hide();}
+                        scene.getWindow().hide();
+                    }
                 }
         );
     }
@@ -83,7 +84,7 @@ public class InstructionsLayoutController {
         listInstructionsModel.add(new InstructionsModel("У випадку помилок робити", "Якщо під час " +
                 "використання програми виникли непередбачені помилки(програма не відповідає, зависає тощо), відправте " +
                 "повідомлення з описом ситуації та прикріпленим файлом логів за поточний день, який можна знайти e папці logs каталогу програми, на softgrouptempmail@gmail.com . "));
-        for (InstructionsModel model:listInstructionsModel){
+        for (InstructionsModel model : listInstructionsModel) {
             content.addAll(model);
         }
         lvInstructions.setItems(content);

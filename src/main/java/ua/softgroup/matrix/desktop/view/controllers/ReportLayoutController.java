@@ -67,7 +67,6 @@ public class ReportLayoutController extends Controller {
 
     /**
      * After Load/Parsing fxml call this method
-     * Create {@link ReportLayoutController} and if project has reports set this data in Set of ReportModel
      */
     @FXML
     public void initialize() {
@@ -79,6 +78,9 @@ public class ReportLayoutController extends Controller {
         addTextLimiter(taEditReport, LIMITER_TEXT_COUNT);
     }
 
+    /**
+     * A method which hears and count length when user type something in text area
+     */
     @FXML
     private void countTextAndSetInView() {
         taEditReport.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -144,6 +146,11 @@ public class ReportLayoutController extends Controller {
         reportsStage.setOnCloseRequest(event -> projectsLayoutController.checkReportAndSetConditionOnTextArea());
     }
 
+    /**
+     * A method which checks length of text and looking of it set defined condition on some view element
+     * @param size
+     * @param reportModel
+     */
     private void checkOnSizeAndChecked(int size, ReportModel reportModel) {
         if (size >= MIN_TEXT_FOR_REPORT) {
             btnChangeReport.setDisable(false);
@@ -157,6 +164,10 @@ public class ReportLayoutController extends Controller {
         }
     }
 
+    /**
+     * A method which check on verified current report and set defined condition to some view element
+     * @param selectReport the current report
+     */
     private void checkOnVerified(ReportModel selectReport) {
         if (selectReport.isChecked()) {
             btnChangeReport.setDisable(true);
@@ -249,7 +260,7 @@ public class ReportLayoutController extends Controller {
     }
 
     /**
-     * Set report what we create ore change in the text area
+     * Set report what we create ore change in the text are;a
      *
      * @param report report what we create or change
      */

@@ -47,6 +47,7 @@ public class Main extends Application {
 
     /**
      * Point of start Application
+     *
      * @param primaryStage get default Stage from Application class
      * @throws Exception
      */
@@ -80,22 +81,22 @@ public class Main extends Application {
     }
 
     /**
-     * Tells {@link Main} to open login window
+     * A method which tells {@link Main} to open login window
      * @param loginStage for create stage
      */
     private void startLoginLayout(Stage loginStage) {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader loader = new FXMLLoader();
-            resourceBundle = new UTF8Control().newBundle(new Locale(globalLanguage),classLoader);
+            resourceBundle = new UTF8Control().newBundle(new Locale(globalLanguage), classLoader);
             loader.setResources(resourceBundle);
             Image icon = new Image(getClass().getResourceAsStream(LOGO));
             loginStage.getIcons().add(icon);
             loader.setLocation(classLoader.getResource(LOGIN_LAYOUT));
             Pane loginLayout = loader.load();
             Scene scene = new Scene(loginLayout);
-            LoginLayoutController loginLayoutController =loader.getController();
-            loginLayoutController.setUpStage(loginStage,scene);
+            LoginLayoutController loginLayoutController = loader.getController();
+            loginLayoutController.setUpStage(loginStage, scene);
             loginStage.setScene(scene);
             loginStage.setTitle(LOGIN_LAYOUT_TITLE);
             loginStage.setResizable(false);
@@ -105,6 +106,9 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * A method which tells user about crash program
+     */
     private void tellUserAboutConfigCrash() {
         Alert mainAlert = new Alert(Alert.AlertType.INFORMATION);
         mainAlert.setTitle(LOGIN_LAYOUT_TITLE);
@@ -112,6 +116,6 @@ public class Main extends Application {
         mainAlert.setContentText(ALERT_CONTENT_TEXT);
         mainAlert.initStyle(StageStyle.UTILITY);
         mainAlert.setOnCloseRequest(event -> Platform.exit());
-            Platform.exit();
+        Platform.exit();
     }
 }

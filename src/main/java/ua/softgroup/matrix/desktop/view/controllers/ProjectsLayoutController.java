@@ -147,6 +147,9 @@ public class ProjectsLayoutController extends Controller implements Initializabl
     @FXML
     public Button getLucky;
 
+    /**
+     * After Load/Parsing fxml call this method
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tvProjectsTable.setFixedCellSize(24.0);
@@ -384,7 +387,8 @@ public class ProjectsLayoutController extends Controller implements Initializabl
 
     /**
      * Hears when user exit from program's  and stop timeTracker if he forget stop him ,and close all programms command
-     *  @param mainLayout send layout were we start and create project window
+     *
+     * @param mainLayout send layout were we start and create project window
      */
     void setUpStage(Stage mainLayout) {
         stage = mainLayout;
@@ -396,6 +400,10 @@ public class ProjectsLayoutController extends Controller implements Initializabl
         });
     }
 
+    /**
+     * A method which set defined label in different colors if deadline is closely or not
+     * @param endDate a date when deadline for current project
+     */
     private void upComingDeadline(LocalDate endDate) {
         if (endDate != null) {
             long between = ChronoUnit.DAYS.between(LocalDate.now(), endDate);
@@ -411,12 +419,18 @@ public class ProjectsLayoutController extends Controller implements Initializabl
         checkReportAndSetConditionOnTextArea();
     }
 
+    /**
+     * A method which sets defined condition of text area
+     */
     private void setDisableTextArea() {
         taWriteReport.setMouseTransparent(true);
         taWriteReport.setText(SET_EMPTY_FIELD);
         taWriteReport.setEditable(false);
     }
 
+    /**
+     * A method which sets defined condition of text area
+     */
     private void setAvailableTextArea() {
         taWriteReport.setMouseTransparent(false);
         taWriteReport.setEditable(true);
@@ -641,7 +655,7 @@ public class ProjectsLayoutController extends Controller implements Initializabl
     }
 
     private void shutDownApp(Stage stage) {
-        Alert alert = new Alert(Alert.AlertType.NONE,resourceBundle.getString("key.QuitDialog"), ButtonType.YES, ButtonType.NO);
+        Alert alert = new Alert(Alert.AlertType.NONE, resourceBundle.getString("key.QuitDialog"), ButtonType.YES, ButtonType.NO);
         alert.setTitle(APP_TITLE);
         if (alert.showAndWait().orElse(ButtonType.NO) == ButtonType.YES) {
             stage.close();
@@ -653,6 +667,9 @@ public class ProjectsLayoutController extends Controller implements Initializabl
         }
     }
 
+    /**
+     * A method which checks defined tools in users and if didn't find show some message
+     */
     private void checkXdotool() {
         if (com.sun.jna.Platform.isLinux()) {
             try {

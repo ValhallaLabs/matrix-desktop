@@ -76,25 +76,16 @@ public class LoginLayoutController extends Controller implements Initializable {
     @FXML
     public ProgressIndicator progressIndWaitConnection;
 
+    /**
+     * After Load/Parsing fxml call this method
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getPreferencesAndSetLoginPassword();
         initializeAuthenticationManager();
         setTextLimiterOnField();
         loginTextField.requestFocus();
-        if (Objects.equals(globalLanguage, "en")) {
-            if (com.sun.jna.Platform.isWindows()) {
-                labelRememberMe.setPadding(new Insets(0, 70, 0, 0));
-            }else if (com.sun.jna.Platform.isLinux()){
-                labelRememberMe.setPadding(new Insets(0, 45, 0, 0));
-            }
-        } else if (Objects.equals(globalLanguage,"uk")){
-            if (com.sun.jna.Platform.isLinux()){
-                labelRememberMe.setPadding(new Insets(0, 5, 0, 0));
-            }else  labelRememberMe.setPadding(new Insets(0, 40, 0, 0));
-        }else if(Objects.equals(globalLanguage,"ru")) if (com.sun.jna.Platform.isLinux()){
-            labelRememberMe.setPadding(new Insets(0, 25, 0, 0));}
-            else labelRememberMe.setPadding(new Insets(0, 40, 0, 0));
+        setUIPaddingDependingFromPlatform();
     }
 
     /**
@@ -182,6 +173,9 @@ public class LoginLayoutController extends Controller implements Initializable {
         saveLoginAndPasswordToPreferencesManager();
     }
 
+    /**
+     * A method which disabled area with password and login
+     */
     void stopProgressIndicator() {
         vBoxLoginWindow.setDisable(true);
     }
@@ -197,10 +191,14 @@ public class LoginLayoutController extends Controller implements Initializable {
         authenticationSessionManager = new AuthenticationServerSessionManager(this);
     }
 
+
     AuthenticationServerSessionManager getAuthenticationSessionManager() {
         return authenticationSessionManager;
     }
 
+    /**
+     * A method which checks defined field on Empty and looking at it do something
+     */
     private void checkLoginAndStartLayout() {
         if (!checkTextFieldOnEmpty(loginTextField) || !checkTextFieldOnEmpty(passwordTextField)) {
             labelErrorMessage.setText(EMPTY_FIElD);
@@ -209,6 +207,9 @@ public class LoginLayoutController extends Controller implements Initializable {
         sendAuthDataToNotificationManager();
     }
 
+    /**
+     * A method which sets limit on defined fields on input symbols
+     */
     private void setTextLimiterOnField() {
         addTextLimiter(loginTextField, COUNTER_TEXT_LIMITER_LOGIN);
         addTextLimiter(passwordTextField, COUNTER_TEXT_LIMITER_PASSWORD);
@@ -326,6 +327,25 @@ public class LoginLayoutController extends Controller implements Initializable {
         } catch (IOException e) {
             logger.error("Error when start Settings Window", e);
         }
+    }
+
+    /**
+     * A method which checks on which platform start the app and looking at this set defined padding on some view element
+     */
+    private void setUIPaddingDependingFromPlatform() {
+        if (Objects.equals(globalLanguage, "en")) {
+            if (com.sun.jna.Platform.isWindows()) {
+                labelRememberMe.setPadding(new Insets(0, 70, 0, 0));
+            } else if (com.sun.jna.Platform.isLinux()) {
+                labelRememberMe.setPadding(new Insets(0, 45, 0, 0));
+            }
+        } else if (Objects.equals(globalLanguage, "uk")) {
+            if (com.sun.jna.Platform.isLinux()) {
+                labelRememberMe.setPadding(new Insets(0, 5, 0, 0));
+            } else labelRememberMe.setPadding(new Insets(0, 40, 0, 0));
+        } else if (Objects.equals(globalLanguage, "ru")) if (com.sun.jna.Platform.isLinux()) {
+            labelRememberMe.setPadding(new Insets(0, 25, 0, 0));
+        } else labelRememberMe.setPadding(new Insets(0, 55, 0, 0));
     }
 
 }
