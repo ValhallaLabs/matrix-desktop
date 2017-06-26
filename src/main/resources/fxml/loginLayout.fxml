@@ -17,7 +17,7 @@
                   <ProgressIndicator fx:id="progressIndWaitConnection" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" />
                   <VBox fx:id="vBoxLoginWindow" disable="true" prefHeight="300.0" prefWidth="320.0">
                      <children>
-                            <Label text="SuperVisor" textFill="#3063a4">
+                            <Label text="SG Tracker" textFill="#3063a4">
                            <font>
                               <Font name="System Bold" size="27.0" />
                            </font>
